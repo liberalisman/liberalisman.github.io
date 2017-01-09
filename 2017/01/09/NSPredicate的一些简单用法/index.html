@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Liberalism</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="NSPredicate的一些简单用法NSPredicate可以支持数据库查询,平时的一些数组查询之类也用这个方法,以下是一些总结
+####格式字符串的一些基本写法1&amp;gt; @&amp;quot;attributeName == %@&amp;quot; 就是属性名字等于某个值2&amp;gt;@&amp;quot;%K == %@&amp;quot;,将属性名字变为%K,增加拓展性.
+12345// 1.第一种写法,右边值如果是字符串">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Liberalism">
+<meta property="og:url" content="http://yoursite.com/2017/01/09/NSPredicate的一些简单用法/index.html">
+<meta property="og:site_name" content="Liberalism">
+<meta property="og:description" content="NSPredicate的一些简单用法NSPredicate可以支持数据库查询,平时的一些数组查询之类也用这个方法,以下是一些总结
+####格式字符串的一些基本写法1&amp;gt; @&amp;quot;attributeName == %@&amp;quot; 就是属性名字等于某个值2&amp;gt;@&amp;quot;%K == %@&amp;quot;,将属性名字变为%K,增加拓展性.
+12345// 1.第一种写法,右边值如果是字符串">
+<meta property="og:updated_time" content="2017-01-09T14:35:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Liberalism">
+<meta name="twitter:description" content="NSPredicate的一些简单用法NSPredicate可以支持数据库查询,平时的一些数组查询之类也用这个方法,以下是一些总结
+####格式字符串的一些基本写法1&amp;gt; @&amp;quot;attributeName == %@&amp;quot; 就是属性名字等于某个值2&amp;gt;@&amp;quot;%K == %@&amp;quot;,将属性名字变为%K,增加拓展性.
+12345// 1.第一种写法,右边值如果是字符串">
+  
+    <link rel="alternate" href="/atom.xml" title="Liberalism" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Liberalism</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">如果我吻你,你就微笑,我就吻你</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-NSPredicate的一些简单用法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/09/NSPredicate的一些简单用法/" class="article-date">
+  <time datetime="2017-01-09T14:34:54.000Z" itemprop="datePublished">2017-01-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="NSPredicate的一些简单用法"><a href="#NSPredicate的一些简单用法" class="headerlink" title="NSPredicate的一些简单用法"></a>NSPredicate的一些简单用法</h1><p>NSPredicate可以支持数据库查询,平时的一些数组查询之类也用这个方法,以下是一些总结</p>
+<p>####格式字符串的一些基本写法<br>1&gt; <code>@&quot;attributeName == %@&quot;</code> 就是属性名字等于某个值<br>2&gt;<code>@&quot;%K == %@&quot;</code>,将属性名字变为%K,增加拓展性.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 1.第一种写法,右边值如果是字符串,可以用单引号表示</div><div class="line">NSPredicate *pre = [NSPredicate predicateWithFormat:@&quot;nickName == &apos;小明&apos;&quot;,];</div><div class="line">// 2.第二种写法,%K的K必须大写,不能用%@代替</div><div class="line">NSString *name = @&quot;cat.nickName&quot;;</div><div class="line">NSPredicate *pre = [NSPredicate predicateWithFormat:@&quot;%K == %@&quot;,name,@&quot;小明&quot;];</div></pre></td></tr></table></figure>
+<p>####左右两边基本的比较操作符号<br>1.<code>=,==</code>左边表达式等于右手表达式</p>
+<p>2.<code>&gt;=,=&gt;</code>左边表达式大于或等于右边表达式</p>
+<p>3.<code>&lt;=,=&lt;</code>左变表达式小于或等于右边表达式</p>
+<p>4<code>&gt;</code> 或者 <code>&lt;</code></p>
+<p>5.<code>!=,&lt;&gt;</code>左边表达式不等于右边表达式</p>
+<p>6.<code>IN</code>左边表达式必须出现在右边表达式指定的集合中。即<code>name IN {&#39;Milk&#39;，&#39;Eggs&#39;，&#39;Bread&#39;}</code></p>
+<p>7.<code>BETWEEN</code>左边表达式在右边表达式之间或等于右边表达式。即<code>1 {0，33}</code>之间。如果你的左边表达式是0或33，也是真的</p>
+<p>8.以下是<strong>字符串表达式的比较符号</strong><br>(1)<code>BEGINSWITH</code>左边表达式以右边表达式开始<br>(2)<code>CONTAINS</code>左边表达式包含表达式<br>(3)<code>ENDSWITH</code>左边表达式以右边表达式结束<br>(4)<code>LIKE</code>左边表达式等于右手表达式：<code>？</code>和<code>*</code>作为通配符，其中<code>？</code>匹配1个字符，<code>*</code>匹配0个或多个字符<br>(5)<code>MATCHES</code>左边表达式等于右边表达式使用正则表达式样式比较</p>
+<p>####两个表达式的逻辑符号<br>1.<code>AND,&amp;&amp;</code>,逻辑AND</p>
+<p>2.<code>OR,||</code>逻辑或</p>
+<p>3.<code>NOT,!</code>逻辑NOT</p>
+<p>###数组的操作的一些特性<br>1.<strong>对数组中数字集合的一些操作</strong><br>(1)<code>@avg</code>返回collection中对象平均值,以NSNumber的形式返回<br>(2)<code>@count</code>集合中总共的个数,,以NSNumber的形式返回<br>(3)``@min<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(4)使用``valueForKeyPath``返回相应的结果</div></pre></td></tr></table></figure></p>
+<p>// 处理大量数字组成的数组的时候可以使用,可以方便的进行判断.然后进行下一步操作<br>NSArray <em>array = @[@(30),@(40),@(50)];<br>NSPredicate </em>pre = [NSPredicate<br>// 最小值是不是大于30<br>predicateWithFormat:@”@min.intValue &gt; 30”];<br>BOOL ok = [pre evaluateWithObject:array];<br>// 可以使用key == value 来去的最小,最大,总和,平均等值.并且返回一个nsnumer类型的值<br>NSNumber *a =  [array11 valueForKeyPath:@”@min.intValue”];<br>NSLog(@”%d”,a.intValue);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">2.**数组中存放对象的一些操作**</div><div class="line">(1) ``@distinctUnionOfObjects``返回一个数组,这个数组是由操作符``.``右侧属性的值组成的,并且重复的值被过滤掉.``@unionOfObjects``逻辑和``@distinctUnionOfObjects``相同,但是重复的值没有被过滤掉</div><div class="line">(2)``@distinctUnionOfArrays``返回的是数组,但是将数组中的数组元素拆分到一个数组里面,逻辑同上面,不包括重复值``@unionOfArrays``包括重复值</div><div class="line">(3)返回值都是使用``valueForKeyPath``取到</div></pre></td></tr></table></figure></p>
+<p>CatModal <em>cat1 = [[CatModal alloc] initWithNickName:@”小明” withWeight:30.1];<br>CatModal </em>cat2 = [[CatModal alloc] initWithNickName:@”mimi” withWeight:33.1];</p>
+<p>CatModal <em>cat4 = [[CatModal alloc] initWithNickName:@”fuu” withWeight:35.1];<br>CatModal </em>cat5 = [[CatModal alloc] initWithNickName:@”err” withWeight:35.1];</p>
+<p>TestModal <em>test1 = [[TestModal alloc] initWithName:@”小七” withHeith:90.1 withCat:cat1];<br>TestModal </em>test2 = [[TestModal alloc] initWithName:@”小七” withHeith:80.1 withCat:cat2];<br>withHeith:60.1 withCat:cat3];</p>
+<p>TestModal *test4 = [[TestModal alloc] initWithName:@”小七” withHeith:60.1 withCat:cat4];</p>
+<p>TestModal *test5 = [[TestModal alloc] initWithName:@”小七” withHeith:60.1 withCat:cat5];</p>
+<p>NSArray <em>array = @[test2,test1];<br>NSArray </em>array2 = @[test4,test5];<br>NSArray *arrayofarray = @[array,array2];</p>
+<p>NSArray <em>array11111 = [array valueForKeyPath:@”@distinctUnionOfObjects.cat”];<br>for (CatModal </em>cat in array11111) {<br>    NSLog(@”%@\n”,cat.nickName);[小明,mini]<br>}</p>
+<p>NSArray <em>array1 = [arrayofarray valueForKeyPath:@”@distinctUnionOfArrays.cat”];<br>for (CatModal </em>cat in array1) {<br>    NSLog(@”%@\n”,cat.nickName); // [fuu 小明 mimi err],并不是数组中的数组的形式<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">3.**数组中的``SELF``指什么**</div><div class="line">数组中``SELF``指的是数组中包含的每一个对象</div><div class="line"></div><div class="line">4.**对数组中具体的某个位置进行操作查询**</div><div class="line"></div><div class="line">``array[index]``指定数组中指定索引处的元素进行匹配操作</div><div class="line">``array[FIRST]````array[LAST]````array[SIZE]``分别表示对数组第一个,最后一个,数组总数进行操作</div></pre></td></tr></table></figure></p>
+<p>CatModal <em>cat1 = [[CatModal alloc] initWithNickName:@”小明” withWeight:30.1];<br>CatModal </em>cat2 = [[CatModal alloc] initWithNickName:@”mimi” withWeight:33.1];<br>CatModal <em>cat3 = [[CatModal alloc] initWithNickName:@”miru” withWeight:35.1];<br>CatModal </em>cat4 = [[CatModal alloc] initWithNickName:@”fuu” withWeight:35.1];<br>CatModal <em>cat5 = [[CatModal alloc] initWithNickName:@”err” withWeight:35.1];<br>CatModal </em>cat6 = [[CatModal alloc] initWithNickName:@”ooo” withWeight:35.1];<br>TestModal *test1 = [[TestModal alloc] initWithName:@”小七” withHeith:90.1 withCat:cat1];<br>test1.catsArray = @[cat2,cat1];</p>
+<p>TestModal <em>test2 = [[TestModal alloc] initWithName:@”小七” withHeith:80.1 withCat:cat2];<br>test2.catsArray = @[cat4];<br>TestModal </em>test3 = [[TestModal alloc] initWithName:@”小七” withHeith:60.1 withCat:cat3];<br>test3.catsArray = @[cat5,cat6];</p>
+<p>NSArray <em>array = @[test2,test1,test3];<br>NSPredicate </em>pre = [NSPredicate predicateWithFormat:@”catsArray[SIZE] == 1”];<br>NSArray *array1 = [array filteredArrayUsingPredicate:pre];<br>NSLog(@”11111%@”,array1);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">5.**对数组中的数组进行操作的时候查询关键字,只能用在数组,一对多的形式**</div><div class="line">``ANY或者SOME``对数组中的数组进行查询,只要有符合条件的,就返回``TRUE``</div><div class="line"></div><div class="line">``ALL``数组中所有都符合条件的时候才会返回。</div><div class="line"></div><div class="line">``NONE``都不正确的时候才返回true。</div></pre></td></tr></table></figure></p>
+<p>CatModal <em>cat1 = [[CatModal alloc] initWithNickName:@”小明” withWeight:30.1];<br>CatModal </em>cat2 = [[CatModal alloc] initWithNickName:@”mimi” withWeight:33.1];<br>CatModal <em>cat3 = [[CatModal alloc] initWithNickName:@”miru” withWeight:35.1];<br>TestModal </em>test1 = [[TestModal alloc] initWithName:@”小七” withHeith:90.1 withCat:cat1];<br>test1.catsArray = @[cat2,cat3];</p>
+<p>TestModal <em>test2 = [[TestModal alloc] initWithName:@”小七” withHeith:80.1 withCat:cat1];<br>test2.catsArray = @[cat2];<br>TestModal </em>test3 = [[TestModal alloc] initWithName:@”小七” withHeith:60.1 withCat:cat1];<br>test3.catsArray = @[cat1,cat3];<br>NSArray <em>array = @[test2,test1,test3];<br>// ALL ANY SOME 用于NSArray NSSet .ANY SOME是数组中有真的就返回. ALL是数组中全部是真的才返回<br>NSPredicate </em>pre = [NSPredicate predicateWithFormat:@”ALL catsArray.weight &gt; 31.0”];<br>NSArray *array1 = [array filteredArrayUsingPredicate:pre];<br>NSLog(@”%@”,array1);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">注意:</div><div class="line">1.查询过程中使用``department.name``这样的形式比较耗费性能.尽量不要使用.``department == %@``这样的形式查询效率最高.</div><div class="line">2. ``@&quot;firstName beginswith[cd] &apos;Matt&apos; AND (ANY directreports.paygrade &lt;= 7)&quot;`` 比下面这种形式更高效 ``@&quot;(ANY directreports.paygrade &lt;= 7) AND (firstName beginswith[cd] &apos;Matt&apos;)&quot;``</div><div class="line">3.使用predicate的类必须支持key-value-coding ,这样才可以在其他地方使用. 实际上使用predicate 也是根据key-value这样的形式来查询的.</div><div class="line"></div><div class="line"></div><div class="line">4.``[c],[d],[cd]``可以加到比较符号的后面表示不区分大小写，不区分发音符号，两这个都不区分</div><div class="line"></div><div class="line">5.如果想要匹配null或者nil值得时候,需要额外增加一条对比</div></pre></td></tr></table></figure></p>
+<p>predicate = [NSPredicate predicateWithFormat:@”(firstName == %@) || (firstName == nil)”];<br>filteredArray = [array filteredArrayUsingPredicate:predicate];<br>NSLog(@”%@”, filteredArray);<br>```</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/01/09/NSPredicate的一些简单用法/" data-id="cixq6yoa30000axs6zvrf614p" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/03/20/ObjectMapper框架解析/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Arkiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Siste innlegg</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/01/09/NSPredicate的一些简单用法/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/20/ObjectMapper框架解析/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Liberalism<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
