@@ -147,6 +147,70 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-SDWebImage的阅读笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="SDWebImage的阅读笔记"><a href="#SDWebImage的阅读笔记" class="headerlink" title="SDWebImage的阅读笔记"></a>SDWebImage的阅读笔记</h1><p>最近，将SDwebImage源码从头到尾敲了一遍，学习到了很多东西。<br>下面放一张SDWebImage的结构图，也就说UML类图<br><img src="media/14840298465623/1313247-f8a91a9dcd82d2a9.png" alt="1313247-f8a91a9dcd82d2a9"></p>
+<p>  从图中我们可以看到，SDWebImage的核心为SDWebImageManager，我们通常所调用的UImageView(Webcache)和UIButton(WebCache)实际上是依赖于SDWebimageManager的，而SDWebImage真正的核心功能缓存和下载并没有直接相关联，它们是通过SDWebImageManager进行交流的。也就说SDWebImageManager调用了下载，下载完成后SDWebImageManager又调用了缓存的接口。而从UML图中我们可以看到，SDWebImageManager是由SDImageCahce和SDWebimageDownload聚合而成的。在这里简单的解释一下聚合的概念：SDWebImageManager包含SDImageCache和SDwebImageDownloader，但是后两者不是前者的组成部分，简单地说就是后两者不是前者的属性</p>
+<ul>
+<li><p>所以我把SDWebimage分为几个模块：</p>
+<p>1.核心模块：SDWebImageManager，负责了各个模块之间通信，相当于一个中介者<br><img src="media/14840298465623/1313247-5494c7a187d09996.png" alt="1313247-5494c7a187d09996"></p>
+</li>
+</ul>
+<p>上面已经说了，请求和缓存是不能直接通信的，SDWebimage也不是直接在downloader里面进行缓存的，它们之间的通信是通过Manager来管理的，这样一来，我们在上层调用的时候，只需要调用manager的请求方法就可以直接完成请求和缓存的两种操作，这样降低了downloader和cache的耦合性。与此同时，如果我们不需要进行缓存的话，我们可以直接调downloader的方法(当然不需要这么做，调用模块已经提供了忽略缓存的参数，只需要设置参数即可)</p>
+<p>   2.上层调用模块：UImageView(Webcache)、UIButton(WebCache)等，我们通常直接使用的部分<br>   <img src="media/14840298465623/1313247-ed588735cc20d2ab.png" alt="1313247-ed588735cc20d2ab"><br>这个模块层级比较高，我们也常用，就简单述说几个方法的差别吧，以UIImageView(WebCache)为例<br><img src="media/14840298465623/1313247-bcccec835b547154.png" alt="1313247-bcccec835b547154"></p>
+<p> 3.缓存模块，将图片异步地存入硬盘或者内存，将图片异步从内存或者硬盘中读出，缓存的清理。<br><img src="media/14840298465623/1313247-6576b15d0041a279.png" alt="1313247-6576b15d0041a279"></p>
+<pre><code>这是个核心功能，没有它，体验上差了不少。
+
+SDImageCache是以url做为key存入内存或者硬盘的，但是有时候把url传为string型，xcode是不警告的，所以SDWebimage做了一些处理。
+</code></pre><p><img src="media/14840298465623/1313247-b14f95ff171255f4.png" alt="1313247-b14f95ff171255f4"></p>
+<pre><code>在左图中我们可以看到，SDwebImage设置缓存有效时间即:maxCacheAge，默认为一周；最大缓存大小即:maxCacheSize，这个是很有意思的，SDWebImage不只通过它限制了缓存的大小，还通过它去删除比较旧的，但又未失效的缓存的；是否将缓存存入内存，shouldCacheImagesInMemory；是否禁止存入iCould，shouldDisableiCould，没想到吧，SDwebImage可以直接把下载好的图片存入iCould吧，不过谁需要啊。
+
+ 右图是具体实现，queryDiskCacheForkey是在每次缓存的时候都需要调用的方法，它是用来检查当前url对应的缓存是否存在，如果存在的话通过回调的参数通知manger不进行下载了，同时也不进行缓存了，同时，移除当前请求队列，防止再次进行请求。这个就是SDWebimage说的:&quot;A guarantee that the same URL won&apos;t be downloaded several times&quot;
+</code></pre><p><img src="media/14840298465623/1313247-69893cecc26fa8b2.png" alt="1313247-69893cecc26fa8b2"></p>
+<p> 关于 @sychoronize ：相当于一个线程锁，防止其它想成对其修饰的对象进行修改</p>
+<hr>
+<pre><code>关于缓存的文件：无论是从网络请求下来的还是缓存到本地的图片，都是已经经过压缩转码的图片文件，而在设备上进行渲染的，不能这些压缩后的文件，而是位图文件。所以设备在进行图片渲染的时候，是需要先将图片解码转换位图文件，再进行渲染，而在iOS设备中，这个过程是在主线程进行的，而SDWebimage将这个过程迁移到了子线程，这提高了性能。
+</code></pre><hr>
+<pre><code>在将图片存入硬盘之前，如果调用者未做特殊处理，SDwebImage也会将图片存入内存作为内存缓存，内存的速度是要优于硬盘的，但是这样会有个问题，请求的图片越多，消耗的内存也就越大，直到开始报内存警告。SDWebImage监控了这个内存警告，若开始报内存警告，就进行内存清理。而图像作为文件，进行硬盘缓存的时候就是把图像文件存入到给定的沙盒目录下。
+</code></pre><p><img src="media/14840298465623/1313247-cace5ddcc8814fe9.png" alt="1313247-cace5ddcc8814fe9"></p>
+<p>4.请求模块，设置请求线程，取消请求，请求完成回调。<br><img src="media/14840298465623/1313247-a773665310280543.png" alt="1313247-a773665310280543"></p>
+<p> 从SDWebImgeDownloader中的图可以看到，着了设置了是否进行图片解码，获取图片当前请求数量，请求超时，执行顺序(先进先出或者先进后出)，url证书，当前最大下载数量的属性。这些属性很清晰明确，具备充分的自注释性。那么，现在就展示一些这些属性的默认值：<br><img src="media/14840298465623/1313247-b59fd1cb8dfc9d81.png" alt="1313247-b59fd1cb8dfc9d81"></p>
+<p>而实际上，SDWebImgeDownloader只是一个请求的入口，真正处理数据请求的是在继承于NSOperation的SDWebImgeDownloaderOperation。SDWebImgeDownloader把设置好的request对象和session对象传递给后者，待后者在其当前线程内请求完成，接收其请求完成的回调内容。<br><img src="media/14840298465623/1313247-1b7c124916551861.png" alt="1313247-1b7"></p>
+<pre><code>在请求完成的时候，SDWebimage对图像进行了处理，需要展示的时候，会将图片数据在子线程转换成相应的位图数据，转换完成，回到主线程进行渲染。当图片的尺寸和给定的尺寸不一致的时候，SDwebImage会根据相应的比例进行缩放，超过当前尺寸，就按比例进行裁剪；当小于当前尺寸，就按比例放大。
+</code></pre><p>5.预取模块</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/01/10/SDWebImage的阅读笔记/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-NSPredicate的一些简单用法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
