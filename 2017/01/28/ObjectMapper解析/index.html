@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>ObjectMapper解析 | Liberalism的博客</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="liberalism,iOS,Swift,nodejs,JavaScript" />
+  
+
+  <meta name="description" content="两个协议文件(Mappleable 和 ImmutableMapple),是其他一切的基础
+map文件 主要是用来匹配json字符和模型
+Mapper文件是转换模型的逻辑文件,里面各种映射逻辑
+operators 文件是操作符定义的文件,将模型和jsonvalue关联的地方
+toJson 和 fromJson 文件是转换的过程中需要做的工作
+transform 转成模型的具体类型的转换">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ObjectMapper解析">
+<meta property="og:url" content="http://yoursite.com/2017/01/28/ObjectMapper解析/index.html">
+<meta property="og:site_name" content="Liberalism的博客">
+<meta property="og:description" content="两个协议文件(Mappleable 和 ImmutableMapple),是其他一切的基础
+map文件 主要是用来匹配json字符和模型
+Mapper文件是转换模型的逻辑文件,里面各种映射逻辑
+operators 文件是操作符定义的文件,将模型和jsonvalue关联的地方
+toJson 和 fromJson 文件是转换的过程中需要做的工作
+transform 转成模型的具体类型的转换">
+<meta property="og:updated_time" content="2017-01-28T10:42:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ObjectMapper解析">
+<meta name="twitter:description" content="两个协议文件(Mappleable 和 ImmutableMapple),是其他一切的基础
+map文件 主要是用来匹配json字符和模型
+Mapper文件是转换模型的逻辑文件,里面各种映射逻辑
+operators 文件是操作符定义的文件,将模型和jsonvalue关联的地方
+toJson 和 fromJson 文件是转换的过程中需要做的工作
+transform 转成模型的具体类型的转换">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/atom.xml"
+            rel="noopener noreferrer"
+            target="_blank"
+            >
+            RSS
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Mapper文件"><span class="toc-text">Mapper文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Map文件"><span class="toc-text">Map文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Operators文件"><span class="toc-text">Operators文件</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-ObjectMapper解析" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">ObjectMapper解析</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.01.28</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>John Doe</span>
+        </span>
+      
+
+      
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="http://www.xiaolu520.com/2017/01/28/ObjectMapper解析/#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <ol>
+<li>两个协议文件<strong>(Mappleable 和 ImmutableMapple)</strong>,是其他一切的基础</li>
+<li>map文件 主要是用来匹配json字符和模型</li>
+<li>Mapper文件是转换模型的逻辑文件,里面各种映射逻辑</li>
+<li>operators 文件是操作符定义的文件,将模型和jsonvalue关联的地方</li>
+<li>toJson 和 fromJson 文件是转换的过程中需要做的工作</li>
+<li>transform 转成模型的具体类型的转换    </li>
+</ol>
+<p>##Mappable和ImmutableMapple文件<br> 1.文件中主要是两个必须实现的协议方法,以及协议的扩展,协议的扩展中的方法也可以直接调用转换成模型.<br> 2.模型遵守协议的时候一定要搞清楚需要模型中的变量是变量还是常量.如果是常量的话,然后继承不同的协议,进行不同的处理.</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"> struct Struct &#123;</div><div class="line">	let prop1: String</div><div class="line">	let prop2: Int</div><div class="line">&#125;</div><div class="line">  extension Struct: ImmutableMappable &#123;</div><div class="line">	init(map: Map) throws &#123;</div><div class="line">		prop1 = try map.value(&quot;prop1&quot;)</div><div class="line">		prop2 = try map.value(&quot;prop2&quot;)</div></pre></td></tr></table></figure>
+<h2 id="Mapper文件"><a href="#Mapper文件" class="headerlink" title="Mapper文件"></a>Mapper文件</h2><p>这个方法是跟外界接触的方法,主要分为两大部分:</p>
+<ol>
+<li>将<code>json[String:Any]</code>转为模型<code>T</code>,还有就是把<code>T</code>转为<code>json</code>.主要说一下将<strong>json转化为模型</strong>.</li>
+<li><p>将一个json串转化成的value给一个已经存在的模型对象赋值还是直接创建一个新的模型,对新的模型赋值.主要讲一下给一个<strong>新的模型赋值的例子</strong>方法例子:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//直接将json中得到的value赋值给这个已经存在的object</span></div><div class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">map</span><span class="params">(JSONObject: Any?, toObject object: N)</span></span> -&gt; <span class="type">N</span>&#123;</div><div class="line">  </div><div class="line">  &#125;</div><div class="line">  <span class="comment">// 重新创建一个模型,然后将json的value赋值给这个模型</span></div><div class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">map</span><span class="params">(JSONObject: Any?)</span></span> -&gt; <span class="type">N</span>?&#123;</div><div class="line">  </div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<hr>
+<p>####json数据处理<br>1.map可以将<code>json</code>字符串转换成相应的字典或者数组格式,然后再次转换成相应的模型.格式对应的模型总结如下:<br> <code>[String:Any]</code> -&gt; <code>T</code>,<br><code>[[String:Any]]</code> -&gt; <code>[T]</code>,<br><code>[String:[string:Any]]</code> -&gt; <code>[String:T]</code>,<br><code>[String:[[String:Any]]]</code> -&gt; <code>[String:[T]]</code>,<br><code>[[[string:Any]]]</code> -&gt; <code>[[T]]</code><br>2.不管这些格式多么复杂,都是通过遍历等各种方法得到最终核心<code>[String:Any]</code>这个格式,然后变成<code>T</code>.所以可以看看这个方法是怎么写的:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 对于新创建一个模型</span></div><div class="line"> 	<span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">map</span><span class="params">(JSON: [String: Any])</span></span> -&gt; <span class="type">N</span>? &#123;</div><div class="line">		<span class="keyword">let</span> <span class="built_in">map</span> = <span class="type">Map</span>(mappingType: .fromJSON, <span class="type">JSON</span>: <span class="type">JSON</span>, context: context, shouldIncludeNilValues: shouldIncludeNilValues)</div><div class="line">		<span class="comment">// N 是遵循了StaticMappable协议的</span></div><div class="line">		<span class="keyword">if</span> <span class="keyword">let</span> klass = <span class="type">N</span>.<span class="keyword">self</span> <span class="keyword">as</span>? <span class="type">StaticMappable</span>.<span class="type">Type</span> &#123; </div><div class="line">		</div><div class="line">			<span class="keyword">if</span> <span class="keyword">var</span> object = klass.objectForMapping(<span class="built_in">map</span>: <span class="built_in">map</span>) <span class="keyword">as</span>? <span class="type">N</span> &#123;</div><div class="line">				object.mapping(<span class="built_in">map</span>: <span class="built_in">map</span>)</div><div class="line">				<span class="keyword">return</span> object</div><div class="line">			&#125;</div><div class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> <span class="keyword">let</span> klass = <span class="type">N</span>.<span class="keyword">self</span> <span class="keyword">as</span>? <span class="type">Mappable</span>.<span class="type">Type</span> &#123; <span class="comment">// Check if object is Mappable</span></div><div class="line">			<span class="keyword">if</span> <span class="keyword">var</span> object = klass.<span class="keyword">init</span>(<span class="built_in">map</span>: <span class="built_in">map</span>) <span class="keyword">as</span>? <span class="type">N</span> &#123;</div><div class="line">				object.mapping(<span class="built_in">map</span>: <span class="built_in">map</span>)</div><div class="line">				<span class="keyword">return</span> object</div><div class="line">			&#125;</div><div class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> <span class="type">N</span>.<span class="keyword">self</span> <span class="keyword">is</span> <span class="type">ImmutableMappable</span>.<span class="type">Type</span> &#123; <span class="comment">// Check if object is ImmutableMappable</span></div><div class="line">			<span class="built_in">assert</span>(<span class="literal">false</span>, <span class="string">"'ImmutableMappable' type requires throwing version of function <span class="subst">\(#function)</span>  - use 'try' before <span class="subst">\(#function)</span>"</span>)</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			<span class="comment">// Ensure BaseMappable is not implemented directly</span></div><div class="line">			<span class="built_in">assert</span>(<span class="literal">false</span>, <span class="string">"BaseMappable should not be implemented directly. Please implement Mappable, StaticMappable or ImmutableMappable"</span>)</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="keyword">return</span> <span class="literal">nil</span></div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p>对于上面一段代码主要是逻辑是: </p>
+<ul>
+<li>创建一个map实例对象.</li>
+<li>看一下模型<code>T</code>遵守的协议是哪个,然后创建模型实例并且调用协议中的方法</li>
+</ul>
+<h2 id="Map文件"><a href="#Map文件" class="headerlink" title="Map文件"></a>Map文件</h2><p> 1.map文件最主要搞明白几个主要的变量和<code>subscript</code>方法:<br> <code>JSON</code>变量是mapper文件中传递过来带有json值得变量.<br> <code>isKeyPresent</code>如果是true,则可以将其赋值给对应的模型变量.<br> <code>currentValue</code>存放模型变量的值<br> <code>currentKey</code>是实例对象map中括号中的key值.<br> <code>keyIsNested</code>是key值是否被包裹着,例如<code>a.b</code>就是被包裹着<br> <code>toObject</code>是否映射到一个已经存在的模型上.</p>
+<p> 重写<code>subscript()</code>方法就可以让自定义的实例变量也可以通过像字典那样,可以拥有key值.我们还可以给类、结构、枚举等自定义下标（subscript）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">//参数不可以是inout类型参数，且参数不能有默认值</div><div class="line">// 可以只实现get方法,或者set和get方法同时实现</div><div class="line">subscript(参数1，参数2...)-&gt;返回值&#123;  </div><div class="line">    get&#123;  </div><div class="line">    &#125;  </div><div class="line">    set(newValue)&#123;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div><div class="line"></div><div class="line">// 例子</div><div class="line">subscript(requestedMeal : MealTime) -&gt; String</div><div class="line">        &#123;</div><div class="line">        get</div><div class="line">        &#123;</div><div class="line">            if let thisMeal = meals[requestedMeal]</div><div class="line">            &#123;</div><div class="line">                return thisMeal</div><div class="line">            &#125;</div><div class="line">            else</div><div class="line">            &#123;</div><div class="line">                return &quot;Ramen&quot;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        set</div><div class="line">        &#123;</div><div class="line">            meals[requestedMeal] = newValue</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>** 其中最主要的方法是下面这个:</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">   public subscript(key: String, nested nested: Bool, delimiter delimiter: String, ignoreNil ignoreNil: Bool) -&gt; Map &#123;</div><div class="line">	// save key and value associated to it</div><div class="line">	currentKey = key</div><div class="line">	keyIsNested = nested</div><div class="line">	nestedKeyDelimiter = delimiter</div><div class="line"></div><div class="line">	if mappingType == .fromJSON &#123;</div><div class="line">		// check if a value exists for the current key </div><div class="line">		// do this pre-check for performance reasons</div><div class="line">		if nested == false &#123;</div><div class="line">			let object = JSON[key]</div><div class="line">		</div><div class="line">			let isNSNull = object is NSNull // 判断是不是null</div><div class="line">			</div><div class="line">			isKeyPresent = isNSNull ? true : object != nil</div><div class="line">			currentValue = isNSNull ? nil : object</div><div class="line">		&#125; else &#123;</div><div class="line">			// break down the components of the key that are separated by .</div><div class="line">			(isKeyPresent, currentValue) = valueFor(ArraySlice(key.components(separatedBy: delimiter)), dictionary: JSON)</div><div class="line"></div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		// update isKeyPresent if ignoreNil is true</div><div class="line">		if ignoreNil &amp;&amp; currentValue == nil &#123;</div><div class="line">		</div><div class="line">			isKeyPresent = false</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	return self</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>主要逻辑是:</p>
+<ul>
+<li>通过key或者去JSON字典中值,判断是不是nil或者NULL</li>
+<li>如果key被包裹着,然后拆开获取JSON中的value值</li>
+</ul>
+<h2 id="Operators文件"><a href="#Operators文件" class="headerlink" title="Operators文件"></a>Operators文件</h2><ol>
+<li>Swift可以自定义运算符。自定义的运算符可以在全局使用。需要使用operator关键字。使用prefix, infix or postfix标记运算符使用的位置。(另外swift还可以对结构体.类重载已经存在运算符,在全局使用)</li>
+<li>文件中对不同的参数进行了完备的定义.兼顾各种情况.</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">这里有三个步骤去定义一个自定义操作符：</div><div class="line">	1.命名你的运算符  例如:&gt;&gt;&gt;</div><div class="line">	2.选择一种类型:一元,二元,三元    例如:一元关键字 : prefix or postfix,二元或者三元 :infix.</div><div class="line">	3.设置它的优先级和结合性:associativity和优先级precedence。associativity有三个值：left, right, none,默认是none。precedence默认值是：100。可以默认不写</div><div class="line">	</div><div class="line">	infix operator &gt;&gt;&gt; &#123;</div><div class="line">	// 有默认值,可以不写</div><div class="line">	 associativity left </div><div class="line">	 precedence 140 </div><div class="line">	 &#125;</div><div class="line">func +- (left: Int, right: Int) -&gt; Int &#123;</div><div class="line">    return 111</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>暂时写这些捋顺一下这个源码的逻辑.   </p>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持Liberalism</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+          <li class="item">
+            <img src="/images/qr-alipay.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/01/21/NSPredicate的一些简单用法/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/atom.xml"
+              rel="noopener noreferrer"
+              target="_blank"
+              >
+              RSS
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'forsigner';
+    
+    var disqus_url = 'http://yoursite.com/2017/01/28/ObjectMapper解析/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//forsigner.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
