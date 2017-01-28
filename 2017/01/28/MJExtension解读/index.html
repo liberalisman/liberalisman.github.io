@@ -21,12 +21,12 @@
 <meta property="og:url" content="http://yoursite.com/2017/01/28/MJExtension解读/index.html">
 <meta property="og:site_name" content="Liberalism的博客">
 <meta property="og:description" content="###结构问题1.NSObjecte+MJKeyValue提供的字典和模型互相转换的核心代码和逻辑.2.NSObject+MJProperty提供了字典key值和value值与模型属性的相对对应关系的配置.最常见写在模型中的方法mj_setupReplacedKeyFromPropertyName和mj_setupObjectClassInArray3.NSObject+MJCoding主要是模型">
-<meta property="og:image" content="http://yoursite.com/media/14841988273857/F861BEC4-D091-4987-9E0E-5F0B19DA83E5.png">
-<meta property="og:updated_time" content="2017-01-28T11:32:33.000Z">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/image/jpg/MJExtension-1.jpg">
+<meta property="og:updated_time" content="2017-01-28T13:26:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MJExtension解读">
 <meta name="twitter:description" content="###结构问题1.NSObjecte+MJKeyValue提供的字典和模型互相转换的核心代码和逻辑.2.NSObject+MJProperty提供了字典key值和value值与模型属性的相对对应关系的配置.最常见写在模型中的方法mj_setupReplacedKeyFromPropertyName和mj_setupObjectClassInArray3.NSObject+MJCoding主要是模型">
-<meta name="twitter:image" content="http://yoursite.com/media/14841988273857/F861BEC4-D091-4987-9E0E-5F0B19DA83E5.png">
+<meta name="twitter:image" content="http://okhqmtd8q.bkt.clouddn.com/image/jpg/MJExtension-1.jpg">
 
   
 
@@ -207,7 +207,7 @@
     
       <p>###结构问题<br>1.<strong><code>NSObjecte+MJKeyValue</code></strong>提供的字典和模型互相转换的核心代码和逻辑.<br>2.<strong><code>NSObject+MJProperty</code></strong>提供了字典key值和value值与模型属性的相对对应关系的配置.最常见写在模型中的方法<code>mj_setupReplacedKeyFromPropertyName</code>和<code>mj_setupObjectClassInArray</code><br>3.<strong><code>NSObject+MJCoding</code></strong>主要是模型的归档和解码.外界实现比较方法,主要是一个宏,这个宏其实是代替两个方法.<br>4.<strong><code>NSObject+MJClass</code></strong>提供了遍历属性类型父类的方法.以及模型和字典互转过程中需要转化的白名单和黑名单.<br>5.<strong><code>MJProperty</code></strong>包装模型中每个属性,包括属性的类型,属性的名字,父类.储存和取出属性对应的值.<br>6.<strong><code>MJPropertyKey</code></strong>模型对应的key值,以及他的对应的类型(字典还是数组)<br>7.<strong><code>MJPropertyType</code></strong>属性对应的类型,这个里面比较细:比如这个属性是一个基本类型,还是一个foundation类,还是另外一个模型类型等等.<br>8.<strong><code>MJFoundation</code></strong>这两个类分别代表遍历某个类是不是foudation框架下<br>9.<strong><code>MJExtensionConst</code></strong>一些基本的配置信息的宏,比如断言,错误,日志输出等等.</p>
 <p>###主要逻辑的说明<br>1.从字典转模型基本方法 ==- (instancetype)mj_setKeyValues:(id)keyValues context:(NSManagedObjectContext *)context== 开始捋顺逻辑:</p>
-<p><img src="media/14841988273857/F861BEC4-D091-4987-9E0E-5F0B19DA83E5.png" alt="F861BEC4-D091-4987-9E0E-5F0B19DA83E5-w854"></p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/image/jpg/MJExtension-1.jpg" alt=""></p>
 <h4 id="代码中需要学习的部分"><a href="#代码中需要学习的部分" class="headerlink" title="代码中需要学习的部分"></a>代码中需要学习的部分</h4><p>1.对于经常用到的方法或者语句可以抽成宏或者内联方法,方便使用.<br>2.runtime获取属性的应用是方法的关键.<br>3.对于<code>objc_setAssociatedObject</code>和<code>objc_getAssociatedObject</code>动态增加属性方法的使用.<br>4.将key值和模型属性的转换桥梁以动态属性的方式写在自己的类里面.对于模型的侵入性很小.<br>5.将每一个模型中属性的包装.然后NSObject中根据之后包装进行处理,转换成想要的样子</p>
 <p>###runTime<br>1.获取所有属性<br><code>class_copyPropertyList</code>说明：使用class_copyPropertyList并不会获取无@property声明的成员变量</p>
 <ol>
