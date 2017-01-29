@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>iOS部署开发环境的几个步骤 | Liberalism的博客</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="liberalism,iOS,Swift,nodejs,JavaScript" />
+  
+
+  <meta name="description" content="安装 Homebrew
+Homebrew简称brew,是Mac OSX上的软件包管理工具,能在Mac中方便的安装软件或者卸载软件,可以说Homebrew就是MAC下的apt-get、yum神器 
+
+安装很简单,打开终端,直接输入命令即可,具体使用此处不提,可取官网参看文档
+
+
+1/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS部署开发环境的几个步骤">
+<meta property="og:url" content="http://yoursite.com/2017/01/21/iOS部署开发环境/index.html">
+<meta property="og:site_name" content="Liberalism的博客">
+<meta property="og:description" content="安装 Homebrew
+Homebrew简称brew,是Mac OSX上的软件包管理工具,能在Mac中方便的安装软件或者卸载软件,可以说Homebrew就是MAC下的apt-get、yum神器 
+
+安装很简单,打开终端,直接输入命令即可,具体使用此处不提,可取官网参看文档
+
+
+1/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent">
+<meta property="og:updated_time" content="2017-01-29T06:45:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS部署开发环境的几个步骤">
+<meta name="twitter:description" content="安装 Homebrew
+Homebrew简称brew,是Mac OSX上的软件包管理工具,能在Mac中方便的安装软件或者卸载软件,可以说Homebrew就是MAC下的apt-get、yum神器 
+
+安装很简单,打开终端,直接输入命令即可,具体使用此处不提,可取官网参看文档
+
+
+1/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            iOS
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            JS
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            翻译
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装-Homebrew"><span class="toc-text">安装 Homebrew</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装-Git"><span class="toc-text">安装 Git</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装-Zsh"><span class="toc-text">安装 Zsh</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CocoaPods安装和使用"><span class="toc-text">CocoaPods安装和使用</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-iOS部署开发环境" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">iOS部署开发环境的几个步骤</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.01.21</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>John Doe</span>
+        </span>
+      
+
+      
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="http://www.xiaolu520.com/2017/01/21/iOS部署开发环境/#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h2 id="安装-Homebrew"><a href="#安装-Homebrew" class="headerlink" title="安装 Homebrew"></a>安装 Homebrew</h2><ol>
+<li><p><code>Homebrew</code>简称<code>brew</code>,是Mac OSX上的软件包管理工具,能在Mac中方便的安装软件或者卸载软件,可以说<code>Homebrew</code>就是<code>MAC</code>下的<code>apt-get</code>、<code>yum</code>神器 </p>
+</li>
+<li><p>安装很简单,打开终端,直接输入命令即可,具体使用此处不提,可取官网参看文档</p>
+</li>
+</ol>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/bin/ruby -e <span class="string">"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</span></div></pre></td></tr></table></figure>
+<h2 id="安装-Git"><a href="#安装-Git" class="headerlink" title="安装 Git"></a>安装 Git</h2><ul>
+<li><p><code>Xcode</code>中就自带<code>Git</code>,如果你是一名<code>iOS Developer</code> ,直接安装<code>Xcode</code>即可.</p>
+</li>
+<li><p>在终端中,输入<code>git</code>,会显示相关的命令,按需使用即可</p>
+</li>
+</ul>
+<h2 id="安装-Zsh"><a href="#安装-Zsh" class="headerlink" title="安装 Zsh"></a>安装 Zsh</h2><ul>
+<li>自动安装</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh</div></pre></td></tr></table></figure>
+<ul>
+<li>手动安装</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 1. 克隆到本地仓库</span></div><div class="line">git clone git:<span class="comment">//github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh</span></div><div class="line"><span class="comment">// 2. (可选)对本地已有文件备份</span></div><div class="line">~/.zshrc filecp ~/.zshrc ~/.zshrc.orig</div><div class="line"><span class="comment">// 3. 利用提供的模板对zsh进行配置</span></div><div class="line">cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc</div><div class="line"><span class="comment">// 4. 设置zsh为默认终端</span></div><div class="line">chsh -s /bin/zsh</div><div class="line"><span class="comment">// 5. 重启你的终端设备</span></div></pre></td></tr></table></figure>
+<h2 id="CocoaPods安装和使用"><a href="#CocoaPods安装和使用" class="headerlink" title="CocoaPods安装和使用"></a>CocoaPods安装和使用</h2><ul>
+<li>CocoaPods是iOS最常用的第三方类库管理工具，绝大部分有名的开源类库都支持CocoaPods。</li>
+<li>CocoaPods是用Ruby实现的，要想使用它首先需要有Ruby的环境。幸运的是OS X系统默认已经可以运行Ruby了，因此我们只需执行以下命令：</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo gem install cocoapods</div><div class="line"><span class="comment">// 或者</span></div><div class="line">sudo gem install -n/user/local/bin cocoapods</div></pre></td></tr></table></figure>
+<ul>
+<li>由于某些原因，执行时会出现下面的错误提示： </li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ERROR: Could not find a valid gem 'cocoapods' (&gt;= 0), here is why: Unable to download data from https://rubygems.org/ - Errno::EPIPE: Broken pipe - SSL_connect (https://rubygems.org/latest_specs.4.8.gz)</div></pre></td></tr></table></figure>
+<ul>
+<li>当你使用代理后如果还是很慢，可以用淘宝的RubyGems镜像来代替官方版本，执行以下命令：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ gem sources -l</div><div class="line">$ gem sources --remove https://rubygems.org/ </div><div class="line">$ gem sources -a https://ruby.taobao.org/ </div><div class="line">$ gem sources -l</div></pre></td></tr></table></figure>
+<ul>
+<li>将代理换回国内的淘宝后,重新执行一遍安装命令</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gem install cocoapods</div></pre></td></tr></table></figure>
+<ul>
+<li>安装成功后，接着执行命令</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod setup</div></pre></td></tr></table></figure>
+<ul>
+<li>如果Ruby环境不够新，可能需要更新以下：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo gem update --system</div></pre></td></tr></table></figure>
+<ul>
+<li>然后利用vim打开Podfile文件编辑，加入你想要使用的类库，格式如下：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">platform :ios, &apos;8.0&apos;</div><div class="line">use_frameworks!</div><div class="line">target &apos;Test&apos; do pod </div><div class="line">&apos;AFNetworking&apos;, &apos;~&gt; 3.0&apos; </div><div class="line">end</div></pre></td></tr></table></figure>
+<ul>
+<li>注意iOS8.0之后，可以增加的动态库了（以前只能是静态库的），为了匹配动态库，增加了</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">use_frameworks!</div></pre></td></tr></table></figure>
+<ul>
+<li>最后执行安装命令</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[!] From now on use `Sample0814.xcworkspace`.</div></pre></td></tr></table></figure>
+<ul>
+<li>当终端出现类似下面的提示后，就代表成功了：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod install</div></pre></td></tr></table></figure>
+<ul>
+<li><p>P.s.1 上面的每一步都有可能出现问题，但大部分问题都是因为大局域网的原因，用一个网速稳定的境外VPN可破。</p>
+</li>
+<li><p>P.s.2 如果上面因为权限问题安装失败，必须每次都要删除</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rm -rf /Users/loginnanme/Library/Caches/CocoaPods/</div></pre></td></tr></table></figure>
+<ul>
+<li>因为这个缓存中会存下你的github的东西，造成每次都调用上次权限问题的缓存。</li>
+<li>P.s.3 关于Podfile文件编辑时，第三方库版本号的各种写法：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">pod ‘AFNetworking’ //不显式指定依赖库版本，表示每次都获取最新版本 </div><div class="line">pod ‘AFNetworking’, ‘2.0’ //只使用2.0版本 </div><div class="line">pod ‘AFNetworking’, ‘&gt;2.0′ //使用高于2.0的版本</div><div class="line">pod ‘AFNetworking’, ‘&gt;=2.0′ //使用大于或等于2.0的版本 </div><div class="line">pod ‘AFNetworking’, ‘&lt;2.0′ //使用小于2.0的版本 </div><div class="line">pod ‘AFNetworking’, ‘&lt;=2.0′ //使用小于或等于2.0的版本 </div><div class="line">pod ‘AFNetworking’, ‘~&gt;0.1.2′ //使用大于等于0.1.2但小于0.2的版本，相当于&gt;=0.1.2并且&lt;0.2.0 </div><div class="line">pod ‘AFNetworking’, ‘~&gt;0.1′ //使用大于等于0.1但小于1.0的版本 </div><div class="line">pod ‘AFNetworking’, ‘~&gt;0′ //高于0的版本，写这个限制和什么都不写是一个效果，都表示使用最新版本</div></pre></td></tr></table></figure>
+<hr>
+<ul>
+<li>再执行</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod setup</div></pre></td></tr></table></figure>
+<ul>
+<li>的时候,可能会比较慢,这时候不要慌,可以通过</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cd .~/cocoapods </div><div class="line">之后 </div><div class="line">du -sh</div></pre></td></tr></table></figure>
+<ul>
+<li><p>查看当前的安装进度</p>
+</li>
+<li><p>如果Mac自带的Ruby版本不够新,可以参考我的另一篇文章<br><a href="http://www.jianshu.com/p/2bc92a0e1b83" target="_blank" rel="external">http://www.jianshu.com/p/2bc92a0e1b83</a></p>
+</li>
+<li><p>在按照步骤执行的过程中遇到任何问题希望大家多多交流</p>
+</li>
+</ul>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持Liberalism</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+          <li class="item">
+            <img src="/images/qr-alipay.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="hide pull-left" href="/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2017/01/21/NSPredicate的一些简单用法/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              iOS
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              JS
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              翻译
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'Liberalism';
+    
+    var disqus_url = 'http://yoursite.com/2017/01/21/iOS部署开发环境/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//Liberalism.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
