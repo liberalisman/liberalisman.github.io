@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>SVN上文件被locked的解决办法 | Liberalism的博客</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="liberalism,iOS,Swift,nodejs,JavaScript" />
+  
+
+  <meta name="description" content="在工作过程中由于网络中断、或是人为的强制关闭SVN版本控制工具。SVN出于自我的保护机制，会自动在每个文件夹中生成lock文件，这样我们下次打开SVN是无法进行操作的，SVN会提示我们系统中有文件被锁，此时你只需进入项目文件夹中把所有的lock文件删除即可
+
+
+1.首先使用终端  cd 到目标文件夹
+
+2.直接执行下面的这句命令
+
+
+12# 这句话的意思很简单，就是找到当前目录下的所有.SVN文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SVN上文件被locked的解决办法">
+<meta property="og:url" content="http://yoursite.com/2017/01/30/SVN上文件被locked的解决办法/index.html">
+<meta property="og:site_name" content="Liberalism的博客">
+<meta property="og:description" content="在工作过程中由于网络中断、或是人为的强制关闭SVN版本控制工具。SVN出于自我的保护机制，会自动在每个文件夹中生成lock文件，这样我们下次打开SVN是无法进行操作的，SVN会提示我们系统中有文件被锁，此时你只需进入项目文件夹中把所有的lock文件删除即可
+
+
+1.首先使用终端  cd 到目标文件夹
+
+2.直接执行下面的这句命令
+
+
+12# 这句话的意思很简单，就是找到当前目录下的所有.SVN文">
+<meta property="og:updated_time" content="2017-01-30T09:05:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SVN上文件被locked的解决办法">
+<meta name="twitter:description" content="在工作过程中由于网络中断、或是人为的强制关闭SVN版本控制工具。SVN出于自我的保护机制，会自动在每个文件夹中生成lock文件，这样我们下次打开SVN是无法进行操作的，SVN会提示我们系统中有文件被锁，此时你只需进入项目文件夹中把所有的lock文件删除即可
+
+
+1.首先使用终端  cd 到目标文件夹
+
+2.直接执行下面的这句命令
+
+
+12# 这句话的意思很简单，就是找到当前目录下的所有.SVN文">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            iOS
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            JS
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            翻译
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-SVN上文件被locked的解决办法" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">SVN上文件被locked的解决办法</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.01.30</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>John Doe</span>
+        </span>
+      
+
+      
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="http://www.xiaolu520.com/2017/01/30/SVN上文件被locked的解决办法/#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <blockquote>
+<p>在工作过程中由于网络中断、或是人为的强制关闭SVN版本控制工具。SVN出于自我的保护机制，会自动在每个文件夹中生成lock文件，这样我们下次打开SVN是无法进行操作的，SVN会提示我们系统中有文件被锁，此时你只需进入项目文件夹中把所有的lock文件删除即可</p>
+</blockquote>
+<ul>
+<li><p>1.首先使用终端  cd 到目标文件夹</p>
+</li>
+<li><p>2.直接执行下面的这句命令</p>
+</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># 这句话的意思很简单，就是找到当前目录下的所有.SVN文件夹，并把文件夹下的所有LOCK文件  干掉。</span></div><div class="line">find . | grep <span class="string">".svn/lock"</span> | xargs rm</div></pre></td></tr></table></figure>
+<ul>
+<li>3.之后再回到SVN中进行操作吧，大功告成。</li>
+</ul>
+<blockquote>
+<p>按步骤进行的过程中遇到问题，欢迎和我交流。</p>
+</blockquote>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持Liberalism</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+          <li class="item">
+            <img src="/images/qr-alipay.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/01/28/MJExtension源码解读/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              iOS
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              JS
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              翻译
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'Liberalism';
+    
+    var disqus_url = 'http://yoursite.com/2017/01/30/SVN上文件被locked的解决办法/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//Liberalism.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
