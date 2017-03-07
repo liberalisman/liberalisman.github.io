@@ -7,7 +7,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>ObjectMapper解析 | Liberalism的博客</title>
+  <title>源码解析-ObjectMapper | Liberalism的博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -22,8 +22,8 @@ operators 文件是操作符定义的文件,将模型和jsonvalue关联的地方
 toJson 和 fromJson 文件是转换的过程中需要做的工作
 transform 转成模型的具体类型的转换">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ObjectMapper解析">
-<meta property="og:url" content="http://yoursite.com/2017/01/28/ObjectMapper解析/index.html">
+<meta property="og:title" content="源码解析-ObjectMapper">
+<meta property="og:url" content="http://yoursite.com/2017/01/28/源码解析-ObjectMapper/index.html">
 <meta property="og:site_name" content="Liberalism的博客">
 <meta property="og:description" content="两个协议文件(Mappleable 和 ImmutableMapple),是其他一切的基础
 map文件 主要是用来匹配json字符和模型
@@ -31,9 +31,9 @@ Mapper文件是转换模型的逻辑文件,里面各种映射逻辑
 operators 文件是操作符定义的文件,将模型和jsonvalue关联的地方
 toJson 和 fromJson 文件是转换的过程中需要做的工作
 transform 转成模型的具体类型的转换">
-<meta property="og:updated_time" content="2017-01-28T10:42:50.000Z">
+<meta property="og:updated_time" content="2017-02-22T06:43:32.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ObjectMapper解析">
+<meta name="twitter:title" content="源码解析-ObjectMapper">
 <meta name="twitter:description" content="两个协议文件(Mappleable 和 ImmutableMapple),是其他一切的基础
 map文件 主要是用来匹配json字符和模型
 Mapper文件是转换模型的逻辑文件,里面各种映射逻辑
@@ -147,16 +147,16 @@ transform 转成模型的具体类型的转换">
 
 
   <div id="toc" class="toc-article">
-    <strong class="toc-title">Posts List</strong>
+    <strong class="toc-title">文章目录</strong>
     <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Mapper文件"><span class="toc-text">Mapper文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Map文件"><span class="toc-text">Map文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Operators文件"><span class="toc-text">Operators文件</span></a></li></ol>
   </div>
 
 
 
 <div class="content content-post CENTER">
-   <article id="post-ObjectMapper解析" class="article article-type-post" itemprop="blogPost">
+   <article id="post-源码解析-ObjectMapper" class="article article-type-post" itemprop="blogPost">
   <header class="article-header">
-    <h1 class="post-title">ObjectMapper解析</h1>
+    <h1 class="post-title">源码解析-ObjectMapper</h1>
 
     <div class="article-meta">
       <span>
@@ -177,7 +177,7 @@ transform 转成模型的具体类型的转换">
       
         <span>
           <i class="icon-comment"></i>
-          <a href="http://www.xiaolu520.com/2017/01/28/ObjectMapper解析/#disqus_thread"></a>
+          <a href="http://www.xiaolu520.com/2017/01/28/源码解析-ObjectMapper/#disqus_thread"></a>
         </span>
       
 
@@ -292,7 +292,7 @@ transform 转成模型的具体类型的转换">
   <span id="cover" class="cover hide"></span>
   <div id="modal-dialog" class="modal-dialog hide-dialog">
     <div class="modal-header">
-      <span id="close" class="btn-close">Close</span>
+      <span id="close" class="btn-close">关闭</span>
     </div>
     <hr>
     <div class="modal-body">
@@ -362,7 +362,7 @@ transform 转成模型的具体类型的转换">
   <script>
     var disqus_shortname = 'Liberalism';
     
-    var disqus_url = 'http://yoursite.com/2017/01/28/ObjectMapper解析/';
+    var disqus_url = 'http://yoursite.com/2017/01/28/源码解析-ObjectMapper/';
     
     (function(){
       var dsq = document.createElement('script');
