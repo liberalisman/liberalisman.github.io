@@ -6,17 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Liberalism</title>
+  <title>序列化和反序列化 | Liberalism</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="码农。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Liberalism">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="序列化和反序列化">
+<meta property="og:url" content="http://yoursite.com/2017/03/15/序列化和反序列化/index.html">
 <meta property="og:site_name" content="Liberalism">
-<meta property="og:description" content="码农。">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/header/image/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-01.png">
+<meta property="og:updated_time" content="2017-04-16T00:09:51.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Liberalism">
-<meta name="twitter:description" content="码农。">
+<meta name="twitter:title" content="序列化和反序列化">
+<meta name="twitter:image" content="http://okhqmtd8q.bkt.clouddn.com/header/image/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-01.png">
   
     <link rel="alternative" href="/atom.xml" title="Liberalism" type="application/atom+xml">
   
@@ -168,135 +169,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-总结-iOS Summary Part1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-序列化和反序列化" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/15/总结-iOS Summary Part1/">iOS知识点总结-1</a>
-    </h1>
-  
-
-        
-        <a href="/2017/04/15/总结-iOS Summary Part1/" class="archive-article-date">
-  	<time datetime="2017-04-15T15:43:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="http://okhqmtd8q.bkt.clouddn.com/header/image/iOS%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-01.png" alt=""></p>
-        
-          <a class="article-more-a" href="/2017/04/15/总结-iOS Summary Part1/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/15/总结-iOS Summary Part1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-weak-弱引用实现原理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/03/weak-弱引用实现原理/">weak-弱引用实现原理</a>
-    </h1>
-  
-
-        
-        <a href="/2017/04/03/weak-弱引用实现原理/" class="archive-article-date">
-  	<time datetime="2017-04-03T06:33:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><code>weak</code>是一个弱引用，这个引用不会增加对象的引用计数，并且所指对象在释放后被自动置为nil。<code>weak</code>通常用于处理循环引用的问题。如<code>代理</code>属性以及<code>block</code>中用得比较多。</p>
-<p>此处重点记录一下<code>weak</code>的实现过程</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="keyword">id</span> __<span class="keyword">weak</span> obj1 = obj;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2017/04/03/weak-弱引用实现原理/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">读后感</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/03/weak-弱引用实现原理/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-序列化和反序列化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/15/序列化和反序列化/">序列化和反序列化</a>
+    <h1 class="article-title" itemprop="name">
+      序列化和反序列化
     </h1>
   
 
@@ -310,64 +190,60 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><img src="http://okhqmtd8q.bkt.clouddn.com/header/image/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96-01.png" alt=""></p>
-        
-          <a class="article-more-a" href="/2017/03/15/序列化和反序列化/#more">more >></a>
-        
-      
+<a id="more"></a>
+<h3 id="定义以及相关概念"><a href="#定义以及相关概念" class="headerlink" title="定义以及相关概念"></a>定义以及相关概念</h3><p>互联网的产生带来了机器间通讯的需求，而互联通讯的双方需要采用约定的协议，序列化和反序列化属于通讯协议的一部分。通讯协议往往采用分层模型，不同模型每层的功能定义以及颗粒度不同，例如：<code>TCP/IP</code>协议是一个四层协议，而<code>OSI</code>模型却是七层协议模型。在<code>OSI</code>七层协议模型中 <strong>展现层（Presentation Layer）的主要功能是把应用层的对象转换成一段连续的二进制串，或者反过来，把二进制串转换成应用层的对象–这两个功能就是序列化和反序列化</strong>。一般而言，<code>TCP/IP</code>协议的应用层对应与<code>OSI</code>七层协议模型的应用层，展示层和会话层，所以序列化协议属于<code>TCP/IP</code>协议应用层的一部分。本文对序列化协议的讲解主要基于<code>OSI</code>七层协议模型。</p>
+<p><strong>序列化(Serialization)： 将数据结构或对象转换成二进制串的过程。在iOS中称为归档(Archive)<br>反序列化：将在序列化过程中所生成的二进制串转换成数据结构或者对象的过程。</strong></p>
+<p>不同的计算机语言中，数据结构，对象以及二进制串的表示方式并不相同。</p>
+<p>数据结构和对象：对于类似Java这种完全面向对象的语言，工程师所操作的一切都是对象<code>（Object）</code>，来自于类的实例化。在Java语言中最接近数据结构的概念，就是<code>POJO（Plain Old Java Object）</code>或者<code>Javabean</code>－－那些只有<code>setter/getter</code>方法的类。而<strong>C二进制串：序列化所生成的二进制串指的是存储在内存中的一块数据。C语言的字符串可以直接被传输层使用，因为其本质上就是以’0’结尾的存储在内存中的二进制串</strong>。在<code>Java</code>语言里面，二进制串的概念容易和String混淆。实际上<code>String</code>是<code>Java</code>的一等公民，是一种特殊对象<code>（Object）</code>。<strong>对于跨语言间的通讯，序列化后的数据当然不能是某种语言的特殊数据类型。</strong>,在<code>iOS</code>中对象转为<code>NSData</code>类型，就是序列化之后的，而<code>NSData</code>转为其他类型对象就是反序列化。</p>
+<h3 id="在iOS中序列化与反序列化"><a href="#在iOS中序列化与反序列化" class="headerlink" title="在iOS中序列化与反序列化"></a>在iOS中序列化与反序列化</h3><p>  将任何对象转NSData，这个对象都需要遵循一个协议，就是<code>NSCoding</code>协议。代码如下：</p>
+  <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">  <span class="comment">//每个属性变量分别转码，序列化</span></div><div class="line">- (<span class="keyword">void</span>)encodeWithCoder:(<span class="built_in">NSCoder</span> *)aCoder </div><div class="line">&#123;</div><div class="line">    [aCoder encodeObject:<span class="keyword">self</span>.FYusername forKey:<span class="string">@"username"</span>];</div><div class="line">    [aCoder encodeObject:<span class="keyword">self</span>.FriendlyName forKey:<span class="string">@"FriendlyName"</span>];</div><div class="line">    [aCoder encodeObject:<span class="keyword">self</span>.phoneNum forKey:<span class="string">@"phoneNum"</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+ <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//分别把每个属性变量根据关键字进行逆转码，最后返回一个Student类的对象,反序列化</span></div><div class="line">- (<span class="keyword">id</span>)initWithCoder:(<span class="built_in">NSCoder</span> *)aDecoder</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">self</span> = [<span class="keyword">super</span> init]) </div><div class="line">    &#123;</div><div class="line">        <span class="keyword">self</span>.FYusername = [aDecoder decodeObjectForKey:<span class="string">@"username"</span>];</div><div class="line">        <span class="keyword">self</span>.FriendlyName= [aDecoder decodeObjectForKey:<span class="string">@"FriendlyName"</span>];</div><div class="line">        <span class="keyword">self</span>.phoneNum= [aDecoder decodeObjectForKey:<span class="string">@"phoneNum"</span>];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>对象在实现NSCoding协议后，在外面使用这个对象的时候可以通过归档函数来转成NSData:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 归档调动，序列化</span></div><div class="line"><span class="built_in">NSData</span> *contactsData=[<span class="built_in">NSKeyedArchiver</span> archivedDataWithRootObject:ContactsArray]; </div><div class="line"><span class="comment">//反序列化，转变为对象</span></div><div class="line"><span class="built_in">NSObject</span>&lt;<span class="built_in">NSCoding</span>&gt; *obj=[<span class="built_in">NSKeyedUnarchiver</span> unarchiveObjectWithFile:path];</div></pre></td></tr></table></figure>
+<p>其中的<code>NSCoder是一个编码的工具性类</code>，封装了对象序列化和反序列化的函数，所以实际上，我们并没有自己写序列化算法，只是遵循了这个协议让系统去调用罢了。</p>
+<h3 id="iOS利用序列化和反序列化的作用"><a href="#iOS利用序列化和反序列化的作用" class="headerlink" title="iOS利用序列化和反序列化的作用"></a>iOS利用序列化和反序列化的作用</h3><p>实现NSCoding的类，并序列化数据，有2个好处：<br>1.<strong>序列化数据可以直接进行存储</strong><br>2.<strong>序列化数据容易进行完全拷贝</strong></p>
+<h4 id="序列化数据可以直接进行存储"><a href="#序列化数据可以直接进行存储" class="headerlink" title="序列化数据可以直接进行存储"></a>序列化数据可以直接进行存储</h4><p>在iOS中，进行存储比较快捷的方式是<code>NSUserDefaults</code>，存储方式如下：<br>但它支持的数据类型很有限：<br><code>NSNumber（NSInteger、float、double），NSString，NSData，NSArray，NSDictionary，BOOL.</code></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[[<span class="built_in">NSUserDefaults</span> standardUserDefaults] setObject:nickName forKey:UserDefault_NickName];</div><div class="line">[[<span class="built_in">NSUserDefaults</span> standardUserDefaults] synchronize];</div></pre></td></tr></table></figure>
+<p>一般都是些不可变的基本类型，存储其他类型时，如<code>NSMutableArray</code>等类型时，会崩溃的。<br>解决办法如下：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//当然，不能忽略的是，如果是自定义对象，别忘了NSCoding协议。</span></div><div class="line"><span class="built_in">NSData</span> *contactsData=[<span class="built_in">NSKeyedArchiver</span> archivedDataWithRootObject:ContactsArray];</div><div class="line">[[<span class="built_in">NSUserDefaults</span> standardUserDefaults] setObject:contactsData forKey:UserDefault_ContactsArray];</div><div class="line">[[<span class="built_in">NSUserDefaults</span> standardUserDefaults] synchronize];</div></pre></td></tr></table></figure>
+<p>除了<code>NSUserDefaults</code>，另外存储<code>NSData</code>的方式可以用<strong>归档+地址</strong>：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[<span class="built_in">NSKeyedArchiver</span> archiveRootObject:obj toFile:path];</div></pre></td></tr></table></figure>
+<h4 id="序列化数据容易进行完全拷贝："><a href="#序列化数据容易进行完全拷贝：" class="headerlink" title="序列化数据容易进行完全拷贝："></a>序列化数据容易进行完全拷贝：</h4><p>这里简单说下使用<code>NSKeyedArchiver</code>来实现深拷贝：<br>主要的方法是先将某个对象转<code>NSData</code>,然后<code>NSData</code>转回赋值给新建对象：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSData</span> *data = [<span class="built_in">NSKeyedArchiver</span> archivedDataWithRootObject:oldContactsArray];</div><div class="line"><span class="built_in">NSMutableArray</span> *newContactsArray = [<span class="built_in">NSKeyedUnarchiver</span> unarchiveObjectWithData:data];</div></pre></td></tr></table></figure>
 
       
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/03/15/序列化和反序列化/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-源码解析-SDWebImage" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/21/源码解析-SDWebImage/">源码解析-SDWebImage</a>
-    </h1>
-  
-
-        
-        <a href="/2017/02/21/源码解析-SDWebImage/" class="archive-article-date">
-  	<time datetime="2017-02-21T04:48:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="http://okhqmtd8q.bkt.clouddn.com/header/image/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-SDWebImage.png" alt=""></p>
-        
-          <a class="article-more-a" href="/2017/02/21/源码解析-SDWebImage/#more">more >></a>
-        
-      
-
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://7xvffo.com1.z0.glb.clouddn.com/Alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://7xvffo.com1.z0.glb.clouddn.com/WeChat.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -376,18 +252,83 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/21/源码解析-SDWebImage/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/03/15/序列化和反序列化/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
 
-
+  
+<nav id="article-nav">
+  
+    <a href="/2017/02/21/源码解析-SDWebImage/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          源码解析-SDWebImage
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/03/weak-弱引用实现原理/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">weak-弱引用实现原理</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
 
 
 
@@ -395,258 +336,10 @@
 
 
   
-    <article id="post-制作正式版 Mac OS 10.12 安装 U盘" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/03/制作正式版 Mac OS 10.12 安装 U盘/">制作正式版 Mac OS 10.12 安装 U盘</a>
-    </h1>
+    <div class="duoshuo"></div>
   
 
-        
-        <a href="/2017/02/03/制作正式版 Mac OS 10.12 安装 U盘/" class="archive-article-date">
-  	<time datetime="2017-02-03T03:05:45.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="http://okhqmtd8q.bkt.clouddn.com/header/image/%E5%88%B6%E4%BD%9C%E6%AD%A3%E5%BC%8F%E7%89%88%20Mac%20OS%2010.12%20%E5%AE%89%E8%A3%85%20U%E7%9B%98.png" alt=""></p>
-        
-          <a class="article-more-a" href="/2017/02/03/制作正式版 Mac OS 10.12 安装 U盘/#more">more >></a>
-        
-      
 
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/03/制作正式版 Mac OS 10.12 安装 U盘/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-翻译-利用Healthkit进行睡眠分析(Swift）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/03/翻译-利用Healthkit进行睡眠分析(Swift）/">翻译-利用 Healthkit 进行睡眠分析（Swift）</a>
-    </h1>
-  
-
-        
-        <a href="/2017/02/03/翻译-利用Healthkit进行睡眠分析(Swift）/" class="archive-article-date">
-  	<time datetime="2017-02-03T00:12:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>原文：<a href=""></a><a href="http://appcoda.com/sleep-analysis-healthkit/">http://appcoda.com/sleep-analysis-healthkit/</a></p>
-<p>翻译：Liberalism</p>
-<p>日期：2016年10月5日</p>
-        
-          <a class="article-more-a" href="/2017/02/03/翻译-利用Healthkit进行睡眠分析(Swift）/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/02/03/翻译-利用Healthkit进行睡眠分析(Swift）/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-SVN上文件被locked的解决办法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/30/SVN上文件被locked的解决办法/">SVN上文件被locked的解决办法</a>
-    </h1>
-  
-
-        
-        <a href="/2017/01/30/SVN上文件被locked的解决办法/" class="archive-article-date">
-  	<time datetime="2017-01-30T08:57:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-30</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>在工作过程中由于网络中断、或是人为的强制关闭SVN版本控制工具。SVN出于自我的保护机制，会自动在每个文件夹中生成lock文件，这样我们下次打开SVN是无法进行操作的，SVN会提示我们系统中有文件被锁，此时你只需进入项目文件夹中把所有的lock文件删除即可</p>
-</blockquote>
-<ul>
-<li><p>1.首先使用终端  cd 到目标文件夹</p>
-</li>
-<li><p>2.直接执行下面的这句命令</p>
-</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># 这句话的意思很简单，就是找到当前目录下的所有.SVN文件夹，并把文件夹下的所有LOCK文件  干掉。</span></div><div class="line">find . | grep <span class="string">".svn/lock"</span> | xargs rm</div></pre></td></tr></table></figure>
-<ul>
-<li>3.之后再回到SVN中进行操作吧，大功告成。</li>
-</ul>
-<blockquote>
-<p>按步骤进行的过程中遇到问题，欢迎和我交流。</p>
-</blockquote>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/01/30/SVN上文件被locked的解决办法/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-源码解析-MJExtension" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/28/源码解析-MJExtension/">源码解析-MJExtension</a>
-    </h1>
-  
-
-        
-        <a href="/2017/01/28/源码解析-MJExtension/" class="archive-article-date">
-  	<time datetime="2017-01-28T08:13:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h3><p>1.<strong><code>NSObjecte+MJKeyValue</code></strong>提供的字典和模型互相转换的核心代码和逻辑.</p>
-<p>2.<strong><code>NSObject+MJProperty</code></strong>提供了字典key值和value值与模型属性的相对对应关系的配置.最常见写在模型中的方法<code>mj_setupReplacedKeyFromPropertyName</code>和<code>mj_setupObjectClassInArray</code></p>
-<p>3.<strong><code>NSObject+MJCoding</code></strong>主要是模型的归档和解码.外界实现比较方法,主要是一个宏,这个宏其实是代替两个方法.</p>
-<p>4.<strong><code>NSObject+MJClass</code></strong>提供了遍历属性类型父类的方法.以及模型和字典互转过程中需要转化的白名单和黑名单.</p>
-<p>5.<strong><code>MJProperty</code></strong>包装模型中每个属性,包括属性的类型,属性的名字,父类.储存和取出属性对应的值.</p>
-<p>6.<strong><code>MJPropertyKey</code></strong>模型对应的key值,以及他的对应的类型(字典还是数组)</p>
-<p>7.<strong><code>MJPropertyType</code></strong>属性对应的类型,这个里面比较细:比如这个属性是一个基本类型,还是一个foundation类,还是另外一个模型类型等等.</p>
-<p>8.<strong><code>MJFoundation</code></strong>这两个类分别代表遍历某个类是不是<strong><code>Foudation</code></strong>框架下</p>
-<p>9.<strong><code>MJExtensionConst</code></strong>一些基本的配置信息的宏,比如断言,错误,日志输出等等.</p>
-<h3 id="主要逻辑的说明"><a href="#主要逻辑的说明" class="headerlink" title="主要逻辑的说明"></a>主要逻辑的说明</h3><p>1.从字典转模型基本方法 ==- (instancetype)mj_setKeyValues:(id)keyValues context:(NSManagedObjectContext *)context== 开始捋顺逻辑:</p>
-<p><img src="http://okhqmtd8q.bkt.clouddn.com/MJExtension%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB-01.jpg" alt=""></p>
-<h3 id="代码中需要学习的部分"><a href="#代码中需要学习的部分" class="headerlink" title="代码中需要学习的部分"></a>代码中需要学习的部分</h3><p>1.对于经常用到的方法或者语句可以抽成宏或者内联方法,方便使用.</p>
-<p>2.runtime获取属性的应用是方法的关键.</p>
-<p>3.对于<strong><code>objc_setAssociatedObject</code></strong>和<strong><code>objc_getAssociatedObject</code></strong>动态增加属性方法的使用.</p>
-<p>4.将 key值 和 模型属性 的转换桥梁以动态属性的方式写在自己的类里面.对于模型的侵入性很小.</p>
-<p>5.将每一个模型中属性的包装.然后NSObject中根据之后包装进行处理,转换成想要的样子</p>
-<h3 id="runTime"><a href="#runTime" class="headerlink" title="runTime"></a>runTime</h3><p>1.获取所有属性<br><code>class_copyPropertyList</code>说明：使用class_copyPropertyList并不会获取无@property声明的成员变</p>
-<ol>
-<li>获取属性名<code>property_getName</code><br>3.描述一个属性<code>objc_property_t</code><br>4.获取所有属性特性<code>property_copyAttributeList</code></li>
-<li>获取属性特性描述字符串<code>property_getAttributes</code>,获取的结果类似是<code>T@&quot;NSDictionary&quot;,C,N,V_dict1</code></li>
-</ol>
-<p><strong>注意获取的结果解释:</strong><br> 属性类型  name值：T  value：变化<br> 编码类型  name值：C(copy) &amp;(strong) W(weak)空(assign) 等 value：无<br>非/原子性 name值：空(atomic) N(Nonatomic)  value：无<br>变量名称  name值：V  value：变化</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">unsigned int outPut = 0;</div><div class="line">objc_property_t *prots = class_copyPropertyList([TestMadal class], &amp;outPut);</div><div class="line"></div><div class="line">for (int i = 0; i&lt;outPut; i++)</div><div class="line">&#123;</div><div class="line">    objc_property_t property = prots[i];</div><div class="line">    const char *t = property_getName(property);</div><div class="line">    const char *attrs = property_getAttributes(property);</div><div class="line">    NSLog(@&quot;%s---%s&quot;,t,attrs);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/01/28/源码解析-MJExtension/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-  
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-    </nav>
-  
 
 
           </div>
@@ -668,8 +361,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

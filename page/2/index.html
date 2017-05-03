@@ -59,7 +59,11 @@
 			
 				<li><a href="/">主页</a></li>
 	        
-				<li><a href="/tags/">随笔</a></li>
+				<li><a href="/tags/">标签</a></li>
+	        
+				<li><a href="/categories">分类</a></li>
+	        
+				<li><a href="/archives">归档</a></li>
 	        
 			</ul>
 		</nav>
@@ -119,6 +123,10 @@
 			
 				
 			
+				
+			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -136,12 +144,16 @@
 			</nav>
 
 			<nav class="header-menu js-header-menu">
-				<ul style="width: 50%">
+				<ul style="width: 70%">
 				
 				
-					<li style="width: 50%"><a href="/">主页</a></li>
+					<li style="width: 25%"><a href="/">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/tags/">随笔</a></li>
+					<li style="width: 25%"><a href="/tags/">标签</a></li>
+		        
+					<li style="width: 25%"><a href="/categories">分类</a></li>
+		        
+					<li style="width: 25%"><a href="/archives">归档</a></li>
 		        
 				</ul>
 			</nav>
@@ -158,56 +170,67 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-NSPredicate的一些简单用法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-源码解析-ObjectMapper" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/21/NSPredicate的一些简单用法/">NSPredicate的一些简单用法</a>
+      <a class="article-title" href="/2017/01/28/源码解析-ObjectMapper/">源码解析-ObjectMapper</a>
     </h1>
   
 
         
-        <a href="/2017/01/21/NSPredicate的一些简单用法/" class="archive-article-date">
-  	<time datetime="2017-01-21T03:00:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-21</time>
+        <a href="/2017/01/28/源码解析-ObjectMapper/" class="archive-article-date">
+  	<time datetime="2017-01-28T08:13:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-28</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>NSPredicate可以支持数据库查询,平时的一些数组查询之类也用这个方法,以下是一些总结</p>
-<p>####格式字符串的一些基本写法<br>1&gt; <code>@&quot;attributeName == %@&quot;</code> 就是属性名字等于某个值<br>2&gt;<code>@&quot;%K == %@&quot;</code>,将属性名字变为%K,增加拓展性.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 1.第一种写法,右边值如果是字符串,可以用单引号表示</div><div class="line">NSPredicate *pre = [NSPredicate predicateWithFormat:@&quot;nickName == &apos;小明&apos;&quot;,];</div><div class="line">// 2.第二种写法,%K的K必须大写,不能用%@代替</div><div class="line">NSString *name = @&quot;cat.nickName&quot;;</div><div class="line">NSPredicate *pre = [NSPredicate predicateWithFormat:@&quot;%K == %@&quot;,name,@&quot;小明&quot;];</div></pre></td></tr></table></figure>
-<p>####左右两边基本的比较操作符号<br>1.<code>=,==</code>左边表达式等于右手表达式</p>
-<p>2.<code>&gt;=,=&gt;</code>左边表达式大于或等于右边表达式</p>
-<p>3.<code>&lt;=,=&lt;</code>左变表达式小于或等于右边表达式</p>
-<p>4<code>&gt;</code> 或者 <code>&lt;</code></p>
-<p>5.<code>!=,&lt;&gt;</code>左边表达式不等于右边表达式</p>
-<p>6.<code>IN</code>左边表达式必须出现在右边表达式指定的集合中。即<code>name IN {&#39;Milk&#39;，&#39;Eggs&#39;，&#39;Bread&#39;}</code></p>
-<p>7.<code>BETWEEN</code>左边表达式在右边表达式之间或等于右边表达式。即<code>1 {0，33}</code>之间。如果你的左边表达式是0或33，也是真的</p>
-<p>8.以下是<strong>字符串表达式的比较符号</strong><br>(1)<code>BEGINSWITH</code>左边表达式以右边表达式开始<br>(2)<code>CONTAINS</code>左边表达式包含表达式<br>(3)<code>ENDSWITH</code>左边表达式以右边表达式结束<br>(4)<code>LIKE</code>左边表达式等于右手表达式：<code>？</code>和<code>*</code>作为通配符，其中<code>？</code>匹配1个字符，<code>*</code>匹配0个或多个字符<br>(5)<code>MATCHES</code>左边表达式等于右边表达式使用正则表达式样式比较</p>
-<p>####两个表达式的逻辑符号<br>1.<code>AND,&amp;&amp;</code>,逻辑AND</p>
-<p>2.<code>OR,||</code>逻辑或</p>
-<p>3.<code>NOT,!</code>逻辑NOT</p>
-<p>###数组的操作的一些特性<br>1.<strong>对数组中数字集合的一些操作</strong><br>(1)<code>@avg</code>返回collection中对象平均值,以NSNumber的形式返回<br>(2)<code>@count</code>集合中总共的个数,,以NSNumber的形式返回<br>(3)``@min<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(4)使用``valueForKeyPath``返回相应的结果</div></pre></td></tr></table></figure></p>
-<p>// 处理大量数字组成的数组的时候可以使用,可以方便的进行判断.然后进行下一步操作<br>NSArray <em>array = @[@(30),@(40),@(50)];<br>NSPredicate </em>pre = [NSPredicate<br>// 最小值是不是大于30<br>predicateWithFormat:@”@min.intValue &gt; 30”];<br>BOOL ok = [pre evaluateWithObject:array];<br>// 可以使用key == value 来去的最小,最大,总和,平均等值.并且返回一个nsnumer类型的值<br>NSNumber *a =  [array11 valueForKeyPath:@”@min.intValue”];<br>NSLog(@”%d”,a.intValue);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">2.**数组中存放对象的一些操作**</div><div class="line">(1) ``@distinctUnionOfObjects``返回一个数组,这个数组是由操作符``.``右侧属性的值组成的,并且重复的值被过滤掉.``@unionOfObjects``逻辑和``@distinctUnionOfObjects``相同,但是重复的值没有被过滤掉</div><div class="line">(2)``@distinctUnionOfArrays``返回的是数组,但是将数组中的数组元素拆分到一个数组里面,逻辑同上面,不包括重复值``@unionOfArrays``包括重复值</div><div class="line">(3)返回值都是使用``valueForKeyPath``取到</div></pre></td></tr></table></figure></p>
-<p>CatModal <em>cat1 = [[CatModal alloc] initWithNickName:@”小明” withWeight:30.1];<br>CatModal </em>cat2 = [[CatModal alloc] initWithNickName:@”mimi” withWeight:33.1];</p>
-<p>CatModal <em>cat4 = [[CatModal alloc] initWithNickName:@”fuu” withWeight:35.1];<br>CatModal </em>cat5 = [[CatModal alloc] initWithNickName:@”err” withWeight:35.1];</p>
-<p>TestModal <em>test1 = [[TestModal alloc] initWithName:@”小七” withHeith:90.1 withCat:cat1];<br>TestModal </em>test2 = [[TestModal alloc] initWithName:@”小七” withHeith:80.1 withCat:cat2];<br>withHeith:60.1 withCat:cat3];</p>
-<p>TestModal *test4 = [[TestModal alloc] initWithName:@”小七” withHeith:60.1 withCat:cat4];</p>
-<p>TestModal *test5 = [[TestModal alloc] initWithName:@”小七” withHeith:60.1 withCat:cat5];</p>
-<p>NSArray <em>array = @[test2,test1];<br>NSArray </em>array2 = @[test4,test5];<br>NSArray *arrayofarray = @[array,array2];</p>
-<p>NSArray <em>array11111 = [array valueForKeyPath:@”@distinctUnionOfObjects.cat”];<br>for (CatModal </em>cat in array11111) {<br>    NSLog(@”%@\n”,cat.nickName);[小明,mini]<br>}</p>
-<p>NSArray <em>array1 = [arrayofarray valueForKeyPath:@”@distinctUnionOfArrays.cat”];<br>for (CatModal </em>cat in array1) {<br>    NSLog(@”%@\n”,cat.nickName); // [fuu 小明 mimi err],并不是数组中的数组的形式<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">3.**数组中的``SELF``指什么**</div><div class="line">数组中``SELF``指的是数组中包含的每一个对象</div><div class="line"></div><div class="line">4.**对数组中具体的某个位置进行操作查询**</div><div class="line"></div><div class="line">``array[index]``指定数组中指定索引处的元素进行匹配操作</div><div class="line">``array[FIRST]````array[LAST]````array[SIZE]``分别表示对数组第一个,最后一个,数组总数进行操作</div></pre></td></tr></table></figure></p>
-<p>CatModal <em>cat1 = [[CatModal alloc] initWithNickName:@”小明” withWeight:30.1];<br>CatModal </em>cat2 = [[CatModal alloc] initWithNickName:@”mimi” withWeight:33.1];<br>CatModal <em>cat3 = [[CatModal alloc] initWithNickName:@”miru” withWeight:35.1];<br>CatModal </em>cat4 = [[CatModal alloc] initWithNickName:@”fuu” withWeight:35.1];<br>CatModal <em>cat5 = [[CatModal alloc] initWithNickName:@”err” withWeight:35.1];<br>CatModal </em>cat6 = [[CatModal alloc] initWithNickName:@”ooo” withWeight:35.1];<br>TestModal *test1 = [[TestModal alloc] initWithName:@”小七” withHeith:90.1 withCat:cat1];<br>test1.catsArray = @[cat2,cat1];</p>
-<p>TestModal <em>test2 = [[TestModal alloc] initWithName:@”小七” withHeith:80.1 withCat:cat2];<br>test2.catsArray = @[cat4];<br>TestModal </em>test3 = [[TestModal alloc] initWithName:@”小七” withHeith:60.1 withCat:cat3];<br>test3.catsArray = @[cat5,cat6];</p>
-<p>NSArray <em>array = @[test2,test1,test3];<br>NSPredicate </em>pre = [NSPredicate predicateWithFormat:@”catsArray[SIZE] == 1”];<br>NSArray *array1 = [array filteredArrayUsingPredicate:pre];<br>NSLog(@”11111%@”,array1);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">5.**对数组中的数组进行操作的时候查询关键字,只能用在数组,一对多的形式**</div><div class="line">``ANY或者SOME``对数组中的数组进行查询,只要有符合条件的,就返回``TRUE``</div><div class="line"></div><div class="line">``ALL``数组中所有都符合条件的时候才会返回。</div><div class="line"></div><div class="line">``NONE``都不正确的时候才返回true。</div></pre></td></tr></table></figure></p>
-<p>CatModal <em>cat1 = [[CatModal alloc] initWithNickName:@”小明” withWeight:30.1];<br>CatModal </em>cat2 = [[CatModal alloc] initWithNickName:@”mimi” withWeight:33.1];<br>CatModal <em>cat3 = [[CatModal alloc] initWithNickName:@”miru” withWeight:35.1];<br>TestModal </em>test1 = [[TestModal alloc] initWithName:@”小七” withHeith:90.1 withCat:cat1];<br>test1.catsArray = @[cat2,cat3];</p>
-<p>TestModal <em>test2 = [[TestModal alloc] initWithName:@”小七” withHeith:80.1 withCat:cat1];<br>test2.catsArray = @[cat2];<br>TestModal </em>test3 = [[TestModal alloc] initWithName:@”小七” withHeith:60.1 withCat:cat1];<br>test3.catsArray = @[cat1,cat3];<br>NSArray <em>array = @[test2,test1,test3];<br>// ALL ANY SOME 用于NSArray NSSet .ANY SOME是数组中有真的就返回. ALL是数组中全部是真的才返回<br>NSPredicate </em>pre = [NSPredicate predicateWithFormat:@”ALL catsArray.weight &gt; 31.0”];<br>NSArray *array1 = [array filteredArrayUsingPredicate:pre];<br>NSLog(@”%@”,array1);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">注意:</div><div class="line">1.查询过程中使用``department.name``这样的形式比较耗费性能.尽量不要使用.``department == %@``这样的形式查询效率最高.</div><div class="line">2. ``@&quot;firstName beginswith[cd] &apos;Matt&apos; AND (ANY directreports.paygrade &lt;= 7)&quot;`` 比下面这种形式更高效 ``@&quot;(ANY directreports.paygrade &lt;= 7) AND (firstName beginswith[cd] &apos;Matt&apos;)&quot;``</div><div class="line">3.使用predicate的类必须支持key-value-coding ,这样才可以在其他地方使用. 实际上使用predicate 也是根据key-value这样的形式来查询的.</div><div class="line"></div><div class="line"></div><div class="line">4.``[c],[d],[cd]``可以加到比较符号的后面表示不区分大小写，不区分发音符号，两这个都不区分</div><div class="line"></div><div class="line">5.如果想要匹配null或者nil值得时候,需要额外增加一条对比</div></pre></td></tr></table></figure></p>
-<p>predicate = [NSPredicate predicateWithFormat:@”(firstName == %@) || (firstName == nil)”];<br>filteredArray = [array filteredArrayUsingPredicate:predicate];<br>NSLog(@”%@”, filteredArray);<br>```</p>
+        <ol>
+<li>两个协议文件<strong>(Mappleable 和 ImmutableMapple)</strong>,是其他一切的基础</li>
+<li>map文件 主要是用来匹配json字符和模型</li>
+<li>Mapper文件是转换模型的逻辑文件,里面各种映射逻辑</li>
+<li>operators 文件是操作符定义的文件,将模型和jsonvalue关联的地方</li>
+<li>toJson 和 fromJson 文件是转换的过程中需要做的工作</li>
+<li>transform 转成模型的具体类型的转换    </li>
+</ol>
+<p>##Mappable和ImmutableMapple文件<br> 1.文件中主要是两个必须实现的协议方法,以及协议的扩展,协议的扩展中的方法也可以直接调用转换成模型.<br> 2.模型遵守协议的时候一定要搞清楚需要模型中的变量是变量还是常量.如果是常量的话,然后继承不同的协议,进行不同的处理.</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"> struct Struct &#123;</div><div class="line">	let prop1: String</div><div class="line">	let prop2: Int</div><div class="line">&#125;</div><div class="line">  extension Struct: ImmutableMappable &#123;</div><div class="line">	init(map: Map) throws &#123;</div><div class="line">		prop1 = try map.value(&quot;prop1&quot;)</div><div class="line">		prop2 = try map.value(&quot;prop2&quot;)</div></pre></td></tr></table></figure>
+<h2 id="Mapper文件"><a href="#Mapper文件" class="headerlink" title="Mapper文件"></a>Mapper文件</h2><p>这个方法是跟外界接触的方法,主要分为两大部分:</p>
+<ol>
+<li>将<code>json[String:Any]</code>转为模型<code>T</code>,还有就是把<code>T</code>转为<code>json</code>.主要说一下将<strong>json转化为模型</strong>.</li>
+<li><p>将一个json串转化成的value给一个已经存在的模型对象赋值还是直接创建一个新的模型,对新的模型赋值.主要讲一下给一个<strong>新的模型赋值的例子</strong>方法例子:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//直接将json中得到的value赋值给这个已经存在的object</span></div><div class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">map</span><span class="params">(JSONObject: Any?, toObject object: N)</span></span> -&gt; <span class="type">N</span>&#123;</div><div class="line">  </div><div class="line">  &#125;</div><div class="line">  <span class="comment">// 重新创建一个模型,然后将json的value赋值给这个模型</span></div><div class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">map</span><span class="params">(JSONObject: Any?)</span></span> -&gt; <span class="type">N</span>?&#123;</div><div class="line">  </div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<hr>
+<p>####json数据处理<br>1.map可以将<code>json</code>字符串转换成相应的字典或者数组格式,然后再次转换成相应的模型.格式对应的模型总结如下:<br> <code>[String:Any]</code> -&gt; <code>T</code>,<br><code>[[String:Any]]</code> -&gt; <code>[T]</code>,<br><code>[String:[string:Any]]</code> -&gt; <code>[String:T]</code>,<br><code>[String:[[String:Any]]]</code> -&gt; <code>[String:[T]]</code>,<br><code>[[[string:Any]]]</code> -&gt; <code>[[T]]</code><br>2.不管这些格式多么复杂,都是通过遍历等各种方法得到最终核心<code>[String:Any]</code>这个格式,然后变成<code>T</code>.所以可以看看这个方法是怎么写的:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 对于新创建一个模型</span></div><div class="line"> 	<span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">map</span><span class="params">(JSON: [String: Any])</span></span> -&gt; <span class="type">N</span>? &#123;</div><div class="line">		<span class="keyword">let</span> <span class="built_in">map</span> = <span class="type">Map</span>(mappingType: .fromJSON, <span class="type">JSON</span>: <span class="type">JSON</span>, context: context, shouldIncludeNilValues: shouldIncludeNilValues)</div><div class="line">		<span class="comment">// N 是遵循了StaticMappable协议的</span></div><div class="line">		<span class="keyword">if</span> <span class="keyword">let</span> klass = <span class="type">N</span>.<span class="keyword">self</span> <span class="keyword">as</span>? <span class="type">StaticMappable</span>.<span class="type">Type</span> &#123; </div><div class="line">		</div><div class="line">			<span class="keyword">if</span> <span class="keyword">var</span> object = klass.objectForMapping(<span class="built_in">map</span>: <span class="built_in">map</span>) <span class="keyword">as</span>? <span class="type">N</span> &#123;</div><div class="line">				object.mapping(<span class="built_in">map</span>: <span class="built_in">map</span>)</div><div class="line">				<span class="keyword">return</span> object</div><div class="line">			&#125;</div><div class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> <span class="keyword">let</span> klass = <span class="type">N</span>.<span class="keyword">self</span> <span class="keyword">as</span>? <span class="type">Mappable</span>.<span class="type">Type</span> &#123; <span class="comment">// Check if object is Mappable</span></div><div class="line">			<span class="keyword">if</span> <span class="keyword">var</span> object = klass.<span class="keyword">init</span>(<span class="built_in">map</span>: <span class="built_in">map</span>) <span class="keyword">as</span>? <span class="type">N</span> &#123;</div><div class="line">				object.mapping(<span class="built_in">map</span>: <span class="built_in">map</span>)</div><div class="line">				<span class="keyword">return</span> object</div><div class="line">			&#125;</div><div class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> <span class="type">N</span>.<span class="keyword">self</span> <span class="keyword">is</span> <span class="type">ImmutableMappable</span>.<span class="type">Type</span> &#123; <span class="comment">// Check if object is ImmutableMappable</span></div><div class="line">			<span class="built_in">assert</span>(<span class="literal">false</span>, <span class="string">"'ImmutableMappable' type requires throwing version of function \(#function)  - use 'try' before \(#function)"</span>)</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			<span class="comment">// Ensure BaseMappable is not implemented directly</span></div><div class="line">			<span class="built_in">assert</span>(<span class="literal">false</span>, <span class="string">"BaseMappable should not be implemented directly. Please implement Mappable, StaticMappable or ImmutableMappable"</span>)</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="keyword">return</span> <span class="literal">nil</span></div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p>对于上面一段代码主要是逻辑是: </p>
+<ul>
+<li>创建一个map实例对象.</li>
+<li>看一下模型<code>T</code>遵守的协议是哪个,然后创建模型实例并且调用协议中的方法</li>
+</ul>
+<h2 id="Map文件"><a href="#Map文件" class="headerlink" title="Map文件"></a>Map文件</h2><p> 1.map文件最主要搞明白几个主要的变量和<code>subscript</code>方法:<br> <code>JSON</code>变量是mapper文件中传递过来带有json值得变量.<br> <code>isKeyPresent</code>如果是true,则可以将其赋值给对应的模型变量.<br> <code>currentValue</code>存放模型变量的值<br> <code>currentKey</code>是实例对象map中括号中的key值.<br> <code>keyIsNested</code>是key值是否被包裹着,例如<code>a.b</code>就是被包裹着<br> <code>toObject</code>是否映射到一个已经存在的模型上.</p>
+<p> 重写<code>subscript()</code>方法就可以让自定义的实例变量也可以通过像字典那样,可以拥有key值.我们还可以给类、结构、枚举等自定义下标（subscript）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">//参数不可以是inout类型参数，且参数不能有默认值</div><div class="line">// 可以只实现get方法,或者set和get方法同时实现</div><div class="line">subscript(参数1，参数2...)-&gt;返回值&#123;  </div><div class="line">    get&#123;  </div><div class="line">    &#125;  </div><div class="line">    set(newValue)&#123;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div><div class="line"></div><div class="line">// 例子</div><div class="line">subscript(requestedMeal : MealTime) -&gt; String</div><div class="line">        &#123;</div><div class="line">        get</div><div class="line">        &#123;</div><div class="line">            if let thisMeal = meals[requestedMeal]</div><div class="line">            &#123;</div><div class="line">                return thisMeal</div><div class="line">            &#125;</div><div class="line">            else</div><div class="line">            &#123;</div><div class="line">                return &quot;Ramen&quot;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        set</div><div class="line">        &#123;</div><div class="line">            meals[requestedMeal] = newValue</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>** 其中最主要的方法是下面这个:</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">   public subscript(key: String, nested nested: Bool, delimiter delimiter: String, ignoreNil ignoreNil: Bool) -&gt; Map &#123;</div><div class="line">	// save key and value associated to it</div><div class="line">	currentKey = key</div><div class="line">	keyIsNested = nested</div><div class="line">	nestedKeyDelimiter = delimiter</div><div class="line"></div><div class="line">	if mappingType == .fromJSON &#123;</div><div class="line">		// check if a value exists for the current key </div><div class="line">		// do this pre-check for performance reasons</div><div class="line">		if nested == false &#123;</div><div class="line">			let object = JSON[key]</div><div class="line">		</div><div class="line">			let isNSNull = object is NSNull // 判断是不是null</div><div class="line">			</div><div class="line">			isKeyPresent = isNSNull ? true : object != nil</div><div class="line">			currentValue = isNSNull ? nil : object</div><div class="line">		&#125; else &#123;</div><div class="line">			// break down the components of the key that are separated by .</div><div class="line">			(isKeyPresent, currentValue) = valueFor(ArraySlice(key.components(separatedBy: delimiter)), dictionary: JSON)</div><div class="line"></div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		// update isKeyPresent if ignoreNil is true</div><div class="line">		if ignoreNil &amp;&amp; currentValue == nil &#123;</div><div class="line">		</div><div class="line">			isKeyPresent = false</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	return self</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>主要逻辑是:</p>
+<ul>
+<li>通过key或者去JSON字典中值,判断是不是nil或者NULL</li>
+<li>如果key被包裹着,然后拆开获取JSON中的value值</li>
+</ul>
+<h2 id="Operators文件"><a href="#Operators文件" class="headerlink" title="Operators文件"></a>Operators文件</h2><ol>
+<li>Swift可以自定义运算符。自定义的运算符可以在全局使用。需要使用operator关键字。使用prefix, infix or postfix标记运算符使用的位置。(另外swift还可以对结构体.类重载已经存在运算符,在全局使用)</li>
+<li>文件中对不同的参数进行了完备的定义.兼顾各种情况.</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">这里有三个步骤去定义一个自定义操作符：</div><div class="line">	1.命名你的运算符  例如:&gt;&gt;&gt;</div><div class="line">	2.选择一种类型:一元,二元,三元    例如:一元关键字 : prefix or postfix,二元或者三元 :infix.</div><div class="line">	3.设置它的优先级和结合性:associativity和优先级precedence。associativity有三个值：left, right, none,默认是none。precedence默认值是：100。可以默认不写</div><div class="line">	</div><div class="line">	infix operator &gt;&gt;&gt; &#123;</div><div class="line">	// 有默认值,可以不写</div><div class="line">	 associativity left </div><div class="line">	 precedence 140 </div><div class="line">	 &#125;</div><div class="line">func +- (left: Int, right: Int) -&gt; Int &#123;</div><div class="line">    return 111</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>暂时写这些捋顺一下这个源码的逻辑.   </p>
 
       
 
@@ -220,7 +243,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/01/21/NSPredicate的一些简单用法/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/01/28/源码解析-ObjectMapper/">展开全文 >></a>
         </p>
       
 
@@ -379,6 +402,86 @@
 
 
   
+    <article id="post-NSPredicate的一些简单用法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/01/21/NSPredicate的一些简单用法/">NSPredicate的一些简单用法</a>
+    </h1>
+  
+
+        
+        <a href="/2017/01/21/NSPredicate的一些简单用法/" class="archive-article-date">
+  	<time datetime="2017-01-21T03:00:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>NSPredicate可以支持数据库查询,平时的一些数组查询之类也用这个方法,以下是一些总结</p>
+<p>####格式字符串的一些基本写法<br>1&gt; <code>@&quot;attributeName == %@&quot;</code> 就是属性名字等于某个值<br>2&gt;<code>@&quot;%K == %@&quot;</code>,将属性名字变为%K,增加拓展性.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 1.第一种写法,右边值如果是字符串,可以用单引号表示</div><div class="line">NSPredicate *pre = [NSPredicate predicateWithFormat:@&quot;nickName == &apos;小明&apos;&quot;,];</div><div class="line">// 2.第二种写法,%K的K必须大写,不能用%@代替</div><div class="line">NSString *name = @&quot;cat.nickName&quot;;</div><div class="line">NSPredicate *pre = [NSPredicate predicateWithFormat:@&quot;%K == %@&quot;,name,@&quot;小明&quot;];</div></pre></td></tr></table></figure>
+<p>####左右两边基本的比较操作符号<br>1.<code>=,==</code>左边表达式等于右手表达式</p>
+<p>2.<code>&gt;=,=&gt;</code>左边表达式大于或等于右边表达式</p>
+<p>3.<code>&lt;=,=&lt;</code>左变表达式小于或等于右边表达式</p>
+<p>4<code>&gt;</code> 或者 <code>&lt;</code></p>
+<p>5.<code>!=,&lt;&gt;</code>左边表达式不等于右边表达式</p>
+<p>6.<code>IN</code>左边表达式必须出现在右边表达式指定的集合中。即<code>name IN {&#39;Milk&#39;，&#39;Eggs&#39;，&#39;Bread&#39;}</code></p>
+<p>7.<code>BETWEEN</code>左边表达式在右边表达式之间或等于右边表达式。即<code>1 {0，33}</code>之间。如果你的左边表达式是0或33，也是真的</p>
+<p>8.以下是<strong>字符串表达式的比较符号</strong><br>(1)<code>BEGINSWITH</code>左边表达式以右边表达式开始<br>(2)<code>CONTAINS</code>左边表达式包含表达式<br>(3)<code>ENDSWITH</code>左边表达式以右边表达式结束<br>(4)<code>LIKE</code>左边表达式等于右手表达式：<code>？</code>和<code>*</code>作为通配符，其中<code>？</code>匹配1个字符，<code>*</code>匹配0个或多个字符<br>(5)<code>MATCHES</code>左边表达式等于右边表达式使用正则表达式样式比较</p>
+<p>####两个表达式的逻辑符号<br>1.<code>AND,&amp;&amp;</code>,逻辑AND</p>
+<p>2.<code>OR,||</code>逻辑或</p>
+<p>3.<code>NOT,!</code>逻辑NOT</p>
+<p>###数组的操作的一些特性<br>1.<strong>对数组中数字集合的一些操作</strong><br>(1)<code>@avg</code>返回collection中对象平均值,以NSNumber的形式返回<br>(2)<code>@count</code>集合中总共的个数,,以NSNumber的形式返回<br>(3)``@min<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(4)使用``valueForKeyPath``返回相应的结果</div></pre></td></tr></table></figure></p>
+<p>// 处理大量数字组成的数组的时候可以使用,可以方便的进行判断.然后进行下一步操作<br>NSArray <em>array = @[@(30),@(40),@(50)];<br>NSPredicate </em>pre = [NSPredicate<br>// 最小值是不是大于30<br>predicateWithFormat:@”@min.intValue &gt; 30”];<br>BOOL ok = [pre evaluateWithObject:array];<br>// 可以使用key == value 来去的最小,最大,总和,平均等值.并且返回一个nsnumer类型的值<br>NSNumber *a =  [array11 valueForKeyPath:@”@min.intValue”];<br>NSLog(@”%d”,a.intValue);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">2.**数组中存放对象的一些操作**</div><div class="line">(1) ``@distinctUnionOfObjects``返回一个数组,这个数组是由操作符``.``右侧属性的值组成的,并且重复的值被过滤掉.``@unionOfObjects``逻辑和``@distinctUnionOfObjects``相同,但是重复的值没有被过滤掉</div><div class="line">(2)``@distinctUnionOfArrays``返回的是数组,但是将数组中的数组元素拆分到一个数组里面,逻辑同上面,不包括重复值``@unionOfArrays``包括重复值</div><div class="line">(3)返回值都是使用``valueForKeyPath``取到</div></pre></td></tr></table></figure></p>
+<p>CatModal <em>cat1 = [[CatModal alloc] initWithNickName:@”小明” withWeight:30.1];<br>CatModal </em>cat2 = [[CatModal alloc] initWithNickName:@”mimi” withWeight:33.1];</p>
+<p>CatModal <em>cat4 = [[CatModal alloc] initWithNickName:@”fuu” withWeight:35.1];<br>CatModal </em>cat5 = [[CatModal alloc] initWithNickName:@”err” withWeight:35.1];</p>
+<p>TestModal <em>test1 = [[TestModal alloc] initWithName:@”小七” withHeith:90.1 withCat:cat1];<br>TestModal </em>test2 = [[TestModal alloc] initWithName:@”小七” withHeith:80.1 withCat:cat2];<br>withHeith:60.1 withCat:cat3];</p>
+<p>TestModal *test4 = [[TestModal alloc] initWithName:@”小七” withHeith:60.1 withCat:cat4];</p>
+<p>TestModal *test5 = [[TestModal alloc] initWithName:@”小七” withHeith:60.1 withCat:cat5];</p>
+<p>NSArray <em>array = @[test2,test1];<br>NSArray </em>array2 = @[test4,test5];<br>NSArray *arrayofarray = @[array,array2];</p>
+<p>NSArray <em>array11111 = [array valueForKeyPath:@”@distinctUnionOfObjects.cat”];<br>for (CatModal </em>cat in array11111) {<br>    NSLog(@”%@\n”,cat.nickName);[小明,mini]<br>}</p>
+<p>NSArray <em>array1 = [arrayofarray valueForKeyPath:@”@distinctUnionOfArrays.cat”];<br>for (CatModal </em>cat in array1) {<br>    NSLog(@”%@\n”,cat.nickName); // [fuu 小明 mimi err],并不是数组中的数组的形式<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">3.**数组中的``SELF``指什么**</div><div class="line">数组中``SELF``指的是数组中包含的每一个对象</div><div class="line"></div><div class="line">4.**对数组中具体的某个位置进行操作查询**</div><div class="line"></div><div class="line">``array[index]``指定数组中指定索引处的元素进行匹配操作</div><div class="line">``array[FIRST]````array[LAST]````array[SIZE]``分别表示对数组第一个,最后一个,数组总数进行操作</div></pre></td></tr></table></figure></p>
+<p>CatModal <em>cat1 = [[CatModal alloc] initWithNickName:@”小明” withWeight:30.1];<br>CatModal </em>cat2 = [[CatModal alloc] initWithNickName:@”mimi” withWeight:33.1];<br>CatModal <em>cat3 = [[CatModal alloc] initWithNickName:@”miru” withWeight:35.1];<br>CatModal </em>cat4 = [[CatModal alloc] initWithNickName:@”fuu” withWeight:35.1];<br>CatModal <em>cat5 = [[CatModal alloc] initWithNickName:@”err” withWeight:35.1];<br>CatModal </em>cat6 = [[CatModal alloc] initWithNickName:@”ooo” withWeight:35.1];<br>TestModal *test1 = [[TestModal alloc] initWithName:@”小七” withHeith:90.1 withCat:cat1];<br>test1.catsArray = @[cat2,cat1];</p>
+<p>TestModal <em>test2 = [[TestModal alloc] initWithName:@”小七” withHeith:80.1 withCat:cat2];<br>test2.catsArray = @[cat4];<br>TestModal </em>test3 = [[TestModal alloc] initWithName:@”小七” withHeith:60.1 withCat:cat3];<br>test3.catsArray = @[cat5,cat6];</p>
+<p>NSArray <em>array = @[test2,test1,test3];<br>NSPredicate </em>pre = [NSPredicate predicateWithFormat:@”catsArray[SIZE] == 1”];<br>NSArray *array1 = [array filteredArrayUsingPredicate:pre];<br>NSLog(@”11111%@”,array1);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">5.**对数组中的数组进行操作的时候查询关键字,只能用在数组,一对多的形式**</div><div class="line">``ANY或者SOME``对数组中的数组进行查询,只要有符合条件的,就返回``TRUE``</div><div class="line"></div><div class="line">``ALL``数组中所有都符合条件的时候才会返回。</div><div class="line"></div><div class="line">``NONE``都不正确的时候才返回true。</div></pre></td></tr></table></figure></p>
+<p>CatModal <em>cat1 = [[CatModal alloc] initWithNickName:@”小明” withWeight:30.1];<br>CatModal </em>cat2 = [[CatModal alloc] initWithNickName:@”mimi” withWeight:33.1];<br>CatModal <em>cat3 = [[CatModal alloc] initWithNickName:@”miru” withWeight:35.1];<br>TestModal </em>test1 = [[TestModal alloc] initWithName:@”小七” withHeith:90.1 withCat:cat1];<br>test1.catsArray = @[cat2,cat3];</p>
+<p>TestModal <em>test2 = [[TestModal alloc] initWithName:@”小七” withHeith:80.1 withCat:cat1];<br>test2.catsArray = @[cat2];<br>TestModal </em>test3 = [[TestModal alloc] initWithName:@”小七” withHeith:60.1 withCat:cat1];<br>test3.catsArray = @[cat1,cat3];<br>NSArray <em>array = @[test2,test1,test3];<br>// ALL ANY SOME 用于NSArray NSSet .ANY SOME是数组中有真的就返回. ALL是数组中全部是真的才返回<br>NSPredicate </em>pre = [NSPredicate predicateWithFormat:@”ALL catsArray.weight &gt; 31.0”];<br>NSArray *array1 = [array filteredArrayUsingPredicate:pre];<br>NSLog(@”%@”,array1);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">注意:</div><div class="line">1.查询过程中使用``department.name``这样的形式比较耗费性能.尽量不要使用.``department == %@``这样的形式查询效率最高.</div><div class="line">2. ``@&quot;firstName beginswith[cd] &apos;Matt&apos; AND (ANY directreports.paygrade &lt;= 7)&quot;`` 比下面这种形式更高效 ``@&quot;(ANY directreports.paygrade &lt;= 7) AND (firstName beginswith[cd] &apos;Matt&apos;)&quot;``</div><div class="line">3.使用predicate的类必须支持key-value-coding ,这样才可以在其他地方使用. 实际上使用predicate 也是根据key-value这样的形式来查询的.</div><div class="line"></div><div class="line"></div><div class="line">4.``[c],[d],[cd]``可以加到比较符号的后面表示不区分大小写，不区分发音符号，两这个都不区分</div><div class="line"></div><div class="line">5.如果想要匹配null或者nil值得时候,需要额外增加一条对比</div></pre></td></tr></table></figure></p>
+<p>predicate = [NSPredicate predicateWithFormat:@”(firstName == %@) || (firstName == nil)”];<br>filteredArray = [array filteredArrayUsingPredicate:predicate];<br>NSLog(@”%@”, filteredArray);<br>```</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/01/21/NSPredicate的一些简单用法/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
@@ -470,6 +573,10 @@
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">读后感</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
