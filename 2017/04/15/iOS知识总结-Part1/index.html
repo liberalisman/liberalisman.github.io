@@ -6,14 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>iOS知识点总结-1 | Liberalism</title>
+  <title>iOS知识总结-Part1 | Liberalism</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords">
+  <meta name="description" content="文章大纲，便于浏览  01-iOS程序启动过程 02-浅拷贝-深拷贝 03-View的生命周期">
+<meta name="keywords" content="知识总结">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS知识点总结-1">
-<meta property="og:url" content="http://yoursite.com/2017/04/15/总结-iOS Summary Part1/index.html">
+<meta property="og:title" content="iOS知识总结-Part1">
+<meta property="og:url" content="http://yoursite.com/2017/04/15/iOS知识总结-Part1/index.html">
 <meta property="og:site_name" content="Liberalism">
-<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/header/image/iOS%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-01.png">
+<meta property="og:description" content="文章大纲，便于浏览  01-iOS程序启动过程 02-浅拷贝-深拷贝 03-View的生命周期">
 <meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E7%A8%8B%E5%BA%8F%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B.png">
 <meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E7%A8%8B%E5%BA%8F%E5%90%AF%E5%8A%A8%E4%B8%8E%E4%BB%A3%E7%90%86.png">
 <meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E6%B7%B1%E6%8B%B7%E8%B4%9D-%E6%B5%85%E6%8B%B7%E8%B4%9D-01">
@@ -21,10 +22,11 @@
 <meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E6%B7%B1%E6%8B%B7%E8%B4%9D-%E6%B5%85%E6%8B%B7%E8%B4%9D-03.png">
 <meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E6%B7%B1%E6%8B%B7%E8%B4%9D-%E6%B5%85%E6%8B%B7%E8%B4%9D-04.png">
 <meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/image/jpg/View%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png">
-<meta property="og:updated_time" content="2017-04-16T03:00:47.000Z">
+<meta property="og:updated_time" content="2017-05-03T06:47:02.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS知识点总结-1">
-<meta name="twitter:image" content="http://okhqmtd8q.bkt.clouddn.com/header/image/iOS%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-01.png">
+<meta name="twitter:title" content="iOS知识总结-Part1">
+<meta name="twitter:description" content="文章大纲，便于浏览  01-iOS程序启动过程 02-浅拷贝-深拷贝 03-View的生命周期">
+<meta name="twitter:image" content="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E7%A8%8B%E5%BA%8F%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B.png">
   
     <link rel="alternative" href="/atom.xml" title="Liberalism" type="application/atom+xml">
   
@@ -176,19 +178,19 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-总结-iOS Summary Part1" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-iOS知识总结-Part1" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      iOS知识点总结-1
+      iOS知识总结-Part1
     </h1>
   
 
         
-        <a href="/2017/04/15/总结-iOS Summary Part1/" class="archive-article-date">
+        <a href="/2017/04/15/iOS知识总结-Part1/" class="archive-article-date">
   	<time datetime="2017-04-15T15:43:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-15</time>
 </a>
         
@@ -196,13 +198,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><img src="http://okhqmtd8q.bkt.clouddn.com/header/image/iOS%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93-01.png" alt=""></p>
-<a id="more"></a>
-<p>文章大纲，便于浏览</p>
+        <p>文章大纲，便于浏览</p>
 <ol>
 <li><a href="https://github.com/liberalisman/2018-Interview-Preparation#01-ios-app-startup-process" target="_blank" rel="external">01-iOS程序启动过程</a></li>
 <li><a href="https://github.com/liberalisman/2018-Interview-Preparation#02-shallowcopy-deepcopy" target="_blank" rel="external">02-浅拷贝-深拷贝</a></li>
 <li><a href="https://github.com/liberalisman/2018-Interview-Preparation#03-view的生命周期" target="_blank" rel="external">03-View的生命周期</a></li>
+</ol>
+<a id="more"></a>
+<ol>
 <li><a href="https://github.com/liberalisman/2018-Interview-Preparation#04-property" target="_blank" rel="external">04-@property</a></li>
 <li><a href="https://github.com/liberalisman/iOS-Summary-Part1#05-事件传递和事件响应" target="_blank" rel="external">05-事件传递和事件响应</a></li>
 <li><a href="https://github.com/liberalisman/iOS-Summary-Part1#06-kvc" target="_blank" rel="external">06-KVC</a></li>
@@ -504,6 +507,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">知识总结</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -554,7 +568,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/04/15/总结-iOS Summary Part1/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/04/15/iOS知识总结-Part1/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -577,6 +591,11 @@
       </div>
     </a>
   
+  
+    <a href="/2017/04/25/iOS知识总结-Part2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">iOS知识总结-Part2</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
@@ -679,6 +698,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">读后感</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">知识总结</a>
               </li>
             
             <div class="clearfix"></div>
