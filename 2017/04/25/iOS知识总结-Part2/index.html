@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>iOS知识总结-Part2 | Liberalism</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="文章大纲，便于浏览 NSTimer以下文章详细讲述了NSTimer的创建、销毁以及与NSRunLoop的关系，通读几遍，就可以融会贯通了 iOS应用程序间共享数据这篇文章义工介绍了四种应用程序间共享数据的方法 开源许可说明">
+  <meta name="description" content="文章大纲，便于浏览 NSTimer以下文章详细讲述了NSTimer的创建、销毁以及与NSRunLoop的关系，通读几遍，就可以融会贯通了 iOS应用程序间共享数据这篇文章义工介绍了四种应用程序间共享数据的方法 开源许可说明 枚举的三种写法 普通写法  12345typedef enum&amp;#123;    GZQDemoTypeTop,    GZQDemoTypeBottom,&amp;#125;GZQD">
 <meta name="keywords" content="知识总结">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS知识总结-Part2">
 <meta property="og:url" content="http://yoursite.com/2017/04/25/iOS知识总结-Part2/index.html">
 <meta property="og:site_name" content="Liberalism">
-<meta property="og:description" content="文章大纲，便于浏览 NSTimer以下文章详细讲述了NSTimer的创建、销毁以及与NSRunLoop的关系，通读几遍，就可以融会贯通了 iOS应用程序间共享数据这篇文章义工介绍了四种应用程序间共享数据的方法 开源许可说明">
+<meta property="og:description" content="文章大纲，便于浏览 NSTimer以下文章详细讲述了NSTimer的创建、销毁以及与NSRunLoop的关系，通读几遍，就可以融会贯通了 iOS应用程序间共享数据这篇文章义工介绍了四种应用程序间共享数据的方法 开源许可说明 枚举的三种写法 普通写法  12345typedef enum&amp;#123;    GZQDemoTypeTop,    GZQDemoTypeBottom,&amp;#125;GZQD">
 <meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E5%BC%80%E6%BA%90%E8%AE%B8%E5%8F%AF%E8%AF%B4%E6%98%8E.jpg">
-<meta property="og:updated_time" content="2017-05-08T02:58:31.000Z">
+<meta property="og:updated_time" content="2017-05-11T06:58:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS知识总结-Part2">
-<meta name="twitter:description" content="文章大纲，便于浏览 NSTimer以下文章详细讲述了NSTimer的创建、销毁以及与NSRunLoop的关系，通读几遍，就可以融会贯通了 iOS应用程序间共享数据这篇文章义工介绍了四种应用程序间共享数据的方法 开源许可说明">
+<meta name="twitter:description" content="文章大纲，便于浏览 NSTimer以下文章详细讲述了NSTimer的创建、销毁以及与NSRunLoop的关系，通读几遍，就可以融会贯通了 iOS应用程序间共享数据这篇文章义工介绍了四种应用程序间共享数据的方法 开源许可说明 枚举的三种写法 普通写法  12345typedef enum&amp;#123;    GZQDemoTypeTop,    GZQDemoTypeBottom,&amp;#125;GZQD">
 <meta name="twitter:image" content="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E5%BC%80%E6%BA%90%E8%AE%B8%E5%8F%AF%E8%AF%B4%E6%98%8E.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Liberalism" type="application/atom+xml">
@@ -196,6 +196,18 @@
 <h3 id="NSTimer"><a href="#NSTimer" class="headerlink" title="NSTimer"></a>NSTimer</h3><p>以下<a href="http://www.jianshu.com/p/330d7310339d" target="_blank" rel="external">文章</a>详细讲述了NSTimer的创建、销毁以及与NSRunLoop的关系，通读几遍，就可以融会贯通了</p>
 <h3 id="iOS应用程序间共享数据"><a href="#iOS应用程序间共享数据" class="headerlink" title="iOS应用程序间共享数据"></a>iOS应用程序间共享数据</h3><p>这篇<a href="http://www.jianshu.com/p/169e31cacf42" target="_blank" rel="external">文章</a>义工介绍了四种应用程序间共享数据的方法</p>
 <h3 id="开源许可说明"><a href="#开源许可说明" class="headerlink" title="开源许可说明"></a>开源许可说明</h3><p><img src="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E5%BC%80%E6%BA%90%E8%AE%B8%E5%8F%AF%E8%AF%B4%E6%98%8E.jpg" alt=""></p>
+<h3 id="枚举的三种写法"><a href="#枚举的三种写法" class="headerlink" title="枚举的三种写法"></a>枚举的三种写法</h3><ul>
+<li>普通写法</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span></div><div class="line">&#123;</div><div class="line">    GZQDemoTypeTop,</div><div class="line">    GZQDemoTypeBottom,</div><div class="line">&#125;GZQDemoType;</div></pre></td></tr></table></figure>
+<ul>
+<li>文艺写法</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">定义类型</div><div class="line"><span class="keyword">typedef</span> <span class="built_in">NS_ENUM</span>(<span class="built_in">NSInteger</span>,GZQType)</div><div class="line">&#123;</div><div class="line">    GZQTypeTop,</div><div class="line">    GZQTypeBottom,</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<ul>
+<li>推荐写法（可以进行位运算，更加灵活）</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="built_in">NS_OPTIONS</span>(<span class="built_in">NSInteger</span>, GZQActionType)</div><div class="line">&#123;</div><div class="line">    GZQActionTypeA = <span class="number">1</span>&lt;&lt;<span class="number">0</span>,</div><div class="line">    GZQActionTypeb = <span class="number">1</span>&lt;&lt;<span class="number">1</span>,</div><div class="line">    GZQActionTypec = <span class="number">1</span>&lt;&lt;<span class="number">2</span>,</div><div class="line">    GZQActionTypeD = <span class="number">1</span>&lt;&lt;<span class="number">3</span>,</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
 
