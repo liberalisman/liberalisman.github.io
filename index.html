@@ -170,6 +170,346 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-NSURLProtocol" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/26/NSURLProtocol/">NSURLProtocol</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/26/NSURLProtocol/" class="archive-article-date">
+  	<time datetime="2017-05-26T08:03:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/26/NSURLProtocol/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-Block详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/18/Block详解/">Block详解</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/18/Block详解/" class="archive-article-date">
+  	<time datetime="2017-05-18T11:34:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>此文主要是为了收藏自己没事儿读，非原创，加入部分自己的理解和整理。原文作者及出处 <a href="http://www.jianshu.com/p/6b59ca5ad2d0" target="_blank" rel="external">http://www.jianshu.com/p/6b59ca5ad2d0</a> ，在此感谢。</p>
+<blockquote>
+<p><code>block</code>是2010年WWDC苹果为 Objective－C 提供的一个新特性，它为我们开发提供了便利，比如GCD就大量使用了<code>block</code>，用来往执行队列中添加任务。其实它就是一个闭包，一个引用自动变量的函数，更通俗的说，<code>block</code>就是一段代码块，用来储存一段代码，在特定的时机执行</p>
+</blockquote>
+<h3 id="Block定义"><a href="#Block定义" class="headerlink" title="Block定义"></a>Block定义</h3><p>1.没有返回值,没有参数的定义方式</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">//返回值类型(^block的名字)(参数类型) = ^(参数类型和参数名) &#123;&#125;;</span></div><div class="line"></div><div class="line">  <span class="keyword">void</span>(^block)() = ^()&#123;</div><div class="line">  </div><div class="line">      <span class="built_in">NSLog</span>(<span class="string">@"调用了block"</span>);</div><div class="line">  &#125;;</div><div class="line">  </div><div class="line"><span class="comment">//当然,没有参数的时候可以把括号省去</span></div><div class="line">  <span class="keyword">void</span>(^block)() = ^&#123;</div><div class="line">  </div><div class="line">      <span class="built_in">NSLog</span>(<span class="string">@"调用了block"</span>);</div><div class="line">  &#125;;</div><div class="line">  </div><div class="line"><span class="comment">// Block的调用直接Block名称后面括号即可，有参数就把参数放入即可</span></div><div class="line"></div><div class="line">    block();  <span class="comment">// 调用了上面定义的Block</span></div></pre></td></tr></table></figure>
+<p>2.有返回值,有参数的定义方式</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//返回值类型(^block的名字)(参数类型) = ^(参数类型和参数名) &#123;&#125;;</span></div><div class="line"><span class="comment">//如果有参数,定义的时候,必须要写参数,而且必须要有参数变量名</span></div><div class="line">  <span class="keyword">int</span>(^block)(<span class="keyword">int</span>) = ^(<span class="keyword">int</span> a)&#123;</div><div class="line">  </div><div class="line">      <span class="keyword">return</span> a + <span class="number">1</span>;</div><div class="line">  &#125;;</div></pre></td></tr></table></figure>
+<p>3.系统提供了一个定义block的快捷函数<code>inline</code></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// block快捷方式   输入:inline</span></div><div class="line">returnType(^blockName)(parameterTypes) = ^(parameters) &#123;</div><div class="line"></div><div class="line">        statements</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>4.block的类型</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//block有自己的类型,就想@"string"是NSString类型一样</span></div><div class="line"><span class="comment">//格式就是 返回值(^)(参数类型)</span></div><div class="line"><span class="comment">//比如这个block的类型就是: int(^)(int)</span></div><div class="line">  <span class="keyword">int</span>(^block)(<span class="keyword">int</span>) = ^(<span class="keyword">int</span> a)&#123;</div><div class="line">      <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">  &#125;;</div><div class="line"><span class="comment">//这个block的类型就是void(^)()</span></div><div class="line">  <span class="keyword">void</span>(^block)() = ^&#123;</div><div class="line">      <span class="built_in">NSLog</span>(<span class="string">@"调用了block"</span>);</div><div class="line">  &#125;; </div><div class="line"><span class="comment">//在ARC中把block定义成属性要用 copy 类型,定义方式如下:</span></div><div class="line"><span class="comment">//这样在类中可以拿到self.block</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>) <span class="keyword">void</span>(^block)();</div><div class="line"></div><div class="line"><span class="comment">//当然也可以取别名:</span></div><div class="line"><span class="comment">//BlockType不是变量名,而是这种类型的block的别名</span></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">void</span>(^BlockType)();</div><div class="line"><span class="comment">//然后就可以这样</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) BlockType block;</div></pre></td></tr></table></figure>
+<h3 id="Block变量的传递"><a href="#Block变量的传递" class="headerlink" title="Block变量的传递"></a>Block变量的传递</h3><p>1.如果block访问的变量是局部变量,那么变量是值传递</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//block为值传递只有一种情况:</span></div><div class="line"><span class="keyword">int</span> a = <span class="number">3</span>;</div><div class="line"><span class="keyword">void</span>(^block)() = ^&#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%d"</span>,a);</div><div class="line">&#125;;</div><div class="line">a = <span class="number">5</span>;</div><div class="line">block();<span class="comment">//这里调用block打印出的是3,是值传递</span></div></pre></td></tr></table></figure>
+<p>2.如果是静态变量,那么变量是指针传递</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="keyword">int</span> a = <span class="number">3</span>;</div><div class="line"><span class="keyword">void</span>(^block)() = ^&#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%d"</span>,a);</div><div class="line">&#125;;</div><div class="line">a = <span class="number">5</span>;</div><div class="line">block();<span class="comment">//这里调用block打印出的是5,是指针传递</span></div><div class="line"><span class="comment">//另外全局变量,静态变量都是指针传递</span></div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">知识点</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/18/Block详解/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-iOS知识点小集" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/17/iOS知识点小集/">iOS知识点小集</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/17/iOS知识点小集/" class="archive-article-date">
+  	<time datetime="2017-05-17T05:45:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li><p>在初始化项目时，<code>LaunchScreen</code> &gt; <code>LaunchImage</code>的优先级</p>
+ <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">   如果是通过LaunchImage设置启动界面,那么屏幕的可视范围由图片决定</div><div class="line">   注意:如果使用LaunchImage,必须让你的美工提供各种尺寸的启动图片</div><div class="line">   </div><div class="line">   LaunchScreen:Xcode6开始才有</div><div class="line">   LaunchScreen好处:<span class="number">1.</span>自动识别当前真机或者模拟器的尺寸 <span class="number">2.</span>只要让美工提供一个可拉伸图片</div><div class="line">   <span class="number">3.</span>展示更多东西</div><div class="line"></div><div class="line">   LaunchScreen底层实现:把LaunchScreen截屏,生成一张图片.作为启动界面</div><div class="line">*/</div></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/17/iOS知识点小集/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-SDWebImage源码解析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/16/SDWebImage源码解析/">SDWebImage源码解析</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/16/SDWebImage源码解析/" class="archive-article-date">
+  	<time datetime="2017-05-16T05:59:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://okhqmtd8q.bkt.clouddn.com/header/image/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-SDWebImage.png" alt=""></p>
+<blockquote>
+<p><a href="https://github.com/rs/SDWebImage">SDWebImage</a>是我们经常使用的一个异步图片加载库，大大提高了我们的开发效率。它支持从网络中下载且缓存图片，并设置图片到对应的UIImageView控件或者UIButton控件上。</p>
+</blockquote>
+        
+          <a class="article-more-a" href="/2017/05/16/SDWebImage源码解析/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">源码解析</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/16/SDWebImage源码解析/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
+    <article id="post-iOS知识总结-多线程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/12/iOS知识总结-多线程/">iOS知识总结-多线程</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/12/iOS知识总结-多线程/" class="archive-article-date">
+  	<time datetime="2017-05-12T05:36:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>进程</strong>是指在系统中正在运行的一个应用程序。每个进程之间是独立的，每个进程均运行在其专用且受保护的内存空间内。</p>
+<h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a><strong>线程</strong></h2><pre><code>进程要想执行任务，必须得有线程（每1个进程至少要有1条线程），线程是进程的基本执行单元，一个进程的所有任务都在线程中执行。线程中任务的执行是串行的，如果要在1个线程中执行多个任务，那么只能一个一个地按顺序执行这些任务。也就是说，在同一时间内，1个线程只能执行1个任务。
+</code></pre><h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a><strong>多线程</strong></h2><pre><code>即1个进程中可以开启多条线程，每条线程可以并行（同时）执行不同的任务。在同一时间里，CPU只能处理1条线程，只有1条线程在工作。多线程并发执行，其实是CPU快速地在多条线程之间切换，如果CPU调度线程的时间足够快，就造成了多线程并发执行的假象
+</code></pre><h3 id="多线程优缺点"><a href="#多线程优缺点" class="headerlink" title="多线程优缺点"></a><strong>多线程优缺点</strong></h3><h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><pre><code>1.能适当提高程序的执行效率。
+2.能适当提高资源利用率（CPU、内存利用率）
+</code></pre><h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><pre><code>1.开启线程需要占用一定的内存空间（默认情况下，主线程占用1M，子线程占用512KB），如果开启大量的线程，会占用大量的内存空间，降低程序的性能。
+2.线程越多，CPU在调度线程上的开销就越大。
+3.程序设计更加复杂：比如线程之间的通信、多线程的数据共享
+</code></pre><p>#### </p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line"><span class="number">5</span><span class="number">-2</span> <span class="built_in">NSThread</span></div><div class="line">	a.特点：</div><div class="line">	    <span class="number">1</span>）使用更加面向对象</div><div class="line">	    <span class="number">2</span>）简单易用，可直接操作线程对象</div><div class="line">	b.使用语言：OC语言</div><div class="line">	c.使用频率：偶尔使用</div><div class="line">	d.线程生命周期：由程序员进行管理</div><div class="line"></div><div class="line"><span class="number">5</span><span class="number">-3</span> GCD</div><div class="line">	a.特点：</div><div class="line">	    <span class="number">1</span>）旨在替代<span class="built_in">NSThread</span>等线程技术</div><div class="line">	    <span class="number">2</span>）充分利用设备的多核（自动）</div><div class="line">	b.使用语言：C语言</div><div class="line">	c.使用频率：经常使用</div><div class="line">	d.线程生命周期：自动管理</div><div class="line"></div><div class="line"><span class="number">5</span><span class="number">-4</span> <span class="built_in">NSOperation</span></div><div class="line">	a.特点：</div><div class="line">	    <span class="number">1</span>）基于GCD（底层是GCD）</div><div class="line">	    <span class="number">2</span>）比GCD多了一些更简单实用的功能</div><div class="line">	    <span class="number">3</span>）使用更加面向对象</div><div class="line">	b.使用语言：OC语言</div><div class="line">	c.使用频率：经常使用</div><div class="line">	d.线程生命周期：自动管理</div></pre></td></tr></table></figure>
+<p>###3 NSThread<br>（1）NSThread的基本使用<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//第一种创建线程的方式：alloc init.</span></div><div class="line"><span class="comment">//特点：需要手动开启线程，可以拿到线程对象进行详细设置</span></div><div class="line">    <span class="comment">//创建线程</span></div><div class="line">    <span class="comment">/*</span></div><div class="line">     第一个参数：目标对象</div><div class="line">     第二个参数：选择器，线程启动要调用哪个方法</div><div class="line">     第三个参数：前面方法要接收的参数（最多只能接收一个参数，没有则传nil）</div><div class="line">     */</div><div class="line">    <span class="built_in">NSThread</span> *thread = [[<span class="built_in">NSThread</span> alloc]initWithTarget:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(run:) object:<span class="string">@"wendingding"</span>];</div><div class="line">     <span class="comment">//启动线程</span></div><div class="line">    [thread start];</div><div class="line"></div><div class="line"><span class="comment">//第二种创建线程的方式：分离出一条子线程</span></div><div class="line"><span class="comment">//特点：自动启动线程，无法对线程进行更详细的设置</span></div><div class="line">    <span class="comment">/*</span></div><div class="line">     第一个参数：线程启动调用的方法</div><div class="line">     第二个参数：目标对象</div><div class="line">     第三个参数：传递给调用方法的参数</div><div class="line">     */</div><div class="line">    [<span class="built_in">NSThread</span> detachNewThreadSelector:<span class="keyword">@selector</span>(run:) toTarget:<span class="keyword">self</span> withObject:<span class="string">@"我是分离出来的子线程"</span>];</div><div class="line"></div><div class="line"><span class="comment">//第三种创建线程的方式：后台线程</span></div><div class="line"><span class="comment">//特点：自动启动县城，无法进行更详细设置</span></div><div class="line">[<span class="keyword">self</span> performSelectorInBackground:<span class="keyword">@selector</span>(run:) withObject:<span class="string">@"我是后台线程"</span>];</div></pre></td></tr></table></figure></p>
+<p>（2）设置线程的属性<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//设置线程的属性</span></div><div class="line"> <span class="comment">//设置线程的名称</span></div><div class="line"> thread.name = <span class="string">@"线程A"</span>;</div><div class="line"></div><div class="line"> <span class="comment">//设置线程的优先级,注意线程优先级的取值范围为0.0~1.0之间，1.0表示线程的优先级最高,如果不设置该值，那么理想状态下默认为0.5</span></div><div class="line"> thread.threadPriority = <span class="number">1.0</span>;</div></pre></td></tr></table></figure></p>
+<p>（3）线程的状态（了解）<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//线程的各种状态：新建-就绪-运行-阻塞-死亡</span></div><div class="line"><span class="comment">//常用的控制线程状态的方法</span></div><div class="line">[<span class="built_in">NSThread</span> exit];<span class="comment">//退出当前线程</span></div><div class="line">[<span class="built_in">NSThread</span> sleepForTimeInterval:<span class="number">2.0</span>];<span class="comment">//阻塞线程</span></div><div class="line">[<span class="built_in">NSThread</span> sleepUntilDate:[<span class="built_in">NSDate</span> dateWithTimeIntervalSinceNow:<span class="number">2.0</span>]];<span class="comment">//阻塞线程</span></div><div class="line"><span class="comment">//注意：线程死了不能复生</span></div></pre></td></tr></table></figure></p>
+<p>（4）线程安全</p>
+<pre><code>01 前提：多个线程访问同一块资源会发生数据安全问题
+02 解决方案：加互斥锁
+03 相关代码：@synchronized(self){}
+04 专业术语-线程同步
+05 原子和非原子属性（是否对setter方法加锁）
+</code></pre><p>（5）线程间通信<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">-(<span class="keyword">void</span>)touchesBegan:(<span class="keyword">nonnull</span> <span class="built_in">NSSet</span>&lt;<span class="built_in">UITouch</span> *&gt; *)touches withEvent:(<span class="keyword">nullable</span> <span class="built_in">UIEvent</span> *)event</div><div class="line">&#123;</div><div class="line"><span class="comment">//    [self download2];</span></div><div class="line"></div><div class="line">    <span class="comment">//开启一条子线程来下载图片</span></div><div class="line">    [<span class="built_in">NSThread</span> detachNewThreadSelector:<span class="keyword">@selector</span>(downloadImage) toTarget:<span class="keyword">self</span> withObject:<span class="literal">nil</span>];</div><div class="line">&#125;</div><div class="line"></div><div class="line">-(<span class="keyword">void</span>)downloadImage</div><div class="line">&#123;</div><div class="line">    <span class="comment">//1.确定要下载网络图片的url地址，一个url唯一对应着网络上的一个资源</span></div><div class="line">    <span class="built_in">NSURL</span> *url = [<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://p6.qhimg.com/t01d2954e2799c461ab.jpg"</span>];</div><div class="line"></div><div class="line">    <span class="comment">//2.根据url地址下载图片数据到本地（二进制数据</span></div><div class="line">    <span class="built_in">NSData</span> *data = [<span class="built_in">NSData</span> dataWithContentsOfURL:url];</div><div class="line"></div><div class="line">    <span class="comment">//3.把下载到本地的二进制数据转换成图片</span></div><div class="line">    <span class="built_in">UIImage</span> *image = [<span class="built_in">UIImage</span> imageWithData:data];</div><div class="line"></div><div class="line">    <span class="comment">//4.回到主线程刷新UI</span></div><div class="line">    <span class="comment">//4.1 第一种方式</span></div><div class="line"><span class="comment">//    [self performSelectorOnMainThread:@selector(showImage:) withObject:image waitUntilDone:YES];</span></div><div class="line"></div><div class="line">    <span class="comment">//4.2 第二种方式</span></div><div class="line"><span class="comment">//    [self.imageView performSelectorOnMainThread:@selector(setImage:) withObject:image waitUntilDone:YES];</span></div><div class="line"></div><div class="line">    <span class="comment">//4.3 第三种方式</span></div><div class="line">    [<span class="keyword">self</span>.imageView performSelector:<span class="keyword">@selector</span>(setImage:) onThread:[<span class="built_in">NSThread</span> mainThread] withObject:image waitUntilDone:<span class="literal">YES</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>（6）如何计算代码段的执行时间<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//第一种方法</span></div><div class="line">    <span class="built_in">NSDate</span> *start = [<span class="built_in">NSDate</span> date];</div><div class="line">    <span class="comment">//2.根据url地址下载图片数据到本地（二进制数据）</span></div><div class="line">    <span class="built_in">NSData</span> *data = [<span class="built_in">NSData</span> dataWithContentsOfURL:url];</div><div class="line"></div><div class="line">    <span class="built_in">NSDate</span> *end = [<span class="built_in">NSDate</span> date];</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"第二步操作花费的时间为%f"</span>,[end timeIntervalSinceDate:start]);</div><div class="line"></div><div class="line"><span class="comment">//第二种方法</span></div><div class="line">    <span class="built_in">CFTimeInterval</span> start = <span class="built_in">CFAbsoluteTimeGetCurrent</span>();</div><div class="line">    <span class="built_in">NSData</span> *data = [<span class="built_in">NSData</span> dataWithContentsOfURL:url];</div><div class="line"></div><div class="line">    <span class="built_in">CFTimeInterval</span> end = <span class="built_in">CFAbsoluteTimeGetCurrent</span>();</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"第二步操作花费的时间为%f"</span>,end - start);</div></pre></td></tr></table></figure></p>
+<p>###4.GCD</p>
+<p>（1）GCD基本知识</p>
+<pre><code>01 两个核心概念-队列和任务
+02 同步函数和异步函数
+</code></pre><p>（2）GCD基本使用【重点】<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="number">01</span> 异步函数+并发队列：开启多条线程，并发执行任务</div><div class="line"><span class="number">02</span> 异步函数+串行队列：开启一条线程，串行执行任务</div><div class="line"><span class="number">03</span> 同步函数+并发队列：不开线程，串行执行任务</div><div class="line"><span class="number">04</span> 同步函数+串行队列：不开线程，串行执行任务</div><div class="line"><span class="number">05</span> 异步函数+主队列：不开线程，在主线程中串行执行任务</div><div class="line"><span class="number">06</span> 同步函数+主队列：不开线程，串行执行任务（注意死锁发生）</div><div class="line"><span class="number">07</span> 注意同步函数和异步函数在执行顺序上面的差异</div></pre></td></tr></table></figure></p>
+<p>（3）GCD线程间通信</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//0.获取一个全局的队列</span></div><div class="line">   <span class="built_in">dispatch_queue_t</span> queue = dispatch_get_global_queue(<span class="number">0</span>, <span class="number">0</span>);</div><div class="line"></div><div class="line">   <span class="comment">//1.先开启一个线程，把下载图片的操作放在子线程中处理</span></div><div class="line">   <span class="built_in">dispatch_async</span>(queue, ^&#123;</div><div class="line"></div><div class="line">      <span class="comment">//2.下载图片</span></div><div class="line">       <span class="built_in">NSURL</span> *url = [<span class="built_in">NSURL</span> URLWithString:<span class="string">@"http://h.hiphotos.baidu.com/zhidao/pic/item/6a63f6246b600c3320b14bb3184c510fd8f9a185.jpg"</span>];</div><div class="line">       <span class="built_in">NSData</span> *data = [<span class="built_in">NSData</span> dataWithContentsOfURL:url];</div><div class="line">       <span class="built_in">UIImage</span> *image = [<span class="built_in">UIImage</span> imageWithData:data];</div><div class="line"></div><div class="line">       <span class="built_in">NSLog</span>(<span class="string">@"下载操作所在的线程--%@"</span>,[<span class="built_in">NSThread</span> currentThread]);</div><div class="line"></div><div class="line">       <span class="comment">//3.回到主线程刷新UI</span></div><div class="line">       <span class="built_in">dispatch_async</span>(dispatch_get_main_queue(), ^&#123;</div><div class="line">          <span class="keyword">self</span>.imageView.image = image;</div><div class="line">          <span class="comment">//打印查看当前线程</span></div><div class="line">           <span class="built_in">NSLog</span>(<span class="string">@"刷新UI---%@"</span>,[<span class="built_in">NSThread</span> currentThread]);</div><div class="line">       &#125;);</div><div class="line"></div><div class="line">   &#125;);</div></pre></td></tr></table></figure>
+<p>（4）GCD其它常用函数</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">   <span class="number">01</span> 栅栏函数（控制任务的执行顺序）</div><div class="line">   dispatch_barrier_async(queue, ^&#123;</div><div class="line">       <span class="built_in">NSLog</span>(<span class="string">@"--dispatch_barrier_async-"</span>);</div><div class="line">   &#125;);</div><div class="line"></div><div class="line">   <span class="number">02</span> 延迟执行（延迟·控制在哪个线程执行）</div><div class="line">     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(<span class="number">2.0</span> * <span class="built_in">NSEC_PER_SEC</span>)), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, <span class="number">0</span>), ^&#123;</div><div class="line">       <span class="built_in">NSLog</span>(<span class="string">@"---%@"</span>,[<span class="built_in">NSThread</span> currentThread]);</div><div class="line">   &#125;);</div><div class="line"></div><div class="line">   <span class="number">03</span> 一次性代码（注意不能放到懒加载）</div><div class="line">   -(<span class="keyword">void</span>)once</div><div class="line">   &#123;</div><div class="line">       <span class="comment">//整个程序运行过程中只会执行一次</span></div><div class="line">       <span class="comment">//onceToken用来记录该部分的代码是否被执行过</span></div><div class="line">       <span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken;</div><div class="line">       <span class="built_in">dispatch_once</span>(&amp;onceToken, ^&#123;</div><div class="line"></div><div class="line">           <span class="built_in">NSLog</span>(<span class="string">@"-----"</span>);</div><div class="line">       &#125;);</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="number">04</span> 快速迭代（开多个线程并发完成迭代操作）</div><div class="line">      dispatch_apply(subpaths.count, queue, ^(size_t index) &#123;</div><div class="line">   &#125;);</div><div class="line"></div><div class="line">   <span class="number">05</span> 队列组（同栅栏函数）</div><div class="line">   <span class="comment">//创建队列组</span></div><div class="line">   dispatch_group_t group = dispatch_group_create();</div><div class="line">   <span class="comment">//队列组中的任务执行完毕之后，执行该函数</span></div><div class="line">   dispatch_group_notify(dispatch_group_t group,<span class="built_in">dispatch_queue_t</span> queue,dispatch_block_t block);</div><div class="line"></div><div class="line"><span class="number">06</span>进入群组和离开群组</div><div class="line">   dispatch_group_enter(group);<span class="comment">//执行该函数后，后面异步执行的block会被gruop监听</span></div><div class="line">   dispatch_group_leave(group);<span class="comment">//异步block中，所有的任务都执行完毕，最后离开群组</span></div><div class="line">   <span class="comment">//注意：dispatch_group_enter|dispatch_group_leave必须成对使用</span></div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">知识总结</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/12/iOS知识总结-多线程/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-iOS常用设计模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -233,19 +573,19 @@
 
 
   
-    <article id="post-iOS知识总结-Part2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-iOS知识总结-基础篇-2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/25/iOS知识总结-Part2/">iOS知识总结-Part2</a>
+      <a class="article-title" href="/2017/04/25/iOS知识总结-基础篇-2/">iOS知识总结-基础篇-2</a>
     </h1>
   
 
         
-        <a href="/2017/04/25/iOS知识总结-Part2/" class="archive-article-date">
+        <a href="/2017/04/25/iOS知识总结-基础篇-2/" class="archive-article-date">
   	<time datetime="2017-04-25T05:43:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-25</time>
 </a>
         
@@ -254,22 +594,12 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>文章大纲，便于浏览</p>
-<h3 id="NSTimer"><a href="#NSTimer" class="headerlink" title="NSTimer"></a>NSTimer</h3><p>以下<a href="http://www.jianshu.com/p/330d7310339d" target="_blank" rel="external">文章</a>详细讲述了NSTimer的创建、销毁以及与NSRunLoop的关系，通读几遍，就可以融会贯通了</p>
-<h3 id="iOS应用程序间共享数据"><a href="#iOS应用程序间共享数据" class="headerlink" title="iOS应用程序间共享数据"></a>iOS应用程序间共享数据</h3><p>这篇<a href="http://www.jianshu.com/p/169e31cacf42" target="_blank" rel="external">文章</a>义工介绍了四种应用程序间共享数据的方法</p>
+<h3 id="NSTimer"><a href="#NSTimer" class="headerlink" title="NSTimer"></a>NSTimer</h3><p>以下<a href="http://www.jianshu.com/p/330d7310339d">文章</a>详细讲述了NSTimer的创建、销毁以及与NSRunLoop的关系，通读几遍，就可以融会贯通了</p>
+<h3 id="iOS应用程序间共享数据"><a href="#iOS应用程序间共享数据" class="headerlink" title="iOS应用程序间共享数据"></a>iOS应用程序间共享数据</h3><p>这篇<a href="http://www.jianshu.com/p/169e31cacf42">文章</a>义工介绍了四种应用程序间共享数据的方法</p>
 <h3 id="开源许可说明"><a href="#开源许可说明" class="headerlink" title="开源许可说明"></a>开源许可说明</h3><p><img src="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E5%BC%80%E6%BA%90%E8%AE%B8%E5%8F%AF%E8%AF%B4%E6%98%8E.jpg" alt=""></p>
-<h3 id="枚举的三种写法"><a href="#枚举的三种写法" class="headerlink" title="枚举的三种写法"></a>枚举的三种写法</h3><ul>
-<li>普通写法</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span></div><div class="line">&#123;</div><div class="line">    GZQDemoTypeTop,</div><div class="line">    GZQDemoTypeBottom,</div><div class="line">&#125;GZQDemoType;</div></pre></td></tr></table></figure>
-<ul>
-<li>文艺写法</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">定义类型</div><div class="line"><span class="keyword">typedef</span> <span class="built_in">NS_ENUM</span>(<span class="built_in">NSInteger</span>,GZQType)</div><div class="line">&#123;</div><div class="line">    GZQTypeTop,</div><div class="line">    GZQTypeBottom,</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<ul>
-<li>推荐写法（可以进行位运算，更加灵活）</li>
-</ul>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="built_in">NS_OPTIONS</span>(<span class="built_in">NSInteger</span>, GZQActionType)</div><div class="line">&#123;</div><div class="line">    GZQActionTypeA = <span class="number">1</span>&lt;&lt;<span class="number">0</span>,</div><div class="line">    GZQActionTypeb = <span class="number">1</span>&lt;&lt;<span class="number">1</span>,</div><div class="line">    GZQActionTypec = <span class="number">1</span>&lt;&lt;<span class="number">2</span>,</div><div class="line">    GZQActionTypeD = <span class="number">1</span>&lt;&lt;<span class="number">3</span>,</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
+        
+          <a class="article-more-a" href="/2017/04/25/iOS知识总结-基础篇-2/#more">more >></a>
+        
       
 
       
@@ -292,7 +622,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/25/iOS知识总结-Part2/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/04/25/iOS知识总结-基础篇-2/">展开全文 >></a>
         </p>
       
 
@@ -310,19 +640,19 @@
 
 
   
-    <article id="post-iOS知识总结-Part1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-iOS知识总结-基础篇-1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/15/iOS知识总结-Part1/">iOS知识总结-Part1</a>
+      <a class="article-title" href="/2017/04/15/iOS知识总结-基础篇-1/">iOS知识总结-基础篇-1</a>
     </h1>
   
 
         
-        <a href="/2017/04/15/iOS知识总结-Part1/" class="archive-article-date">
+        <a href="/2017/04/15/iOS知识总结-基础篇-1/" class="archive-article-date">
   	<time datetime="2017-04-15T15:43:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-15</time>
 </a>
         
@@ -337,7 +667,7 @@
 <li><a href="https://github.com/liberalisman/2018-Interview-Preparation#03-view的生命周期">03-View的生命周期</a></li>
 </ol>
         
-          <a class="article-more-a" href="/2017/04/15/iOS知识总结-Part1/#more">more >></a>
+          <a class="article-more-a" href="/2017/04/15/iOS知识总结-基础篇-1/#more">more >></a>
         
       
 
@@ -361,7 +691,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/15/iOS知识总结-Part1/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/04/15/iOS知识总结-基础篇-1/">展开全文 >></a>
         </p>
       
 
@@ -379,138 +709,10 @@
 
 
   
-    <article id="post-weak-弱引用实现原理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/03/weak-弱引用实现原理/">weak-弱引用实现原理</a>
-    </h1>
-  
-
-        
-        <a href="/2017/04/03/weak-弱引用实现原理/" class="archive-article-date">
-  	<time datetime="2017-04-03T06:33:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><code>weak</code>是一个弱引用，这个引用不会增加对象的引用计数，并且所指对象在释放后被自动置为nil。<code>weak</code>通常用于处理循环引用的问题。如<code>代理</code>属性以及<code>block</code>中用得比较多。</p>
-<p>此处重点记录一下<code>weak</code>的实现过程</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="keyword">id</span> __<span class="keyword">weak</span> obj1 = obj;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2017/04/03/weak-弱引用实现原理/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">读后感</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/03/weak-弱引用实现原理/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-Healthkit睡眠分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/03/Healthkit睡眠分析/">Healthkit睡眠分析</a>
-    </h1>
-  
-
-        
-        <a href="/2016/05/03/Healthkit睡眠分析/" class="archive-article-date">
-  	<time datetime="2016-05-03T06:55:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-05-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>原文：<a href=""></a><a href="http://appcoda.com/sleep-analysis-healthkit/">http://appcoda.com/sleep-analysis-healthkit/</a></p>
-<p>翻译：Liberalism</p>
-<p>日期：2016年5月3日</p>
-        
-          <a class="article-more-a" href="/2016/05/03/Healthkit睡眠分析/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">翻译</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/05/03/Healthkit睡眠分析/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 
 
@@ -600,15 +802,23 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">知识点</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">源码解析</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">翻译</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">知识总结</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">读后感</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">翻译</a>
               </li>
             
             <div class="clearfix"></div>

@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>iOS知识总结-基础篇-1 | Liberalism</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="文章大纲，便于浏览  01-iOS程序启动过程 02-浅拷贝-深拷贝 03-View的生命周期">
+<meta name="keywords" content="知识总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS知识总结-基础篇-1">
+<meta property="og:url" content="http://yoursite.com/2017/04/15/iOS知识总结-基础篇-1/index.html">
+<meta property="og:site_name" content="Liberalism">
+<meta property="og:description" content="文章大纲，便于浏览  01-iOS程序启动过程 02-浅拷贝-深拷贝 03-View的生命周期">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E7%A8%8B%E5%BA%8F%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E7%A8%8B%E5%BA%8F%E5%90%AF%E5%8A%A8%E4%B8%8E%E4%BB%A3%E7%90%86.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E6%B7%B1%E6%8B%B7%E8%B4%9D-%E6%B5%85%E6%8B%B7%E8%B4%9D-01">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E6%B7%B1%E6%8B%B7%E8%B4%9D-%E6%B5%85%E6%8B%B7%E8%B4%9D-02">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E6%B7%B1%E6%8B%B7%E8%B4%9D-%E6%B5%85%E6%8B%B7%E8%B4%9D-03.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E6%B7%B1%E6%8B%B7%E8%B4%9D-%E6%B5%85%E6%8B%B7%E8%B4%9D-04.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/image/jpg/View%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png">
+<meta property="og:updated_time" content="2017-05-12T05:36:43.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS知识总结-基础篇-1">
+<meta name="twitter:description" content="文章大纲，便于浏览  01-iOS程序启动过程 02-浅拷贝-深拷贝 03-View的生命周期">
+<meta name="twitter:image" content="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E7%A8%8B%E5%BA%8F%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Liberalism" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" type="text/css" href="/./main.05aabf.css">
+  <style type="text/css">
+  
+    #container.show {
+      background: linear-gradient(200deg,#a0cfe4,#e8c37e);
+    }
+  </style>
+  
+
+  
+
+</head>
+
+<body>
+  <div id="container" q-class="show:isCtnShow">
+    <canvas id="anm-canvas" class="anm-canvas"></canvas>
+    <div class="left-col" q-class="show:isShow">
+      
+<div class="overlay" style="background: #4d4d4d"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="http://okhqmtd8q.bkt.clouddn.com/lufei.jpeg" class="js-avatar">
+		</a>
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Liberalism</a></h1>
+		</hgroup>
+		
+		<p class="header-subtitle">Liberalism就是自由主义</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/tags/">标签</a></li>
+	        
+				<li><a href="/categories">分类</a></li>
+	        
+				<li><a href="/archives">归档</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+    		
+    			
+    			<a q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">所有文章</a>
+    			
+            
+    			
+    			<a q-on="click: openSlider(e, 'friends')" href="javascript:void(0)">友链</a>
+    			
+            
+    			
+    			<a q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">关于我</a>
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/liberalisman" title="github"><i class="icon-github"></i></a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/1743643682/profile?rightmod=1&wvr=6&mod=personinfo" title="weibo"><i class="icon-weibo"></i></a>
+		        
+					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/geng-zhi-qiang/activities" title="zhihu"><i class="icon-zhihu"></i></a>
+		        
+					<a class="jianshu" target="_blank" href="http://www.jianshu.com/u/7f77569053f1" title="jianshu"><i class="icon-jianshu"></i></a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
+      
+<nav id="mobile-nav">
+  	<div class="overlay js-overlay" style="background: #4d4d4d"></div>
+	<div class="btnctn js-mobile-btnctn">
+  		<div class="slider-trigger list" q-on="click: openSlider(e)"><i class="icon icon-sort"></i></div>
+	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="http://okhqmtd8q.bkt.clouddn.com/lufei.jpeg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author js-header-author">Liberalism</h1>
+			</hgroup>
+			
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>Liberalism就是自由主义<i class="icon icon-quo-right"></i></p>
+			
+			
+			
+				
+			
+				
+			
+				
+			
+				
+			
+			
+			
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/liberalisman" title="github"><i class="icon-github"></i></a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/1743643682/profile?rightmod=1&wvr=6&mod=personinfo" title="weibo"><i class="icon-weibo"></i></a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/geng-zhi-qiang/activities" title="zhihu"><i class="icon-zhihu"></i></a>
+			        
+						<a class="jianshu" target="_blank" href="http://www.jianshu.com/u/7f77569053f1" title="jianshu"><i class="icon-jianshu"></i></a>
+			        
+				</div>
+			</nav>
+
+			<nav class="header-menu js-header-menu">
+				<ul style="width: 70%">
+				
+				
+					<li style="width: 25%"><a href="/">主页</a></li>
+		        
+					<li style="width: 25%"><a href="/tags/">标签</a></li>
+		        
+					<li style="width: 25%"><a href="/categories">分类</a></li>
+		        
+					<li style="width: 25%"><a href="/archives">归档</a></li>
+		        
+				</ul>
+			</nav>
+		</header>				
+	</div>
+	<div class="mobile-mask" style="display:none" q-show="isShow"></div>
+</nav>
+
+      <div id="wrapper" class="body-wrap">
+        <div class="menu-l">
+          <div class="canvas-wrap">
+            <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
+          </div>
+          <div id="js-content" class="content-ll">
+            <article id="post-iOS知识总结-基础篇-1" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      iOS知识总结-基础篇-1
+    </h1>
+  
+
+        
+        <a href="/2017/04/15/iOS知识总结-基础篇-1/" class="archive-article-date">
+  	<time datetime="2017-04-15T15:43:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>文章大纲，便于浏览</p>
+<ol>
+<li><a href="https://github.com/liberalisman/2018-Interview-Preparation#01-ios-app-startup-process" target="_blank" rel="external">01-iOS程序启动过程</a></li>
+<li><a href="https://github.com/liberalisman/2018-Interview-Preparation#02-shallowcopy-deepcopy" target="_blank" rel="external">02-浅拷贝-深拷贝</a></li>
+<li><a href="https://github.com/liberalisman/2018-Interview-Preparation#03-view的生命周期" target="_blank" rel="external">03-View的生命周期</a></li>
+</ol>
+<a id="more"></a>
+<ol>
+<li><a href="https://github.com/liberalisman/2018-Interview-Preparation#04-property" target="_blank" rel="external">04-@property</a></li>
+<li><a href="https://github.com/liberalisman/iOS-Summary-Part1#05-事件传递和事件响应" target="_blank" rel="external">05-事件传递和事件响应</a></li>
+<li><a href="https://github.com/liberalisman/iOS-Summary-Part1#06-kvc" target="_blank" rel="external">06-KVC</a></li>
+<li><a href="https://github.com/liberalisman/iOS-Summary-Part1#07-kvo" target="_blank" rel="external">07-KVO</a></li>
+<li><a href="https://github.com/liberalisman/iOS-Summary-Part1#08-ios数据持久化方案" target="_blank" rel="external">08-iOS数据持久化方案</a></li>
+</ol>
+<h2 id="01-iOS-App-startup-process"><a href="#01-iOS-App-startup-process" class="headerlink" title="01-iOS-App-startup-process"></a>01-iOS-App-startup-process</h2><p>###一、启动完整过程</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E7%A8%8B%E5%BA%8F%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B.png" alt=""></p>
+<p>1.<code>main</code>函数</p>
+<p>2.<code>UIApplicationMain</code>函数</p>
+<ul>
+<li>创建<code>UIApplication</code>对象</li>
+<li>创建<code>UIApplication的delegate</code>对象</li>
+</ul>
+<p>3.<code>delegate</code>对象开始处理(监听)系统事件(没有storyboard)</p>
+<ul>
+<li>程序启动完毕的时候, 就会调用代理的:<code>didFinishLaunchingWithOptions:</code>方法</li>
+<li>在<code>application:didFinishLaunchingWithOptions</code>:中创建<code>UIWindow</code> 创建和设置<code>UIWindow</code>的<code>rootViewController</code></li>
+<li>显示窗口</li>
+</ul>
+<p>4.根据<code>Info.plist</code>获得最主要<code>storyboard</code>的文件名,加载最主要的<code>storyboard</code>(有storyboard)</p>
+<ul>
+<li>创建<code>UIWindow</code></li>
+<li>创建和设置<code>UIWindow</code>的<code>rootViewController</code></li>
+<li>显示窗口</li>
+</ul>
+<p>###二、程序启动原理</p>
+<p>1.<code>main</code>函数中执行了一个<code>UIApplicationMain</code>这个函数</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> <span class="built_in">UIApplicationMain</span>(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[], <span class="built_in">NSString</span> *principalClassName, <span class="built_in">NSString</span> *delegateClassName);</div><div class="line"></div><div class="line">argc、argv：直接传递给<span class="built_in">UIApplicationMain</span>进行相关处理即可</div></pre></td></tr></table></figure>
+<p>2.<code>principalClassName</code>：指定应用程序类名（app的象征），该类必须是<code>UIApplication</code>(或子类)。如果为<code>nil</code>,则用<code>UIApplication</code>类作为默认值</p>
+<p>3.<code>delegateClassName</code>：指定应用程序的代理类，该类必须遵守<code>UIApplicationDelegate</code>协议</p>
+<p>4.<code>UIApplicationMain</code>函数会根据<code>principalClassName</code>创建<code>UIApplication</code>对象，根据<code>delegateClassName</code>创建一个<code>delegate</code>对象，并将该<code>delegate</code>对象赋值给<code>UIApplication</code>对象中的<code>delegate</code>属性</p>
+<p>5.接着会建立应用程序的<code>Main Runloop</code>（事件循环），进行事件的处理(首先会在程序完毕后调用<code>delegate</code>对象的<code>application:didFinishLaunchingWithOptions</code>:方法)</p>
+<p>程序正常退出时<code>UIApplicationMain</code>函数才返回</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> main(<span class="keyword">int</span> argc, <span class="keyword">char</span> * argv[])&#123; <span class="keyword">@autoreleasepool</span> &#123; </div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line">* argc: 系统或者用户传入的参数个数</div><div class="line">* argv: 系统或者用户传入的实际参数 </div><div class="line">* 1.根据传入的第三个参数创建UIApplication对象 </div><div class="line">* 2.根据传入的第四个产生创建UIApplication对象的代理</div><div class="line">* 3.设置刚刚创建出来的代理对象为UIApplication的代理 </div><div class="line">* 4.开启一个事件循环 </div><div class="line">**/ </div><div class="line"><span class="keyword">return</span> <span class="built_in">UIApplicationMain</span>(argc, argv, <span class="string">@"UIApplication"</span>, <span class="string">@"YYAppDelegate"</span>); &#125;&#125;</div></pre></td></tr></table></figure>
+<p>启动与代理：<br><img src="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E7%A8%8B%E5%BA%8F%E5%90%AF%E5%8A%A8%E4%B8%8E%E4%BB%A3%E7%90%86.png" alt=""></p>
+<h2 id="02-ShallowCopy-DeepCopy"><a href="#02-ShallowCopy-DeepCopy" class="headerlink" title="02-ShallowCopy-DeepCopy"></a>02-ShallowCopy-DeepCopy</h2><p>简要总结一下什么是浅拷贝，什么是深拷贝</p>
+<blockquote>
+<p>深拷贝就是内容拷贝</p>
+<p>浅拷贝就是指针拷贝</p>
+</blockquote>
+<p>###一.系统对象的 copy/mutableCopy</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSString</span> *string = <span class="string">@"LiMing"</span>;</div><div class="line">    </div><div class="line"><span class="built_in">NSString</span> *copyString = [string <span class="keyword">copy</span>];</div><div class="line">    </div><div class="line"><span class="built_in">NSString</span> *mutableString = [string mutableCopy];</div><div class="line">    </div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"string = %p"</span>,string);</div><div class="line">    </div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"copyString = %p"</span>,copyString);</div><div class="line">    </div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"mutableString = %p "</span>,mutableString);</div><div class="line"></div><div class="line">结论：</div><div class="line"><span class="number">1.</span>string 和 copyString 他们只是二个不同的指针，指向内存中的同一块地址，<span class="keyword">copy</span> 只是指针复制</div><div class="line"><span class="number">2.</span>string 和 mutableString 打印出来的地址不同，是因为两个指针指向的地址本就不同，mutableCopy 是内容复制</div><div class="line"></div><div class="line">注意：其他对象 <span class="built_in">NSArray</span> 、<span class="built_in">NSMutableArray</span> 、<span class="built_in">NSDictionary</span> 、<span class="built_in">NSMutableDictionary</span> 一样适用</div></pre></td></tr></table></figure>
+<p>规律可以从这张图看出来</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E6%B7%B1%E6%8B%B7%E8%B4%9D-%E6%B5%85%E6%8B%B7%E8%B4%9D-01" alt=""></p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E6%B7%B1%E6%8B%B7%E8%B4%9D-%E6%B5%85%E6%8B%B7%E8%B4%9D-02" alt=""></p>
+<p>###二.自定义对象实现 Copy-MutableCopy</p>
+<ul>
+<li>copy</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">GZQPerson *person = [[GZQPerson alloc] init];</div><div class="line">person.age = <span class="number">20</span>;</div><div class="line">person.name = <span class="string">@"GZQ"</span>;</div><div class="line">GZQPerson *copyP = [person <span class="keyword">copy</span>];  <span class="comment">// 这里崩溃</span></div></pre></td></tr></table></figure>
+<p>崩溃：<br><img src="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E6%B7%B1%E6%8B%B7%E8%B4%9D-%E6%B5%85%E6%8B%B7%E8%B4%9D-03.png" alt=""></p>
+<p>看崩溃信息GZQPerson应该先实现：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">id</span>)copyWithZone:(<span class="built_in">NSZone</span> *)zone;</div></pre></td></tr></table></figure>
+<p>测试：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#import <span class="meta-string">"GZQPerson.h"</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">GZQPerson</span> ()&lt;<span class="title">NSCopying</span>,<span class="title">NSMutableCopying</span>&gt;</span></div><div class="line"></div><div class="line"><span class="keyword">@end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">GZQPerson</span></span></div><div class="line"></div><div class="line">- (<span class="keyword">id</span>)copyWithZone:(<span class="built_in">NSZone</span> *)zone &#123;</div><div class="line"></div><div class="line">    GZQPerson *person = [[[<span class="keyword">self</span> <span class="keyword">class</span>] allocWithZone:zone] init];</div><div class="line">    person.age = <span class="keyword">self</span>.age;</div><div class="line">    person.name = <span class="keyword">self</span>.name;</div><div class="line">    <span class="keyword">return</span> person;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (<span class="keyword">id</span>)mutableCopyWithZone:(<span class="built_in">NSZone</span> *)zone &#123;</div><div class="line"></div><div class="line">    GZQPerson *person = [[[<span class="keyword">self</span> <span class="keyword">class</span>] allocWithZone:zone] init];</div><div class="line">    person.age = <span class="keyword">self</span>.age;</div><div class="line">    person.name = <span class="keyword">self</span>.name;</div><div class="line">    <span class="keyword">return</span> person;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#import <span class="meta-string">"ViewController.h"</span></span></div><div class="line"><span class="meta">#import <span class="meta-string">"GZQPerson.h"</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> ()</span></div><div class="line"></div><div class="line"><span class="keyword">@end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    </div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line"></div><div class="line">    GZQPerson *person = [[GZQPerson alloc] init];</div><div class="line">    person.age = <span class="number">20</span>;</div><div class="line">    person.name = <span class="string">@"GZQ"</span>;</div><div class="line">    GZQPerson *copyP = [person <span class="keyword">copy</span>];</div><div class="line">    </div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"copyP=%p"</span>,copyP);</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"person=%p"</span>,person);</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"person=%p"</span>,copyP.name);</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"person=%p"</span>,person.name);</div><div class="line">    </div><div class="line">&#125;</div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E6%B7%B1%E6%8B%B7%E8%B4%9D-%E6%B5%85%E6%8B%B7%E8%B4%9D-04.png" alt=""></p>
+<p>可以看出虽然指针的地址不同，但是存储的地址是一致的。</p>
+<p>###三.copy 本质</p>
+<p><code>property copy</code> 实际上就对name干了这个：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#import <span class="meta-string">&lt;Foundation/Foundation.h&gt;</span></span></div><div class="line"></div><div class="line">property <span class="keyword">copy</span> 实际上就对name干了这个：</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)setName:(<span class="built_in">NSString</span> *)name</div><div class="line">&#123;</div><div class="line">    _name = [name <span class="keyword">copy</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>strong</code>是不执行<code>Copy</code>操作的</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="built_in">NSString</span> *name;</div><div class="line"></div><div class="line"><span class="built_in">NSMutableString</span> *string = [<span class="built_in">NSMutableString</span> stringWithFormat:<span class="string">@"深拷贝-浅拷贝"</span>];</div><div class="line"></div><div class="line">GZQPerson *person = [[GZQPerson alloc] init];</div><div class="line">person.name = string;</div><div class="line"></div><div class="line"><span class="comment">// 可以改变person.name的值，因为其内部没有生成新的对象</span></div><div class="line">[string appendString:<span class="string">@"LALALA"</span>];</div><div class="line"></div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"name = %@"</span>, person.name);</div></pre></td></tr></table></figure>
+<h2 id="03-View的生命周期"><a href="#03-View的生命周期" class="headerlink" title="03-View的生命周期"></a>03-View的生命周期</h2><ul>
+<li>读懂这一张图即可<br><img src="http://okhqmtd8q.bkt.clouddn.com/image/jpg/View%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png" alt=""></li>
+</ul>
+<h2 id="04-property"><a href="#04-property" class="headerlink" title="04-@property"></a>04-@property</h2><blockquote>
+<p>@property 的本质是什么？ivar、getter、setter 是如何生成并添加到这个类中的</p>
+</blockquote>
+<p>@property 的本质.</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">@property</span> = ivar + <span class="keyword">getter</span> + <span class="keyword">setter</span>;</div></pre></td></tr></table></figure>
+<p>下面解释下：</p>
+<blockquote>
+<p>“属性” (property)有两大概念：ivar（实例变量）、存取方法（access method ＝ getter + setter）。</p>
+<p>“属性” (property)作为 Objective-C 的一项特性，主要的作用就在于封装对象中的数据。 Objective-C 对象通常会把其所需要的数据保存为各种实例变量。实例变量一般通过“存取方法”(access method)来访问。其中，“获取方法” (getter)用于读取变量值，而“设置方法” (setter)用于写入变量值。这个概念已经定型，并且经由“属性”这一特性而成为 Objective-C 2.0 的一部分。 而在正规的 Objective-C 编码风格中，存取方法有着严格的命名规范。 正因为有了这种严格的命名规范，所以 Objective-C 这门语言才能根据名称自动创建出存取方法。其实也可以把属性当做一种关键字，其表示:</p>
+</blockquote>
+<p>编译器会自动写出一套存取方法，用以访问给定类型中具有给定名称的变量。 所以你也可以这么说：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">@property</span> = <span class="keyword">getter</span> + <span class="keyword">setter</span>;</div></pre></td></tr></table></figure>
+<p>例如下面这个类：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Person</span> : <span class="title">NSObject</span></span></div><div class="line"><span class="keyword">@property</span> <span class="built_in">NSString</span> *firstName;</div><div class="line"><span class="keyword">@property</span> <span class="built_in">NSString</span> *lastName;</div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+<p>上述代码写出来的类与下面这种写法等效：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Person</span> : <span class="title">NSObject</span></span></div><div class="line">- (<span class="built_in">NSString</span> *)firstName;</div><div class="line">- (<span class="keyword">void</span>)setFirstName:(<span class="built_in">NSString</span> *)firstName;</div><div class="line">- (<span class="built_in">NSString</span> *)lastName;</div><div class="line">- (<span class="keyword">void</span>)setLastName:(<span class="built_in">NSString</span> *)lastName;</div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+<p><code>property</code>在<code>runtime</code>中是<code>objc_property_t</code>定义如下:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> objc_property *objc_property_t;</div></pre></td></tr></table></figure>
+<p>而<code>objc_property</code>是一个结构体，包括<code>name</code>和<code>attributes</code>，定义如下：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> property_t &#123;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *name;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *attributes;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>而<code>attributes</code>本质是<code>objc_property_attribute_t</code>，定义了<code>property</code>的一些属性，定义如下：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/// Defines a property attribute</span></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *name;           <span class="comment">/**&lt; The name of the attribute */</span></div><div class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *value;          <span class="comment">/**&lt; The value of the attribute (usually empty) */</span></div><div class="line">&#125; objc_property_attribute_t;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>而attributes的具体内容是什么呢？其实，包括：类型，原子性，内存语义和对应的实例变量。</p>
+</blockquote>
+<p>例如：我们定义一个<code>string</code>的<code>property</code></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>) <span class="built_in">NSString</span> *string;</div></pre></td></tr></table></figure>
+<p>通过 <code>property_getAttributes(property)</code>获取到<code>attributes</code>并打印出来之后的结果为</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">T<span class="string">@"NSString"</span>,C,N,V_string</div></pre></td></tr></table></figure>
+<p>其中<code>T</code>就代表类型，可参阅<code>Type Encodings</code>，<code>C</code>就代表<code>Copy</code>，<code>N</code>代表<code>nonatomic</code>，<code>V</code>就代表对于的实例变量。</p>
+<blockquote>
+<p>ivar、getter、setter 是如何生成并添加到这个类中的?</p>
+</blockquote>
+<p><strong>“自动合成”( autosynthesis)</strong></p>
+<blockquote>
+<p>完成属性定义后，编译器会自动编写访问这些属性所需的方法，此过程叫做“自动合成”(autosynthesis)。需要强调的是，这个过程由编译 器在编译期执行，所以编辑器里看不到这些“合成方法”(synthesized method)的源代码。除了生成方法代码 getter、setter 之外，编译器还要自动向类中添加适当类型的实例变量，并且在属性名前面加下划线，以此作为实例变量的名字。在前例中，会生成两个实例变量，其名称分别为 _firstName 与 _lastName。也可以在类的实现代码里通过@synthesize 语法来指定实例变量的名字.</p>
+</blockquote>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">Person</span></span></div><div class="line"><span class="keyword">@synthesize</span> firstName = _myFirstName;</div><div class="line"><span class="keyword">@synthesize</span> lastName = _myLastName;</div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+<p><strong>我为了搞清属性是怎么实现的,曾经反编译过相关的代码,他大致生成了五个东西</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="number">1.</span> OBJC_IVAR_$类名$属性名称 ：该属性的“偏移量” (offset)，这个偏移量是“硬编码” (hardcode)，表示该变量距离存放对象的内存区域的起始地址有多远。</div><div class="line"><span class="number">2.</span> <span class="keyword">setter</span> 与 <span class="keyword">getter</span> 方法对应的实现函数</div><div class="line"><span class="number">3.</span> ivar_list ：成员变量列表</div><div class="line"><span class="number">4.</span> method_list ：方法列表</div><div class="line"><span class="number">5.</span> prop_list ：属性列表</div><div class="line">也就是说我们每次在增加一个属性,系统都会在 ivar_list 中添加一个成员变量的描述,在 method_list 中增加 <span class="keyword">setter</span> 与 <span class="keyword">getter</span> 方法的描述,在属性列表中增加一个属性的描述,然后计算该属性在对象中的偏移量,然后给出 <span class="keyword">setter</span> 与 <span class="keyword">getter</span> 方法对应的实现,在 <span class="keyword">setter</span> 方法中从偏移量的位置开始赋值,在 <span class="keyword">getter</span> 方法中从偏移量开始取值,为了能够读取正确字节数,系统对象偏移量的指针类型进行了类型强转.</div></pre></td></tr></table></figure>
+<p><strong>属性可以拥有的特质分为四类:</strong></p>
+<ul>
+<li><p>原子性— nonatomic 特质,在默认情况下，由编译器合成的方法会通过锁定机制确保其原子性(atomicity)。如果属性具备 nonatomic 特质，则不使用自旋锁。请注意，尽管没有名为“atomic”的特质(如果某属性不具备 nonatomic 特质，那它就是“原子的” ( atomic) )，但是仍然可以在属性特质中写明这一点，编译器不会报错。若是自己定义存取方法，那么就应该遵从与属性特质相符的原子性。</p>
+</li>
+<li><p>读/写权限—readwrite(读写)、readonly (只读)</p>
+</li>
+<li><p>内存管理语义—assign、strong、 weak、unsafe_unretained、copy</p>
+</li>
+<li>方法名—getter=<name> 、setter=<name></name></name></li>
+</ul>
+<p><strong>getter=<name>的样式：</name></strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">getter</span>=isOn) <span class="built_in">BOOL</span> on;</div><div class="line">     </div><div class="line">(`<span class="keyword">setter</span>=`这种不常用，也不推荐使用。故不在这里给出写法。）</div></pre></td></tr></table></figure>
+<p><strong>setter=<name>一般用在特殊的情境下，比如</name></strong>：</p>
+<blockquote>
+<p>在数据反序列化、转模型的过程中，服务器返回的字段如果以 init 开头，所以你需要定义一个 init 开头的属性，但默认生成的 setter 与 getter 方法也会以 init 开头，而编译器会把所有以 init 开头的方法当成初始化方法，而初始化方法只能返回 self 类型，因此编译器会报错。</p>
+</blockquote>
+<p><strong>这时你就可以使用下面的方式来避免编译器报错：</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>, <span class="keyword">getter</span>=p_initBy, <span class="keyword">setter</span>=setP_initBy:)<span class="built_in">NSString</span> *initBy;</div></pre></td></tr></table></figure>
+<p><strong>另外也可以用关键字进行特殊说明，来避免编译器报错</strong>：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">@property</span>(<span class="keyword">nonatomic</span>, <span class="keyword">readwrite</span>, <span class="keyword">copy</span>, <span class="keyword">null_resettable</span>) <span class="built_in">NSString</span> *initBy;</div><div class="line"></div><div class="line">- (<span class="built_in">NSString</span> *)initBy __attribute__((objc_method_family(none)));</div><div class="line"></div><div class="line"><span class="number">1.</span> 不常用的：<span class="keyword">nonnull</span>,<span class="keyword">null_resettable</span>,<span class="keyword">nullable</span></div><div class="line"></div><div class="line">注意：很多人会认为如果属性具备 <span class="keyword">nonatomic</span> 特质，则不使用 “同步锁”。其实在属性设置方法中使用的是自旋锁，自旋锁相关代码如下：</div><div class="line"></div><div class="line"><span class="keyword">static</span> <span class="keyword">inline</span> <span class="keyword">void</span> reallySetProperty(<span class="keyword">id</span> <span class="keyword">self</span>, SEL _cmd, <span class="keyword">id</span> newValue, ptrdiff_t offset, <span class="keyword">bool</span> atomic, <span class="keyword">bool</span> <span class="keyword">copy</span>, <span class="keyword">bool</span> mutableCopy)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> (offset == <span class="number">0</span>) </div><div class="line">    &#123;</div><div class="line">        object_setClass(<span class="keyword">self</span>, newValue);</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">id</span> oldValue;</div><div class="line">    <span class="keyword">id</span> *slot = (<span class="keyword">id</span>*) ((<span class="keyword">char</span>*)<span class="keyword">self</span> + offset);</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (<span class="keyword">copy</span>) </div><div class="line">    &#123;</div><div class="line">        newValue = [newValue copyWithZone:<span class="literal">nil</span>];</div><div class="line">    &#125; </div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (mutableCopy) </div><div class="line">    &#123;</div><div class="line">        newValue = [newValue mutableCopyWithZone:<span class="literal">nil</span>];</div><div class="line">    &#125; </div><div class="line">    <span class="keyword">else</span> </div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (*slot == newValue) <span class="keyword">return</span>;</div><div class="line">        newValue = objc_retain(newValue);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (!atomic) </div><div class="line">    &#123;</div><div class="line">        oldValue = *slot;</div><div class="line">        *slot = newValue;</div><div class="line">    &#125; </div><div class="line">    <span class="keyword">else</span> </div><div class="line">    &#123;</div><div class="line">        spinlock_t&amp; slotlock = PropertyLocks[slot];</div><div class="line">        slotlock.lock();</div><div class="line">        oldValue = *slot;</div><div class="line">        *slot = newValue;        </div><div class="line">        slotlock.unlock();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    objc_release(oldValue);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">void</span> objc_setProperty(<span class="keyword">id</span> <span class="keyword">self</span>, SEL _cmd, ptrdiff_t offset, <span class="keyword">id</span> newValue, <span class="built_in">BOOL</span> atomic, <span class="keyword">signed</span> <span class="keyword">char</span> shouldCopy) </div><div class="line">&#123;</div><div class="line">    <span class="keyword">bool</span> <span class="keyword">copy</span> = (shouldCopy &amp;&amp; shouldCopy != MUTABLE_COPY);</div><div class="line">    <span class="keyword">bool</span> mutableCopy = (shouldCopy == MUTABLE_COPY);</div><div class="line">    reallySetProperty(<span class="keyword">self</span>, _cmd, newValue, offset, atomic, <span class="keyword">copy</span>, mutableCopy);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="05-事件传递和事件响应"><a href="#05-事件传递和事件响应" class="headerlink" title="05-事件传递和事件响应"></a>05-事件传递和事件响应</h2><p>这部分知识如果自己总结，篇幅较长。可以参考<a href="http://www.jianshu.com/p/2e074db792ba" target="_blank" rel="external">以下文章</a></p>
+<h2 id="06-KVC"><a href="#06-KVC" class="headerlink" title="06-KVC"></a>06-KVC</h2><p><strong>Key-Value Coding (KVC)</strong></p>
+<blockquote>
+<p>KVC（Key-value coding）键值编码，单看这个名字可能不太好理解。其实翻译一下就很简单了，就是指iOS的开发中，可以允许开发者通过Key名直接访问对象的属性，或者给对象的属性赋值。而不需要调用明确的存取方法。这样就可以在运行时动态在访问和修改对象的属性。而不是在编译时确定，这也是iOS开发中的黑魔法之一。很多高级的iOS开发技巧都是基于KVC实现的。目前网上关于KVC的文章在非常多，有的只是简单地说了下用法，有的讲得深入但是在使用场景和最佳实践没有说明，我写下这遍文章就是给大家详解一个最完整最详细的KVC。</p>
+</blockquote>
+<p><strong>KVC在iOS中的定义</strong></p>
+<p>无论是<code>Swift</code>还是<code>Objective-C</code>，<code>KVC</code>的定义都是对<code>NSObject</code>的扩展来实现的(<code>Objective-C</code>中有个显式的<code>NSKeyValueCoding</code>类别名，而<code>Swift</code>没有，也不需要)所以对于所有继承了<code>NSObject</code>在类型，都能使用<code>KVC</code>(一些纯<code>Swift</code>类和结构体是不支持<code>KVC</code>的)，下面是<code>KVC</code>最为重要的四个方法</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">nullable</span> <span class="keyword">id</span>)valueForKey:(<span class="built_in">NSString</span> *)key;                          <span class="comment">//直接通过Key来取值</span></div><div class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">nullable</span> <span class="keyword">id</span>)value forKey:(<span class="built_in">NSString</span> *)key;          <span class="comment">//通过Key来设值</span></div><div class="line">- (<span class="keyword">nullable</span> <span class="keyword">id</span>)valueForKeyPath:(<span class="built_in">NSString</span> *)keyPath;                  <span class="comment">//通过KeyPath来取值</span></div><div class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">nullable</span> <span class="keyword">id</span>)value forKeyPath:(<span class="built_in">NSString</span> *)keyPath;  <span class="comment">//通过KeyPath来设值</span></div></pre></td></tr></table></figure>
+<p>当然<code>NSKeyValueCoding</code>类别中还有其他的一些方法，下面列举一些</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">+ (<span class="built_in">BOOL</span>)accessInstanceVariablesDirectly;</div><div class="line"><span class="comment">//默认返回YES，表示如果没有找到Set&lt;Key&gt;方法的话，会按照_key，_iskey，key，iskey的顺序搜索成员，设置成NO就不这样搜索</span></div><div class="line">- (<span class="built_in">BOOL</span>)validateValue:(<span class="keyword">inout</span> <span class="keyword">id</span> __<span class="keyword">nullable</span> * __<span class="keyword">nonnull</span>)ioValue forKey:(<span class="built_in">NSString</span> *)inKey error:(<span class="keyword">out</span> <span class="built_in">NSError</span> **)outError;</div><div class="line"><span class="comment">//KVC提供属性值确认的API，它可以用来检查set的值是否正确、为不正确的值做一个替换值或者拒绝设置新值并返回错误原因。</span></div><div class="line">- (<span class="built_in">NSMutableArray</span> *)mutableArrayValueForKey:(<span class="built_in">NSString</span> *)key;</div><div class="line"><span class="comment">//这是集合操作的API，里面还有一系列这样的API，如果属性是一个NSMutableArray，那么可以用这个方法来返回</span></div><div class="line">- (<span class="keyword">nullable</span> <span class="keyword">id</span>)valueForUndefinedKey:(<span class="built_in">NSString</span> *)key;</div><div class="line"><span class="comment">//如果Key不存在，且没有KVC无法搜索到任何和Key有关的字段或者属性，则会调用这个方法，默认是抛出异常</span></div><div class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">nullable</span> <span class="keyword">id</span>)value forUndefinedKey:(<span class="built_in">NSString</span> *)key;</div><div class="line"><span class="comment">//和上一个方法一样，只不过是设值。</span></div><div class="line">- (<span class="keyword">void</span>)setNilValueForKey:(<span class="built_in">NSString</span> *)key;</div><div class="line"><span class="comment">//如果你在SetValue方法时面给Value传nil，则会调用这个方法</span></div><div class="line">- (<span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSString</span> *, <span class="keyword">id</span>&gt; *)dictionaryWithValuesForKeys:(<span class="built_in">NSArray</span>&lt;<span class="built_in">NSString</span> *&gt; *)keys;</div><div class="line"><span class="comment">//输入一组key,返回该组key对应的Value，再转成字典返回，用于将Model转到字典。</span></div></pre></td></tr></table></figure>
+<p>上面的这些方法在碰到特殊情况或者有特殊需求还是会用到的，所以也是可以了解一下。后面的代码示例会有讲到其中的一些方法。<br>同时苹果对一些容器类比如NSArray或者NSSet等，KVC有着特殊的实现。建议有基础的或者英文好的开发者直接去看苹果的官方文档，相信你会对KVC的理解更上一个台阶。</p>
+<p><strong>KVC是怎么寻找Key的</strong></p>
+<p>KVC是怎么使用的，我相信绝大多数的开发者都很清楚，我在这里就不再写简单的使用KVC来设值和取值的代码了，首页我们来探讨KVC在内部是按什么样的顺序来寻找key的。<br>当调用<code>setValue：</code>属性值 <code>forKey：``@”name“</code>的代码时，底层的执行机制如下：</p>
+<ul>
+<li><p>程序优先调用<code>set&lt;Key&gt;:</code>属性值方法，代码通过<code>setter</code>方法完成设置。注意，这里的<code>&lt;key&gt;</code>是指成员变量名，首字母大清写要符合<code>KVC</code>的全名规则，下同</p>
+</li>
+<li><p>如果没有找到<code>setName：</code>方法，<code>KVC</code>机制会检查<code>+ (BOOL)accessInstanceVariablesDirectly</code>方法有没有返回<code>YES</code>，默认该方法会返回<code>YES</code>，如果你重写了该方法让其返回<code>NO</code>的话，那么在这一步KVC会执行<code>setValue：forUNdefinedKey：</code>方法，不过一般开发者不会这么做。所以KVC机制会搜索该类里面有没有名为<code>_&lt;key&gt;</code>的成员变量，无论该变量是在类接口部分定义，还是在类实现部分定义，也无论用了什么样的访问修饰符，只在存在以<code>_&lt;key&gt;</code>命名的变量，<code>KVC</code>都可以对该成员变量赋值。</p>
+</li>
+<li><p>如果该类即没有<code>set&lt;Key&gt;：</code>方法，也没有<code>_&lt;key&gt;</code>成员变量，<code>KVC</code>机制会搜索<code>_is&lt;Key&gt;</code>的成员变量，</p>
+</li>
+<li><p>和上面一样，如果该类即没有<code>set&lt;Key&gt;：</code>方法，也没有<code>_&lt;key&gt;</code>和<code>_is&lt;Key&gt;</code>成员变量，<code>KVC</code>机制再会继续搜索<code>&lt;key&gt;</code>和<code>is&lt;Key&gt;</code>的成员变量。再给它们赋值。</p>
+</li>
+<li><p>如果上面列出的方法或者成员变量都不存在，系统将会执行该对象的<code>setValue：forUNdefinedKey：</code>方法，默认是抛出异常。</p>
+</li>
+</ul>
+<p>如果开发者想让这个类禁用<code>KVC</code>里，那么重写<code>+ (BOOL)accessInstanceVariablesDirectly</code>方法让其返回NO即可，这样的话如果<code>KVC</code>没有找到<code>set&lt;Key&gt;:</code>属性名时，会直接用<code>setValue：forUNdefinedKey：</code>方法。</p>
+<h2 id="07-KVO"><a href="#07-KVO" class="headerlink" title="07-KVO"></a>07-KVO</h2><p><code>KVO</code>，全称为<code>Key-Value Observing</code>，是iOS中的一种设计模式，用于检测对象的某些属性的实时变化情况并作出响应。当应用场景比较复杂时，多个地方存在crash的危险。</p>
+<p>首先，假设我们的目标是在一个<code>UITableViewController</code>内对<code>tableview</code>的<code>contentOffset</code>进行实时监测，很容易地使用<code>KVO</code>来实现为。</p>
+<p>在初始化方法中加入：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">[_tableView addObserver:<span class="keyword">self</span> forKeyPath:<span class="string">@"contentOffset"</span> options:<span class="built_in">NSKeyValueObservingOptionNew</span> context:<span class="literal">nil</span>];</div><div class="line"></div><div class="line"><span class="comment">// 在dealloc中移除KVO监听：</span></div><div class="line">[_tableView removeObserver:<span class="keyword">self</span> forKeyPath:<span class="string">@"contentOffset"</span> context:<span class="literal">nil</span>];</div><div class="line"></div><div class="line"><span class="comment">// 添加默认的响应回调方法：</span></div><div class="line">- (<span class="keyword">void</span>)observeValueForKeyPath:(<span class="built_in">NSString</span> *)keyPath </div><div class="line">                      ofObject:(<span class="keyword">id</span>)object</div><div class="line">                        change:(<span class="built_in">NSDictionary</span> *)change </div><div class="line">                       context:(<span class="keyword">void</span> *)context</div><div class="line">&#123;</div><div class="line">    [<span class="keyword">self</span> doSomethingWhenContentOffsetChanges];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>好了，<code>KVO</code>实现就到此完美结束了，开玩笑，肯定没这么简单的，这样的代码太粗糙了，当你在<code>controller</code>中添加多个<code>KVO</code>时，所有的回调都是走同上述函数，那就必须对触发回调函数的来源进行判断。判断如下：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)observeValueForKeyPath:(<span class="built_in">NSString</span> *)keyPath </div><div class="line">                      ofObject:(<span class="keyword">id</span>)object</div><div class="line">                        change:(<span class="built_in">NSDictionary</span> *)change </div><div class="line">                       context:(<span class="keyword">void</span> *)context</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> (object == _tableView &amp;&amp; [keyPath isEqualToString:<span class="string">@"contentOffset"</span>]) </div><div class="line">    &#123;</div><div class="line">        [<span class="keyword">self</span> doSomethingWhenContentOffsetChanges];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>你以为这样就结束了吗？答案是否定的！我们假设当前类(在例子中为<code>UITableViewController</code>)还有父类，并且父类也有自己绑定了一些其他<code>KVO</code>呢？我们看到，上述回调函数体中只有一个判断，如果这个<code>if</code>不成立，这次<code>KVO</code>事件的触发就会到此中断了。但事实上，若当前类无法捕捉到这个<code>KVO</code>，那很有可能是在他的<code>superClass</code>，或者<code>super-superClass...</code>中，上述处理砍断了这个链。合理的处理方式应该是这样的：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)observeValueForKeyPath:(<span class="built_in">NSString</span> *)keyPath </div><div class="line">                      ofObject:(<span class="keyword">id</span>)object</div><div class="line">                        change:(<span class="built_in">NSDictionary</span> *)change </div><div class="line">                       context:(<span class="keyword">void</span> *)context</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> (object == _tableView &amp;&amp; [keyPath isEqualToString:<span class="string">@"contentOffset"</span>]) </div><div class="line">    &#123;</div><div class="line">        [<span class="keyword">self</span> doSomethingWhenContentOffsetChanges];</div><div class="line">    &#125; </div><div class="line">    <span class="keyword">else</span> </div><div class="line">    &#123;</div><div class="line">        [<span class="keyword">super</span> observeValueForKeyPath:keyPath ofObject:object change:change context:context];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这样就结束了吗？答案仍旧是否定的。潜在的问题有可能出现在<code>dealloc</code>中对<code>KVO</code>的注销上。<code>KVO</code>的一种缺陷(其实不能称为缺陷，应该称为特性)是，当对同一个<code>keypath</code>进行两次<code>removeObserver</code>时会导致程序<code>crash</code>，这种情况常常出现在父类有一个<code>kvo</code>，父类在<code>dealloc</code>中<code>remove</code>了一次，子类又<code>remove</code>了一次的情况下。不要以为这种情况很少出现！当你封装<code>framework</code>开源给别人用或者多人协作开发时是有可能出现的，而且这种<code>crash</code>很难发现。不知道你发现没，目前的代码中<code>context</code>字段都是<code>nil</code>，那能否利用该字段来标识出到底<code>kvo</code>是<code>superClass</code>注册的，还是<code>self</code>注册的？</p>
+<p>回答是可以的。我们可以分别在父类以及本类中定义各自的<code>context</code>字符串，比如在本类中定义<code>context</code>为<code>@&quot;ThisIsMyKVOContextNotSuper&quot;</code>;然后在<code>dealloc</code>中<code>remove observer</code>时指定移除的自身添加的<code>observer</code>。这样iOS就能知道移除的是自己的<code>kvo</code>，而不是父类中的<code>kvo</code>，避免二次<code>remove</code>造成<code>crash</code>。</p>
+<h2 id="08-iOS数据持久化方案"><a href="#08-iOS数据持久化方案" class="headerlink" title="08-iOS数据持久化方案"></a>08-iOS数据持久化方案</h2><h3 id="存储方案"><a href="#存储方案" class="headerlink" title="存储方案"></a>存储方案</h3><ul>
+<li>plist文件（属性列表）</li>
+<li>preference（偏好设置）</li>
+<li>NSKeyedArchiver（归档）</li>
+<li>SQLite 3</li>
+<li>CoreData</li>
+</ul>
+<h3 id="沙盒"><a href="#沙盒" class="headerlink" title="沙盒"></a>沙盒</h3><blockquote>
+<p>iOS程序默认情况下只能访问程序自己的目录，这个目录被称为“沙盒”。</p>
+</blockquote>
+<h4 id="1-结构"><a href="#1-结构" class="headerlink" title="1.结构"></a>1.结构</h4><p>沙盒的目录结构如下：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="string">"应用程序包"</span></div><div class="line">Documents</div><div class="line">Library</div><div class="line">    Caches</div><div class="line">    Preferences</div><div class="line">tmp</div></pre></td></tr></table></figure>
+<h4 id="2-目录特性"><a href="#2-目录特性" class="headerlink" title="2.目录特性"></a>2.目录特性</h4><blockquote>
+<p>虽然沙盒中有这么多文件夹，但是每个文件夹都不尽相同，都有各自的特性。所以在选择存放目录时，一定要认真选择适合的目录。</p>
+</blockquote>
+<p>“应用程序包”: 这里面存放的是应用程序的<strong>源文件</strong>，包括<strong>资源文件</strong>和<strong>可执行文件</strong>。</p>
+<ul>
+<li>Documents: 最常用的目录，iTunes同步该应用时会同步此文件夹中的内容，适合存储重要数据。</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSString</span> *path = [[<span class="built_in">NSBundle</span> mainBundle] bundlePath];</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, path);</div></pre></td></tr></table></figure>
+<ul>
+<li>Library/Caches: iTunes不会同步此文件夹，适合存储体积大，不需要备份的非重要数据。</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSString</span> *path = <span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSDocumentDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>).firstObject;</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, path);</div></pre></td></tr></table></figure>
+<ul>
+<li>Library/Preferences: iTunes同步该应用时会同步此文件夹中的内容，通常保存应用的设置信息。</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSString</span> *path = <span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSCachesDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>).firstObject;</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, path);</div></pre></td></tr></table></figure>
+<ul>
+<li>tmp: iTunes不会同步此文件夹，系统可能在应用没运行时就删除该目录下的文件，所以此目录适合保存应用中的一些临时文件，用完就删除。</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSString</span> *path = <span class="built_in">NSTemporaryDirectory</span>();</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, path);</div></pre></td></tr></table></figure>
+<h3 id="plist文件"><a href="#plist文件" class="headerlink" title="plist文件"></a>plist文件</h3><blockquote>
+<p>plist文件是将某些特定的类，通过XML文件的方式保存在目录中。</p>
+</blockquote>
+<p>可以被序列化的类型只有如下几种：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSArray</span>;</div><div class="line"><span class="built_in">NSMutableArray</span>;</div><div class="line"><span class="built_in">NSDictionary</span>;</div><div class="line"><span class="built_in">NSMutableDictionary</span>;</div><div class="line"><span class="built_in">NSData</span>;</div><div class="line"><span class="built_in">NSMutableData</span>;</div><div class="line"><span class="built_in">NSString</span>;</div><div class="line"><span class="built_in">NSMutableString</span>;</div><div class="line"><span class="built_in">NSNumber</span>;</div><div class="line"><span class="built_in">NSDate</span>;</div></pre></td></tr></table></figure>
+<h4 id="1-获得文件路径"><a href="#1-获得文件路径" class="headerlink" title="1.获得文件路径"></a>1.获得文件路径</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSString</span> *path = <span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSDocumentDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>).firstObject;</div><div class="line"><span class="built_in">NSString</span> *fileName = [path stringByAppendingPathComponent:<span class="string">@"123.plist"</span>];</div></pre></td></tr></table></figure>
+<h4 id="2-存储"><a href="#2-存储" class="headerlink" title="2.存储"></a>2.存储</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSArray</span> *array = @[<span class="string">@"123"</span>, <span class="string">@"456"</span>, <span class="string">@"789"</span>];</div><div class="line">[array writeToFile:fileName atomically:<span class="literal">YES</span>];</div></pre></td></tr></table></figure>
+<h4 id="3-读取"><a href="#3-读取" class="headerlink" title="3.读取"></a>3.读取</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSArray</span> *result = [<span class="built_in">NSArray</span> arrayWithContentsOfFile:fileName];</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, result);</div></pre></td></tr></table></figure>
+<h4 id="4-注意"><a href="#4-注意" class="headerlink" title="4.注意"></a>4.注意</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 只有以上列出的类型才能使用plist文件存储。</span></div><div class="line"><span class="comment">// 存储时使用writeToFile: atomically:方法。 其中atomically表示是否需要先写入一个辅助文件，再把辅助文件拷贝到目标文件地址。这是更安全的写入文件方法，一般都写YES。</span></div><div class="line"><span class="comment">// 读取时使用arrayWithContentsOfFile:方法。</span></div></pre></td></tr></table></figure>
+<h3 id="Preference"><a href="#Preference" class="headerlink" title="Preference"></a>Preference</h3><h4 id="1-使用方法"><a href="#1-使用方法" class="headerlink" title="1.使用方法"></a>1.使用方法</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//1.获得NSUserDefaults文件</span></div><div class="line"><span class="built_in">NSUserDefaults</span> *userDefaults = [<span class="built_in">NSUserDefaults</span> standardUserDefaults];</div><div class="line"></div><div class="line"><span class="comment">//2.向文件中写入内容</span></div><div class="line">[userDefaults setObject:<span class="string">@"AAA"</span> forKey:<span class="string">@"a"</span>];</div><div class="line">[userDefaults setBool:<span class="literal">YES</span> forKey:<span class="string">@"sex"</span>];</div><div class="line">[userDefaults setInteger:<span class="number">21</span> forKey:<span class="string">@"age"</span>];</div><div class="line"></div><div class="line"><span class="comment">//2.1立即同步</span></div><div class="line">[userDefaults synchronize];</div><div class="line"></div><div class="line"><span class="comment">//3.读取文件</span></div><div class="line"><span class="built_in">NSString</span> *name = [userDefaults objectForKey:<span class="string">@"a"</span>];</div><div class="line"><span class="built_in">BOOL</span> sex = [userDefaults boolForKey:<span class="string">@"sex"</span>];</div><div class="line"><span class="built_in">NSInteger</span> age = [userDefaults integerForKey:<span class="string">@"age"</span>];</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@, %d, %ld"</span>, name, sex, age);</div></pre></td></tr></table></figure>
+<h4 id="2-注意"><a href="#2-注意" class="headerlink" title="2.注意"></a>2.注意</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 偏好设置是专门用来保存应用程序的配置信息的，一般不要在偏好设置中保存其他数据。</span></div><div class="line"><span class="comment">// 如果没有调用synchronize方法，系统会根据I/O情况不定时刻地保存到文件中。所以如果需要立即写入文件的就必须调用synchronize方法。</span></div><div class="line"><span class="comment">// 偏好设置会将所有数据保存到同一个文件中。即preference目录下的一个以此应用包名来命名的plist文件。</span></div></pre></td></tr></table></figure>
+<h3 id="NSKeyedArchiver"><a href="#NSKeyedArchiver" class="headerlink" title="NSKeyedArchiver"></a>NSKeyedArchiver</h3><blockquote>
+<p>归档在iOS中是另一种形式的序列化，只要遵循了NSCoding协议的对象都可以通过它实现序列化。由于决大多数支持存储数据的Foundation和Cocoa Touch类都遵循了NSCoding协议，因此，对于大多数类来说，归档相对而言还是比较容易实现的。</p>
+</blockquote>
+<h4 id="1-遵循NSCoding协议"><a href="#1-遵循NSCoding协议" class="headerlink" title="1.遵循NSCoding协议"></a>1.遵循NSCoding协议</h4><blockquote>
+<p>NSCoding协议声明了两个方法，这两个方法都是必须实现的。一个用来说明如何将对象编码到归档中，另一个说明如何进行解档来获取一个新对象。</p>
+</blockquote>
+<p>遵循协议和设置属性</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//1.遵循NSCoding协议 </span></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Person</span> : <span class="title">NSObject</span>   //2.设置属性</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">strong</span>, <span class="keyword">nonatomic</span>) <span class="built_in">UIImage</span> *avatar;</div><div class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>, <span class="keyword">nonatomic</span>) <span class="built_in">NSString</span> *name;</div><div class="line"><span class="keyword">@property</span> (<span class="keyword">assign</span>, <span class="keyword">nonatomic</span>) <span class="built_in">NSInteger</span> age;</div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+<p>实现协议方法</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//解档</span></div><div class="line">- (<span class="keyword">id</span>)initWithCoder:(<span class="built_in">NSCoder</span> *)aDecoder &#123;</div><div class="line">    <span class="keyword">if</span> ([<span class="keyword">super</span> init]) &#123;</div><div class="line">        <span class="keyword">self</span>.avatar = [aDecoder decodeObjectForKey:<span class="string">@"avatar"</span>];</div><div class="line">        <span class="keyword">self</span>.name = [aDecoder decodeObjectForKey:<span class="string">@"name"</span>];</div><div class="line">        <span class="keyword">self</span>.age = [aDecoder decodeIntegerForKey:<span class="string">@"age"</span>];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//归档</span></div><div class="line">- (<span class="keyword">void</span>)encodeWithCoder:(<span class="built_in">NSCoder</span> *)aCoder &#123;</div><div class="line">    [aCoder encodeObject:<span class="keyword">self</span>.avatar forKey:<span class="string">@"avatar"</span>];</div><div class="line">    [aCoder encodeObject:<span class="keyword">self</span>.name forKey:<span class="string">@"name"</span>];</div><div class="line">    [aCoder encodeInteger:<span class="keyword">self</span>.age forKey:<span class="string">@"age"</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>特别注意</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">如果需要归档的类是某个自定义类的子类时，就需要在归档和解档之前先实现父类的归档和解档方法。即 [<span class="keyword">super</span> encodeWithCoder:aCoder] 和 [<span class="keyword">super</span> initWithCoder:aDecoder] 方法;</div></pre></td></tr></table></figure>
+<h4 id="2-使用"><a href="#2-使用" class="headerlink" title="2.使用"></a>2.使用</h4><p>需要把对象归档是调用<code>NSKeyedArchiver</code>的工厂方法 <code>archiveRootObject: toFile:</code>方法。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSString</span> *file = [<span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSDocumentDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>).firstObject stringByAppendingPathComponent:<span class="string">@"person.data"</span>];</div><div class="line">Person *person = [[Person alloc] init];</div><div class="line">person.avatar = <span class="keyword">self</span>.avatarView.image;</div><div class="line">person.name = <span class="keyword">self</span>.nameField.text;</div><div class="line">person.age = [<span class="keyword">self</span>.ageField.text integerValue];</div><div class="line">[<span class="built_in">NSKeyedArchiver</span> archiveRootObject:person toFile:file];</div></pre></td></tr></table></figure>
+<p>需要从文件中解档对象就调用<code>NSKeyedUnarchiver</code>的一个工厂方法 <code>unarchiveObjectWithFile:</code> 即可。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSString</span> *file = [<span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSDocumentDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>).firstObject stringByAppendingPathComponent:<span class="string">@"person.data"</span>];</div><div class="line">Person *person = [<span class="built_in">NSKeyedUnarchiver</span> unarchiveObjectWithFile:file];</div><div class="line"><span class="keyword">if</span> (person) </div><div class="line">&#123;</div><div class="line">   <span class="keyword">self</span>.avatarView.image = person.avatar;</div><div class="line">   <span class="keyword">self</span>.nameField.text = person.name;</div><div class="line">   <span class="keyword">self</span>.ageField.text = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%ld"</span>, person.age];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="3-注意"><a href="#3-注意" class="headerlink" title="3.注意"></a>3.注意</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">必须遵循并实现<span class="built_in">NSCoding</span>协议</div><div class="line">保存文件的扩展名可以任意指定</div><div class="line">继承时必须先调用父类的归档解档方法</div></pre></td></tr></table></figure>
+<h3 id="SQLite3"><a href="#SQLite3" class="headerlink" title="SQLite3"></a>SQLite3</h3><blockquote>
+<p>之前的所有存储方法，都是覆盖存储。如果想要增加一条数据就必须把整个文件读出来，然后修改数据后再把整个内容覆盖写入文件。所以它们都不适合存储大量的内容。</p>
+</blockquote>
+<h4 id="1-字段类型"><a href="#1-字段类型" class="headerlink" title="1.字段类型"></a>1.字段类型</h4><p>表面上·SQLite·将数据分为以下几种类型：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">integer : 整数</div><div class="line">real : 实数（浮点数）</div><div class="line">text : 文本字符串</div><div class="line">blob : 二进制数据，比如文件，图片之类的</div></pre></td></tr></table></figure>
+<p>实际上<code>SQLite</code>是无类型的。即不管你在创表时指定的字段类型是什么，存储是依然可以存储任意类型的数据。而且在创表时也可以不指定字段类型。<code>SQLite</code>之所以什么类型就是为了良好的编程规范和方便开发人员交流，所以平时在使用时最好设置正确的字段类型！主键必须设置成<code>integer</code></p>
+<h4 id="2-准备工作"><a href="#2-准备工作" class="headerlink" title="2. 准备工作"></a>2. 准备工作</h4><p>准备工作就是导入依赖库啦，在<code>iOS</code>中要使用<code>SQLite3</code>，需要添加库文件：<code>libsqlite3.dylib</code>并导入主头文件，这是一个<code>C语言</code>的库，所以直接使用<code>SQLite3</code>还是比较麻烦的。</p>
+<h4 id="3-使用"><a href="#3-使用" class="headerlink" title="3.使用"></a>3.使用</h4><h5 id="1-创建数据库并打开"><a href="#1-创建数据库并打开" class="headerlink" title="1.创建数据库并打开"></a>1.创建数据库并打开</h5><p>操作数据库之前必须先指定数据库文件和要操作的表，所以使用<code>SQLite3</code>，首先要打开数据库文件，然后指定或创建一张表。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//  打开数据库并创建一个表</span></div><div class="line">- (<span class="keyword">void</span>)openDatabase </div><div class="line">&#123;</div><div class="line">   <span class="comment">//1.设置文件名</span></div><div class="line">   <span class="built_in">NSString</span> *filename = [<span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSDocumentDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>).firstObject stringByAppendingPathComponent:<span class="string">@"person.db"</span>];</div><div class="line">   </div><div class="line">   <span class="comment">//2.打开数据库文件，如果没有会自动创建一个文件</span></div><div class="line">   <span class="built_in">NSInteger</span> result = sqlite3_open(filename.UTF8String, &amp;_sqlite3);</div><div class="line">   </div><div class="line">   <span class="keyword">if</span> (result == SQLITE_OK) </div><div class="line">   &#123;</div><div class="line">       <span class="built_in">NSLog</span>(<span class="string">@"打开数据库成功！"</span>);</div><div class="line">       </div><div class="line">       <span class="comment">//3.创建一个数据库表</span></div><div class="line">       <span class="keyword">char</span> *errmsg = <span class="literal">NULL</span>;</div><div class="line">       sqlite3_exec(_sqlite3, <span class="string">"CREATE TABLE IF NOT EXISTS t_person(id integer primary key autoincrement, name text, age integer)"</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>, &amp;errmsg);</div><div class="line">       </div><div class="line">       <span class="keyword">if</span> (errmsg) </div><div class="line">       &#123;</div><div class="line">           <span class="built_in">NSLog</span>(<span class="string">@"错误：%s"</span>, errmsg);</div><div class="line">       &#125; </div><div class="line">       <span class="keyword">else</span> </div><div class="line">       &#123;</div><div class="line">           <span class="built_in">NSLog</span>(<span class="string">@"创表成功！"</span>);</div><div class="line">       &#125;</div><div class="line">   &#125; </div><div class="line">   <span class="keyword">else</span> </div><div class="line">   &#123;</div><div class="line">       <span class="built_in">NSLog</span>(<span class="string">@"打开数据库失败！"</span>);</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="2-执行指令"><a href="#2-执行指令" class="headerlink" title="2.执行指令"></a>2.执行指令</h5><p>使用 <code>sqlite3_exec()</code> 方法可以执行任何<code>SQL</code>语句，比如<code>创表、更新、插入和删除</code>操作。但是一般不用它执行查询语句，因为它不会返回查询到的数据。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 往表中插入1000条数据</span></div><div class="line">- (<span class="keyword">void</span>)insertData </div><div class="line">&#123;</div><div class="line">    <span class="built_in">NSString</span> *nameStr;</div><div class="line">    <span class="built_in">NSInteger</span> age;</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> (<span class="built_in">NSInteger</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; i++) </div><div class="line">    &#123;</div><div class="line">      nameStr = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"Bourne-%d"</span>, arc4random_uniform(<span class="number">10000</span>)];</div><div class="line">      age = arc4random_uniform(<span class="number">80</span>) + <span class="number">20</span>;</div><div class="line">      <span class="built_in">NSString</span> *sql = [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"INSERT INTO t_person (name, age) VALUES('%@', '%ld')"</span>, nameStr, age];</div><div class="line">      <span class="keyword">char</span> *errmsg = <span class="literal">NULL</span>;</div><div class="line">      sqlite3_exec(_sqlite3, sql.UTF8String, <span class="literal">NULL</span>, <span class="literal">NULL</span>, &amp;errmsg);</div><div class="line">      <span class="keyword">if</span> (errmsg) </div><div class="line">      &#123;</div><div class="line">          <span class="built_in">NSLog</span>(<span class="string">@"错误：%s"</span>, errmsg);</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"插入完毕！"</span>);   </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="3-查询指令"><a href="#3-查询指令" class="headerlink" title="3.查询指令"></a>3.查询指令</h5><p>前面说过一般不使用 sqlite3_exec() 方法查询数据。因为查询数据必须要获得查询结果，所以查询相对比较麻烦。示例代码如下：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// sqlite3_prepare_v2() : 检查sql的合法性</span></div><div class="line"><span class="comment">// sqlite3_step() : 逐行获取查询结果，不断重复，直到最后一条记录</span></div><div class="line"><span class="comment">// sqlite3_coloum_xxx() : 获取对应类型的内容，iCol对应的就是SQL语句中字段的顺序，从0开始。根据实际查询字段的属性，使用sqlite3_column_xxx取得对应的内容即可。</span></div><div class="line"><span class="comment">// sqlite3_finalize() : 释放stmt</span></div><div class="line"></div><div class="line"><span class="comment">// 从表中读取数据到数组中</span></div><div class="line">- (<span class="keyword">void</span>)readData </div><div class="line">&#123;</div><div class="line">   <span class="built_in">NSMutableArray</span> *mArray = [<span class="built_in">NSMutableArray</span> arrayWithCapacity:<span class="number">1000</span>];</div><div class="line">   <span class="keyword">char</span> *sql = <span class="string">"select name, age from t_person;"</span>;</div><div class="line">   sqlite3_stmt *stmt;</div><div class="line">   <span class="built_in">NSInteger</span> result = sqlite3_prepare_v2(_sqlite3, sql, <span class="number">-1</span>, &amp;stmt, <span class="literal">NULL</span>);</div><div class="line">   </div><div class="line">   <span class="keyword">if</span> (result == SQLITE_OK) </div><div class="line">   &#123;</div><div class="line">       <span class="keyword">while</span> (sqlite3_step(stmt) == SQLITE_ROW) </div><div class="line">       &#123;</div><div class="line">           <span class="keyword">char</span> *name = (<span class="keyword">char</span> *)sqlite3_column_text(stmt, <span class="number">0</span>);</div><div class="line">           <span class="built_in">NSInteger</span> age = sqlite3_column_int(stmt, <span class="number">1</span>);</div><div class="line">           <span class="comment">//创建对象</span></div><div class="line">           Person *person = [Person personWithName:[<span class="built_in">NSString</span> stringWithUTF8String:name] Age:age];</div><div class="line">           [mArray addObject:person];</div><div class="line">       &#125;</div><div class="line">       <span class="keyword">self</span>.dataList = mArray;</div><div class="line">   &#125;</div><div class="line">   sqlite3_finalize(stmt);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="4-总结"><a href="#4-总结" class="headerlink" title="4.总结"></a>4.总结</h4><p>总得来说，<code>SQLite3</code>的使用还是比较麻烦的，因为都是些<code>c语言</code>的函数，理解起来有些困难。不过在一般开发过程中，使用的都是第三方开源库 <code>FMDB</code>，封装了这些基本的<code>c语言</code>方法，使得我们在使用时更加容易理解，提高开发效率。</p>
+<h3 id="FMDB"><a href="#FMDB" class="headerlink" title="FMDB"></a>FMDB</h3><h4 id="1-简介"><a href="#1-简介" class="headerlink" title="1.简介"></a>1.简介</h4><blockquote>
+<p>FMDB是iOS平台的SQLite数据库框架，它是以OC的方式封装了SQLite的C语言API，它相对于cocoa自带的C语言框架有如下的优点:<br>使用起来更加面向对象，省去了很多麻烦、冗余的C语言代码<br>对比苹果自带的Core Data框架，更加轻量级和灵活<br>提供了多线程安全的数据库操作方法，有效地防止数据混乱</p>
+</blockquote>
+<h4 id="2-核心类"><a href="#2-核心类" class="headerlink" title="2.核心类"></a>2.核心类</h4><p><strong>FMDB有三个主要的类：</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// FMDatabase</span></div><div class="line">一个FMDatabase对象就代表一个单独的SQLite数据库，用来执行SQL语句</div><div class="line"></div><div class="line"><span class="comment">// FMResultSet</span></div><div class="line">使用FMDatabase执行查询后的结果集</div><div class="line"></div><div class="line"><span class="comment">// FMDatabaseQueue</span></div><div class="line">用于在多线程中执行多个查询或更新，它是线程安全的</div></pre></td></tr></table></figure>
+<h4 id="3-打开数据库"><a href="#3-打开数据库" class="headerlink" title="3.打开数据库"></a>3.打开数据库</h4><blockquote>
+<p>和c语言框架一样，FMDB通过指定SQLite数据库文件路径来创建FMDatabase对象，但FMDB更加容易理解，使用起来更容易，使用之前一样需要导入sqlite3.dylib。打开数据库方法如下：</p>
+</blockquote>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSString</span> *path = [<span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSDocumentDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>).firstObject stringByAppendingPathComponent:<span class="string">@"person.db"</span>];</div><div class="line">FMDatabase *database = [FMDatabase databaseWithPath:path]; </div><div class="line">   </div><div class="line"><span class="keyword">if</span> (![database open]) </div><div class="line">&#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"数据库打开失败！"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>值得注意的是，Path的值可以传入以下三种情况：</strong></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 具体文件路径，如果不存在会自动创建</span></div><div class="line"><span class="comment">// 空字符串@""，会在临时目录创建一个空的数据库，当FMDatabase连接关闭时，数据库文件也被删除</span></div><div class="line"><span class="comment">// nil，会创建一个内存中临时数据库，当FMDatabase连接关闭时，数据库会被销毁</span></div></pre></td></tr></table></figure>
+<h4 id="4-更新"><a href="#4-更新" class="headerlink" title="4.更新"></a>4.更新</h4><blockquote>
+<p>在FMDB中，除查询以外的所有操作，都称为“更新”, 如：create、drop、insert、update、delete等操作，使用executeUpdate:方法执行更新：</p>
+</blockquote>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//常用方法有以下 3 种：   </span></div><div class="line">- (<span class="built_in">BOOL</span>)executeUpdate:(<span class="built_in">NSString</span>*)sql, ...</div><div class="line"></div><div class="line">- (<span class="built_in">BOOL</span>)executeUpdateWithFormat:(<span class="built_in">NSString</span>*)format, ...</div><div class="line"></div><div class="line">- (<span class="built_in">BOOL</span>)executeUpdate:(<span class="built_in">NSString</span>*)sql withArgumentsInArray:(<span class="built_in">NSArray</span> *)arguments</div><div class="line"></div><div class="line"><span class="comment">//示例</span></div><div class="line">[database executeUpdate:<span class="string">@"CREATE TABLE IF NOT EXISTS t_person(id integer primary key autoincrement, name text, age integer)"</span>]; </div><div class="line">  </div><div class="line"><span class="comment">//或者  </span></div><div class="line">[database executeUpdate:<span class="string">@"INSERT INTO t_person(name, age) VALUES(?, ?)"</span>, <span class="string">@"Bourne"</span>, [<span class="built_in">NSNumber</span> numberWithInt:<span class="number">42</span>]];</div></pre></td></tr></table></figure>
+<h4 id="5-查询"><a href="#5-查询" class="headerlink" title="5.查询"></a>5.查询</h4><p>查询方法也有3种，使用起来相当简单：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- (FMResultSet *)executeQuery:(<span class="built_in">NSString</span>*)sql, ...</div><div class="line">- (FMResultSet *)executeQueryWithFormat:(<span class="built_in">NSString</span>*)format, ...</div><div class="line">- (FMResultSet *)executeQuery:(<span class="built_in">NSString</span> *)sql withArgumentsInArray:(<span class="built_in">NSArray</span> *)arguments</div></pre></td></tr></table></figure>
+<p>查询示例：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//1.执行查询</span></div><div class="line">FMResultSet *result = [database executeQuery:<span class="string">@"SELECT * FROM t_person"</span>];</div><div class="line"></div><div class="line"><span class="comment">//2.遍历结果集</span></div><div class="line"><span class="keyword">while</span> ([result next]) </div><div class="line">&#123;</div><div class="line">    <span class="built_in">NSString</span> *name = [result stringForColumn:<span class="string">@"name"</span>];</div><div class="line">    <span class="keyword">int</span> age = [result intForColumn:<span class="string">@"age"</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="6-线程安全"><a href="#6-线程安全" class="headerlink" title="6.线程安全"></a>6.线程安全</h4><blockquote>
+<p>在多个线程中同时使用一个 <code>FMDatabase</code> 实例是不明智的。不要让多个线程分享同一个<code>FMDatabase</code>实例，它无法在多个线程中同时使用。 如果在多个线程中同时使用一个<code>FMDatabase</code>实例，会造成数据混乱等问题。所以，请使用 <code>FMDatabaseQueue</code>，它是线程安全的。以下是使用方法：</p>
+</blockquote>
+<p>创建队列。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">FMDatabaseQueue *queue = [FMDatabaseQueue databaseQueueWithPath:aPath];</div><div class="line"></div><div class="line"><span class="comment">// 使用队列</span></div><div class="line">[queue inDatabase:^(FMDatabase *database)</div><div class="line">&#123;    </div><div class="line">          [database executeUpdate:<span class="string">@"INSERT INTO t_person(name, age) VALUES (?, ?)"</span>, <span class="string">@"Bourne_1"</span>, [<span class="built_in">NSNumber</span> numberWithInt:<span class="number">1</span>]];    </div><div class="line">          [database executeUpdate:<span class="string">@"INSERT INTO t_person(name, age) VALUES (?, ?)"</span>, <span class="string">@"Bourne_2"</span>, [<span class="built_in">NSNumber</span> numberWithInt:<span class="number">2</span>]];    </div><div class="line">          [database executeUpdate:<span class="string">@"INSERT INTO t_person(name, age) VALUES (?, ?)"</span>, <span class="string">@"Bourne_3"</span>, [<span class="built_in">NSNumber</span> numberWithInt:<span class="number">3</span>]];      </div><div class="line">          FMResultSet *result = [database executeQuery:<span class="string">@"select * from t_person"</span>];    </div><div class="line">         <span class="keyword">while</span>([result next]) &#123;   </div><div class="line">         &#125;    </div><div class="line">&#125;];</div><div class="line"></div><div class="line"><span class="comment">// 而且可以轻松地把简单任务包装到事务里：</span></div><div class="line">[queue inTransaction:^(FMDatabase *database, <span class="built_in">BOOL</span> *rollback) &#123;    </div><div class="line">          [database executeUpdate:<span class="string">@"INSERT INTO t_person(name, age) VALUES (?, ?)"</span>, <span class="string">@"Bourne_1"</span>, [<span class="built_in">NSNumber</span> numberWithInt:<span class="number">1</span>]];    </div><div class="line">          [database executeUpdate:<span class="string">@"INSERT INTO t_person(name, age) VALUES (?, ?)"</span>, <span class="string">@"Bourne_2"</span>, [<span class="built_in">NSNumber</span> numberWithInt:<span class="number">2</span>]];    </div><div class="line">          [database executeUpdate:<span class="string">@"INSERT INTO t_person(name, age) VALUES (?, ?)"</span>, <span class="string">@"Bourne_3"</span>, [<span class="built_in">NSNumber</span> numberWithInt:<span class="number">3</span>]];      </div><div class="line">          FMResultSet *result = [database executeQuery:<span class="string">@"select * from t_person"</span>];    </div><div class="line">             <span class="keyword">while</span>([result next]) &#123;   </div><div class="line">             &#125;   </div><div class="line">           <span class="comment">//回滚</span></div><div class="line">           *rollback = <span class="literal">YES</span>;  </div><div class="line">    &#125;];</div></pre></td></tr></table></figure>
+<p>FMDatabaseQueue 后台会建立系列化的<code>GCD</code>队列，并执行你传给<code>GCD</code>队列的块。这意味着 你从多线程同时调用调用方法，<code>GCD</code>也会按它接收的块的顺序来执行了。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://7xvffo.com1.z0.glb.clouddn.com/Alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://7xvffo.com1.z0.glb.clouddn.com/WeChat.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">知识总结</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/04/15/iOS知识总结-基础篇-1/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/04/03/weak-弱引用实现原理/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          weak-弱引用实现原理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/25/iOS知识总结-基础篇-2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">iOS知识总结-基础篇-2</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+    <div class="duoshuo"></div>
+  
+
+
+
+
+          </div>
+        </div>
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 Liberalism
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		mathjax: false,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: "/",
+		innerArchive: true,
+		showTags: false
+	}
+</script>
+
+<script>!function(t){function n(r){if(e[r])return e[r].exports;var o=e[r]={exports:{},id:r,loaded:!1};return t[r].call(o.exports,o,o.exports,n),o.loaded=!0,o.exports}var e={};return n.m=t,n.c=e,n.p="./",n(0)}([function(t,n,e){"use strict";function r(t){return t&&t.__esModule?t:{default:t}}function o(t,n){var e=/\/|index.html/g;return t.replace(e,"")===n.replace(e,"")}function i(){for(var t=document.querySelectorAll(".js-header-menu li a"),n=window.location.pathname,e=0,r=t.length;e<r;e++){var i=t[e];o(n,i.getAttribute("href"))&&(0,d.default)(i,"active")}}function u(t){for(var n=t.offsetLeft,e=t.offsetParent;null!==e;)n+=e.offsetLeft,e=e.offsetParent;return n}function f(t){for(var n=t.offsetTop,e=t.offsetParent;null!==e;)n+=e.offsetTop,e=e.offsetParent;return n}function c(t,n,e,r,o){var i=u(t),c=f(t)-n;if(c-e<=o){var a=t.$newDom;a||(a=t.cloneNode(!0),(0,h.default)(t,a),t.$newDom=a,a.style.position="fixed",a.style.top=(e||c)+"px",a.style.left=i+"px",a.style.zIndex=r||2,a.style.width="100%",a.style.color="#fff"),a.style.visibility="visible",t.style.visibility="hidden"}else{t.style.visibility="visible";var s=t.$newDom;s&&(s.style.visibility="hidden")}}function a(){var t=document.querySelector(".js-overlay"),n=document.querySelector(".js-header-menu");c(t,document.body.scrollTop,-63,2,0),c(n,document.body.scrollTop,1,3,0)}function s(){document.querySelector("#container").addEventListener("scroll",function(t){a()}),window.addEventListener("scroll",function(t){a()}),a()}function l(){x.default.versions.mobile&&window.screen.width<800&&(i(),s())}var p=e(71),d=r(p),v=e(72),y=(r(v),e(84)),h=r(y),b=e(69),x=r(b),g=e(75),m=r(g),w=e(70);l(),(0,w.addLoadEvent)(function(){m.default.init()}),t.exports={}},function(t,n){var e=t.exports="undefined"!=typeof window&&window.Math==Math?window:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")();"number"==typeof __g&&(__g=e)},function(t,n){var e={}.hasOwnProperty;t.exports=function(t,n){return e.call(t,n)}},function(t,n,e){var r=e(49),o=e(15);t.exports=function(t){return r(o(t))}},function(t,n,e){t.exports=!e(8)(function(){return 7!=Object.defineProperty({},"a",{get:function(){return 7}}).a})},function(t,n,e){var r=e(6),o=e(12);t.exports=e(4)?function(t,n,e){return r.f(t,n,o(1,e))}:function(t,n,e){return t[n]=e,t}},function(t,n,e){var r=e(10),o=e(30),i=e(24),u=Object.defineProperty;n.f=e(4)?Object.defineProperty:function(t,n,e){if(r(t),n=i(n,!0),r(e),o)try{return u(t,n,e)}catch(t){}if("get"in e||"set"in e)throw TypeError("Accessors not supported!");return"value"in e&&(t[n]=e.value),t}},function(t,n,e){var r=e(22)("wks"),o=e(13),i=e(1).Symbol,u="function"==typeof i,f=t.exports=function(t){return r[t]||(r[t]=u&&i[t]||(u?i:o)("Symbol."+t))};f.store=r},function(t,n){t.exports=function(t){try{return!!t()}catch(t){return!0}}},function(t,n,e){var r=e(35),o=e(16);t.exports=Object.keys||function(t){return r(t,o)}},function(t,n,e){var r=e(11);t.exports=function(t){if(!r(t))throw TypeError(t+" is not an object!");return t}},function(t,n){t.exports=function(t){return"object"==typeof t?null!==t:"function"==typeof t}},function(t,n){t.exports=function(t,n){return{enumerable:!(1&t),configurable:!(2&t),writable:!(4&t),value:n}}},function(t,n){var e=0,r=Math.random();t.exports=function(t){return"Symbol(".concat(void 0===t?"":t,")_",(++e+r).toString(36))}},function(t,n){var e=t.exports={version:"2.4.0"};"number"==typeof __e&&(__e=e)},function(t,n){t.exports=function(t){if(void 0==t)throw TypeError("Can't call method on  "+t);return t}},function(t,n){t.exports="constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf".split(",")},function(t,n){t.exports={}},function(t,n){t.exports=!0},function(t,n){n.f={}.propertyIsEnumerable},function(t,n,e){var r=e(6).f,o=e(2),i=e(7)("toStringTag");t.exports=function(t,n,e){t&&!o(t=e?t:t.prototype,i)&&r(t,i,{configurable:!0,value:n})}},function(t,n,e){var r=e(22)("keys"),o=e(13);t.exports=function(t){return r[t]||(r[t]=o(t))}},function(t,n,e){var r=e(1),o="__core-js_shared__",i=r[o]||(r[o]={});t.exports=function(t){return i[t]||(i[t]={})}},function(t,n){var e=Math.ceil,r=Math.floor;t.exports=function(t){return isNaN(t=+t)?0:(t>0?r:e)(t)}},function(t,n,e){var r=e(11);t.exports=function(t,n){if(!r(t))return t;var e,o;if(n&&"function"==typeof(e=t.toString)&&!r(o=e.call(t)))return o;if("function"==typeof(e=t.valueOf)&&!r(o=e.call(t)))return o;if(!n&&"function"==typeof(e=t.toString)&&!r(o=e.call(t)))return o;throw TypeError("Can't convert object to primitive value")}},function(t,n,e){var r=e(1),o=e(14),i=e(18),u=e(26),f=e(6).f;t.exports=function(t){var n=o.Symbol||(o.Symbol=i?{}:r.Symbol||{});"_"==t.charAt(0)||t in n||f(n,t,{value:u.f(t)})}},function(t,n,e){n.f=e(7)},function(t,n,e){var r=e(1),o=e(14),i=e(46),u=e(5),f="prototype",c=function(t,n,e){var a,s,l,p=t&c.F,d=t&c.G,v=t&c.S,y=t&c.P,h=t&c.B,b=t&c.W,x=d?o:o[n]||(o[n]={}),g=x[f],m=d?r:v?r[n]:(r[n]||{})[f];d&&(e=n);for(a in e)s=!p&&m&&void 0!==m[a],s&&a in x||(l=s?m[a]:e[a],x[a]=d&&"function"!=typeof m[a]?e[a]:h&&s?i(l,r):b&&m[a]==l?function(t){var n=function(n,e,r){if(this instanceof t){switch(arguments.length){case 0:return new t;case 1:return new t(n);case 2:return new t(n,e)}return new t(n,e,r)}return t.apply(this,arguments)};return n[f]=t[f],n}(l):y&&"function"==typeof l?i(Function.call,l):l,y&&((x.virtual||(x.virtual={}))[a]=l,t&c.R&&g&&!g[a]&&u(g,a,l)))};c.F=1,c.G=2,c.S=4,c.P=8,c.B=16,c.W=32,c.U=64,c.R=128,t.exports=c},function(t,n){var e={}.toString;t.exports=function(t){return e.call(t).slice(8,-1)}},function(t,n,e){var r=e(11),o=e(1).document,i=r(o)&&r(o.createElement);t.exports=function(t){return i?o.createElement(t):{}}},function(t,n,e){t.exports=!e(4)&&!e(8)(function(){return 7!=Object.defineProperty(e(29)("div"),"a",{get:function(){return 7}}).a})},function(t,n,e){"use strict";var r=e(18),o=e(27),i=e(36),u=e(5),f=e(2),c=e(17),a=e(51),s=e(20),l=e(58),p=e(7)("iterator"),d=!([].keys&&"next"in[].keys()),v="@@iterator",y="keys",h="values",b=function(){return this};t.exports=function(t,n,e,x,g,m,w){a(e,n,x);var O,S,_,j=function(t){if(!d&&t in A)return A[t];switch(t){case y:return function(){return new e(this,t)};case h:return function(){return new e(this,t)}}return function(){return new e(this,t)}},P=n+" Iterator",E=g==h,M=!1,A=t.prototype,T=A[p]||A[v]||g&&A[g],L=T||j(g),N=g?E?j("entries"):L:void 0,C="Array"==n?A.entries||T:T;if(C&&(_=l(C.call(new t)),_!==Object.prototype&&(s(_,P,!0),r||f(_,p)||u(_,p,b))),E&&T&&T.name!==h&&(M=!0,L=function(){return T.call(this)}),r&&!w||!d&&!M&&A[p]||u(A,p,L),c[n]=L,c[P]=b,g)if(O={values:E?L:j(h),keys:m?L:j(y),entries:N},w)for(S in O)S in A||i(A,S,O[S]);else o(o.P+o.F*(d||M),n,O);return O}},function(t,n,e){var r=e(10),o=e(55),i=e(16),u=e(21)("IE_PROTO"),f=function(){},c="prototype",a=function(){var t,n=e(29)("iframe"),r=i.length,o="<",u=">";for(n.style.display="none",e(48).appendChild(n),n.src="javascript:",t=n.contentWindow.document,t.open(),t.write(o+"script"+u+"document.F=Object"+o+"/script"+u),t.close(),a=t.F;r--;)delete a[c][i[r]];return a()};t.exports=Object.create||function(t,n){var e;return null!==t?(f[c]=r(t),e=new f,f[c]=null,e[u]=t):e=a(),void 0===n?e:o(e,n)}},function(t,n,e){var r=e(35),o=e(16).concat("length","prototype");n.f=Object.getOwnPropertyNames||function(t){return r(t,o)}},function(t,n){n.f=Object.getOwnPropertySymbols},function(t,n,e){var r=e(2),o=e(3),i=e(45)(!1),u=e(21)("IE_PROTO");t.exports=function(t,n){var e,f=o(t),c=0,a=[];for(e in f)e!=u&&r(f,e)&&a.push(e);for(;n.length>c;)r(f,e=n[c++])&&(~i(a,e)||a.push(e));return a}},function(t,n,e){t.exports=e(5)},function(t,n,e){var r=e(15);t.exports=function(t){return Object(r(t))}},function(t,n,e){t.exports={default:e(41),__esModule:!0}},function(t,n,e){t.exports={default:e(42),__esModule:!0}},function(t,n,e){"use strict";function r(t){return t&&t.__esModule?t:{default:t}}n.__esModule=!0;var o=e(39),i=r(o),u=e(38),f=r(u),c="function"==typeof f.default&&"symbol"==typeof i.default?function(t){return typeof t}:function(t){return t&&"function"==typeof f.default&&t.constructor===f.default&&t!==f.default.prototype?"symbol":typeof t};n.default="function"==typeof f.default&&"symbol"===c(i.default)?function(t){return"undefined"==typeof t?"undefined":c(t)}:function(t){return t&&"function"==typeof f.default&&t.constructor===f.default&&t!==f.default.prototype?"symbol":"undefined"==typeof t?"undefined":c(t)}},function(t,n,e){e(65),e(63),e(66),e(67),t.exports=e(14).Symbol},function(t,n,e){e(64),e(68),t.exports=e(26).f("iterator")},function(t,n){t.exports=function(t){if("function"!=typeof t)throw TypeError(t+" is not a function!");return t}},function(t,n){t.exports=function(){}},function(t,n,e){var r=e(3),o=e(61),i=e(60);t.exports=function(t){return function(n,e,u){var f,c=r(n),a=o(c.length),s=i(u,a);if(t&&e!=e){for(;a>s;)if(f=c[s++],f!=f)return!0}else for(;a>s;s++)if((t||s in c)&&c[s]===e)return t||s||0;return!t&&-1}}},function(t,n,e){var r=e(43);t.exports=function(t,n,e){if(r(t),void 0===n)return t;switch(e){case 1:return function(e){return t.call(n,e)};case 2:return function(e,r){return t.call(n,e,r)};case 3:return function(e,r,o){return t.call(n,e,r,o)}}return function(){return t.apply(n,arguments)}}},function(t,n,e){var r=e(9),o=e(34),i=e(19);t.exports=function(t){var n=r(t),e=o.f;if(e)for(var u,f=e(t),c=i.f,a=0;f.length>a;)c.call(t,u=f[a++])&&n.push(u);return n}},function(t,n,e){t.exports=e(1).document&&document.documentElement},function(t,n,e){var r=e(28);t.exports=Object("z").propertyIsEnumerable(0)?Object:function(t){return"String"==r(t)?t.split(""):Object(t)}},function(t,n,e){var r=e(28);t.exports=Array.isArray||function(t){return"Array"==r(t)}},function(t,n,e){"use strict";var r=e(32),o=e(12),i=e(20),u={};e(5)(u,e(7)("iterator"),function(){return this}),t.exports=function(t,n,e){t.prototype=r(u,{next:o(1,e)}),i(t,n+" Iterator")}},function(t,n){t.exports=function(t,n){return{value:n,done:!!t}}},function(t,n,e){var r=e(9),o=e(3);t.exports=function(t,n){for(var e,i=o(t),u=r(i),f=u.length,c=0;f>c;)if(i[e=u[c++]]===n)return e}},function(t,n,e){var r=e(13)("meta"),o=e(11),i=e(2),u=e(6).f,f=0,c=Object.isExtensible||function(){return!0},a=!e(8)(function(){return c(Object.preventExtensions({}))}),s=function(t){u(t,r,{value:{i:"O"+ ++f,w:{}}})},l=function(t,n){if(!o(t))return"symbol"==typeof t?t:("string"==typeof t?"S":"P")+t;if(!i(t,r)){if(!c(t))return"F";if(!n)return"E";s(t)}return t[r].i},p=function(t,n){if(!i(t,r)){if(!c(t))return!0;if(!n)return!1;s(t)}return t[r].w},d=function(t){return a&&v.NEED&&c(t)&&!i(t,r)&&s(t),t},v=t.exports={KEY:r,NEED:!1,fastKey:l,getWeak:p,onFreeze:d}},function(t,n,e){var r=e(6),o=e(10),i=e(9);t.exports=e(4)?Object.defineProperties:function(t,n){o(t);for(var e,u=i(n),f=u.length,c=0;f>c;)r.f(t,e=u[c++],n[e]);return t}},function(t,n,e){var r=e(19),o=e(12),i=e(3),u=e(24),f=e(2),c=e(30),a=Object.getOwnPropertyDescriptor;n.f=e(4)?a:function(t,n){if(t=i(t),n=u(n,!0),c)try{return a(t,n)}catch(t){}if(f(t,n))return o(!r.f.call(t,n),t[n])}},function(t,n,e){var r=e(3),o=e(33).f,i={}.toString,u="object"==typeof window&&window&&Object.getOwnPropertyNames?Object.getOwnPropertyNames(window):[],f=function(t){try{return o(t)}catch(t){return u.slice()}};t.exports.f=function(t){return u&&"[object Window]"==i.call(t)?f(t):o(r(t))}},function(t,n,e){var r=e(2),o=e(37),i=e(21)("IE_PROTO"),u=Object.prototype;t.exports=Object.getPrototypeOf||function(t){return t=o(t),r(t,i)?t[i]:"function"==typeof t.constructor&&t instanceof t.constructor?t.constructor.prototype:t instanceof Object?u:null}},function(t,n,e){var r=e(23),o=e(15);t.exports=function(t){return function(n,e){var i,u,f=String(o(n)),c=r(e),a=f.length;return c<0||c>=a?t?"":void 0:(i=f.charCodeAt(c),i<55296||i>56319||c+1===a||(u=f.charCodeAt(c+1))<56320||u>57343?t?f.charAt(c):i:t?f.slice(c,c+2):(i-55296<<10)+(u-56320)+65536)}}},function(t,n,e){var r=e(23),o=Math.max,i=Math.min;t.exports=function(t,n){return t=r(t),t<0?o(t+n,0):i(t,n)}},function(t,n,e){var r=e(23),o=Math.min;t.exports=function(t){return t>0?o(r(t),9007199254740991):0}},function(t,n,e){"use strict";var r=e(44),o=e(52),i=e(17),u=e(3);t.exports=e(31)(Array,"Array",function(t,n){this._t=u(t),this._i=0,this._k=n},function(){var t=this._t,n=this._k,e=this._i++;return!t||e>=t.length?(this._t=void 0,o(1)):"keys"==n?o(0,e):"values"==n?o(0,t[e]):o(0,[e,t[e]])},"values"),i.Arguments=i.Array,r("keys"),r("values"),r("entries")},function(t,n){},function(t,n,e){"use strict";var r=e(59)(!0);e(31)(String,"String",function(t){this._t=String(t),this._i=0},function(){var t,n=this._t,e=this._i;return e>=n.length?{value:void 0,done:!0}:(t=r(n,e),this._i+=t.length,{value:t,done:!1})})},function(t,n,e){"use strict";var r=e(1),o=e(2),i=e(4),u=e(27),f=e(36),c=e(54).KEY,a=e(8),s=e(22),l=e(20),p=e(13),d=e(7),v=e(26),y=e(25),h=e(53),b=e(47),x=e(50),g=e(10),m=e(3),w=e(24),O=e(12),S=e(32),_=e(57),j=e(56),P=e(6),E=e(9),M=j.f,A=P.f,T=_.f,L=r.Symbol,N=r.JSON,C=N&&N.stringify,k="prototype",F=d("_hidden"),q=d("toPrimitive"),I={}.propertyIsEnumerable,B=s("symbol-registry"),D=s("symbols"),W=s("op-symbols"),H=Object[k],K="function"==typeof L,R=r.QObject,J=!R||!R[k]||!R[k].findChild,U=i&&a(function(){return 7!=S(A({},"a",{get:function(){return A(this,"a",{value:7}).a}})).a})?function(t,n,e){var r=M(H,n);r&&delete H[n],A(t,n,e),r&&t!==H&&A(H,n,r)}:A,G=function(t){var n=D[t]=S(L[k]);return n._k=t,n},$=K&&"symbol"==typeof L.iterator?function(t){return"symbol"==typeof t}:function(t){return t instanceof L},z=function(t,n,e){return t===H&&z(W,n,e),g(t),n=w(n,!0),g(e),o(D,n)?(e.enumerable?(o(t,F)&&t[F][n]&&(t[F][n]=!1),e=S(e,{enumerable:O(0,!1)})):(o(t,F)||A(t,F,O(1,{})),t[F][n]=!0),U(t,n,e)):A(t,n,e)},Y=function(t,n){g(t);for(var e,r=b(n=m(n)),o=0,i=r.length;i>o;)z(t,e=r[o++],n[e]);return t},Q=function(t,n){return void 0===n?S(t):Y(S(t),n)},X=function(t){var n=I.call(this,t=w(t,!0));return!(this===H&&o(D,t)&&!o(W,t))&&(!(n||!o(this,t)||!o(D,t)||o(this,F)&&this[F][t])||n)},V=function(t,n){if(t=m(t),n=w(n,!0),t!==H||!o(D,n)||o(W,n)){var e=M(t,n);return!e||!o(D,n)||o(t,F)&&t[F][n]||(e.enumerable=!0),e}},Z=function(t){for(var n,e=T(m(t)),r=[],i=0;e.length>i;)o(D,n=e[i++])||n==F||n==c||r.push(n);return r},tt=function(t){for(var n,e=t===H,r=T(e?W:m(t)),i=[],u=0;r.length>u;)!o(D,n=r[u++])||e&&!o(H,n)||i.push(D[n]);return i};K||(L=function(){if(this instanceof L)throw TypeError("Symbol is not a constructor!");var t=p(arguments.length>0?arguments[0]:void 0),n=function(e){this===H&&n.call(W,e),o(this,F)&&o(this[F],t)&&(this[F][t]=!1),U(this,t,O(1,e))};return i&&J&&U(H,t,{configurable:!0,set:n}),G(t)},f(L[k],"toString",function(){return this._k}),j.f=V,P.f=z,e(33).f=_.f=Z,e(19).f=X,e(34).f=tt,i&&!e(18)&&f(H,"propertyIsEnumerable",X,!0),v.f=function(t){return G(d(t))}),u(u.G+u.W+u.F*!K,{Symbol:L});for(var nt="hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables".split(","),et=0;nt.length>et;)d(nt[et++]);for(var nt=E(d.store),et=0;nt.length>et;)y(nt[et++]);u(u.S+u.F*!K,"Symbol",{for:function(t){return o(B,t+="")?B[t]:B[t]=L(t)},keyFor:function(t){if($(t))return h(B,t);throw TypeError(t+" is not a symbol!")},useSetter:function(){J=!0},useSimple:function(){J=!1}}),u(u.S+u.F*!K,"Object",{create:Q,defineProperty:z,defineProperties:Y,getOwnPropertyDescriptor:V,getOwnPropertyNames:Z,getOwnPropertySymbols:tt}),N&&u(u.S+u.F*(!K||a(function(){var t=L();return"[null]"!=C([t])||"{}"!=C({a:t})||"{}"!=C(Object(t))})),"JSON",{stringify:function(t){if(void 0!==t&&!$(t)){for(var n,e,r=[t],o=1;arguments.length>o;)r.push(arguments[o++]);return n=r[1],"function"==typeof n&&(e=n),!e&&x(n)||(n=function(t,n){if(e&&(n=e.call(this,t,n)),!$(n))return n}),r[1]=n,C.apply(N,r)}}}),L[k][q]||e(5)(L[k],q,L[k].valueOf),l(L,"Symbol"),l(Math,"Math",!0),l(r.JSON,"JSON",!0)},function(t,n,e){e(25)("asyncIterator")},function(t,n,e){e(25)("observable")},function(t,n,e){e(62);for(var r=e(1),o=e(5),i=e(17),u=e(7)("toStringTag"),f=["NodeList","DOMTokenList","MediaList","StyleSheetList","CSSRuleList"],c=0;c<5;c++){var a=f[c],s=r[a],l=s&&s.prototype;l&&!l[u]&&o(l,u,a),i[a]=i.Array}},function(t,n){"use strict";var e={versions:function(){var t=window.navigator.userAgent;return{trident:t.indexOf("Trident")>-1,presto:t.indexOf("Presto")>-1,webKit:t.indexOf("AppleWebKit")>-1,gecko:t.indexOf("Gecko")>-1&&t.indexOf("KHTML")==-1,mobile:!!t.match(/AppleWebKit.*Mobile.*/),ios:!!t.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),android:t.indexOf("Android")>-1||t.indexOf("Linux")>-1,iPhone:t.indexOf("iPhone")>-1||t.indexOf("Mac")>-1,iPad:t.indexOf("iPad")>-1,webApp:t.indexOf("Safari")==-1,weixin:t.indexOf("MicroMessenger")==-1}}()};t.exports=e},function(t,n,e){"use strict";function r(t){return t&&t.__esModule?t:{default:t}}var o=e(40),i=r(o),u=function(){function t(t,n,e){return n||e?String.fromCharCode(n||e):o[t]||t}function n(t){return l[t]}var e=/&quot;|&lt;|&gt;|&amp;|&nbsp;|&apos;|&#(\d+);|&#(\d+)/g,r=/['<> "&]/g,o={"&quot;":'"',"&lt;":"<","&gt;":">","&amp;":"&","&nbsp;":" "},f=/\u00a0/g,c=/<br\s*\/?>/gi,a=/\r?\n/g,s=/\s/g,l={};for(var p in o)l[o[p]]=p;return o["&apos;"]="'",l["'"]="&#39;",{encode:function(t){return t?(""+t).replace(r,n).replace(a,"<br/>").replace(s,"&nbsp;"):""},decode:function(n){return n?(""+n).replace(c,"\n").replace(e,t).replace(f," "):""},encodeBase16:function(t){if(!t)return t;t+="";for(var n=[],e=0,r=t.length;r>e;e++)n.push(t.charCodeAt(e).toString(16).toUpperCase());return n.join("")},encodeBase16forJSON:function(t){if(!t)return t;t=t.replace(/[\u4E00-\u9FBF]/gi,function(t){return escape(t).replace("%u","\\u")});for(var n=[],e=0,r=t.length;r>e;e++)n.push(t.charCodeAt(e).toString(16).toUpperCase());return n.join("")},decodeBase16:function(t){if(!t)return t;t+="";for(var n=[],e=0,r=t.length;r>e;e+=2)n.push(String.fromCharCode("0x"+t.slice(e,e+2)));return n.join("")},encodeObject:function(t){if(t instanceof Array)for(var n=0,e=t.length;e>n;n++)t[n]=u.encodeObject(t[n]);else if("object"==("undefined"==typeof t?"undefined":(0,i.default)(t)))for(var r in t)t[r]=u.encodeObject(t[r]);else if("string"==typeof t)return u.encode(t);return t},loadScript:function(t){var n=document.createElement("script");document.getElementsByTagName("body")[0].appendChild(n),n.setAttribute("src",t)},addLoadEvent:function(t){var n=window.onload;"function"!=typeof window.onload?window.onload=t:window.onload=function(){n(),t()}}}}();t.exports=u},function(t,n){function e(t,n){t.classList?t.classList.add(n):t.className+=" "+n}t.exports=e},function(t,n){function e(t,n){if(t.classList)t.classList.remove(n);else{var e=new RegExp("(^|\\b)"+n.split(" ").join("|")+"(\\b|$)","gi");t.className=t.className.replace(e," ")}}t.exports=e},,,function(t,n){"use strict";function e(){var t=document.querySelector("#page-nav");if(t&&!document.querySelector("#page-nav .extend.prev")&&(t.innerHTML='<a class="extend prev disabled" rel="prev">&laquo; Prev</a>'+t.innerHTML),t&&!document.querySelector("#page-nav .extend.next")&&(t.innerHTML=t.innerHTML+'<a class="extend next disabled" rel="next">Next &raquo;</a>'),yiliaConfig&&yiliaConfig.open_in_new){var n=document.querySelectorAll(".article-entry a:not(.article-more-a)");n.forEach(function(t){var n=t.setAttribute("target");n&&""!==n||t.setAttribute("target","_blank")})}var e=document.querySelector("#js-aboutme");e&&0!==e.length&&(e.innerHTML=e.innerText)}t.exports={init:e}},,,,,,,,,function(t,n){function e(t,n){if("string"==typeof n)return t.insertAdjacentHTML("afterend",n);var e=t.nextSibling;return e?t.parentNode.insertBefore(n,e):t.parentNode.appendChild(n)}t.exports=e}])</script><script src="/./main.05aabf.js"></script><script>!function(){var e=function(e){var t=document.createElement("script");document.getElementsByTagName("body")[0].appendChild(t),t.setAttribute("src",e)};e("/slider.885efe.js")}()</script>
+
+
+    
+<div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
+  <div class="tools-nav header-menu">
+    
+    
+      
+      
+      
+    
+      
+      
+      
+    
+      
+      
+      
+    
+    
+
+    <ul style="width: 70%">
+    
+    
+      
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'innerArchive')"><a href="javascript:void(0)" q-class="active:innerArchive">所有文章</a></li>
+      
+        
+      
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'friends')"><a href="javascript:void(0)" q-class="active:friends">友链</a></li>
+      
+        
+      
+      <li style="width: 33.333333333333336%" q-on="click: openSlider(e, 'aboutme')"><a href="javascript:void(0)" q-class="active:aboutme">关于我</a></li>
+      
+        
+    </ul>
+  </div>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all" q-show="innerArchive">
+        <div class="search-wrap">
+          <input class="search-ipt" q-model="search" type="text" placeholder="find something…">
+          <i class="icon-search icon" q-show="search|isEmptyStr"></i>
+          <i class="icon-close icon" q-show="search|isNotEmptyStr" q-on="click:clearChose(e)"></i>
+        </div>
+        <div class="widget tagcloud search-tag">
+          <p class="search-tag-wording">tag:</p>
+          <label class="search-switch">
+            <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
+          </label>
+          <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">知识点</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">源码解析</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">翻译</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">知识总结</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">读后感</a>
+              </li>
+            
+            <div class="clearfix"></div>
+          </ul>
+        </div>
+        <ul class="search-ul">
+          <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
+            缺失模块。<br/>1、在博客根目录（注意不是yilia根目录）执行以下命令：<br/> npm i hexo-generator-json-content --save<br/><br/>
+            2、在根目录_config.yml里添加配置：
+<pre style="font-size: 12px;" q-show="jsonFail">
+  jsonContent:
+    meta: false
+    pages: false
+    posts:
+      title: true
+      date: true
+      path: true
+      text: true
+      raw: false
+      content: false
+      slug: false
+      updated: false
+      comments: false
+      link: false
+      permalink: false
+      excerpt: false
+      categories: false
+      tags: true
+</pre>
+          </p>
+          <li class="search-li" q-repeat="items" q-show="isShow">
+            <a q-attr="href:path|urlformat" class="search-title"><i class="icon-quo-left icon"></i><span q-text="title"></span></a>
+            <p class="search-time">
+              <i class="icon-calendar icon"></i>
+              <span q-text="date|dateformat"></span>
+            </p>
+            <p class="search-tag">
+              <i class="icon-price-tags icon"></i>
+              <span q-repeat="tags" q-on="click:choseTag(e, name)" q-text="name|tagformat"></span>
+            </p>
+          </li>
+        </ul>
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-friends" q-show="friends">
+  		
+        <ul class="search-ul">
+          
+            <li class="search-li">
+              <a href="https://www.boxueio.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>Boxue</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://www.vii-lin.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>vii-lin</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://onevcat.com/#blog" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>onevcat</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://blog.devtang.com" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>唐巧</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://blog.ibireme.com" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>ibireme</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://liuyanwei.jumppo.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>刘彦玮</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://stormzhang.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>stormzhang</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="http://litten.me" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>litten</a>
+            </li>
+          
+        </ul>
+  		
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-me" q-show="aboutme">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Liberalism，&lt;br&gt;90后北方汉子&lt;br&gt;&lt;br&gt;虽然一直自称自由主义，&lt;br/&gt;可一直过着不太自由的生活&lt;br/&gt;&lt;br/&gt;人已奔三，焦虑渐重&lt;br&gt;</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>

@@ -6,17 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2016 | Liberalism</title>
+  <title>iOS知识点小集 | Liberalism</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="码农。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Liberalism">
-<meta property="og:url" content="http://yoursite.com/archives/2016/index.html">
+  <meta name="description" content="在初始化项目时，LaunchScreen &amp;gt; LaunchImage的优先级  123456789   如果是通过LaunchImage设置启动界面,那么屏幕的可视范围由图片决定   注意:如果使用LaunchImage,必须让你的美工提供各种尺寸的启动图片      LaunchScreen:Xcode6开始才有   LaunchScreen好处:1.自动识别当前真机或者模拟器的尺寸 2">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS知识点小集">
+<meta property="og:url" content="http://yoursite.com/2017/05/17/iOS知识点小集/index.html">
 <meta property="og:site_name" content="Liberalism">
-<meta property="og:description" content="码农。">
+<meta property="og:description" content="在初始化项目时，LaunchScreen &amp;gt; LaunchImage的优先级  123456789   如果是通过LaunchImage设置启动界面,那么屏幕的可视范围由图片决定   注意:如果使用LaunchImage,必须让你的美工提供各种尺寸的启动图片      LaunchScreen:Xcode6开始才有   LaunchScreen好处:1.自动识别当前真机或者模拟器的尺寸 2">
+<meta property="og:updated_time" content="2017-05-17T05:48:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Liberalism">
-<meta name="twitter:description" content="码农。">
+<meta name="twitter:title" content="iOS知识点小集">
+<meta name="twitter:description" content="在初始化项目时，LaunchScreen &amp;gt; LaunchImage的优先级  123456789   如果是通过LaunchImage设置启动界面,那么屏幕的可视范围由图片决定   注意:如果使用LaunchImage,必须让你的美工提供各种尺寸的启动图片      LaunchScreen:Xcode6开始才有   LaunchScreen好处:1.自动识别当前真机或者模拟器的尺寸 2">
   
     <link rel="alternative" href="/atom.xml" title="Liberalism" type="application/atom+xml">
   
@@ -168,60 +170,161 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-iOS知识点小集" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/05/03/Healthkit睡眠分析/" class="archive-article-date">
-  	<time datetime="2016-05-03T06:55:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-05-03</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/03/Healthkit睡眠分析/">Healthkit睡眠分析</a>
+    <h1 class="article-title" itemprop="name">
+      iOS知识点小集
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">翻译</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        <a href="/2017/05/17/iOS知识点小集/" class="archive-article-date">
+  	<time datetime="2017-05-17T05:45:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li><p>在初始化项目时，<code>LaunchScreen</code> &gt; <code>LaunchImage</code>的优先级</p>
+ <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">   如果是通过LaunchImage设置启动界面,那么屏幕的可视范围由图片决定</div><div class="line">   注意:如果使用LaunchImage,必须让你的美工提供各种尺寸的启动图片</div><div class="line">   </div><div class="line">   LaunchScreen:Xcode6开始才有</div><div class="line">   LaunchScreen好处:<span class="number">1.</span>自动识别当前真机或者模拟器的尺寸 <span class="number">2.</span>只要让美工提供一个可拉伸图片</div><div class="line">   <span class="number">3.</span>展示更多东西</div><div class="line"></div><div class="line">   LaunchScreen底层实现:把LaunchScreen截屏,生成一张图片.作为启动界面</div><div class="line">*/</div></pre></td></tr></table></figure>
+</li>
+</ol>
 
-          
+      
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://7xvffo.com1.z0.glb.clouddn.com/Alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://7xvffo.com1.z0.glb.clouddn.com/WeChat.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/05/17/iOS知识点小集/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/05/16/SDWebImage源码解析/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          SDWebImage源码解析
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/05/18/Block详解/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Block详解</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+    <div class="duoshuo"></div>
   
 
-    
+
 
 
           </div>
@@ -244,8 +347,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

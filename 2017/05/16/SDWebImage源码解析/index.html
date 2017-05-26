@@ -6,17 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2016 | Liberalism</title>
+  <title>SDWebImage源码解析 | Liberalism</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="码农。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Liberalism">
-<meta property="og:url" content="http://yoursite.com/archives/2016/index.html">
+  <meta name="description" content="SDWebImage是我们经常使用的一个异步图片加载库，大大提高了我们的开发效率。它支持从网络中下载且缓存图片，并设置图片到对应的UIImageView控件或者UIButton控件上。">
+<meta name="keywords" content="源码解析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SDWebImage源码解析">
+<meta property="og:url" content="http://yoursite.com/2017/05/16/SDWebImage源码解析/index.html">
 <meta property="og:site_name" content="Liberalism">
-<meta property="og:description" content="码农。">
+<meta property="og:description" content="SDWebImage是我们经常使用的一个异步图片加载库，大大提高了我们的开发效率。它支持从网络中下载且缓存图片，并设置图片到对应的UIImageView控件或者UIButton控件上。">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/header/image/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-SDWebImage.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/image/jpg/SDWebImage%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B.png?watermark/2/text/QExpYmVyYWxpc20=/font/5a6L5L2T/fontsize/800/fill/IzhBMTgxOA==/dissolve/100/gravity/SouthEast/dx/10/dy/10">
+<meta property="og:updated_time" content="2017-05-16T06:31:06.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Liberalism">
-<meta name="twitter:description" content="码农。">
+<meta name="twitter:title" content="SDWebImage源码解析">
+<meta name="twitter:description" content="SDWebImage是我们经常使用的一个异步图片加载库，大大提高了我们的开发效率。它支持从网络中下载且缓存图片，并设置图片到对应的UIImageView控件或者UIButton控件上。">
+<meta name="twitter:image" content="http://okhqmtd8q.bkt.clouddn.com/header/image/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-SDWebImage.png">
   
     <link rel="alternative" href="/atom.xml" title="Liberalism" type="application/atom+xml">
   
@@ -168,60 +173,196 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-SDWebImage源码解析" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/05/03/Healthkit睡眠分析/" class="archive-article-date">
-  	<time datetime="2016-05-03T06:55:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-05-03</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/03/Healthkit睡眠分析/">Healthkit睡眠分析</a>
+    <h1 class="article-title" itemprop="name">
+      SDWebImage源码解析
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/05/16/SDWebImage源码解析/" class="archive-article-date">
+  	<time datetime="2017-05-16T05:59:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://okhqmtd8q.bkt.clouddn.com/header/image/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-SDWebImage.png" alt=""></p>
+<blockquote>
+<p><a href="https://github.com/rs/SDWebImage" target="_blank" rel="external">SDWebImage</a>是我们经常使用的一个异步图片加载库，大大提高了我们的开发效率。它支持从网络中下载且缓存图片，并设置图片到对应的UIImageView控件或者UIButton控件上。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="SDWebImage-概论"><a href="#SDWebImage-概论" class="headerlink" title="SDWebImage 概论"></a>SDWebImage 概论</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">1.提供了一个UIImageView的category用来加载网络图片并且对网络图片的缓存进行管理</div><div class="line">2.采用异步方式来下载网络图片</div><div class="line">3.采用异步方式，使用memory＋disk来缓存网络图片，自动管理缓存。</div><div class="line">4.支持GIF动画,支持JEPG,JPG格式。</div><div class="line">5.支持WebP格式</div><div class="line">6.同一个URL的网络图片不会被重复下载</div><div class="line">7.失效的URL不会被无限重试</div><div class="line">8.耗时操作都在子线程，确保不会阻塞主线程</div><div class="line">9.使用GCD和ARC</div><div class="line">10.支持Arm64</div></pre></td></tr></table></figure>
+<p>##SDWebImage知识点的梳理</p>
+<ol>
+<li><p>正常程序退出后，会在几秒内停止工作,要想申请更长的时间，需要用到<code>beginBackgroundTaskWithExpirationHandler</code></p>
+</li>
+<li><p><code>endBackgroundTask</code>一定要成对出现</p>
+</li>
+<li><p>使用<code>NSdirectoryEnumerator</code>遍历所有的缓存文件不会有性能耗时的问题,检查某个文件是否存在或者检查是否为文件夹都会检查文件的inode 数据,而这个inode中包括file的各种attribute.</p>
+</li>
+<li><p>使用NSCache作为内存储存比NSDictionary的好处是:当系统资源要耗尽的时候可以自动的删减,NSCache不会自动的拷贝键,并且是线程安全的,比NSDictionary线程安全.</p>
+</li>
+<li><p>线程中<code>urlCallbacks</code>的增加,改动都是使用所有增改回调集合<code>URLCallbacks</code>的操作使用<code>dispatch_barrier_sync</code>放入队列<code>barrierQueue</code>中，而查询<code>URLCallbakcs</code>的操作只需使用<code>dispatch_sync</code>放入队列<code>barrierQueue</code>中。</p>
+</li>
+</ol>
+<p>要先说一些系统中锁的问题:</p>
+<p>同步锁<code>@synchronized(self)</code>在<code>self</code>上加一个同步锁,频繁滥用的话会导致程序会等待另外一段与此代码无关的执行完毕之后才能执行,会耗时.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[_lock lock];</div><div class="line">//</div><div class="line">[_lock unlock];</div></pre></td></tr></table></figure>
+<p>这样遇到死锁也会很麻烦,并且效率也不高.<br>一般情况下想要为代码加锁,最好使用CGD.将所有的操作放到串行队列中执行.而对于并行队列的话就需要,读取的话可以并发进行,并没有任何改动,而增加或者修改数据的话必须保证此时不能进行读取数据,那么可以使用<code>栅栏(barrier)</code>来设置.<strong>在队列中栅栏块必须单独执行,不能与其他一起执行.这对于并发队列来说,如果并发队列发下下面要处理的是栅栏块,那么会一直等前面所有的并发块执行完毕后才执行这个栅栏,而等栅栏执行完毕后才执行其后的并发任务</strong>.所以增加和修改使用栅栏可以保证线程安全.</p>
+<p>5.图片的解码.当你用 <code>UIImage</code> 或 <code>CGImageSource</code> 的那几个方法创建图片时，图片数据并不会立刻解码。图片设置到 <code>UIImageView</code> 或者 <code>CALayer.contents</code> 中去，并且 <code>CALayer</code> 被提交到 <code>GPU</code> 前，<code>CGImage</code> 中的数据才会得到解码。这一步是发生在主线程的，并且不可避免。如果想要绕开这个机制，常见的做法是在后台线程先把图片绘制到 <code>CGBitmapContext</code> 中，然后从 <code>Bitmap</code> 直接创建图片。目前常见的网络图片库都自带这个功能。<code>SDWebImage</code>就是在后台生成这种位图.</p>
+<h2 id="SDWebImageManager结构"><a href="#SDWebImageManager结构" class="headerlink" title="SDWebImageManager结构"></a>SDWebImageManager结构</h2><p>关于结构，我们可以用一张流程图说明<br><img src="http://okhqmtd8q.bkt.clouddn.com/image/jpg/SDWebImage%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B.png?watermark/2/text/QExpYmVyYWxpc20=/font/5a6L5L2T/fontsize/800/fill/IzhBMTgxOA==/dissolve/100/gravity/SouthEast/dx/10/dy/10" alt=""></p>
+<h4 id="SDWebImageDownloaderOptions"><a href="#SDWebImageDownloaderOptions" class="headerlink" title="SDWebImageDownloaderOptions"></a>SDWebImageDownloaderOptions</h4><p><code>SDWebImageDownloaderOptions</code>是图片下载选项</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="built_in">NS_OPTIONS</span>(<span class="built_in">NSUInteger</span>, SDWebImageDownloaderOptions) &#123;</div><div class="line"></div><div class="line">    SDWebImageDownloaderLowPriority = <span class="number">1</span> &lt;&lt; <span class="number">0</span>,  <span class="comment">//低优先级</span></div><div class="line">    </div><div class="line">    SDWebImageDownloaderProgressiveDownload = <span class="number">1</span> &lt;&lt; <span class="number">1</span>,  <span class="comment">//渐进式下载</span></div><div class="line"></div><div class="line">    SDWebImageDownloaderUseNSURLCache = <span class="number">1</span> &lt;&lt; <span class="number">2</span>,  <span class="comment">//使用 NSURLCache 和默认缓存策略</span></div><div class="line">    </div><div class="line">    <span class="comment">/*</span></div><div class="line">     * 如果图像是从 NSURLCache 读取的，则调用 completion block 时，image/imageData 传入 nil</div><div class="line">     * (此标记要和 `SDWebImageDownloaderUseNSURLCache` 组合使用)</div><div class="line">     */</div><div class="line">    SDWebImageDownloaderIgnoreCachedResponse = <span class="number">1</span> &lt;&lt; <span class="number">3</span>,</div><div class="line"></div><div class="line">    SDWebImageDownloaderContinueInBackground = <span class="number">1</span> &lt;&lt; <span class="number">4</span>,  <span class="comment">//当 App 进入后台后仍然会继续下载图像</span></div><div class="line"></div><div class="line">    SDWebImageDownloaderHandleCookies = <span class="number">1</span> &lt;&lt; <span class="number">5</span>, <span class="comment">//处理保存在 NSHTTPCookieStore 中的 cookies</span></div><div class="line"></div><div class="line">    SDWebImageDownloaderAllowInvalidSSLCertificates = <span class="number">1</span> &lt;&lt; <span class="number">6</span>,  <span class="comment">//允许不信任的 SSL 证书</span></div><div class="line"></div><div class="line">    SDWebImageDownloaderHighPriority = <span class="number">1</span> &lt;&lt; <span class="number">7</span>, <span class="comment">//将图像放入高优先级队列</span></div><div class="line">    </div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h4 id="SDWebImageDownloaderExecutionOrder"><a href="#SDWebImageDownloaderExecutionOrder" class="headerlink" title="SDWebImageDownloaderExecutionOrder"></a>SDWebImageDownloaderExecutionOrder</h4><p><code>SDWebImageDownloaderExecutionOrder</code>是图片下载操作的执行方式</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="built_in">NS_ENUM</span>(<span class="built_in">NSInteger</span>, SDWebImageDownloaderExecutionOrder) &#123;</div><div class="line">     </div><div class="line">    SDWebImageDownloaderFIFOExecutionOrder,  <span class="comment">//默认值，按照队列的先进先出方式执行</span></div><div class="line"></div><div class="line">    SDWebImageDownloaderLIFOExecutionOrder  <span class="comment">//按照堆栈的后进先出方式执行</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://7xvffo.com1.z0.glb.clouddn.com/Alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://7xvffo.com1.z0.glb.clouddn.com/WeChat.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">翻译</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">源码解析</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/05/16/SDWebImage源码解析/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/05/12/iOS知识总结-多线程/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          iOS知识总结-多线程
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/05/17/iOS知识点小集/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">iOS知识点小集</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+    <div class="duoshuo"></div>
   
 
-    
+
 
 
           </div>
@@ -244,8 +385,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

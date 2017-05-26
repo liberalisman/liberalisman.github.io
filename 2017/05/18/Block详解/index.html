@@ -6,17 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2016 | Liberalism</title>
+  <title>Block详解 | Liberalism</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="码农。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Liberalism">
-<meta property="og:url" content="http://yoursite.com/archives/2016/index.html">
+  <meta name="description" content="此文主要是为了收藏自己没事儿读，非原创，加入部分自己的理解和整理。原文作者及出处 http://www.jianshu.com/p/6b59ca5ad2d0 ，在此感谢。  block是2010年WWDC苹果为 Objective－C 提供的一个新特性，它为我们开发提供了便利，比如GCD就大量使用了block，用来往执行队列中添加任务。其实它就是一个闭包，一个引用自动变量的函数，更通俗的说，blo">
+<meta name="keywords" content="知识点">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Block详解">
+<meta property="og:url" content="http://yoursite.com/2017/05/18/Block详解/index.html">
 <meta property="og:site_name" content="Liberalism">
-<meta property="og:description" content="码农。">
+<meta property="og:description" content="此文主要是为了收藏自己没事儿读，非原创，加入部分自己的理解和整理。原文作者及出处 http://www.jianshu.com/p/6b59ca5ad2d0 ，在此感谢。  block是2010年WWDC苹果为 Objective－C 提供的一个新特性，它为我们开发提供了便利，比如GCD就大量使用了block，用来往执行队列中添加任务。其实它就是一个闭包，一个引用自动变量的函数，更通俗的说，blo">
+<meta property="og:updated_time" content="2017-05-19T08:13:08.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Liberalism">
-<meta name="twitter:description" content="码农。">
+<meta name="twitter:title" content="Block详解">
+<meta name="twitter:description" content="此文主要是为了收藏自己没事儿读，非原创，加入部分自己的理解和整理。原文作者及出处 http://www.jianshu.com/p/6b59ca5ad2d0 ，在此感谢。  block是2010年WWDC苹果为 Objective－C 提供的一个新特性，它为我们开发提供了便利，比如GCD就大量使用了block，用来往执行队列中添加任务。其实它就是一个闭包，一个引用自动变量的函数，更通俗的说，blo">
   
     <link rel="alternative" href="/atom.xml" title="Liberalism" type="application/atom+xml">
   
@@ -168,60 +170,183 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Block详解" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/05/03/Healthkit睡眠分析/" class="archive-article-date">
-  	<time datetime="2016-05-03T06:55:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-05-03</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/03/Healthkit睡眠分析/">Healthkit睡眠分析</a>
+    <h1 class="article-title" itemprop="name">
+      Block详解
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/05/18/Block详解/" class="archive-article-date">
+  	<time datetime="2017-05-18T11:34:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>此文主要是为了收藏自己没事儿读，非原创，加入部分自己的理解和整理。原文作者及出处 <a href="http://www.jianshu.com/p/6b59ca5ad2d0" target="_blank" rel="external">http://www.jianshu.com/p/6b59ca5ad2d0</a> ，在此感谢。</p>
+<blockquote>
+<p><code>block</code>是2010年WWDC苹果为 Objective－C 提供的一个新特性，它为我们开发提供了便利，比如GCD就大量使用了<code>block</code>，用来往执行队列中添加任务。其实它就是一个闭包，一个引用自动变量的函数，更通俗的说，<code>block</code>就是一段代码块，用来储存一段代码，在特定的时机执行</p>
+</blockquote>
+<h3 id="Block定义"><a href="#Block定义" class="headerlink" title="Block定义"></a>Block定义</h3><p>1.没有返回值,没有参数的定义方式</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">//返回值类型(^block的名字)(参数类型) = ^(参数类型和参数名) &#123;&#125;;</span></div><div class="line"></div><div class="line">  <span class="keyword">void</span>(^block)() = ^()&#123;</div><div class="line">  </div><div class="line">      <span class="built_in">NSLog</span>(<span class="string">@"调用了block"</span>);</div><div class="line">  &#125;;</div><div class="line">  </div><div class="line"><span class="comment">//当然,没有参数的时候可以把括号省去</span></div><div class="line">  <span class="keyword">void</span>(^block)() = ^&#123;</div><div class="line">  </div><div class="line">      <span class="built_in">NSLog</span>(<span class="string">@"调用了block"</span>);</div><div class="line">  &#125;;</div><div class="line">  </div><div class="line"><span class="comment">// Block的调用直接Block名称后面括号即可，有参数就把参数放入即可</span></div><div class="line"></div><div class="line">    block();  <span class="comment">// 调用了上面定义的Block</span></div></pre></td></tr></table></figure>
+<p>2.有返回值,有参数的定义方式</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//返回值类型(^block的名字)(参数类型) = ^(参数类型和参数名) &#123;&#125;;</span></div><div class="line"><span class="comment">//如果有参数,定义的时候,必须要写参数,而且必须要有参数变量名</span></div><div class="line">  <span class="keyword">int</span>(^block)(<span class="keyword">int</span>) = ^(<span class="keyword">int</span> a)&#123;</div><div class="line">  </div><div class="line">      <span class="keyword">return</span> a + <span class="number">1</span>;</div><div class="line">  &#125;;</div></pre></td></tr></table></figure>
+<p>3.系统提供了一个定义block的快捷函数<code>inline</code></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// block快捷方式   输入:inline</span></div><div class="line">returnType(^blockName)(parameterTypes) = ^(parameters) &#123;</div><div class="line"></div><div class="line">        statements</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>4.block的类型</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//block有自己的类型,就想@"string"是NSString类型一样</span></div><div class="line"><span class="comment">//格式就是 返回值(^)(参数类型)</span></div><div class="line"><span class="comment">//比如这个block的类型就是: int(^)(int)</span></div><div class="line">  <span class="keyword">int</span>(^block)(<span class="keyword">int</span>) = ^(<span class="keyword">int</span> a)&#123;</div><div class="line">      <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">  &#125;;</div><div class="line"><span class="comment">//这个block的类型就是void(^)()</span></div><div class="line">  <span class="keyword">void</span>(^block)() = ^&#123;</div><div class="line">      <span class="built_in">NSLog</span>(<span class="string">@"调用了block"</span>);</div><div class="line">  &#125;; </div><div class="line"><span class="comment">//在ARC中把block定义成属性要用 copy 类型,定义方式如下:</span></div><div class="line"><span class="comment">//这样在类中可以拿到self.block</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">copy</span>) <span class="keyword">void</span>(^block)();</div><div class="line"></div><div class="line"><span class="comment">//当然也可以取别名:</span></div><div class="line"><span class="comment">//BlockType不是变量名,而是这种类型的block的别名</span></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">void</span>(^BlockType)();</div><div class="line"><span class="comment">//然后就可以这样</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) BlockType block;</div></pre></td></tr></table></figure>
+<h3 id="Block变量的传递"><a href="#Block变量的传递" class="headerlink" title="Block变量的传递"></a>Block变量的传递</h3><p>1.如果block访问的变量是局部变量,那么变量是值传递</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//block为值传递只有一种情况:</span></div><div class="line"><span class="keyword">int</span> a = <span class="number">3</span>;</div><div class="line"><span class="keyword">void</span>(^block)() = ^&#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%d"</span>,a);</div><div class="line">&#125;;</div><div class="line">a = <span class="number">5</span>;</div><div class="line">block();<span class="comment">//这里调用block打印出的是3,是值传递</span></div></pre></td></tr></table></figure>
+<p>2.如果是静态变量,那么变量是指针传递</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="keyword">int</span> a = <span class="number">3</span>;</div><div class="line"><span class="keyword">void</span>(^block)() = ^&#123;</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%d"</span>,a);</div><div class="line">&#125;;</div><div class="line">a = <span class="number">5</span>;</div><div class="line">block();<span class="comment">//这里调用block打印出的是5,是指针传递</span></div><div class="line"><span class="comment">//另外全局变量,静态变量都是指针传递</span></div></pre></td></tr></table></figure>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://7xvffo.com1.z0.glb.clouddn.com/Alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://7xvffo.com1.z0.glb.clouddn.com/WeChat.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">翻译</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">知识点</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/05/18/Block详解/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2017/05/17/iOS知识点小集/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          iOS知识点小集
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2017/05/26/NSURLProtocol/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">NSURLProtocol</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+  
+    <div class="duoshuo"></div>
   
 
-    
+
 
 
           </div>
@@ -244,8 +369,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
