@@ -8,13 +8,13 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>iOS知识总结-基础篇-1 | Liberalism</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="文章大纲，便于浏览  01-iOS程序启动过程 02-浅拷贝-深拷贝 03-View的生命周期">
+  <meta name="description" content="文章大纲，便于浏览  01-iOS程序启动过程 02-浅拷贝-深拷贝 03-View的生命周期 04-@property 05-事件传递和事件响应 06-KVC 07-KVO 08-iOS数据持久化方案  01-iOS-App-startup-process一、启动完整过程">
 <meta name="keywords" content="知识总结">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS知识总结-基础篇-1">
 <meta property="og:url" content="http://yoursite.com/2017/04/15/iOS知识总结-基础篇-1/index.html">
 <meta property="og:site_name" content="Liberalism">
-<meta property="og:description" content="文章大纲，便于浏览  01-iOS程序启动过程 02-浅拷贝-深拷贝 03-View的生命周期">
+<meta property="og:description" content="文章大纲，便于浏览  01-iOS程序启动过程 02-浅拷贝-深拷贝 03-View的生命周期 04-@property 05-事件传递和事件响应 06-KVC 07-KVO 08-iOS数据持久化方案  01-iOS-App-startup-process一、启动完整过程">
 <meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E7%A8%8B%E5%BA%8F%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B.png">
 <meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E7%A8%8B%E5%BA%8F%E5%90%AF%E5%8A%A8%E4%B8%8E%E4%BB%A3%E7%90%86.png">
 <meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E6%B7%B1%E6%8B%B7%E8%B4%9D-%E6%B5%85%E6%8B%B7%E8%B4%9D-01">
@@ -22,10 +22,10 @@
 <meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E6%B7%B1%E6%8B%B7%E8%B4%9D-%E6%B5%85%E6%8B%B7%E8%B4%9D-03.png">
 <meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E6%B7%B1%E6%8B%B7%E8%B4%9D-%E6%B5%85%E6%8B%B7%E8%B4%9D-04.png">
 <meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/image/jpg/View%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png">
-<meta property="og:updated_time" content="2017-05-12T05:36:43.000Z">
+<meta property="og:updated_time" content="2017-06-09T05:13:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS知识总结-基础篇-1">
-<meta name="twitter:description" content="文章大纲，便于浏览  01-iOS程序启动过程 02-浅拷贝-深拷贝 03-View的生命周期">
+<meta name="twitter:description" content="文章大纲，便于浏览  01-iOS程序启动过程 02-浅拷贝-深拷贝 03-View的生命周期 04-@property 05-事件传递和事件响应 06-KVC 07-KVO 08-iOS数据持久化方案  01-iOS-App-startup-process一、启动完整过程">
 <meta name="twitter:image" content="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E7%A8%8B%E5%BA%8F%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B.png">
   
     <link rel="alternative" href="/atom.xml" title="Liberalism" type="application/atom+xml">
@@ -203,17 +203,14 @@
 <li><a href="https://github.com/liberalisman/2018-Interview-Preparation#01-ios-app-startup-process" target="_blank" rel="external">01-iOS程序启动过程</a></li>
 <li><a href="https://github.com/liberalisman/2018-Interview-Preparation#02-shallowcopy-deepcopy" target="_blank" rel="external">02-浅拷贝-深拷贝</a></li>
 <li><a href="https://github.com/liberalisman/2018-Interview-Preparation#03-view的生命周期" target="_blank" rel="external">03-View的生命周期</a></li>
-</ol>
-<a id="more"></a>
-<ol>
 <li><a href="https://github.com/liberalisman/2018-Interview-Preparation#04-property" target="_blank" rel="external">04-@property</a></li>
 <li><a href="https://github.com/liberalisman/iOS-Summary-Part1#05-事件传递和事件响应" target="_blank" rel="external">05-事件传递和事件响应</a></li>
 <li><a href="https://github.com/liberalisman/iOS-Summary-Part1#06-kvc" target="_blank" rel="external">06-KVC</a></li>
 <li><a href="https://github.com/liberalisman/iOS-Summary-Part1#07-kvo" target="_blank" rel="external">07-KVO</a></li>
 <li><a href="https://github.com/liberalisman/iOS-Summary-Part1#08-ios数据持久化方案" target="_blank" rel="external">08-iOS数据持久化方案</a></li>
 </ol>
-<h2 id="01-iOS-App-startup-process"><a href="#01-iOS-App-startup-process" class="headerlink" title="01-iOS-App-startup-process"></a>01-iOS-App-startup-process</h2><p>###一、启动完整过程</p>
-<p><img src="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E7%A8%8B%E5%BA%8F%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B.png" alt=""></p>
+<h2 id="01-iOS-App-startup-process"><a href="#01-iOS-App-startup-process" class="headerlink" title="01-iOS-App-startup-process"></a>01-iOS-App-startup-process</h2><h3 id="一、启动完整过程"><a href="#一、启动完整过程" class="headerlink" title="一、启动完整过程"></a>一、启动完整过程</h3><p><img src="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E7%A8%8B%E5%BA%8F%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B.png" alt=""></p>
+<a id="more"></a>
 <p>1.<code>main</code>函数</p>
 <p>2.<code>UIApplicationMain</code>函数</p>
 <ul>
@@ -697,10 +694,6 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">WWDC Session 2016</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">知识点</a>
               </li>
              
@@ -709,15 +702,35 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">知识总结</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">源码解析</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">WWDC Session 2016</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">知识总结</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">读后感</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">WWDC Session 2016，Developer Tools</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">WWDC Session 2016， Developer Tools</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">WWDC Session 2016, Developer Tools</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">加密算法</a>
               </li>
             
             <div class="clearfix"></div>

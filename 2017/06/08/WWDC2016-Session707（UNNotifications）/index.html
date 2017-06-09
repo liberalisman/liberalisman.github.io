@@ -33,7 +33,13 @@
 <meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-707/16.png">
 <meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-707/17.png">
 <meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-707/18.png">
-<meta property="og:updated_time" content="2017-06-08T08:52:08.000Z">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-707/19.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-707/20.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-707/21.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-707/25.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-707/23.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-707/24.png">
+<meta property="og:updated_time" content="2017-06-09T03:30:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WWDC2016-Session707（UNNotifications）">
 <meta name="twitter:description" content="UNNotifications是WWDC2016基于之前的推送服务，推出的全新的的通知框架。">
@@ -62,7 +68,7 @@
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
     <div class="left-col" q-class="show:isShow">
       
-<div class="overlay" style="background: #4d4d4d"></div>
+<div class="overlay" style="background: #DC143C"></div>
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
@@ -123,7 +129,7 @@
     <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
       
 <nav id="mobile-nav">
-  	<div class="overlay js-overlay" style="background: #4d4d4d"></div>
+  	<div class="overlay js-overlay" style="background: #DC143C"></div>
 	<div class="btnctn js-mobile-btnctn">
   		<div class="slider-trigger list" q-on="click: openSlider(e)"><i class="icon icon-sort"></i></div>
 	</div>
@@ -215,12 +221,12 @@
 <h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-707/WWDC-2016-707-02.png" alt=""></p>
 <p>此课程主要分为两大部分。</p>
 <ul>
-<li>全新的 User Notifictions 框架 <ul>
+<li>全新的 <code>User Notifictions</code> 框架 <ul>
 <li>通知的注册</li>
 <li>构建通知的内容</li>
 <li>通知的排期</li>
 <li>通知的管理</li>
-<li>通知出发的动作</li>
+<li>通知触发的动作</li>
 </ul>
 </li>
 <li>服务的扩展</li>
@@ -250,7 +256,7 @@
 <h3 id="远程通知"><a href="#远程通知" class="headerlink" title="远程通知"></a>远程通知</h3><p>讲远程通知，首先要知道远程通知的原理。</p>
 <p><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-707/11.png" alt=""></p>
 <p>通过上面这张图，理解起来会比较轻松</p>
-<p>我们的<code>iOS</code>设备和苹果的<code>APNS</code>服务器一直保持着一个长连接，我们将<code>App注册</code>通知后，设备与 <code>APNS</code> 服务器通信，由 <code>APNS</code> 服务器返回设备一个<code>Token</code>，随后这个<code>Token</code>被上传到我们所需要使用的<code>推送服务器</code>上。之后当我们需要向设备上推送的时候，我们的<code>推送服务器</code>直接把要<code>推送的内容</code>和<code>Token</code>发送给<code>APNS</code>，<code>APNS</code>就可以把信息准确、快速的推送到指定的设备上</p>
+<p>我们的<code>iOS</code>设备和苹果的<code>APNS</code>服务器一直保持着一个长连接，我们将<code>App注册</code>通知后，设备与 <code>APNS</code> 服务器通信，由 <code>APNS</code> 服务器返回设备一个<code>Token</code>，随后这个<code>Token</code>被上传到我们所需要使用的<code>推送服务器</code>上。之后当我们需要向设备上推送的时候，我们的<code>推送服务器</code>直接把要<code>推送的内容</code>和<code>Token</code>发送给<code>APNS</code>，<code>APNS</code>就可以把信息准确、快速的推送到指定的设备上。</p>
 <p><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-707/WWDC-2016-707-06.png" alt=""></p>
 <p><code>APNS</code>远程通知可以被用于以下场景</p>
 <ul>
@@ -260,12 +266,7 @@
 </ul>
 <p>远程通知实际上也分为两种</p>
 <p><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-707/WWDC-2016-707-07.png" alt=""></p>
-<ul>
-<li>显式的远程通知</li>
-<li><p>隐式的远程通知</p>
 <p><strong>显式的远程通知</strong><br><code>显式的远程通知</code>是设备接到通知之后，会显示在用户的设备界面上，用户可以直观的看</p>
-</li>
-</ul>
 <p><strong>隐式的远程通知</strong><br><code>隐式的远程通知</code>是App在后台时，接收到隐式的远程通知，此时并不会调起程序，而是程序在后台发起请求，更新数据，当用户下一次主动点击，进入App后，直接显示的就是已经更新好数据的页面。</p>
 <h2 id="iOS-10-之前通知存在的问题"><a href="#iOS-10-之前通知存在的问题" class="headerlink" title="iOS 10 之前通知存在的问题"></a>iOS 10 之前通知存在的问题</h2><p><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-707/WWDC-2016-707-08.png" alt=""></p>
 <ul>
@@ -274,7 +275,7 @@
 <li>通知被排期之后管理就变得困难</li>
 <li>不同平台，通知的区别比较大</li>
 </ul>
-<h2 id="User-Notifications-Framework"><a href="#User-Notifications-Framework" class="headerlink" title="User Notifications Framework"></a>User Notifications Framework</h2><p>基于之前通知平台所存在的问题和不足，WWDC-2016 退出了全新的通知架构 <code>User Notifications Framework</code>。</p>
+<h2 id="User-Notifications-Framework"><a href="#User-Notifications-Framework" class="headerlink" title="User Notifications Framework"></a>User Notifications Framework</h2><p>基于之前通知平台所存在的问题和不足，<code>WWDC-2016</code> 推出了全新的通知架构 <code>User Notifications Framework</code>。</p>
 <p><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-707/WWDC-2016-707-09.png" alt=""><br>通过上图我们可以简要的概括一下这个新框架</p>
 <ul>
 <li>和之前几乎相同的API。</li>
@@ -293,7 +294,8 @@
 <li><code>TV OS</code>支持角标，可以实现一些特定的提醒通知。</li>
 </ul>
 <h2 id="推送流程"><a href="#推送流程" class="headerlink" title="推送流程"></a>推送流程</h2><p><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-707/15.png" alt=""><br>推送的流程基本如图所示，下面一一展开来说</p>
-<h3 id="1-配置并获取许可（Registration）"><a href="#1-配置并获取许可（Registration）" class="headerlink" title="1.配置并获取许可（Registration）"></a>1.配置并获取许可（Registration）</h3><p><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-707/12.png" alt=""><br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 献上OC版本的代码</span></div><div class="line">-(<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span> *)application didFinishLaunchingWithOptions:(<span class="built_in">NSDictionary</span> *)launchOptions &#123;  </div><div class="line"> </div><div class="line">    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter]; </div><div class="line">     </div><div class="line">    [center requestAuthorizationWithOptions:UNAuthorizationOptionCarPlay | </div><div class="line">                                              UNAuthorizationOptionSound | </div><div class="line">                                              UNAuthorizationOptionBadge | </div><div class="line">                                              UNAuthorizationOptionAlert </div><div class="line">                                              completionHandler:^(<span class="built_in">BOOL</span> granted, <span class="built_in">NSError</span> * _Nullable error) &#123;  </div><div class="line">    </div><div class="line">           <span class="keyword">if</span> (granted) </div><div class="line">           &#123;  </div><div class="line">               <span class="built_in">NSLog</span>(<span class="string">@" iOS 10 request notification success"</span>);  </div><div class="line">           &#125; </div><div class="line">           <span class="keyword">else</span> </div><div class="line">           &#123;  </div><div class="line">               <span class="built_in">NSLog</span>(<span class="string">@" iOS 10 request notification fail"</span>);  </div><div class="line">           &#125;  </div><div class="line">    &#125;];  </div><div class="line">    </div><div class="line">     [[<span class="built_in">UIApplication</span> sharedApplication] registerForRemoteNotifications]; </div><div class="line">    </div><div class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="1-配置并获取许可（Registration）"><a href="#1-配置并获取许可（Registration）" class="headerlink" title="1.配置并获取许可（Registration）"></a>1.配置并获取许可（Registration）</h3><p><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-707/12.png" alt=""></p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 献上OC版本的代码</span></div><div class="line">-(<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span> *)application didFinishLaunchingWithOptions:(<span class="built_in">NSDictionary</span> *)launchOptions &#123;  </div><div class="line"> </div><div class="line">    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter]; </div><div class="line">     </div><div class="line">    [center requestAuthorizationWithOptions:UNAuthorizationOptionCarPlay | </div><div class="line">                                              UNAuthorizationOptionSound | </div><div class="line">                                              UNAuthorizationOptionBadge | </div><div class="line">                                              UNAuthorizationOptionAlert </div><div class="line">                                              completionHandler:^(<span class="built_in">BOOL</span> granted, <span class="built_in">NSError</span> * _Nullable error) &#123;  </div><div class="line">    </div><div class="line">           <span class="keyword">if</span> (granted) </div><div class="line">           &#123;  </div><div class="line">               <span class="built_in">NSLog</span>(<span class="string">@" iOS 10 request notification success"</span>);  </div><div class="line">           &#125; </div><div class="line">           <span class="keyword">else</span> </div><div class="line">           &#123;  </div><div class="line">               <span class="built_in">NSLog</span>(<span class="string">@" iOS 10 request notification fail"</span>);  </div><div class="line">           &#125;  </div><div class="line">    &#125;];  </div><div class="line">    </div><div class="line">     [[<span class="built_in">UIApplication</span> sharedApplication] registerForRemoteNotifications]; </div><div class="line">    </div><div class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><code>iOS 10</code> 可以通过以下方法获取针对通知的用户配置，于是我们可以更加灵活的给用户发出提示</p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[[UNUserNotificationCenter currentNotificationCenter] getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) &#123;</div><div class="line"></div><div class="line">            <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,settings);</div><div class="line"> &#125;];</div></pre></td></tr></table></figure>
 <h3 id="2-构建推送的内容（Content）"><a href="#2-构建推送的内容（Content）" class="headerlink" title="2.构建推送的内容（Content）"></a>2.构建推送的内容（Content）</h3><p>1.针对<code>本地通知</code>，构建推送内容方式<br><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-707/13.png" alt=""></p>
@@ -309,7 +311,56 @@
 <h3 id="4-排期（Schedule）"><a href="#4-排期（Schedule）" class="headerlink" title="4.排期（Schedule）"></a>4.排期（Schedule）</h3><p><strong>本地通知排期</strong><br><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-707/17.png" alt=""></p>
 <p><strong>远程通知排期</strong><br><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-707/18.png" alt=""></p>
 <p>自此，前端的通知配置完毕</p>
-<h3 id="5-代码（code）"><a href="#5-代码（code）" class="headerlink" title="5.代码（code）"></a>5.代码（code）</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">    </div><div class="line"><span class="keyword">import</span> UserNotifications</div><div class="line">       </div><div class="line">    <span class="comment">// 获取用户许可</span></div><div class="line">    <span class="type">UNUserNotificationCenter</span>.current().requestAuthorization([.alert, .sound, .badge]) &#123; (granted, error) <span class="keyword">in</span>  ... &#125;</div><div class="line">    </div><div class="line">    <span class="comment">// 构建推送内容  </span></div><div class="line">    <span class="keyword">let</span> content = <span class="type">UNMutableNotificationContent</span>() content.title = <span class="string">"Introduction to Notifications"</span> content.body = <span class="string">"Let's talk about notifications!"</span></div><div class="line">    </div><div class="line">    <span class="comment">// 构建触发条件  </span></div><div class="line">    <span class="keyword">let</span> trigger = <span class="type">UNTimeIntervalNotificationTrigger</span>(timeInterval: <span class="number">5</span>, repeats: <span class="literal">false</span>)</div><div class="line">    </div><div class="line">    <span class="comment">// 构建推送请求   </span></div><div class="line">    <span class="keyword">let</span> requestIdentifier = <span class="string">"sampleRequest"</span> </div><div class="line">    <span class="keyword">let</span> request = <span class="type">UNNotificationRequest</span>(identifier: requestIdentifier, content: content, trigger: trigger)</div><div class="line">    </div><div class="line">    <span class="comment">// 进行排期</span></div><div class="line">    <span class="type">UNUserNotificationCenter</span>.current().add(request) &#123; (error) <span class="keyword">in</span> <span class="comment">// ... &#125; import UserNotifications</span></div></pre></td></tr></table></figure>
+<h3 id="5-代码（code）"><a href="#5-代码（code）" class="headerlink" title="5.代码（code）"></a>5.代码（code）</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">    </div><div class="line"><span class="keyword">import</span> UserNotifications</div><div class="line">       </div><div class="line">    <span class="comment">// 获取用户许可</span></div><div class="line">    <span class="type">UNUserNotificationCenter</span>.current().requestAuthorization([.alert, .sound, .badge]) &#123; (granted, error) <span class="keyword">in</span>  ... &#125;</div><div class="line">    </div><div class="line">    <span class="comment">// 构建推送内容  </span></div><div class="line">    <span class="keyword">let</span> content = <span class="type">UNMutableNotificationContent</span>() </div><div class="line">    content.title = <span class="string">"Introduction to Notifications"</span> </div><div class="line">    content.body = <span class="string">"Let's talk about notifications!"</span></div><div class="line">    </div><div class="line">    <span class="comment">// 构建触发条件  </span></div><div class="line">    <span class="keyword">let</span> trigger = <span class="type">UNTimeIntervalNotificationTrigger</span>(timeInterval: <span class="number">5</span>, repeats: <span class="literal">false</span>)</div><div class="line">    </div><div class="line">    <span class="comment">// 构建推送请求   </span></div><div class="line">    <span class="keyword">let</span> requestIdentifier = <span class="string">"sampleRequest"</span> </div><div class="line">    <span class="keyword">let</span> request = <span class="type">UNNotificationRequest</span>(identifier: requestIdentifier, content: content, trigger: trigger)</div><div class="line">    </div><div class="line">    <span class="comment">// 进行排期</span></div><div class="line">    <span class="type">UNUserNotificationCenter</span>.current().add(request) &#123; (error) <span class="keyword">in</span> <span class="comment">// ... &#125; import UserNotifications</span></div></pre></td></tr></table></figure>
+<h2 id="Notifiction-Handling（前台的通知处理）"><a href="#Notifiction-Handling（前台的通知处理）" class="headerlink" title="Notifiction Handling（前台的通知处理）"></a>Notifiction Handling（前台的通知处理）</h2><p>为了使我们的程序在前台时依然可以接收通知，我们可以通过实现 <code>UNUserNotificationCenterDelegate</code> 的代理方法，通过这个代理方法，我们可以获取到即将收到的<code>通知</code>，此时我们就可以在他的<code>Handler回调</code>中对其进行处理</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-707/19.png" alt=""></p>
+<p>如果没有传递参数，也就意味着不对其进行处理</p>
+<h2 id="Notifiction-Management"><a href="#Notifiction-Management" class="headerlink" title="Notifiction Management"></a>Notifiction Management</h2><p><code>Notifiction Management</code>允许开发者访问已经排期等待发出的<code>通知</code>，甚至可以管理用户已经收到了的<code>通知</code>。这包括<code>本地通知</code>和<code>远程通知</code>。</p>
+<p>同时你也可以<code>更新、提升或者删除</code>已经发送给用户的通知。</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-707/20.png" alt=""></p>
+<p>其中有个很关键的要素就是<code>请求识别符（RequestIdentifier）</code>，在<strong>本地通知</strong>中，它被设置在通知的请求对象上，在<strong>远程通知</strong>中，在 <code>HTTP/2</code> 有一个新的请求数据头 <code>apns-collapse-id</code>。</p>
+<p>系统通过这个 <code>RequestIdentifier</code> 来得知是哪个通知</p>
+<p>我们可以通过官方的示例，来简单的理解这个功能。</p>
+<ul>
+<li>删除通知</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 比赛开始时给一个标识符</span></div><div class="line"><span class="keyword">let</span> gameStartIdentifier = <span class="string">"game1.start.identifier"</span> </div><div class="line"><span class="keyword">let</span> gameStartRequest = <span class="type">UNNotificationRequest</span>(identifier: gameStartIdentifier, content: content, trigger: startTrigger)</div><div class="line"></div><div class="line"><span class="type">UNUserNotificationCenter</span>.current().add(gameStartRequest) &#123; (error) <span class="keyword">in</span> <span class="comment">// ... &#125;</span></div><div class="line"></div><div class="line"><span class="comment">// 因为发送了错误的信息，所可以直接取消通知，只要标识符一样即可（比赛结束也可以直接remove掉）</span></div><div class="line"><span class="type">UNUserNotificationCenter</span>.current() .removePendingNotificationRequests(withIdentifiers: [gameStartIdentifier])</div></pre></td></tr></table></figure>
+<ul>
+<li>更新通知</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 比赛开始时给一个标识符</span></div><div class="line"><span class="keyword">let</span> gameStartIdentifier = <span class="string">"game1.start.identifier"</span> </div><div class="line"><span class="keyword">let</span> gameStartRequest = <span class="type">UNNotificationRequest</span>(identifier: gameStartIdentifier, content: content, trigger: startTrigger)</div><div class="line"></div><div class="line"><span class="type">UNUserNotificationCenter</span>.current().add(gameStartRequest) &#123; (error) <span class="keyword">in</span> <span class="comment">// ... &#125;</span></div><div class="line"></div><div class="line"><span class="comment">// 比赛分数发生改变，需要更新通知，创建一个新的request，但是标识符要一样</span></div><div class="line"><span class="keyword">let</span> updatedGameStartRequest = <span class="type">UNNotificationRequest</span>(identifier: gameStartIdentifier, content: content, trigger: newStartTrigger)</div><div class="line"></div><div class="line"><span class="type">UNUserNotificationCenter</span>.current().add(updatedGameStartRequest) &#123; (error) <span class="keyword">in</span> <span class="comment">// ... &#125;</span></div></pre></td></tr></table></figure>
+<h2 id="Notiﬁcation-Actions"><a href="#Notiﬁcation-Actions" class="headerlink" title="Notiﬁcation Actions"></a>Notiﬁcation Actions</h2><h3 id="1-默认行为（Default-Action）"><a href="#1-默认行为（Default-Action）" class="headerlink" title="1.默认行为（Default Action）"></a>1.默认行为（Default Action）</h3><p>通知可以在三个地方显示，<code>锁屏页面</code>，<code>开锁后主屏幕</code>，<code>通知中心</code>。</p>
+<p><code>默认行为</code>是点击通知后，直接进入程序</p>
+<h3 id="2-可操作行为（Actionable-Notifications）"><a href="#2-可操作行为（Actionable-Notifications）" class="headerlink" title="2.可操作行为（Actionable Notifications）"></a>2.可操作行为（Actionable Notifications）</h3><p><code>可操作行为</code>是接收到用户通知后，可进行一系列的交互操作，如下图</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-707/21.png" alt=""></p>
+<p>实现这种可以进行操作的通知需要给通知注册行为，实现代码如下</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 声明一个Action</span></div><div class="line"><span class="keyword">let</span> action = <span class="type">UNNotificationAction</span>(identifier:<span class="string">"reply"</span>,title:<span class="string">"Reply"</span>,options:[])</div><div class="line"><span class="comment">// 声明一个Category</span></div><div class="line"><span class="keyword">let</span> category = <span class="type">UNNotificationCategory</span>(identifier: <span class="string">"message"</span>, actions: [action], minimalActions: [action], intentIdentifiers: [], options: [])</div><div class="line"><span class="comment">// 将Category赋值给当前的通知中心即可</span></div><div class="line"><span class="type">UNUserNotificationCenter</span>.current().setNotificationCategories([category])</div></pre></td></tr></table></figure>
+<p>如果是<code>远程通知的话</code>，需要在推送的数据中加上<code>Category</code>,并且将<code>Content</code>的<code>CategotrIdentifier</code>赋值</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Remote Notiﬁcations</span></div><div class="line">&#123;</div><div class="line">    aps:&#123;</div><div class="line">             alert:“<span class="type">Welcome</span> to <span class="type">WWDC</span> !”,</div><div class="line">             category:<span class="string">"message"</span></div><div class="line">        &#125;</div><div class="line">    <span class="comment">// Local Notiﬁcations</span></div><div class="line">    content.categoryIdentifier = <span class="string">"message"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="3-取消行为（Dismiss-Action）"><a href="#3-取消行为（Dismiss-Action）" class="headerlink" title="3.取消行为（Dismiss Action）"></a>3.取消行为（Dismiss Action）</h3><ul>
+<li>可以通过向左滑动通知，进行取消操作;</li>
+<li>也可以在通知中心，点击<code>x</code>号</li>
+</ul>
+<p>取消通知之后可以执行相关的操作，需要用到<code>CustomerDismissAction</code>,可以进行自定义的操作；</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">customDismissAction: <span class="type">UNNotificationCategoryOptions</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> category = <span class="type">UNNotificationCategory</span>(identifier: <span class="string">"message"</span>, actions: [action], minimalActions: [action], intentIdentifiers: [], options: [.customDismissAction])</div></pre></td></tr></table></figure>
+<h2 id="Actions-Response"><a href="#Actions-Response" class="headerlink" title="Actions Response"></a>Actions Response</h2><p>我们有多种方法知道，用户是通过什么途径打开应用，在通知上做了什么操作，通知是什么类型等等。但是现在我们只需要实现一个代理方法就可以做到这些了</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-707/25.png" alt=""></p>
+<p>通过 <code>delegate</code> 的方法，我们可以得到一个<code>response</code> 和一个 <code>handler</code> 的<code>Block回调</code></p>
+<p>在 <code>Response</code>中我们可以得到<code>actionIdentifier</code>,如果用户有输入行为，我们可以得到<code>输入的文本</code>，以及具体的<code>Notification</code>。</p>
+<p>在已得到的通知中，获取<code>Request</code>,再接下来就可以得到触发条件<code>Trigger</code>和通知内容<code>Content</code>。</p>
+<p>然后我们在<code>completionHandler</code>回调中，进行相关的操作。</p>
+<h2 id="Service-Extension"><a href="#Service-Extension" class="headerlink" title="Service Extension"></a>Service Extension</h2><blockquote>
+<p><code>Service Extension</code>是通知的服务扩展，它不会在UI界面上进行展示，用于<code>增强</code>和<code>替换</code>显示到用户界面上的内容。</p>
+<p>其原理是我们的推送服务器将推送的内容上传至<code>APNS</code>服务器，在<code>APNS</code>将消息推送到设备，在设备显示推送消息之前，我们有一段很短的时间，可以通过<code>Extension</code>进行回调执行相关的操作。</p>
+<p>基于<code>Service Extension</code>，我们可以实现<code>端到端加密</code>以及<code>添加附件</code>和其他统一的操作。</p>
+</blockquote>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-707/23.png" alt=""></p>
+<p>我们大致走一下构建<code>Service Extension</code>的流程</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-707/24.png" alt=""></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Service Extension</span></div><div class="line"><span class="keyword">import</span> UserNotifications</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">NotificationService</span>: <span class="title">UNNotificationServiceExtension</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">didReceive</span><span class="params">(request: UNNotificationRequest, withContentHandler contentHandler:<span class="params">(UNNotificationContent)</span></span></span> -&gt; <span class="type">Void</span>) &#123; <span class="comment">// Modify the notification content </span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">serviceExtensionTimeWillExpire</span><span class="params">()</span></span> &#123; <span class="comment">// Called before the extension will be terminated by the system </span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>示例代码</strong></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    aps : &#123; </div><div class="line">            alert : “<span class="type">New</span> <span class="type">Message</span> <span class="type">Available</span>”,</div><div class="line">            mutable-content : <span class="number">1</span></div><div class="line"></div><div class="line">          &#125;, </div><div class="line">    encrypted-content : “#myencryptedcontent”</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// Decrypt Remote Notification Payload in Service Extension and Update Notification Content</span></div><div class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">didReceive</span><span class="params">(request: UNNotificationRequest, withContentHandler contentHandler: <span class="params">(UNNotificationContent)</span></span></span> -&gt; <span class="type">Void</span>) &#123;</div><div class="line"></div><div class="line">    <span class="comment">// Decrypt the payload </span></div><div class="line">    <span class="keyword">let</span> decryptedBody = decrypt(request.content.userInfo[“encrypted-content”])</div><div class="line">    <span class="keyword">let</span> newContent = <span class="type">UNMutableNotificationContent</span>()</div><div class="line">    </div><div class="line">    <span class="comment">// Modify the notification content </span></div><div class="line">    newContent.body = decryptedBody</div><div class="line">    <span class="comment">// Call content handler with updated content </span></div><div class="line">    contentHandler(newContent)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>后面还有一篇高级通知的文章，地址。</p>
 
       
 
@@ -434,6 +485,11 @@
     </a>
   
   
+    <a href="/2017/06/09/WWDC2016-Session708（高级通知）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">WWDC2016-Session708（高级通知）</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
 </nav>
 
 
@@ -534,10 +590,6 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">WWDC Session 2016</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">知识点</a>
               </li>
              
@@ -546,15 +598,35 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">知识总结</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">源码解析</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">WWDC Session 2016</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">知识总结</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">读后感</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">WWDC Session 2016，Developer Tools</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">WWDC Session 2016， Developer Tools</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">WWDC Session 2016, Developer Tools</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">加密算法</a>
               </li>
             
             <div class="clearfix"></div>

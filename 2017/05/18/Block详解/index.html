@@ -15,7 +15,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/05/18/Block详解/index.html">
 <meta property="og:site_name" content="Liberalism">
 <meta property="og:description" content="block是2010年WWDC苹果为 Objective－C 提供的一个新特性，它为我们开发提供了便利，比如GCD就大量使用了block，用来往执行队列中添加任务。书上定义block是带有自动变量（局部变量）的匿名函数。其实它就是一个闭包，一个引用自动变量的函数，更通俗的说，block就是一段代码块，用来储存一段代码，在特定的时机执行  Block用途 自动变量（局部变量） 函数参数 静态局部变">
-<meta property="og:updated_time" content="2017-06-06T03:00:49.000Z">
+<meta property="og:updated_time" content="2017-06-09T05:06:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Block详解">
 <meta name="twitter:description" content="block是2010年WWDC苹果为 Objective－C 提供的一个新特性，它为我们开发提供了便利，比如GCD就大量使用了block，用来往执行队列中添加任务。书上定义block是带有自动变量（局部变量）的匿名函数。其实它就是一个闭包，一个引用自动变量的函数，更通俗的说，block就是一段代码块，用来储存一段代码，在特定的时机执行  Block用途 自动变量（局部变量） 函数参数 静态局部变">
@@ -202,6 +202,7 @@
 </ol>
 <h3 id="Block声明与定义"><a href="#Block声明与定义" class="headerlink" title="Block声明与定义"></a>Block声明与定义</h3><p>1.没有返回值,没有参数的定义方式</p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">//返回值类型(^block的名字)(参数类型) = ^(参数类型和参数名) &#123;&#125;;</span></div><div class="line">  <span class="keyword">void</span>(^block)() = ^()&#123;</div><div class="line">  </div><div class="line">      <span class="built_in">NSLog</span>(<span class="string">@"调用了block"</span>);</div><div class="line">  &#125;;</div><div class="line">  </div><div class="line"><span class="comment">//当然,没有参数的时候可以把括号省去</span></div><div class="line">  <span class="keyword">void</span>(^block)() = ^&#123;</div><div class="line">  </div><div class="line">      <span class="built_in">NSLog</span>(<span class="string">@"调用了block"</span>);</div><div class="line">  &#125;;</div><div class="line">  </div><div class="line"><span class="comment">// Block的调用直接Block名称后面括号即可，有参数就把参数放入即可</span></div><div class="line"></div><div class="line">    block();  <span class="comment">// 调用了上面定义的Block</span></div></pre></td></tr></table></figure>
+<a id="more"></a>
 <p>2.有返回值,有参数的定义方式</p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//返回值类型(^block的名字)(参数类型) = ^(参数类型和参数名) &#123;&#125;;</span></div><div class="line"><span class="comment">//如果有参数,定义的时候,必须要写参数,而且必须要有参数变量名</span></div><div class="line">  <span class="keyword">int</span>(^block)(<span class="keyword">int</span>) = ^(<span class="keyword">int</span> a)&#123;</div><div class="line">  </div><div class="line">      <span class="keyword">return</span> a + <span class="number">1</span>;</div><div class="line">  &#125;;</div></pre></td></tr></table></figure>
 <p>3.系统提供了一个定义block的快捷函数<code>inline</code></p>
@@ -446,10 +447,6 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">WWDC Session 2016</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">知识点</a>
               </li>
              
@@ -458,15 +455,35 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">知识总结</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">源码解析</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">WWDC Session 2016</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">知识总结</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">读后感</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">WWDC Session 2016，Developer Tools</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">WWDC Session 2016， Developer Tools</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">WWDC Session 2016, Developer Tools</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">加密算法</a>
               </li>
             
             <div class="clearfix"></div>
