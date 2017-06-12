@@ -6,19 +6,34 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>weak-弱引用实现原理 | Liberalism</title>
+  <title>WWDC2016-Session724（APNS新特性） | Liberalism</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="weak是一个弱引用，这个引用不会增加对象的引用计数，并且所指对象在释放后被自动置为nil。weak通常用于处理循环引用的问题。如代理属性以及block中用得比较多。 此处重点记录一下weak的实现过程 123&amp;#123;    id __weak obj1 = obj;&amp;#125;">
-<meta name="keywords" content="读后感">
+  <meta name="description" content="简要回顾 APNS是苹果的推送服务器，此篇主要讲一下2016年APNS的新特性">
+<meta name="keywords" content="WWDC Session 2016">
 <meta property="og:type" content="article">
-<meta property="og:title" content="weak-弱引用实现原理">
-<meta property="og:url" content="http://yoursite.com/2017/04/03/weak-弱引用实现原理/index.html">
+<meta property="og:title" content="WWDC2016-Session724（APNS新特性）">
+<meta property="og:url" content="http://yoursite.com/2017/06/12/WWDC2016-Session724（APNS新特性）/index.html">
 <meta property="og:site_name" content="Liberalism">
-<meta property="og:description" content="weak是一个弱引用，这个引用不会增加对象的引用计数，并且所指对象在释放后被自动置为nil。weak通常用于处理循环引用的问题。如代理属性以及block中用得比较多。 此处重点记录一下weak的实现过程 123&amp;#123;    id __weak obj1 = obj;&amp;#125;">
-<meta property="og:updated_time" content="2017-05-03T06:44:03.000Z">
+<meta property="og:description" content="简要回顾 APNS是苹果的推送服务器，此篇主要讲一下2016年APNS的新特性">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/1.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/2.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/3.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/4.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/6.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/7.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/8.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/9.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/10.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/11.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/13.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/14.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/15.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/16.png">
+<meta property="og:updated_time" content="2017-06-12T07:00:08.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="weak-弱引用实现原理">
-<meta name="twitter:description" content="weak是一个弱引用，这个引用不会增加对象的引用计数，并且所指对象在释放后被自动置为nil。weak通常用于处理循环引用的问题。如代理属性以及block中用得比较多。 此处重点记录一下weak的实现过程 123&amp;#123;    id __weak obj1 = obj;&amp;#125;">
+<meta name="twitter:title" content="WWDC2016-Session724（APNS新特性）">
+<meta name="twitter:description" content="简要回顾 APNS是苹果的推送服务器，此篇主要讲一下2016年APNS的新特性">
+<meta name="twitter:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Liberalism" type="application/atom+xml">
   
@@ -170,71 +185,94 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-weak-弱引用实现原理" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-WWDC2016-Session724（APNS新特性）" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      weak-弱引用实现原理
+      WWDC2016-Session724（APNS新特性）
     </h1>
   
 
         
-        <a href="/2017/04/03/weak-弱引用实现原理/" class="archive-article-date">
-  	<time datetime="2017-04-03T06:33:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-03</time>
+        <a href="/2017/06/12/WWDC2016-Session724（APNS新特性）/" class="archive-article-date">
+  	<time datetime="2017-06-12T05:11:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-12</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><code>weak</code>是一个弱引用，这个引用不会增加对象的引用计数，并且所指对象在释放后被自动置为nil。<code>weak</code>通常用于处理循环引用的问题。如<code>代理</code>属性以及<code>block</code>中用得比较多。</p>
-<p>此处重点记录一下<code>weak</code>的实现过程</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="keyword">id</span> __<span class="keyword">weak</span> obj1 = obj;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        <h2 id="简要回顾"><a href="#简要回顾" class="headerlink" title="简要回顾"></a>简要回顾</h2><blockquote>
+<p><code>APNS</code>是苹果的推送服务器，此篇主要讲一下2016年<code>APNS</code>的新特性</p>
+</blockquote>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/1.png" alt=""></p>
 <a id="more"></a>
-<p>当我们初始化一个<code>weak</code>属性的变量时，<code>Runtime</code>会调用<code>objc_initWeak</code>函数</p>
-<p>声明如下：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="keyword">id</span> objc_initWeak (<span class="keyword">id</span> *object , <span class="keyword">id</span> value);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>其具体实现如下：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">id</span> objc_initWeak (<span class="keyword">id</span> *object , <span class="keyword">id</span> value)</div><div class="line">&#123;</div><div class="line">   *object = <span class="number">0</span>;</div><div class="line">   <span class="keyword">return</span> objc_storeWeak(object,value);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>轮换成编译器代码如下</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">id</span> obj1;</div><div class="line">objc_initWeak(&amp;obj1,obj);</div></pre></td></tr></table></figure>
-<p>因此，这里所做的事是先将<code>obj1</code>初始化为<code>0(nil)</code>，然后将<code>obj1</code>的地址及<code>obj</code>作为参数传递给<code>objc_storeWeak</code>函数。</p>
-<p><code>objc_storeWeak</code>的函数声明如下:</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">id</span> objc_storeWeak(<span class="keyword">id</span> *location, <span class="keyword">id</span> value);</div></pre></td></tr></table></figure>
-<p>具体实现相对较为复杂，去掉线程之间锁之后，大致如下：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">id</span> objc_storeWeak(<span class="keyword">id</span> *location, <span class="keyword">id</span> newObj)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">id</span> oldObj;</div><div class="line">    SideTable *oldTable;</div><div class="line">    SideTable *newTable;  </div><div class="line"></div><div class="line">    oldObj = *location;                               <span class="comment">// 旧值</span></div><div class="line">    oldTable = SideTable::tableForPointer(oldObj);    <span class="comment">// 旧表</span></div><div class="line">    newTable = SideTable::tableForPointer(newObj);    <span class="comment">// 新表</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span> (oldObj) &#123;</div><div class="line">        weak_unregister_no_lock(&amp;oldTable-&gt;weak_table, oldObj, location);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">if</span> (newObj) &#123;</div><div class="line">        newObj = weak_register_no_lock(&amp;newTable-&gt;weak_table, newObj,location);</div><div class="line">    &#125;</div><div class="line">   </div><div class="line">    *location = newObj;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> newObj;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这里面有很关键的两个结构体<code>weak</code>和<code>SideTable</code></p>
-<p><code>weak</code>表是一个弱引用表，实现为一个<code>weak_table_t</code>结构体，存储了某个对象相关的的所有的弱引用信息。其定义如下(具体定义在<code>objc-weak.h</code>中)：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> weak_table_t &#123;</div><div class="line">    weak_entry_t *weak_entries;</div><div class="line">    size_t    num_entries;</div><div class="line">    ......</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>其中<code>weak_entry_t</code>是存储在弱引用表中的一个内部结构体，它负责维护和存储指向一个对象的所有弱引用<code>hash</code>表。其定义如下：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> weak_entry_t &#123;</div><div class="line">    DisguisedPtr&lt;objc_object&gt; referent;</div><div class="line">    <span class="keyword">union</span> &#123;</div><div class="line">        <span class="keyword">struct</span> &#123;</div><div class="line">            weak_referrer_t *referrers;</div><div class="line">            uintptr_t        out_of_line : <span class="number">1</span>;</div><div class="line">            ......</div><div class="line">        &#125;;</div><div class="line">        </div><div class="line">        <span class="keyword">struct</span> &#123;</div><div class="line">            weak_referrer_t  inline_referrers[WEAK_INLINE_COUNT];</div><div class="line">        &#125;;</div><div class="line">    &#125;;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p><code>SideTable</code>是一个用<code>C++</code>实现的类，它的具体定义在<code>NSObject.mm</code>中，看看它的一些成员变量的定义:</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> SideTable &#123;</div><div class="line">private:</div><div class="line">    <span class="keyword">static</span> uint8_t table_buf[SIDE_TABLE_STRIPE * SIDE_TABLE_SIZE];</div><div class="line">public:</div><div class="line">    RefcountMap refcnts;</div><div class="line">    weak_table_t weak_table;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>了解了<code>weak</code>表和<code>SideTable</code>，让我们再回过头来看看<code>objc_storeWeak</code>。首先是根据<code>weak</code>指针找到其指向的老的对象：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">oldObj = *location;</div></pre></td></tr></table></figure>
-<p>然后获取到与新旧对象相关的<code>SideTable</code>对象：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">oldTable = SideTable::tableForPointer(oldObj);</div><div class="line">newTable = SideTable::tableForPointer(newObj);</div></pre></td></tr></table></figure>
-<p>下面要做的就是在老对象的<code>weak</code>表中移除指向信息，而在新对象的<code>weak</code>表中建立关联信息：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (oldObj) &#123;</div><div class="line">    weak_unregister_no_lock(&amp;oldTable-&gt;weak_table, oldObj, location);</div><div class="line">&#125;</div><div class="line"><span class="keyword">if</span> (newObj) &#123;</div><div class="line">    newObj = weak_register_no_lock(&amp;newTable-&gt;weak_table, newObj,location);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>接下来让弱引用指针指向新的对象：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">*location = newObj;</div></pre></td></tr></table></figure>
-<p>最后会返回这个新对象：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">return</span> newObj;</div></pre></td></tr></table></figure>
-<p>而当<code>weak</code>引用指向的对象被释放时，其基本流程如下：</p>
+<p>苹果的工程师上来就回顾了一下去年在<code>APNS</code>上所推出的改进，例如：</p>
 <ul>
-<li>调用<code>objc_release</code></li>
-<li>因为对象的引用计数为<code>0</code>，所以执行<code>dealloc</code></li>
-<li>在<code>dealloc</code>中，调用了<code>_objc_rootDealloc</code>函数</li>
-<li>在<code>_objc_rootDealloc</code>中，调用了<code>object_dispose</code>函数</li>
-<li>调用<code>objc_destructInstance</code></li>
-<li>最后调用<code>objc_clear_deallocating</code></li>
+<li>支持<code>HTTP/2</code>的API（采用二进制编码）</li>
+<li>服务器通信可以做到及时响应</li>
+<li>可以推送的文件内容扩展到了4KB</li>
+<li>以及简化的证书管理</li>
 </ul>
-<p><code>objc_clear_deallocating</code>中首先取出对象对应的<code>SideTable</code>实例，如果这个对象有关联的弱引用，则调用<code>arr_clear_deallocating</code>来清除对象的弱引用信息。</p>
-<p>这个函数首先是找出对象对应的<code>weak_entry_t</code>链表，然后挨个将弱引用置为<code>nil</code>。最后清理对象的记录。</p>
-<p>一个<code>weak</code>引用的处理涉及各种查表、添加与删除操作，还是有一定消耗的。所以如果大量使用__weak变量的话，会对性能造成一定的影响。</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/2.png" alt=""></p>
+<p>通过下图可以简要的看一下基于<code>HTTP/2</code>提供的<code>API</code></p>
+<ol>
+<li>客户端通过<code>设备</code>与<code>APNS</code>通信，</li>
+<li><code>APNS</code>返回给客户端<code>DeviceToken</code>，</li>
+<li>客户端将<code>DeviceToken</code>上传给我们自己的<code>服务器</code>。</li>
+<li>接下来我们的<code>服务器</code>与<code>APNS</code>进行通信</li>
+<li>每一次<code>服务器</code>将推送信息传递给<code>APNS</code>,都会附带一个<code>DeviceToken</code>的<code>Request</code>,同时<code>APNS</code>也会返回一个<code>Response</code>。</li>
+</ol>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/3.png" alt=""></p>
+<p>同时还简化了推送证书的管理，不论是<code>开发环境</code>还是<code>发布环境</code>，<code>应用推送</code>，<code>VOIP推送</code>以及<code>并发推送</code>，都用<code>一个证书</code>进行管理，大大的简化了流程</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/4.png" alt=""></p>
+<h2 id="Token-Authentication"><a href="#Token-Authentication" class="headerlink" title="Token Authentication"></a>Token Authentication</h2><p>上文讲到，推送通知的时候会附带一个<code>Token</code>,接下来会讲这个<code>Token</code>认证的问题</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/6.png" alt=""></p>
+<p>新出的<code>Token Authentication</code></p>
+<ol>
+<li>简化了我们的推送服务器与<code>APNS</code>通信的过程</li>
+<li>提高了安全性</li>
+<li>创建<code>Token</code>很简单</li>
+<li>不再有过多的<code>过期证书</code></li>
+<li><code>APNS</code>不会在服务失效时关闭连接</li>
+<li>每一次发送通知，都会附件一个客户端证书中的应用标识。</li>
+</ol>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/7.png" alt=""><br><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/8.png" alt=""></p>
+<h3 id="证书验证-和-Token验证"><a href="#证书验证-和-Token验证" class="headerlink" title="证书验证 和 Token验证"></a>证书验证 和 Token验证</h3><p>结合上面的两张图，我们仔细的梳理一下<code>证书验证</code>和<code>Token验证</code>通信过程</p>
+<p> <strong>TLS</strong>（是“Transport Layer Security”的缩写），中文叫做“<strong>传输层安全协议</strong>”。</p>
+<p> 我们先来看看<strong>证书验证</strong></p>
+<ol>
+<li>通过<code>开发者账号</code>，生成一个<code>证书</code></li>
+<li>当<code>Provider</code>与<code>APNS</code>通信时，<code>APNS</code>会返回一个<code>证书</code>给<code>Provider</code>服务器。</li>
+<li><code>Provider</code>需要对这个<code>证书</code>签名并且信任，然后再将<code>客户端证书</code>返回给APNS。</li>
+<li>此时APNS和Privider就构建了一个可信赖的通信通道。</li>
+</ol>
+<p>再来看看<strong>Token验证</strong></p>
+<ol>
+<li>由我们的开发者账号生成一个<code>Service Key</code>，要包含你的<code>Team ID</code>,并且要为他签名</li>
+<li><code>Service Key</code>通过加密算法，生成一个加密后的<code>Token</code></li>
+</ol>
+<p>随后每一次<code>Provider</code>向<code>APNS</code>推送信息的时候，所发送的<code>Request</code>都必须有这个<code>Token</code>和<code>推送的内容</code>.</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/9.png" alt=""><br><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/10.png" alt=""></p>
+<p>在<code>Provider</code>与<code>APNS</code>通信的过程中：</p>
+<ul>
+<li>如果Token验证正确，那么接下来处理需要推送的部分，随后再返回状态码等相关信息。</li>
+<li>如果Token验证失败，直接返回错误码信息。</li>
+</ul>
+<h2 id="构建-Token"><a href="#构建-Token" class="headerlink" title="构建 Token"></a>构建 Token</h2><p><strong>首先</strong>，到开着发中心创建一个 <code>Service Key</code>。<br><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/11.png" alt=""></p>
+<p><strong>其次</strong>，利用<code>Json Web Token</code>构建<code>Token</code>。<br><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/13.png" alt=""></p>
+<p>上面一共是三个部分，每一个部分都是通过 <code>base-64</code> 编码过的 <code>URL</code>形式</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//  “alg”是加密方式，采用的是 ES256 加密</span></div><div class="line"><span class="comment">//  "kid"是 Key 的标识符，是用来给 Token 签名的</span></div><div class="line"><span class="comment">//  "iss"是Team ID 等团队信息</span></div><div class="line"><span class="comment">//  "iat"是初始化的时间戳</span></div><div class="line"><span class="comment">//  "signature"是针对上面的内容进行加密以后，再利用 Base64 加密</span></div></pre></td></tr></table></figure>
+<p>下图是使用<code>HTTP/2</code>构建的一个使用<code>Token</code>认证的请求<br><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/14.png" alt=""><br>下图是一个错误的<code>Response</code><br><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/15.png" alt=""><br><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/16.png" alt=""></p>
+<h3 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h3><ol>
+<li>签名的Token需要不定期的生成，原则上是一小时，但考虑到性能因素，如果T欧肯有效就可以继续使用</li>
+<li><code>Sign Key</code>是不会失效的</li>
+<li>如果<code>Sign Key</code>有错误，可以通过<code>开发者中心</code>进行撤销并重新创建</li>
+<li>目前<code>证书认证</code>和<code>Token认证</code>两种方式同时有效</li>
+</ol>
 
       
 
@@ -279,7 +317,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">读后感</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">WWDC Session 2016</a>
         		</li>
       		
 		</ul>
@@ -335,7 +373,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/04/03/weak-弱引用实现原理/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/06/12/WWDC2016-Session724（APNS新特性）/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -349,20 +387,15 @@
   
 <nav id="article-nav">
   
-    <a href="/2016/05/03/Healthkit睡眠分析/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/06/09/WWDC2016-Session708（高级通知）/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Healthkit睡眠分析
+          WWDC2016-Session708（高级通知）
         
       </div>
     </a>
   
-  
-    <a href="/2017/04/15/iOS知识总结-基础篇-1/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">iOS知识总结-基础篇-1</div>
-      <i class="icon-circle-right"></i>
-    </a>
   
 </nav>
 
