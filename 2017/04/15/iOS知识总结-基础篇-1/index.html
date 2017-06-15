@@ -22,7 +22,7 @@
 <meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E6%B7%B1%E6%8B%B7%E8%B4%9D-%E6%B5%85%E6%8B%B7%E8%B4%9D-03.png">
 <meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E6%B7%B1%E6%8B%B7%E8%B4%9D-%E6%B5%85%E6%8B%B7%E8%B4%9D-04.png">
 <meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/image/jpg/View%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png">
-<meta property="og:updated_time" content="2017-06-09T05:13:01.000Z">
+<meta property="og:updated_time" content="2017-06-14T04:54:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS知识总结-基础篇-1">
 <meta name="twitter:description" content="文章大纲，便于浏览  01-iOS程序启动过程 02-浅拷贝-深拷贝 03-View的生命周期 04-@property 05-事件传递和事件响应 06-KVC 07-KVO 08-iOS数据持久化方案  01-iOS-App-startup-process一、启动完整过程">
@@ -241,15 +241,15 @@
 <p>启动与代理：<br><img src="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E7%A8%8B%E5%BA%8F%E5%90%AF%E5%8A%A8%E4%B8%8E%E4%BB%A3%E7%90%86.png" alt=""></p>
 <h2 id="02-ShallowCopy-DeepCopy"><a href="#02-ShallowCopy-DeepCopy" class="headerlink" title="02-ShallowCopy-DeepCopy"></a>02-ShallowCopy-DeepCopy</h2><p>简要总结一下什么是浅拷贝，什么是深拷贝</p>
 <blockquote>
-<p>深拷贝就是内容拷贝</p>
+<p>深拷贝就是内容拷贝（分为单层拷贝、完全拷贝），深拷贝的之所以分为两类，主要是针对集合类</p>
 <p>浅拷贝就是指针拷贝</p>
 </blockquote>
-<p>###一.系统对象的 copy/mutableCopy</p>
+<p>####一.系统对象的 copy/mutableCopy</p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSString</span> *string = <span class="string">@"LiMing"</span>;</div><div class="line">    </div><div class="line"><span class="built_in">NSString</span> *copyString = [string <span class="keyword">copy</span>];</div><div class="line">    </div><div class="line"><span class="built_in">NSString</span> *mutableString = [string mutableCopy];</div><div class="line">    </div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"string = %p"</span>,string);</div><div class="line">    </div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"copyString = %p"</span>,copyString);</div><div class="line">    </div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"mutableString = %p "</span>,mutableString);</div><div class="line"></div><div class="line">结论：</div><div class="line"><span class="number">1.</span>string 和 copyString 他们只是二个不同的指针，指向内存中的同一块地址，<span class="keyword">copy</span> 只是指针复制</div><div class="line"><span class="number">2.</span>string 和 mutableString 打印出来的地址不同，是因为两个指针指向的地址本就不同，mutableCopy 是内容复制</div><div class="line"></div><div class="line">注意：其他对象 <span class="built_in">NSArray</span> 、<span class="built_in">NSMutableArray</span> 、<span class="built_in">NSDictionary</span> 、<span class="built_in">NSMutableDictionary</span> 一样适用</div></pre></td></tr></table></figure>
 <p>规律可以从这张图看出来</p>
 <p><img src="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E6%B7%B1%E6%8B%B7%E8%B4%9D-%E6%B5%85%E6%8B%B7%E8%B4%9D-01" alt=""></p>
 <p><img src="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E6%B7%B1%E6%8B%B7%E8%B4%9D-%E6%B5%85%E6%8B%B7%E8%B4%9D-02" alt=""></p>
-<p>###二.自定义对象实现 Copy-MutableCopy</p>
+<p>####二.自定义对象实现 Copy-MutableCopy</p>
 <ul>
 <li>copy</li>
 </ul>
@@ -262,11 +262,18 @@
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#import <span class="meta-string">"ViewController.h"</span></span></div><div class="line"><span class="meta">#import <span class="meta-string">"GZQPerson.h"</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> ()</span></div><div class="line"></div><div class="line"><span class="keyword">@end</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    </div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line"></div><div class="line">    GZQPerson *person = [[GZQPerson alloc] init];</div><div class="line">    person.age = <span class="number">20</span>;</div><div class="line">    person.name = <span class="string">@"GZQ"</span>;</div><div class="line">    GZQPerson *copyP = [person <span class="keyword">copy</span>];</div><div class="line">    </div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"copyP=%p"</span>,copyP);</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"person=%p"</span>,person);</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"person=%p"</span>,copyP.name);</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"person=%p"</span>,person.name);</div><div class="line">    </div><div class="line">&#125;</div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
 <p><img src="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E6%B7%B1%E6%8B%B7%E8%B4%9D-%E6%B5%85%E6%8B%B7%E8%B4%9D-04.png" alt=""></p>
 <p>可以看出虽然指针的地址不同，但是存储的地址是一致的。</p>
-<p>###三.copy 本质</p>
+<p>####三.copy 本质</p>
 <p><code>property copy</code> 实际上就对name干了这个：</p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#import <span class="meta-string">&lt;Foundation/Foundation.h&gt;</span></span></div><div class="line"></div><div class="line">property <span class="keyword">copy</span> 实际上就对name干了这个：</div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)setName:(<span class="built_in">NSString</span> *)name</div><div class="line">&#123;</div><div class="line">    _name = [name <span class="keyword">copy</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><code>strong</code>是不执行<code>Copy</code>操作的</p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="built_in">NSString</span> *name;</div><div class="line"></div><div class="line"><span class="built_in">NSMutableString</span> *string = [<span class="built_in">NSMutableString</span> stringWithFormat:<span class="string">@"深拷贝-浅拷贝"</span>];</div><div class="line"></div><div class="line">GZQPerson *person = [[GZQPerson alloc] init];</div><div class="line">person.name = string;</div><div class="line"></div><div class="line"><span class="comment">// 可以改变person.name的值，因为其内部没有生成新的对象</span></div><div class="line">[string appendString:<span class="string">@"LALALA"</span>];</div><div class="line"></div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"name = %@"</span>, person.name);</div></pre></td></tr></table></figure>
+<p>####四.集合类 Copy MutableCopy 操作</p>
+<blockquote>
+<p>单层深复制，也就是我们经常说的深复制，我这里说的单层深复制是对于集合类所说的(即NSArray,NSDictionary,NSSet)，单层深复制指的是只复制了该集合类的最外层，里边的元素没有复制，(即这两个集合类的地址不一样，但是两个集合里所存储的元素的地址是一样的)</p>
+<p>完全复制，指的是完全复制整个集合类，也就是说两个集合地址不一样，里边所存储的元素地址也不一样</p>
+</blockquote>
+<p>实现多层完全拷贝也很简单</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSArray</span> *copyArray = [[<span class="built_in">NSArray</span> alloc] initWithArray:array copyItems:<span class="literal">YES</span>];  <span class="comment">// 完全复制</span></div></pre></td></tr></table></figure>
 <h2 id="03-View的生命周期"><a href="#03-View的生命周期" class="headerlink" title="03-View的生命周期"></a>03-View的生命周期</h2><ul>
 <li>读懂这一张图即可<br><img src="http://okhqmtd8q.bkt.clouddn.com/image/jpg/View%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png" alt=""></li>
 </ul>
@@ -694,11 +701,15 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">翻译</a>
+                <a href="javascript:void(0)" class="js-tag color4">知识点</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">知识点</a>
+                <a href="javascript:void(0)" class="js-tag color4">面试题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">翻译</a>
               </li>
              
               <li class="article-tag-list-item">
