@@ -6,12 +6,12 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Liberalism</title>
+  <title>Archives | Liberalism</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="码农。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Liberalism">
-<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+<meta property="og:url" content="http://yoursite.com/archives/page/3/index.html">
 <meta property="og:site_name" content="Liberalism">
 <meta property="og:description" content="码农。">
 <meta name="twitter:card" content="summary">
@@ -170,549 +170,60 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Block详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
     
-      <header class="article-header">
-        
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2016" class="archive-year">2016</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2016/05/03/Healthkit睡眠分析/" class="archive-article-date">
+  	<time datetime="2016-05-03T06:55:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-05-03</time>
+</a>
+        </div>
+    	 
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/18/Block详解/">Block详解</a>
+      <a class="archive-article-title" href="/2016/05/03/Healthkit睡眠分析/">Healthkit睡眠分析</a>
     </h1>
   
 
-        
-        <a href="/2017/05/18/Block详解/" class="archive-article-date">
-  	<time datetime="2017-05-18T11:34:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p><code>block</code>是2010年WWDC苹果为 Objective－C 提供的一个新特性，它为我们开发提供了便利，比如GCD就大量使用了<code>block</code>，用来往执行队列中添加任务。书上定义<code>block</code>是带有自动变量（局部变量）的匿名函数。其实它就是一个闭包，一个引用自动变量的函数，更通俗的说，<code>block</code>就是一段代码块，用来储存一段代码，在特定的时机执行</p>
-</blockquote>
-<h3 id="Block用途"><a href="#Block用途" class="headerlink" title="Block用途"></a>Block用途</h3><ol>
-<li>自动变量（局部变量）</li>
-<li>函数参数</li>
-<li>静态局部变量</li>
-<li>静态全局变量</li>
-<li>全局变量</li>
-</ol>
-<h3 id="Block声明与定义"><a href="#Block声明与定义" class="headerlink" title="Block声明与定义"></a>Block声明与定义</h3><p>1.没有返回值,没有参数的定义方式</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">//返回值类型(^block的名字)(参数类型) = ^(参数类型和参数名) &#123;&#125;;</span></div><div class="line">  <span class="keyword">void</span>(^block)() = ^()&#123;</div><div class="line">  </div><div class="line">      <span class="built_in">NSLog</span>(<span class="string">@"调用了block"</span>);</div><div class="line">  &#125;;</div><div class="line">  </div><div class="line"><span class="comment">//当然,没有参数的时候可以把括号省去</span></div><div class="line">  <span class="keyword">void</span>(^block)() = ^&#123;</div><div class="line">  </div><div class="line">      <span class="built_in">NSLog</span>(<span class="string">@"调用了block"</span>);</div><div class="line">  &#125;;</div><div class="line">  </div><div class="line"><span class="comment">// Block的调用直接Block名称后面括号即可，有参数就把参数放入即可</span></div><div class="line"></div><div class="line">    block();  <span class="comment">// 调用了上面定义的Block</span></div></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2017/05/18/Block详解/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">知识点</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">翻译</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/18/Block详解/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-
-
-
-
-
-
-
   
-    <article id="post-iOS知识点小集" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
+    </div></section>
+  
+
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/17/iOS知识点小集/">iOS知识点小集</a>
-    </h1>
-  
-
-        
-        <a href="/2017/05/17/iOS知识点小集/" class="archive-article-date">
-  	<time datetime="2017-05-17T05:45:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li><p>在初始化项目时，<code>LaunchScreen</code> &gt; <code>LaunchImage</code>的优先级</p>
- <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">   如果是通过LaunchImage设置启动界面,那么屏幕的可视范围由图片决定</div><div class="line">   注意:如果使用LaunchImage,必须让你的美工提供各种尺寸的启动图片</div><div class="line">   </div><div class="line">   LaunchScreen:Xcode6开始才有</div><div class="line">   LaunchScreen好处:<span class="number">1.</span>自动识别当前真机或者模拟器的尺寸 <span class="number">2.</span>只要让美工提供一个可拉伸图片</div><div class="line">   <span class="number">3.</span>展示更多东西</div><div class="line"></div><div class="line">   LaunchScreen底层实现:把LaunchScreen截屏,生成一张图片.作为启动界面</div><div class="line">*/</div></pre></td></tr></table></figure>
-</li>
-</ol>
-        
-          <a class="article-more-a" href="/2017/05/17/iOS知识点小集/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/17/iOS知识点小集/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-SDWebImage源码解析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/16/SDWebImage源码解析/">SDWebImage源码解析</a>
-    </h1>
-  
-
-        
-        <a href="/2017/05/16/SDWebImage源码解析/" class="archive-article-date">
-  	<time datetime="2017-05-16T05:59:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="http://okhqmtd8q.bkt.clouddn.com/header/image/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-SDWebImage.png" alt=""></p>
-<blockquote>
-<p><a href="https://github.com/rs/SDWebImage">SDWebImage</a>是我们经常使用的一个异步图片加载库，大大提高了我们的开发效率。它支持从网络中下载且缓存图片，并设置图片到对应的UIImageView控件或者UIButton控件上。</p>
-</blockquote>
-        
-          <a class="article-more-a" href="/2017/05/16/SDWebImage源码解析/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">源码解析</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/16/SDWebImage源码解析/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-iOS知识总结-多线程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/12/iOS知识总结-多线程/">iOS知识总结-多线程</a>
-    </h1>
-  
-
-        
-        <a href="/2017/05/12/iOS知识总结-多线程/" class="archive-article-date">
-  	<time datetime="2017-05-12T05:36:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>进程</strong>是指在系统中正在运行的一个应用程序。每个进程之间是独立的，每个进程均运行在其专用且受保护的内存空间内。</p>
-<h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a><strong>线程</strong></h2><blockquote>
-<p>进程要想执行任务，必须得有线程（每1个进程至少要有1条线程），线程是进程的基本执行单元，一个进程的所有任务都在线程中执行。线程中任务的执行是串行的，如果要在1个线程中执行多个任务，那么只能一个一个地按顺序执行这些任务。也就是说，在同一时间内，1个线程只能执行1个任务。</p>
-</blockquote>
-<h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a><strong>多线程</strong></h2><blockquote>
-<p> 即1个进程中可以开启多条线程，每条线程可以并行（同时）执行不同的任务。在同一时间里，CPU只能处理1条线程，只有1条线程在工作。多线程并发执行，其实是CPU快速地在多条线程之间切换，如果CPU调度线程的时间足够快，就造成了多线程并发执行的假象</p>
-</blockquote>
-        
-          <a class="article-more-a" href="/2017/05/12/iOS知识总结-多线程/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">知识总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/12/iOS知识总结-多线程/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-iOS常用设计模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/10/iOS常用设计模式/">iOS常用设计模式</a>
-    </h1>
-  
-
-        
-        <a href="/2017/05/10/iOS常用设计模式/" class="archive-article-date">
-  	<time datetime="2017-05-10T07:28:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>一、何为设计模式</p>
-<p><code>设计模式（Design pattern）</code>是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了可重用代码、让代码更容易被他人理解、保证代码可靠性。 毫无疑问，设计模式于己于他人于系统都是多赢的；设计模式使代码编制真正工程化；设计模式是软件工程的基石脉络，如同大厦的结构一样。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">知识总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/10/iOS常用设计模式/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-iOS知识总结-基础篇-2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/25/iOS知识总结-基础篇-2/">iOS知识总结-基础篇-2</a>
-    </h1>
-  
-
-        
-        <a href="/2017/04/25/iOS知识总结-基础篇-2/" class="archive-article-date">
-  	<time datetime="2017-04-25T05:43:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>文章大纲，便于浏览</p>
-<h3 id="1-NSTimer"><a href="#1-NSTimer" class="headerlink" title="1.NSTimer"></a>1.NSTimer</h3><p>以下<a href="http://www.jianshu.com/p/330d7310339d">文章</a>详细讲述了NSTimer的创建、销毁以及与NSRunLoop的关系，通读几遍，就可以融会贯通了</p>
-<h3 id="2-iOS应用程序间共享数据"><a href="#2-iOS应用程序间共享数据" class="headerlink" title="2.iOS应用程序间共享数据"></a>2.iOS应用程序间共享数据</h3><p>这篇<a href="http://www.jianshu.com/p/169e31cacf42">文章</a>义工介绍了四种应用程序间共享数据的方法</p>
-<h3 id="3-开源许可说明"><a href="#3-开源许可说明" class="headerlink" title="3.开源许可说明"></a>3.开源许可说明</h3><p><img src="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E5%BC%80%E6%BA%90%E8%AE%B8%E5%8F%AF%E8%AF%B4%E6%98%8E.jpg" alt=""></p>
-        
-          <a class="article-more-a" href="/2017/04/25/iOS知识总结-基础篇-2/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">知识总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/25/iOS知识总结-基础篇-2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-iOS知识总结-基础篇-1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/15/iOS知识总结-基础篇-1/">iOS知识总结-基础篇-1</a>
-    </h1>
-  
-
-        
-        <a href="/2017/04/15/iOS知识总结-基础篇-1/" class="archive-article-date">
-  	<time datetime="2017-04-15T15:43:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>文章大纲，便于浏览</p>
-<ol>
-<li><a href="https://github.com/liberalisman/2018-Interview-Preparation#01-ios-app-startup-process">01-iOS程序启动过程</a></li>
-<li><a href="https://github.com/liberalisman/2018-Interview-Preparation#02-shallowcopy-deepcopy">02-浅拷贝-深拷贝</a></li>
-<li><a href="https://github.com/liberalisman/2018-Interview-Preparation#03-view的生命周期">03-View的生命周期</a></li>
-<li><a href="https://github.com/liberalisman/2018-Interview-Preparation#04-property">04-@property</a></li>
-<li><a href="https://github.com/liberalisman/iOS-Summary-Part1#05-事件传递和事件响应">05-事件传递和事件响应</a></li>
-<li><a href="https://github.com/liberalisman/iOS-Summary-Part1#06-kvc">06-KVC</a></li>
-<li><a href="https://github.com/liberalisman/iOS-Summary-Part1#07-kvo">07-KVO</a></li>
-<li><a href="https://github.com/liberalisman/iOS-Summary-Part1#08-ios数据持久化方案">08-iOS数据持久化方案</a></li>
-</ol>
-<h2 id="01-iOS-App-startup-process"><a href="#01-iOS-App-startup-process" class="headerlink" title="01-iOS-App-startup-process"></a>01-iOS-App-startup-process</h2><h3 id="一、启动完整过程"><a href="#一、启动完整过程" class="headerlink" title="一、启动完整过程"></a>一、启动完整过程</h3><p><img src="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E7%A8%8B%E5%BA%8F%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B.png" alt=""></p>
-        
-          <a class="article-more-a" href="/2017/04/15/iOS知识总结-基础篇-1/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">知识总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/15/iOS知识总结-基础篇-1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-weak-弱引用实现原理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/03/weak-弱引用实现原理/">weak-弱引用实现原理</a>
-    </h1>
-  
-
-        
-        <a href="/2017/04/03/weak-弱引用实现原理/" class="archive-article-date">
-  	<time datetime="2017-04-03T06:33:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><code>weak</code>是一个弱引用，这个引用不会增加对象的引用计数，并且所指对象在释放后被自动置为nil。<code>weak</code>通常用于处理循环引用的问题。如<code>代理</code>属性以及<code>block</code>中用得比较多。</p>
-<p>此处重点记录一下<code>weak</code>的实现过程</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="keyword">id</span> __<span class="keyword">weak</span> obj1 = obj;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2017/04/03/weak-弱引用实现原理/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">读后感</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/03/weak-弱引用实现原理/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-  
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/archives/page/2/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span>
     </nav>
   
 
@@ -736,9 +247,9 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
+		isHome: false,
 		isPost: false,
-		isArchive: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

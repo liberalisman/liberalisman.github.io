@@ -6,17 +6,41 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Liberalism</title>
+  <title>UIStackView教程 | Liberalism</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="码农。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Liberalism">
-<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+  <meta name="description" content="这是一篇挺老的文章，主要就是介绍在iOS9时推出的控件UIStackView。我发现网上的资料并不算多，而AppCoda的这一篇就浅显易懂，所以决定翻译一下，再写个Demo。">
+<meta name="keywords" content="翻译">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UIStackView教程">
+<meta property="og:url" content="http://yoursite.com/2017/06/16/UIStackView教程/index.html">
 <meta property="og:site_name" content="Liberalism">
-<meta property="og:description" content="码农。">
+<meta property="og:description" content="这是一篇挺老的文章，主要就是介绍在iOS9时推出的控件UIStackView。我发现网上的资料并不算多，而AppCoda的这一篇就浅显易懂，所以决定翻译一下，再写个Demo。">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/1.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/2.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/3.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/4.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/5.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/6.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/7.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/8.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/9.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/10.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/11.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/12.gif">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/13.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/14.gif">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/15.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/16.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/17.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/18.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/19.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/20.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/21.gif">
+<meta property="og:updated_time" content="2017-06-16T07:38:09.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Liberalism">
-<meta name="twitter:description" content="码农。">
+<meta name="twitter:title" content="UIStackView教程">
+<meta name="twitter:description" content="这是一篇挺老的文章，主要就是介绍在iOS9时推出的控件UIStackView。我发现网上的资料并不算多，而AppCoda的这一篇就浅显易懂，所以决定翻译一下，再写个Demo。">
+<meta name="twitter:image" content="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/1.png">
   
     <link rel="alternative" href="/atom.xml" title="Liberalism" type="application/atom+xml">
   
@@ -168,45 +192,128 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-Block详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-UIStackView教程" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/18/Block详解/">Block详解</a>
+    <h1 class="article-title" itemprop="name">
+      UIStackView教程
     </h1>
   
 
         
-        <a href="/2017/05/18/Block详解/" class="archive-article-date">
-  	<time datetime="2017-05-18T11:34:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-18</time>
+        <a href="/2017/06/16/UIStackView教程/" class="archive-article-date">
+  	<time datetime="2017-06-16T01:41:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-16</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
-<p><code>block</code>是2010年WWDC苹果为 Objective－C 提供的一个新特性，它为我们开发提供了便利，比如GCD就大量使用了<code>block</code>，用来往执行队列中添加任务。书上定义<code>block</code>是带有自动变量（局部变量）的匿名函数。其实它就是一个闭包，一个引用自动变量的函数，更通俗的说，<code>block</code>就是一段代码块，用来储存一段代码，在特定的时机执行</p>
-</blockquote>
-<h3 id="Block用途"><a href="#Block用途" class="headerlink" title="Block用途"></a>Block用途</h3><ol>
-<li>自动变量（局部变量）</li>
-<li>函数参数</li>
-<li>静态局部变量</li>
-<li>静态全局变量</li>
-<li>全局变量</li>
-</ol>
-<h3 id="Block声明与定义"><a href="#Block声明与定义" class="headerlink" title="Block声明与定义"></a>Block声明与定义</h3><p>1.没有返回值,没有参数的定义方式</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">//返回值类型(^block的名字)(参数类型) = ^(参数类型和参数名) &#123;&#125;;</span></div><div class="line">  <span class="keyword">void</span>(^block)() = ^()&#123;</div><div class="line">  </div><div class="line">      <span class="built_in">NSLog</span>(<span class="string">@"调用了block"</span>);</div><div class="line">  &#125;;</div><div class="line">  </div><div class="line"><span class="comment">//当然,没有参数的时候可以把括号省去</span></div><div class="line">  <span class="keyword">void</span>(^block)() = ^&#123;</div><div class="line">  </div><div class="line">      <span class="built_in">NSLog</span>(<span class="string">@"调用了block"</span>);</div><div class="line">  &#125;;</div><div class="line">  </div><div class="line"><span class="comment">// Block的调用直接Block名称后面括号即可，有参数就把参数放入即可</span></div><div class="line"></div><div class="line">    block();  <span class="comment">// 调用了上面定义的Block</span></div></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2017/05/18/Block详解/#more">more >></a>
-        
+        <p>这是一篇挺老的文章，主要就是介绍在<code>iOS9</code>时推出的控件<code>UIStackView</code>。我发现网上的资料并不算多，而<code>AppCoda</code>的这一篇就浅显易懂，所以决定翻译一下，再写个<code>Demo</code>。</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/1.png" alt=""></p>
+<a id="more"></a>
+<h3 id="UIStackView-简介"><a href="#UIStackView-简介" class="headerlink" title="UIStackView 简介"></a>UIStackView 简介</h3><p>开始这个教程的话，我们会讲一些<code>iOS9</code>的新特性，<code>iOS</code>最近推出的新版本带来了很多新的特性，而新推出的<code>UIStackView</code>应该引起开发者第一时间的关注。据我所知，一些开发者认为使用<code>AutoLayout</code>去设计一些复杂的用户界面是十分困难的。<code>UIStackView</code>就是帮助开发者将这些复杂页面的设计工作变得更简单。</p>
+<p><code>UIStackView</code>为布局一组控件提供了线性的布局页面，这组控件可以<strong>垂直显示</strong>，也可以<strong>水平显示</strong>。当<code>View</code>被加入到<code>UIStackView</code>,你不再需要为它设置约束。<code>UIStackView</code>会自动管理子控件的布局并为他们添加约束。这也就意味着，子控件可以去适应不同的屏幕尺寸。</p>
+<p>再进一步讲，你可以将一个<code>UIStackView</code>放进另一个<code>UIStackView</code>中以实现更为复杂的用户界面的设计工作。当然千万不要被我误导，<code>UIStackView</code>并不意味着你再也不必和约束打交道，你至少是要为<code>UIStackView</code>设置约束的。<code>UIStackView</code>只是节省了你为每一个界面元素添加约束的时间，同时你在<code>UIStackView</code>中添加和删除约束将变得超级简单。</p>
+<p><code>Xcode 7</code>提供了两种方式去使用<code>UIStackView</code>。你可以在<code>对象库</code>拖一个<code>UIStackView</code>然后放进<code>StoryBoard</code>中，<code>UIStackView</code>有<strong>水平</strong>和<strong>垂直</strong>两种，然后你可以拖拽一些<strong>视图控件</strong>，例如<code>Label</code>,<code>Button</code>,<code>image</code>等直接放入<code>UIStackView</code>。或者，你也可以利用在自动布局工具栏中<code>Stack</code>选项。利用这种方法，你可以选择两个或者多个视图控件，直接点击<code>Stack</code>。<code>Interface Builder</code>会将这些试图对象加入到<code>UIStackView</code>并且重新指定他们的大小。说到此处如果你还没有明白<code>UIStackView</code>，那也不要担心。在这个教程中，我们会展示这两种方法。只需要继续阅读，然后在一瞬间，你会  <strong>怦</strong>  的一下就懂了。</p>
+<h3 id="The-Demo-App"><a href="#The-Demo-App" class="headerlink" title="The Demo App"></a>The Demo App</h3><p>首先我们要预览一下我们即将构建的App，在这个教程中，我们会展示在<code>Interface</code>中利用<code>UIStackView</code>如何构建这个<strong>App</strong>。<br><img src="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/2.png" alt=""></p>
+<p>当然你不用<code>UIStackView</code>也可以构建一个这样的页面，但是正如你所见，<code>UIStackView</code>完全改变了你进行页面布局的方式。这个教程无需任何代码，我们将专注于利用<code>Interface Builder</code>来构建这个用户界面。</p>
+<h3 id="添加-UIStackView"><a href="#添加-UIStackView" class="headerlink" title="添加 UIStackView"></a>添加 UIStackView</h3><p>打开 <code>Xcode 7</code> ，然后打开<code>main.storyBoard</code>。从右侧的对象库面板中，往<code>storyBoard</code>中拖一个垂直方向的<code>UIStackView</code>。<code>UIStackView</code>可以分别管理<strong>水平方向</strong>和<strong>垂直方向</strong>的子控件。因为我们想要布局的<code>ImageViews</code>是垂直方向的，所以我们选择一个垂直方向的<code>UIStackView</code>。</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/3.png" alt=""></p>
+<p>接下来从控件库往外拖一个<code>Imageview</code>，当你把<code>Imageview</code>拖拽到<code>StackView</code>里，<code>Imageview</code>会自动调整尺寸，重复上面的步骤，我们再往<code>StackView</code>里面添加两个<code>imageView</code>,这时候神奇的一幕发生了，当你把另外两个<code>imageView</code>添加到<code>StackView</code>里面时，<code>StackView</code>会自动给这两个<code>imageView</code>进行垂直布局，并为他们添加上了约束条件。是不是很酷？</p>
+<h3 id="为-UIStackView-添加约束"><a href="#为-UIStackView-添加约束" class="headerlink" title="为 UIStackView 添加约束"></a>为 UIStackView 添加约束</h3><p><code>StackView</code>为开发者节省了为每一个界面元素添加约束的时间，但是你必须要为你的<code>StackView</code>添加约束条件，接下来我们将为刚才添加到是图中的<code>StackView</code>添加约束</p>
+<ul>
+<li>设置<code>StackView</code>与父控件顶部、左侧、右侧的距离</li>
+<li>设置<code>StackView</code>的高度占父控件高度的70%</li>
+</ul>
+<p>现在，我们选中<code>StackView</code>并点击<code>Pin</code>按钮。设置距离顶部、左侧、右侧的距离各自分别为10，0，0。并且把这三个约束加上。</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/4.png" alt=""></p>
+<p>现在<code>StackView</code>的位置，并不满足我们的约束条件，你需要点击警告去修复这个问题。</p>
+<p>想设置高度的约束，到文档大纲视图。按住<code>Control</code>键，从<code>StackView</code>拖线到<code>View</code>上面，松开后，选择<code>Equal Height</code>.</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/5.png" alt=""></p>
+<p>这样设置以后，<code>StackView</code>的高度就与使徒的<code>View</code>相等。然而我们只需要让<code>StackView</code>的高度是视图的<code>View</code>的70%。所以选择<code>StackView</code>的<code>Height</code>属性，然后到<code>属性面板</code>，把<code>Mutiplier</code>的值从<code>1.0</code>变成<code>0.7</code>。</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/6.png" alt=""></p>
+<h3 id="设置StackView属性值"><a href="#设置StackView属性值" class="headerlink" title="设置StackView属性值"></a>设置StackView属性值</h3><p><code>StackView</code>看起来并没有像预期一样，一旦你使用了<code>StackView</code>，你可以通过修改<code>StackView</code>的属性值来改变它的外观。</p>
+<p><code>Axis</code>是坐标轴，负责水平还是垂直。<br><code>alignment</code>是对齐方式。</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/7.png" alt=""></p>
+<p><code>Distribution</code>决定了<code>StackView</code>中子控件的尺寸和位置。它默认被设置为<code>Fill</code>。在这个例子里，<code>StackView</code>要尽可能的利用有限的空间去适配它的子控件。接下来我们将选项改为<code>Fill Equally</code>。<code>StackView</code>会自动将里面的子控件重新布局为大小相等的控件。</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/8.png" alt=""></p>
+<p><code>Space</code>选项允许你通过修改该选项，调解两个控件之间的距离，此处将值改为10。</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/9.png" alt=""></p>
+<h3 id="设置图片"><a href="#设置图片" class="headerlink" title="设置图片"></a>设置图片</h3><p>接下来为三个<code>ImageView</code>设置图片</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/10.png" alt=""></p>
+<p>现在可以把程序跑起来看看效果，在不同的模拟器，UI都可以很好的适配各种设备。<code>StackView</code>已经自动帮你添加好了布局。实际上你可以通过<code>页面调试</code>选项，来查看为<code>ImageView</code>添加的布局。</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/11.png" alt=""></p>
+<h3 id="用嵌套的方式布局控件"><a href="#用嵌套的方式布局控件" class="headerlink" title="用嵌套的方式布局控件"></a>用嵌套的方式布局控件</h3><p>还有一些<code>Lable</code>和<code>Button</code>需要添加到页面上，如图所示，拖两个<code>Lable</code>到<code>StackView</code>的正下方，上面的标签字号为30.</p>
+<p>然后选中两个<code>Lable</code>，点击<code>stack</code>选项，将这两个控件合并为一个<code>StackView</code>。</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/12.gif" alt=""></p>
+<p>接下来添加两个按钮，一个<code>Like</code>,一个<code>Share</code>。把这两个控件合并为一个<code>StackView</code>，设置间距为 5，方向水平。</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/13.png" alt=""></p>
+<p>把按钮的<code>StackView</code>拖进<code>Label</code>的<code>StackView</code>中，选中顶部的<code>Nature</code>标签和<code>Button</code>de <code>StackView</code>,点击<code>stack</code>选项,将他们两个合并为一个<code>StackView</code>，设置方向为水平</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/14.gif" alt=""></p>
+<p>选中这个<code>StackView</code>，将对齐方式调整为<code>First BaseLine</code>,沿第一个对象的基线对齐，然后给<code>Lable</code>和<code>Button</code>加一个20的间距。</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/15.png" alt=""></p>
+<p>这样，我们只需要利用 <code>StackView</code> 的嵌套，就可以实现我们想得到的布局。</p>
+<p>最后，我们实现了用<code>StackView</code>包裹<code>ImageView</code>,同时也实现了<code>StackView</code>包裹<code>Label</code>和<code>Button</code>。将顶部、左侧、右侧各自设置值为 8，0，0。</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/16.png" alt=""></p>
+<p>为了确保<code>Label</code>的描述文字可以正好适配，将<code>Label</code>的行数改为0，文字的<code>Line break</code>设置为文字包裹。这样你就完成了界面的设计。</p>
+<p>现在可以把程序跑起来看一下效果</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/17.png" alt=""></p>
+<p>如果横屏，效果是这样的：</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/18.png" alt=""></p>
+<p>看起来还可以，但是如果横屏时图片是水平排列那就更好了：</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/19.png" alt=""></p>
+<h3 id="利用-Size-Class-构建自适应的-StackView"><a href="#利用-Size-Class-构建自适应的-StackView" class="headerlink" title="利用*Size Class 构建自适应的 StackView"></a>利用*Size Class 构建自适应的 StackView</h3><p>为了实现 <code>iPhone</code> 在横屏时显示不同的布局，我们需要让<code>StackView</code>是自适应。在 <code>iOS8</code>，介绍过 <code>Size Class</code>  的概念，下面的表格介绍了不同的 <code>iOS</code> 设备以及他们相对应的 <code>Size Class</code>。</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/20.png" alt=""></p>
+<p>你可以利用 <code>Size Class</code> 提供一个指定的布局去覆写之前的布局设计。在这个例子中，我们需要将<code>StackView</code>的方向在以下两种情况下，由垂直变为水平。</p>
+<ul>
+<li>宽度紧凑 - 高度紧凑</li>
+<li>宽度宽松 - 高度紧凑</li>
+</ul>
+<p>接下来选择我们的<code>StackView</code>,然后打开<code>属性面板</code>，点击<code>Axis</code>边上的<code>+</code>号。</p>
+<p>选择 <code>任意宽度</code> , <code>高度紧凑</code>，并把<code>StackView</code>的方向设置为<code>水平方向</code>。</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/21.gif" alt=""></p>
+<p>然后。。。。。。就妥了！</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>在这个教程中，对<code>StackView</code>进行了简单介绍，为大家做了一个Demo，以及如何使用这个全新的组件。<code>StackView</code>这种流线型的布局方式，让你在布局时只需要使用很少的约束。</p>
+<p><strong>Apple</strong>的工程师也是推荐优先使用<code>StackView</code>，实在不行在用原生的约束。</p>
+<p>我自己做了一个简单的Demo，地址如下 ： <a href="https://github.com/liberalisman/StackView-Demo" target="_blank" rel="external">https://github.com/liberalisman/StackView-Demo</a></p>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://7xvffo.com1.z0.glb.clouddn.com/Alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://7xvffo.com1.z0.glb.clouddn.com/WeChat.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -217,7 +324,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">知识点</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">翻译</a>
         		</li>
       		
 		</ul>
@@ -226,18 +333,78 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/18/Block详解/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/06/16/UIStackView教程/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
 
-
+  
+<nav id="article-nav">
+  
+    <a href="/2017/06/15/Interview-Question/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Interview-Question &amp; Answer （初级篇)
+        
+      </div>
+    </a>
+  
+  
+</nav>
 
 
 
@@ -245,476 +412,10 @@
 
 
   
-    <article id="post-iOS知识点小集" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/17/iOS知识点小集/">iOS知识点小集</a>
-    </h1>
+    <div class="duoshuo"></div>
   
 
-        
-        <a href="/2017/05/17/iOS知识点小集/" class="archive-article-date">
-  	<time datetime="2017-05-17T05:45:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ol>
-<li><p>在初始化项目时，<code>LaunchScreen</code> &gt; <code>LaunchImage</code>的优先级</p>
- <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">   如果是通过LaunchImage设置启动界面,那么屏幕的可视范围由图片决定</div><div class="line">   注意:如果使用LaunchImage,必须让你的美工提供各种尺寸的启动图片</div><div class="line">   </div><div class="line">   LaunchScreen:Xcode6开始才有</div><div class="line">   LaunchScreen好处:<span class="number">1.</span>自动识别当前真机或者模拟器的尺寸 <span class="number">2.</span>只要让美工提供一个可拉伸图片</div><div class="line">   <span class="number">3.</span>展示更多东西</div><div class="line"></div><div class="line">   LaunchScreen底层实现:把LaunchScreen截屏,生成一张图片.作为启动界面</div><div class="line">*/</div></pre></td></tr></table></figure>
-</li>
-</ol>
-        
-          <a class="article-more-a" href="/2017/05/17/iOS知识点小集/#more">more >></a>
-        
-      
 
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/17/iOS知识点小集/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-SDWebImage源码解析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/16/SDWebImage源码解析/">SDWebImage源码解析</a>
-    </h1>
-  
-
-        
-        <a href="/2017/05/16/SDWebImage源码解析/" class="archive-article-date">
-  	<time datetime="2017-05-16T05:59:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="http://okhqmtd8q.bkt.clouddn.com/header/image/%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-SDWebImage.png" alt=""></p>
-<blockquote>
-<p><a href="https://github.com/rs/SDWebImage">SDWebImage</a>是我们经常使用的一个异步图片加载库，大大提高了我们的开发效率。它支持从网络中下载且缓存图片，并设置图片到对应的UIImageView控件或者UIButton控件上。</p>
-</blockquote>
-        
-          <a class="article-more-a" href="/2017/05/16/SDWebImage源码解析/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">源码解析</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/16/SDWebImage源码解析/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-iOS知识总结-多线程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/12/iOS知识总结-多线程/">iOS知识总结-多线程</a>
-    </h1>
-  
-
-        
-        <a href="/2017/05/12/iOS知识总结-多线程/" class="archive-article-date">
-  	<time datetime="2017-05-12T05:36:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>进程</strong>是指在系统中正在运行的一个应用程序。每个进程之间是独立的，每个进程均运行在其专用且受保护的内存空间内。</p>
-<h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a><strong>线程</strong></h2><blockquote>
-<p>进程要想执行任务，必须得有线程（每1个进程至少要有1条线程），线程是进程的基本执行单元，一个进程的所有任务都在线程中执行。线程中任务的执行是串行的，如果要在1个线程中执行多个任务，那么只能一个一个地按顺序执行这些任务。也就是说，在同一时间内，1个线程只能执行1个任务。</p>
-</blockquote>
-<h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a><strong>多线程</strong></h2><blockquote>
-<p> 即1个进程中可以开启多条线程，每条线程可以并行（同时）执行不同的任务。在同一时间里，CPU只能处理1条线程，只有1条线程在工作。多线程并发执行，其实是CPU快速地在多条线程之间切换，如果CPU调度线程的时间足够快，就造成了多线程并发执行的假象</p>
-</blockquote>
-        
-          <a class="article-more-a" href="/2017/05/12/iOS知识总结-多线程/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">知识总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/12/iOS知识总结-多线程/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-iOS常用设计模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/10/iOS常用设计模式/">iOS常用设计模式</a>
-    </h1>
-  
-
-        
-        <a href="/2017/05/10/iOS常用设计模式/" class="archive-article-date">
-  	<time datetime="2017-05-10T07:28:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>一、何为设计模式</p>
-<p><code>设计模式（Design pattern）</code>是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了可重用代码、让代码更容易被他人理解、保证代码可靠性。 毫无疑问，设计模式于己于他人于系统都是多赢的；设计模式使代码编制真正工程化；设计模式是软件工程的基石脉络，如同大厦的结构一样。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">知识总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/10/iOS常用设计模式/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-iOS知识总结-基础篇-2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/25/iOS知识总结-基础篇-2/">iOS知识总结-基础篇-2</a>
-    </h1>
-  
-
-        
-        <a href="/2017/04/25/iOS知识总结-基础篇-2/" class="archive-article-date">
-  	<time datetime="2017-04-25T05:43:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>文章大纲，便于浏览</p>
-<h3 id="1-NSTimer"><a href="#1-NSTimer" class="headerlink" title="1.NSTimer"></a>1.NSTimer</h3><p>以下<a href="http://www.jianshu.com/p/330d7310339d">文章</a>详细讲述了NSTimer的创建、销毁以及与NSRunLoop的关系，通读几遍，就可以融会贯通了</p>
-<h3 id="2-iOS应用程序间共享数据"><a href="#2-iOS应用程序间共享数据" class="headerlink" title="2.iOS应用程序间共享数据"></a>2.iOS应用程序间共享数据</h3><p>这篇<a href="http://www.jianshu.com/p/169e31cacf42">文章</a>义工介绍了四种应用程序间共享数据的方法</p>
-<h3 id="3-开源许可说明"><a href="#3-开源许可说明" class="headerlink" title="3.开源许可说明"></a>3.开源许可说明</h3><p><img src="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E5%BC%80%E6%BA%90%E8%AE%B8%E5%8F%AF%E8%AF%B4%E6%98%8E.jpg" alt=""></p>
-        
-          <a class="article-more-a" href="/2017/04/25/iOS知识总结-基础篇-2/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">知识总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/25/iOS知识总结-基础篇-2/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-iOS知识总结-基础篇-1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/15/iOS知识总结-基础篇-1/">iOS知识总结-基础篇-1</a>
-    </h1>
-  
-
-        
-        <a href="/2017/04/15/iOS知识总结-基础篇-1/" class="archive-article-date">
-  	<time datetime="2017-04-15T15:43:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>文章大纲，便于浏览</p>
-<ol>
-<li><a href="https://github.com/liberalisman/2018-Interview-Preparation#01-ios-app-startup-process">01-iOS程序启动过程</a></li>
-<li><a href="https://github.com/liberalisman/2018-Interview-Preparation#02-shallowcopy-deepcopy">02-浅拷贝-深拷贝</a></li>
-<li><a href="https://github.com/liberalisman/2018-Interview-Preparation#03-view的生命周期">03-View的生命周期</a></li>
-<li><a href="https://github.com/liberalisman/2018-Interview-Preparation#04-property">04-@property</a></li>
-<li><a href="https://github.com/liberalisman/iOS-Summary-Part1#05-事件传递和事件响应">05-事件传递和事件响应</a></li>
-<li><a href="https://github.com/liberalisman/iOS-Summary-Part1#06-kvc">06-KVC</a></li>
-<li><a href="https://github.com/liberalisman/iOS-Summary-Part1#07-kvo">07-KVO</a></li>
-<li><a href="https://github.com/liberalisman/iOS-Summary-Part1#08-ios数据持久化方案">08-iOS数据持久化方案</a></li>
-</ol>
-<h2 id="01-iOS-App-startup-process"><a href="#01-iOS-App-startup-process" class="headerlink" title="01-iOS-App-startup-process"></a>01-iOS-App-startup-process</h2><h3 id="一、启动完整过程"><a href="#一、启动完整过程" class="headerlink" title="一、启动完整过程"></a>一、启动完整过程</h3><p><img src="http://okhqmtd8q.bkt.clouddn.com/image/jpg/%E7%A8%8B%E5%BA%8F%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B.png" alt=""></p>
-        
-          <a class="article-more-a" href="/2017/04/15/iOS知识总结-基础篇-1/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">知识总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/15/iOS知识总结-基础篇-1/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-weak-弱引用实现原理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/03/weak-弱引用实现原理/">weak-弱引用实现原理</a>
-    </h1>
-  
-
-        
-        <a href="/2017/04/03/weak-弱引用实现原理/" class="archive-article-date">
-  	<time datetime="2017-04-03T06:33:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-03</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><code>weak</code>是一个弱引用，这个引用不会增加对象的引用计数，并且所指对象在释放后被自动置为nil。<code>weak</code>通常用于处理循环引用的问题。如<code>代理</code>属性以及<code>block</code>中用得比较多。</p>
-<p>此处重点记录一下<code>weak</code>的实现过程</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="keyword">id</span> __<span class="keyword">weak</span> obj1 = obj;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2017/04/03/weak-弱引用实现原理/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">读后感</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/03/weak-弱引用实现原理/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
-    </nav>
-  
 
 
           </div>
@@ -736,8 +437,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
