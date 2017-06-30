@@ -6,21 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>iOS常用加密算法 | Liberalism</title>
+  <title>KVC知识小结 | Liberalism</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="对称加密[算法]在加密和解密时使用的是同一个秘钥；而[非对称加密算法]需要两个[密钥]来进行加密和解密，这两个秘钥是[公开密钥]（public key，简称公钥）和私有密钥（private key，简称私钥）。  DES加密（数据加密算法）AES加密（高级加密标准）替代DES加密">
-<meta name="keywords" content="加密算法">
+  <meta name="description" content="KVC，即是指 NSKeyValueCoding，一个非正式的 Protocol，提供一种机制来间接访问对象的属性。KVO 就是基于 KVC 实现的关键技术之一,关于KVO,我们留待下一篇文章再仔细讲。  KVC在iOS中的定义Objective-C中KVC的定义是对NSObject的扩展来实现的(Objective-C中有个显式的NSKeyValueCoding类别名)所以对于所有继承了NSO">
+<meta name="keywords" content="知识总结">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS常用加密算法">
-<meta property="og:url" content="http://yoursite.com/2017/06/07/iOS常用加密算法/index.html">
+<meta property="og:title" content="KVC知识小结">
+<meta property="og:url" content="http://yoursite.com/2017/06/17/KVC知识小结/index.html">
 <meta property="og:site_name" content="Liberalism">
-<meta property="og:description" content="对称加密[算法]在加密和解密时使用的是同一个秘钥；而[非对称加密算法]需要两个[密钥]来进行加密和解密，这两个秘钥是[公开密钥]（public key，简称公钥）和私有密钥（private key，简称私钥）。  DES加密（数据加密算法）AES加密（高级加密标准）替代DES加密">
-<meta property="og:image" content="http://images.cnitblog.com/blog2015/671127/201503/130035028553414.png">
-<meta property="og:updated_time" content="2017-06-09T05:04:58.000Z">
+<meta property="og:description" content="KVC，即是指 NSKeyValueCoding，一个非正式的 Protocol，提供一种机制来间接访问对象的属性。KVO 就是基于 KVC 实现的关键技术之一,关于KVO,我们留待下一篇文章再仔细讲。  KVC在iOS中的定义Objective-C中KVC的定义是对NSObject的扩展来实现的(Objective-C中有个显式的NSKeyValueCoding类别名)所以对于所有继承了NSO">
+<meta property="og:updated_time" content="2017-06-30T05:34:25.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS常用加密算法">
-<meta name="twitter:description" content="对称加密[算法]在加密和解密时使用的是同一个秘钥；而[非对称加密算法]需要两个[密钥]来进行加密和解密，这两个秘钥是[公开密钥]（public key，简称公钥）和私有密钥（private key，简称私钥）。  DES加密（数据加密算法）AES加密（高级加密标准）替代DES加密">
-<meta name="twitter:image" content="http://images.cnitblog.com/blog2015/671127/201503/130035028553414.png">
+<meta name="twitter:title" content="KVC知识小结">
+<meta name="twitter:description" content="KVC，即是指 NSKeyValueCoding，一个非正式的 Protocol，提供一种机制来间接访问对象的属性。KVO 就是基于 KVC 实现的关键技术之一,关于KVO,我们留待下一篇文章再仔细讲。  KVC在iOS中的定义Objective-C中KVC的定义是对NSObject的扩展来实现的(Objective-C中有个显式的NSKeyValueCoding类别名)所以对于所有继承了NSO">
   
     <link rel="alternative" href="/atom.xml" title="Liberalism" type="application/atom+xml">
   
@@ -172,20 +170,20 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-iOS常用加密算法" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-KVC知识小结" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      iOS常用加密算法
+      KVC知识小结
     </h1>
   
 
         
-        <a href="/2017/06/07/iOS常用加密算法/" class="archive-article-date">
-  	<time datetime="2017-06-07T06:46:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-07</time>
+        <a href="/2017/06/17/KVC知识小结/" class="archive-article-date">
+  	<time datetime="2017-06-17T02:15:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-17</time>
 </a>
         
       </header>
@@ -193,43 +191,48 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>对称加密<code>[算法]</code>在加密和解密时使用的是同一个秘钥；而<code>[非对称加密算法]</code>需要两个<code>[密钥]</code>来进行加密和解密，这两个秘钥是<code>[公开密钥]</code>（public key，简称公钥）和私有密钥（private key，简称私钥）。</p>
+<p><strong>KVC</strong>，即是指 <strong>NSKeyValueCoding</strong>，一个非正式的 <strong>Protocol</strong>，提供一种机制来间接访问对象的属性。<strong>KVO</strong> 就是基于 <strong>KVC</strong> 实现的关键技术之一,关于<strong>KVO</strong>,我们留待下一篇文章再仔细讲。</p>
 </blockquote>
-<h3 id="DES加密（数据加密算法）"><a href="#DES加密（数据加密算法）" class="headerlink" title="DES加密（数据加密算法）"></a>DES加密（数据加密算法）</h3><h3 id="AES加密（高级加密标准）"><a href="#AES加密（高级加密标准）" class="headerlink" title="AES加密（高级加密标准）"></a>AES加密（高级加密标准）</h3><p>替代DES加密</p>
-<p><img src="http://images.cnitblog.com/blog2015/671127/201503/130035028553414.png" alt=""></p>
+<h3 id="KVC在iOS中的定义"><a href="#KVC在iOS中的定义" class="headerlink" title="KVC在iOS中的定义"></a>KVC在iOS中的定义</h3><p><code>Objective-C</code>中<code>KVC</code>的定义是对<code>NSObject</code>的扩展来实现的(<code>Objective-C</code>中有个显式的<code>NSKeyValueCoding</code>类别名)所以对于所有继承了<code>NSObject</code>在类型，都可以使用<code>KVC</code>，下面是<code>KVC</code>最为重要的四个方法</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">nullable</span> <span class="keyword">id</span>)valueForKey:(<span class="built_in">NSString</span> *)key;                          <span class="comment">//直接通过Key来取值</span></div><div class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">nullable</span> <span class="keyword">id</span>)value forKey:(<span class="built_in">NSString</span> *)key;          <span class="comment">//通过Key来设值</span></div><div class="line">- (<span class="keyword">nullable</span> <span class="keyword">id</span>)valueForKeyPath:(<span class="built_in">NSString</span> *)keyPath;                  <span class="comment">//通过KeyPath来取值</span></div><div class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">nullable</span> <span class="keyword">id</span>)value forKeyPath:(<span class="built_in">NSString</span> *)keyPath;  <span class="comment">//通过KeyPath来设值</span></div></pre></td></tr></table></figure>
+<p>一般来讲，<strong>Obj-C</strong> 对象中都会有一些属性。如代码所示</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#import <span class="meta-string">&lt;Foundation/Foundation.h&gt;</span></span></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Person</span> : <span class="title">NSObject</span></span></div><div class="line"></div><div class="line"><span class="comment">/** name */</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">copy</span>  ) <span class="built_in">NSString</span> *name;</div><div class="line"></div><div class="line"><span class="comment">/** Address */</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">copy</span>  ) <span class="built_in">NSString</span> *address;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
 <a id="more"></a>
+<p>上面的<code>Person</code>对象所拥有的两个属性，以 <strong>KVC</strong>的角度来看，就是<code>Person</code>对象的<code>name</code>,<code>address</code>这两个属性分别有一个<code>Value</code>对应他们的<code>Key</code>值。</p>
 <ul>
-<li>字节替代（SubBytes）</li>
-<li>行移位（ShiftRows）</li>
-<li>列混淆（MixColumns）</li>
-<li>轮密钥加（AddRoundKey）</li>
+<li>Key 是一个字符串类型。</li>
+<li>Value 可以为任何类型。</li>
 </ul>
-<p>参考博客   <a href="http://www.mamicode.com/info-detail-514466.html" target="_blank" rel="external">http://www.mamicode.com/info-detail-514466.html</a></p>
-<h3 id="MD5加密（信息-摘要算法）"><a href="#MD5加密（信息-摘要算法）" class="headerlink" title="MD5加密（信息-摘要算法）"></a>MD5加密（信息-摘要算法）</h3><h6 id="MD5功能："><a href="#MD5功能：" class="headerlink" title="MD5功能："></a>MD5功能：</h6><ul>
-<li>输入任意长度的信息，经过处理，输出为128位的信息（数字指纹）；</li>
-<li>不同的输入得到的不同的结果（唯一性）；</li>
-<li>根据128位的输出结果不可能反推出输入的信息（不可逆）；</li>
-</ul>
-<h6 id="MD5用途"><a href="#MD5用途" class="headerlink" title="MD5用途"></a>MD5用途</h6><ul>
-<li>1、防止被篡改：</li>
-<li>2、比如发送一个电子文档，发送前，我先得到MD5的输出结果a。然后在对方收到电子文档后，对方也得到一个MD5的输出结果b。如果a与b一样就代表中途未被篡改。2）比如我提供文件下载，为了防止不法分子在安装程序中添加木马，我可以在网站上公布由安装文件得到的MD5输出结果。</li>
-<li>3、SVN在检测文件是否在CheckOut后被修改过，也是用到了MD5. </li>
-</ul>
-<h3 id="SHA加密（安全散列算法）"><a href="#SHA加密（安全散列算法）" class="headerlink" title="SHA加密（安全散列算法）"></a>SHA加密（安全散列算法）</h3><blockquote>
-<p>接收一段明文，然后以一种不可逆的方式将它转换成一段密文，也可以简单的理解为取一串输入码，并把这个信息转化为长度较短、位数固定的输出序列即散列值（也称为信息认证代码）的过程。适用于长度不超过<br>2^64 二进制位的消息。根据长度小于2^64 位的消息，它会产生一个160位的信息摘要</p>
-</blockquote>
-<h6 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h6><ul>
-<li>不可逆——（无法推出任何部分的原始信息）</li>
-<li>防冲突—— （任何输入的信息的变化，哪怕一位，都将导致结果变化）</li>
-<li>具有良好的雪崩效应——（找不到具有相同散列结果的两条信息）</li>
-</ul>
-<h3 id="RSA加密"><a href="#RSA加密" class="headerlink" title="RSA加密"></a>RSA加密</h3><blockquote>
-<p>与对称加密[算法]不同，[非对称加密算法]需要两个[密钥]：<code>[公开密钥]（publickey）</code>和<code>私有密钥（privatekey）</code>。公开密钥与私有密钥是一对，如果用公开密钥对数据进行加密，只有用对应的私有密钥才能解密；如果用私有密钥对数据进行加密，那么只有用对应的公开密钥才能解密。因为<code>加密</code>和<code>解密</code>使用的是两个不同的[密钥]，所以这种算法叫作<code>[非对称加密算法]</code>。</p>
-</blockquote>
-<h4 id="RSA加密原理"><a href="#RSA加密原理" class="headerlink" title="RSA加密原理"></a><code>RSA</code>加密原理</h4><p><code>RSA</code>是常用的加密模式，其加密原理可用以下的例子进行简要的论述。</p>
-<p>随机取两个质数</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">P = <span class="number">61</span>;</div><div class="line">q = <span class="number">53</span>;</div><div class="line">N = P * Q = <span class="number">3233</span>;</div><div class="line"><span class="comment">// E是1-n之间的一个随机的质数</span></div><div class="line">E = <span class="number">17</span>;</div><div class="line"></div><div class="line"><span class="comment">// D是通过一系列数学运算得出的一个数字，</span></div><div class="line"><span class="comment">// 运算方法后续会附上阮一峰老师的两篇文章链接</span></div><div class="line"><span class="comment">// (N,D)(N,E)要满足可以互相解值运算</span></div><div class="line"><span class="comment">// 假如(N,D)是公钥，（N,E）是私钥</span></div><div class="line"><span class="comment">// 满足私钥加密，公钥解密或者反过来公钥加密，私钥解密。</span></div><div class="line"><span class="comment">// 也要满足只知道（N，D）就想知道（N,E），那就要把N这个大的整数进行因数分解。</span></div><div class="line"><span class="comment">// 因数分解只能使用暴力穷举，N越大，相应的也就越安全</span></div><div class="line"><span class="comment">// 当 N 大到1024位或者2048位时，以目前的技术破解几乎不可能，所以很安全</span></div></pre></td></tr></table></figure>
-<h4 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h4><p><a href="http://www.ruanyifeng.com/blog/2013/06/rsa_algorithm_part_one.html" target="_blank" rel="external">阮一峰-RSA算法原理1</a><br><a href="http://www.ruanyifeng.com/blog/2013/07/rsa_algorithm_part_two.html" target="_blank" rel="external">阮一峰-RSA算法原理2</a></p>
+<p>KVC 为存取值提供了两个最基础的方法。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Person *man = [Person new];</div><div class="line"></div><div class="line"><span class="comment">// 存值</span></div><div class="line">[man setValue:<span class="string">@"LiMing"</span> forKey:<span class="string">@"name"</span>];</div><div class="line"></div><div class="line"><span class="comment">// 取值</span></div><div class="line"><span class="built_in">NSString</span> *name = [man valueForKey:<span class="string">@"name"</span>];</div><div class="line"></div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,name);</div></pre></td></tr></table></figure>
+<p>KVC 为了便于使用还提供了另外两个方法。</p>
+<p>假设我们之前创建的这个对象有一个配偶，配偶也是一个Person对象,此时我们想在<code>man</code>这里读出<code>woman</code>的<code>name</code>属性</p>
+<p>可以这样操作</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Person *woman = [Person new];</div><div class="line"></div><div class="line">man.spouse = woman;</div><div class="line"></div><div class="line">[man setValue:<span class="string">@"Lily"</span> forKeyPath:<span class="string">@"spouse.name"</span>];</div><div class="line"></div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,[man valueForKeyPath:<span class="string">@"spouse.name"</span>]);</div><div class="line"></div><div class="line"><span class="comment">//  Key 与 KeyPath 要区分开来</span></div><div class="line"><span class="comment">//  Key 可以让你从一个对象中获取值</span></div><div class="line"><span class="comment">//  KeyPath  可以让你通过连续的多个Key获取值，着多个key值用点号 “.” 分割连接起来</span></div></pre></td></tr></table></figure>
+<p>简单对比一下</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//  结果一样的，但是用 KeyPath 更简单</span></div><div class="line">[man valueForKeyPath:<span class="string">@"spouse.name"</span>]</div><div class="line"></div><div class="line">[[man valueForKey:<span class="string">@"spouse"</span>] valueForKey:<span class="string">@"name"</span>];</div></pre></td></tr></table></figure>
+<h3 id="KVC寻找Key值过程"><a href="#KVC寻找Key值过程" class="headerlink" title="KVC寻找Key值过程"></a>KVC寻找Key值过程</h3><p>KVC在某种程度上提供了访问器的替代方案，不过只要有可能，KVC也是在访问器方法的帮助下工作。KVC按照以下顺序寻找Key值。</p>
+<h4 id="1-赋值"><a href="#1-赋值" class="headerlink" title="1.赋值"></a>1.赋值</h4><p>当程序调用</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">nullable</span> <span class="keyword">id</span>)value forKey:(<span class="built_in">NSString</span> *)key;</div></pre></td></tr></table></figure>
+<h5 id="1-优先寻找访问器方法"><a href="#1-优先寻找访问器方法" class="headerlink" title="1.优先寻找访问器方法"></a>1.优先寻找访问器方法</h5><p>程序会优先调用<code>setKey</code>的属性值方法，代码直接通过<code>Setter</code>方法完成设置。这里的<code>key</code>值指的是成员变量名，<code>Key</code>值首字母大写要符合<code>Setter</code>和<code>Getter</code>方法的命名规则。</p>
+<h5 id="2-寻找-key"><a href="#2-寻找-key" class="headerlink" title="2.寻找_key"></a>2.寻找_key</h5><p>如果没有找到<code>setKey</code>的访问器方法，<code>KVC</code>机制会检查</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">+ (<span class="built_in">BOOL</span>)accessInstanceVariablesDirectly</div></pre></td></tr></table></figure>
+<p>的返回值是否为<code>NO</code>，此方法默认返回的是<code>YES</code>。如果开发者重写了该方法让这个返回值为<code>NO</code>时，接下来<code>KVC</code>会直接调用</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">id</span>)value forUndefinedKey:(<span class="built_in">NSString</span> *)key</div></pre></td></tr></table></figure>
+<p>这个时候如果你不做其他操作，就要报出异常了，所以一般人都不会这么做。</p>
+<p>接下来<code>KVC</code>机制会搜索该类里面有没有<code>_key</code>的成员变量，无论你是在声明文件中定义，还是在实现文件中定义，也无论使用了什么样的属性修饰符，只要存在着<code>_key</code>命名的变量，<code>KVC</code>都可以对该成员变量赋值。</p>
+<h5 id="3-寻找-isKey"><a href="#3-寻找-isKey" class="headerlink" title="3.寻找_isKey"></a>3.寻找_isKey</h5><p>如果该类即没有<code>setKey：</code>的访问器方法，也没有<code>_key</code>成员变量，<code>KVC</code>机制会搜索<code>_isKey</code>的成员变量。</p>
+<h5 id="4-寻找Key和isKey"><a href="#4-寻找Key和isKey" class="headerlink" title="4.寻找Key和isKey"></a>4.寻找Key和isKey</h5><p>和上面一样，如果该类即没有<code>setKey：</code>的访问器方法，也没有<code>_key</code>和<code>_isKey</code>成员变量，<code>KVC</code>机制再会继续搜索<code>key</code>和<code>isKey</code>的成员变量。再给它们赋值。</p>
+<p>如果上面列出的方法或者成员变量都不存在，系统将会执行该对象的<code>setValue：forUNdefinedKey：</code>方法，默认是抛出异常。</p>
+<p>如果开发者想让这个类禁用<code>KVC</code>里，那么重写<code>+ (BOOL)accessInstanceVariablesDirectly</code>方法让其返回NO即可，这样的话如果<code>KVC</code>没有找到<code>set&lt;Key&gt;:</code>属性名时，会直接用<code>setValue：forUNdefinedKey：</code>方法。</p>
+<p>####2.取值<br>当程序调用</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">nullable</span> <span class="keyword">id</span>)valueForKey:(<span class="built_in">NSString</span> *)key;</div></pre></td></tr></table></figure>
+<h5 id="1-优先查找访问器的方法"><a href="#1-优先查找访问器的方法" class="headerlink" title="1.优先查找访问器的方法"></a>1.优先查找访问器的方法</h5><p>首先按<code>getKey</code>、<code>key</code>、<code>isKey</code>的顺序查找<code>getter</code>方法，找到直接调用。如果是<code>bool</code>、<code>int</code>等内建值类型，会做<code>NSNumber</code>的转换。</p>
+<h5 id="2-有序集合中查找"><a href="#2-有序集合中查找" class="headerlink" title="2.有序集合中查找"></a>2.有序集合中查找</h5><p>上面的<code>getter</code>没有找到，查找<code>countOfKey</code>、<code>objectInKeyAtIndex:</code>、<code>KeyAtIndexes</code>格式的方法。<br>如果<code>countOfKey</code>和另外两个方法中的一个找到，那么就会返回一个可以响应<code>NSArray</code>所有方法的代理集合。发送给这个代理集合的<code>NSArray</code>消息方法，就会以<code>countOfKey</code>、<code>objectInKeyAtIndex:</code>、<code>KeyAtIndexes</code>这几个方法组合的形式调用。还有一个可选的 <code>getKey:range:</code> 方法。</p>
+<h5 id="3-无序集合中查找"><a href="#3-无序集合中查找" class="headerlink" title="3.无序集合中查找"></a>3.无序集合中查找</h5><p>还没查到，那么查找<code>countOfKey</code>、<code>enumeratorOfKey</code>、<code>memberOfKey:</code>格式的方法。<br>如果这三个方法都找到，那么就返回一个可以响应NSSet所有方法的代理集合。发送给这个代理集合的<code>NSSet</code>消息方法，就会以<code>countOfKey</code>、<code>enumeratorOfKey</code>、<code>memberOfKey:</code>组合的形式调用。</p>
+<h5 id="4-搜索成员变量名"><a href="#4-搜索成员变量名" class="headerlink" title="4.搜索成员变量名"></a>4.搜索成员变量名</h5><p>还是没查到，那么如果类方法<code>accessInstanceVariablesDirectly</code>返回<code>YES</code>，那么按<code>_key</code>，<code>_isKey</code>，<code>key</code>，<code>iskey</code>的顺序直接搜索成员名。</p>
+<h5 id="5-报出异常"><a href="#5-报出异常" class="headerlink" title="5.报出异常"></a>5.报出异常</h5><p> 再找不到，调用<code>setValue:forUndefinedKey:</code>，默认报出异常</p>
+<h3 id="NSKeyValueCoding其他方法"><a href="#NSKeyValueCoding其他方法" class="headerlink" title="NSKeyValueCoding其他方法"></a>NSKeyValueCoding其他方法</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">+ (<span class="built_in">BOOL</span>)accessInstanceVariablesDirectly;</div><div class="line"><span class="comment">//默认返回YES，表示如果没有找到Set&lt;Key&gt;方法的话，会按照_key，_iskey，key，iskey的顺序搜索成员，设置成NO就不这样搜索</span></div><div class="line"></div><div class="line">- (<span class="built_in">BOOL</span>)validateValue:(<span class="keyword">inout</span> <span class="keyword">id</span> __<span class="keyword">nullable</span> * __<span class="keyword">nonnull</span>)ioValue forKey:(<span class="built_in">NSString</span> *)inKey error:(<span class="keyword">out</span> <span class="built_in">NSError</span> **)outError;</div><div class="line"><span class="comment">//KVC提供属性值确认的API，它可以用来检查set的值是否正确、为不正确的值做一个替换值或者拒绝设置新值并返回错误原因。</span></div><div class="line"></div><div class="line">- (<span class="built_in">NSMutableArray</span> *)mutableArrayValueForKey:(<span class="built_in">NSString</span> *)key;</div><div class="line"><span class="comment">//这是集合操作的API，里面还有一系列这样的API，如果属性是一个NSMutableArray，那么可以用这个方法来返回</span></div><div class="line"></div><div class="line">- (<span class="keyword">nullable</span> <span class="keyword">id</span>)valueForUndefinedKey:(<span class="built_in">NSString</span> *)key;</div><div class="line"><span class="comment">//如果Key不存在，且没有KVC无法搜索到任何和Key有关的字段或者属性，则会调用这个方法，默认是抛出异常</span></div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">nullable</span> <span class="keyword">id</span>)value forUndefinedKey:(<span class="built_in">NSString</span> *)key;</div><div class="line"><span class="comment">//和上一个方法一样，只不过是设值。</span></div><div class="line"></div><div class="line">- (<span class="keyword">void</span>)setNilValueForKey:(<span class="built_in">NSString</span> *)key;</div><div class="line"><span class="comment">//如果你在SetValue方法时面给Value传nil，则会调用这个方法</span></div><div class="line"></div><div class="line">- (<span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSString</span> *, <span class="keyword">id</span>&gt; *)dictionaryWithValuesForKeys:(<span class="built_in">NSArray</span>&lt;<span class="built_in">NSString</span> *&gt; *)keys;</div><div class="line"><span class="comment">//输入一组key,返回该组key对应的Value，再转成字典返回，用于将Model转到字典。</span></div></pre></td></tr></table></figure>
 
       
 
@@ -274,7 +277,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">加密算法</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">知识总结</a>
         		</li>
       		
 		</ul>
@@ -330,7 +333,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/06/07/iOS常用加密算法/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/06/17/KVC知识小结/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -344,20 +347,15 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/06/07/WWDC2016-Session413（介绍Xcode的使用技巧）/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/06/16/UIStackView教程/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          WWDC2016-Session413（介绍Xcode的使用技巧）
+          UIStackView教程
         
       </div>
     </a>
   
-  
-    <a href="/2017/06/08/WWDC2016-Session707（UNNotifications）/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">WWDC2016-Session707（UNNotifications）</div>
-      <i class="icon-circle-right"></i>
-    </a>
   
 </nav>
 
