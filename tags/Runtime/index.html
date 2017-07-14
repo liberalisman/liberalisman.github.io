@@ -6,12 +6,12 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Liberalism</title>
+  <title>Tag: Runtime | Liberalism</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="码农。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Liberalism">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/tags/Runtime/index.html">
 <meta property="og:site_name" content="Liberalism">
 <meta property="og:description" content="码农。">
 <meta name="twitter:card" content="summary">
@@ -158,42 +158,34 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-Obj-C灵魂-Runtime" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
     
-      <header class="article-header">
-        
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2017/07/12/Obj-C灵魂-Runtime/" class="archive-article-date">
+  	<time datetime="2017-07-12T02:11:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-12</time>
+</a>
+        </div>
+    	 
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/12/Obj-C灵魂-Runtime/">Obj-C灵魂-Runtime</a>
+      <a class="archive-article-title" href="/2017/07/12/Obj-C灵魂-Runtime/">Obj-C灵魂-Runtime</a>
     </h1>
   
 
-        
-        <a href="/2017/07/12/Obj-C灵魂-Runtime/" class="archive-article-date">
-  	<time datetime="2017-07-12T02:11:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p><code>Obj-C</code>之所以被称之为动态语言，完全是因为<code>Runtime</code>库，<code>Runtime</code>库是由<code>C语言</code>和<code>汇编语言</code>所写的，它在<code>C语言</code>的基础上，为<code>Obj-C</code>增加了面向对象的特征。同时借鉴<code>SmallTalk</code>增加了消息转发。说透彻了就是我们所写的所有<code>Obj-C</code>代码，都会通过<code>Runtime库</code>转换为<code>C语言</code>的代码。针对这么一个大家无时不刻都在使用的类库，是有必要深入了解一下的。</p>
-</blockquote>
-<h3 id="1-数据结构及常用名词解释"><a href="#1-数据结构及常用名词解释" class="headerlink" title="1.数据结构及常用名词解释"></a>1.数据结构及常用名词解释</h3><p>之所以开篇将一些数据的结构组成以及常用的名词解释，是为了大家在后续的过程中不会懵逼，咱们也不着急，那就一步步，踏踏实实的看。</p>
-<h5 id="1-Class"><a href="#1-Class" class="headerlink" title="1.Class"></a>1.Class</h5><p> 我们通常所说的 <strong>Class</strong>，实际上是指向 <strong>objc_class</strong> 结构体的指针，<strong>objc_class</strong>在 <strong>objc_class</strong>里定义如下：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> objc_class &#123;</div><div class="line">    Class isa;                                  <span class="comment">// is a kind of的意思</span></div><div class="line"><span class="meta">#if !__OBJC2__</span></div><div class="line">    Class super_class;                          <span class="comment">// 获取父类</span></div><div class="line">    <span class="keyword">const</span> <span class="keyword">char</span> *name;                           <span class="comment">// 类名</span></div><div class="line">    <span class="keyword">long</span> version;                               <span class="comment">// 类的版本号</span></div><div class="line">    <span class="keyword">long</span> info;                                  <span class="comment">// 理解为类的相关信息</span></div><div class="line">    <span class="keyword">long</span> instance_size;                         <span class="comment">// 实例的大小</span></div><div class="line">    <span class="keyword">struct</span> objc_ivar_list *ivars;               <span class="comment">// 获取成员变量列表</span></div><div class="line">    <span class="keyword">struct</span> objc_method_list **methodLists;      <span class="comment">// 获取方法列表</span></div><div class="line">    <span class="keyword">struct</span> objc_cache *cache;                   <span class="comment">// 方法缓存列表</span></div><div class="line">    <span class="keyword">struct</span> objc_protocol_list *protocols;       <span class="comment">// 获取协议列表</span></div><div class="line"><span class="meta">#endif</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// 获取类名</span></div><div class="line"><span class="keyword">const</span> <span class="keyword">char</span> * class_getName ( Class <span class="keyword">class</span>);</div><div class="line"></div><div class="line"><span class="comment">// 获取父类</span></div><div class="line">Class class_getSuperclass ( Class <span class="keyword">class</span> );</div><div class="line"></div><div class="line"><span class="comment">// 判断给定的Class是否是一个元类</span></div><div class="line"><span class="built_in">BOOL</span> class_isMetaClass ( Class <span class="keyword">class</span> );</div><div class="line"></div><div class="line"><span class="comment">// 获取实例大小</span></div><div class="line">size_t class_getInstanceSize ( Class <span class="keyword">class</span> );</div><div class="line"></div><div class="line"><span class="comment">// 获取类中指定名称实例成员变量的信息</span></div><div class="line">Ivar class_getInstanceVariable ( Class <span class="keyword">class</span>, <span class="keyword">const</span> <span class="keyword">char</span> *name );</div><div class="line"></div><div class="line"><span class="comment">// 获取类成员变量的信息</span></div><div class="line">Ivar class_getClassVariable ( Class <span class="keyword">class</span>, <span class="keyword">const</span> <span class="keyword">char</span> *name );</div><div class="line"></div><div class="line"><span class="comment">// 添加成员变量</span></div><div class="line"><span class="built_in">BOOL</span> class_addIvar ( Class <span class="keyword">class</span>, <span class="keyword">const</span> <span class="keyword">char</span> *name, size_t size, uint8_t alignment, <span class="keyword">const</span> <span class="keyword">char</span> *types );</div><div class="line"></div><div class="line"><span class="comment">// 获取整个成员变量列表</span></div><div class="line">Ivar * class_copyIvarList ( Class <span class="keyword">class</span>, <span class="keyword">unsigned</span> <span class="keyword">int</span> *outCount );</div><div class="line"></div><div class="line"><span class="comment">// 添加协议</span></div><div class="line"><span class="built_in">BOOL</span> class_addProtocol ( Class cls, Protocol *protocol );</div><div class="line"></div><div class="line"><span class="comment">// 返回类是否实现指定的协议</span></div><div class="line"><span class="built_in">BOOL</span> class_conformsToProtocol ( Class cls, Protocol *protocol );</div><div class="line"></div><div class="line"><span class="comment">// 获取版本号</span></div><div class="line"><span class="keyword">int</span> class_getVersion ( Class cls );</div><div class="line"><span class="comment">// 设置版本号</span></div><div class="line"><span class="keyword">void</span> class_setVersion ( Class cls, <span class="keyword">int</span> version );</div></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2017/07/12/Obj-C灵魂-Runtime/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -205,506 +197,19 @@
 		</ul>
 	</div>
 
-      
+          
 
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/12/Obj-C灵魂-Runtime/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-
-
-
-
-
-
-
   
-    <article id="post-KVO知识小结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
+    </div></section>
+  
+
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/06/KVO知识小结/">KVO知识小结</a>
-    </h1>
-  
-
-        
-        <a href="/2017/07/06/KVO知识小结/" class="archive-article-date">
-  	<time datetime="2017-07-06T05:56:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="1-认识KVO"><a href="#1-认识KVO" class="headerlink" title="1.认识KVO"></a>1.认识KVO</h3><blockquote>
-<p><code>KVO</code>类似于观察者模式，我们利用简单的代码来了解什么是<code>KVO</code>。</p>
-</blockquote>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//  注册一个Person类</span></div><div class="line"><span class="meta">#import <span class="meta-string">&lt;Foundation/Foundation.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Person</span> : <span class="title">NSObject</span></span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">copy</span>) <span class="built_in">NSString</span> *name;</div><div class="line"><span class="keyword">@end</span></div><div class="line"></div><div class="line"><span class="comment">// 再注册一个Dog类</span></div><div class="line"><span class="meta">#import <span class="meta-string">&lt;Foundation/Foundation.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Dog</span> : <span class="title">NSObject</span></span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">copy</span>  ) <span class="built_in">NSString</span> *name;</div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
-<p>我们在<code>ViewController</code>中引入头文件，并创建两个全局的属性。我们希望<code>Person</code>作为<code>Dog</code>的观察者，当<code>Dog</code>的<code>name</code>属性发生变化的时候，<code>Person</code>可以第一时间知道。这时我们就可以运用<code>KVO</code>的技术。</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"> Person *p = [Person new];</div><div class="line"> <span class="keyword">self</span>.p = p;</div><div class="line"> Dog *dog = [Dog new];</div><div class="line"> <span class="keyword">self</span>.dog = dog;</div><div class="line"></div><div class="line"><span class="comment">// 成为其他对象的观察者要进行注册</span></div><div class="line"><span class="comment">// KeyPath代表监听对象的具体属性</span></div><div class="line"><span class="comment">// Observe就是观察者喽</span></div><div class="line"><span class="comment">// Options可以指定管擦得值得新旧等</span></div><div class="line"><span class="comment">// Context可以是任何对象，可以向观察者传递信息，也可以用指定的标识对不同的观察者进行区分</span></div><div class="line"> [dog addObserver:p</div><div class="line">       forKeyPath:<span class="string">@"name"</span></div><div class="line">          options:(<span class="built_in">NSKeyValueObservingOptionNew</span> | <span class="built_in">NSKeyValueObservingOptionOld</span>)</div><div class="line">          context:<span class="literal">nil</span>];</div><div class="line"></div><div class="line"> dog.name = <span class="string">@"旺财"</span>;</div></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2017/07/06/KVO知识小结/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">知识总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/06/KVO知识小结/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-KVC知识小结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/17/KVC知识小结/">KVC知识小结</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/17/KVC知识小结/" class="archive-article-date">
-  	<time datetime="2017-06-17T02:15:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>关于<code>KVC</code>和<code>KVO</code>,我之前的总结文章有写过，但是实际上我在平日工作里，<code>KVC</code>和<code>KVO</code>使用的相对较少，不是<code>KVC</code>和<code>KVO</code>的功能不够强大，这实际上和项目的架构有比较大的关系，以前的我对于<code>KVC</code>和<code>KVO</code>的使用也是趋于表面，没有探究其内部真正的实现原理和进阶用法，这次总结正好给了我很好的学习机会，在此深入的总结一下<code>KVC</code>和<code>KVO</code>吧。</p>
-<blockquote>
-<p><strong>KVC</strong>，即是指 <strong>NSKeyValueCoding</strong>，一个非正式的 <strong>Protocol</strong>，提供一种机制来间接访问对象的属性。<strong>KVO</strong> 就是基于 <strong>KVC</strong> 实现的关键技术之一。</p>
-</blockquote>
-<h3 id="KVC在iOS中的定义"><a href="#KVC在iOS中的定义" class="headerlink" title="KVC在iOS中的定义"></a>KVC在iOS中的定义</h3><p><code>Objective-C</code>中<code>KVC</code>的定义是对<code>NSObject</code>的扩展来实现的。所以对于所有继承了<code>NSObject</code>在类型，都可以使用<code>KVC</code>，下面是<code>KVC</code>最为重要的四个方法</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">nullable</span> <span class="keyword">id</span>)valueForKey:(<span class="built_in">NSString</span> *)key;                          <span class="comment">//直接通过Key来取值</span></div><div class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">nullable</span> <span class="keyword">id</span>)value forKey:(<span class="built_in">NSString</span> *)key;          <span class="comment">//通过Key来设值</span></div><div class="line">- (<span class="keyword">nullable</span> <span class="keyword">id</span>)valueForKeyPath:(<span class="built_in">NSString</span> *)keyPath;                  <span class="comment">//通过KeyPath来取值</span></div><div class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">nullable</span> <span class="keyword">id</span>)value forKeyPath:(<span class="built_in">NSString</span> *)keyPath;  <span class="comment">//通过KeyPath来设值</span></div></pre></td></tr></table></figure>
-<p>一般来讲，<strong>Obj-C</strong> 对象中都会有一些属性。如代码所示</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#import <span class="meta-string">&lt;Foundation/Foundation.h&gt;</span></span></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Person</span> : <span class="title">NSObject</span></span></div><div class="line"></div><div class="line"><span class="comment">/** name */</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">copy</span>  ) <span class="built_in">NSString</span> *name;</div><div class="line"></div><div class="line"><span class="comment">/** Address */</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">copy</span>  ) <span class="built_in">NSString</span> *address;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
-        
-          <a class="article-more-a" href="/2017/06/17/KVC知识小结/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">知识总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/17/KVC知识小结/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-UIStackView教程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/16/UIStackView教程/">UIStackView教程</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/16/UIStackView教程/" class="archive-article-date">
-  	<time datetime="2017-06-16T01:41:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>这是一篇挺老的文章，主要就是介绍在<code>iOS9</code>时推出的控件<code>UIStackView</code>。我发现网上的资料并不算多，而<code>AppCoda</code>的这一篇就浅显易懂，所以决定翻译一下，再写个<code>Demo</code>。</p>
-<p><img src="http://okhqmtd8q.bkt.clouddn.com/UIStackView%E6%95%99%E7%A8%8B/1.png" alt=""></p>
-        
-          <a class="article-more-a" href="/2017/06/16/UIStackView教程/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">翻译</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/16/UIStackView教程/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-Interview-Question" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/15/Interview-Question/">Interview-Question &amp; Answer （初级篇)</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/15/Interview-Question/" class="archive-article-date">
-  	<time datetime="2017-06-15T08:21:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>此篇是根据知名博主 <a href="http://weibo.com/u/1929625262?from=feed&amp;loc=nickname">J-Knight</a> 所提供的面试题目，所整理的答案，感谢 <a href="http://weibo.com/u/1929625262?from=feed&amp;loc=nickname">J-Knight</a> 的分享，<a href="https://juejin.im/post/5938dfdb8d6d810058481572?utm_source=weibo&amp;utm_campaign=user。">点击查看原文。</a> </p>
-<p>另外，我写此文的目的在于和广大的<code>iOS</code>开发者进行沟通交流，里面的内容有自己的理解，也有很大一部分参照网上的解释。很感谢之前的分享者，文末会附上相关的链接。如果在本文有理解不正确的地方，也希望大家多多指正。</p>
-<p>面试题分为三个部分，我们先从基础开始。</p>
-<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><h3 id="1-为什么说Objective-C是一门动态的语言？"><a href="#1-为什么说Objective-C是一门动态的语言？" class="headerlink" title="1. 为什么说Objective-C是一门动态的语言？"></a>1. 为什么说Objective-C是一门动态的语言？</h3><p>其实<code>Objective-C</code>是一门动态语言的用<code>运行时Runtime</code>可以更好地说明，但我看后面还有关于<code>运行时</code>的问题，在此处就先不展开了。</p>
-<pre><code>1. 动态类型：例如“id”类型，动态类型属于弱类型，在运行时才决定消息的接收者
-2. 动态绑定：程序在运行时需要调用什么代码是在运行时决定的，而不是在编译时。
-3. 动态载入：程序在运行时的代码模块以及相关资源是在运行时添加的，而不是启动时就加载所有资源
-</code></pre><h3 id="2-简要概括一下-MVC-和-MVVM，MVP三种模式。"><a href="#2-简要概括一下-MVC-和-MVVM，MVP三种模式。" class="headerlink" title="2.简要概括一下 MVC 和 MVVM，MVP三种模式。"></a>2.简要概括一下 <strong>MVC</strong> 和 <strong>MVVM</strong>，<strong>MVP</strong>三种模式。</h3><h5 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h5><p><img src="http://image.beekka.com/blog/2015/bg2015020105.png" alt=""></p>
-        
-          <a class="article-more-a" href="/2017/06/15/Interview-Question/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">面试题</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/15/Interview-Question/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-WWDC2016-Session724（APNS新特性）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/12/WWDC2016-Session724（APNS新特性）/">WWDC2016-Session724（APNS新特性）</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/12/WWDC2016-Session724（APNS新特性）/" class="archive-article-date">
-  	<time datetime="2017-06-12T05:11:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="简要回顾"><a href="#简要回顾" class="headerlink" title="简要回顾"></a>简要回顾</h2><blockquote>
-<p><code>APNS</code>是苹果的推送服务器，此篇主要讲一下2016年<code>APNS</code>的新特性</p>
-</blockquote>
-<p><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/1.png" alt=""></p>
-        
-          <a class="article-more-a" href="/2017/06/12/WWDC2016-Session724（APNS新特性）/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">WWDC Session 2016</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/12/WWDC2016-Session724（APNS新特性）/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-WWDC2016-Session708（高级通知）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/09/WWDC2016-Session708（高级通知）/">WWDC2016-Session708（高级通知）</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/09/WWDC2016-Session708（高级通知）/" class="archive-article-date">
-  	<time datetime="2017-06-09T03:28:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>此篇我们接着<code>Session 707</code>接着讲,有兴趣的可以查看 : <a href="http://xiaolu520.com/2017/06/08/WWDC2016-Session707%EF%BC%88UNNotifications%EF%BC%89/">http://xiaolu520.com/2017/06/08/WWDC2016-Session707%EF%BC%88UNNotifications%EF%BC%89/</a></p>
-<p><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-708/1.png" alt=""></p>
-        
-          <a class="article-more-a" href="/2017/06/09/WWDC2016-Session708（高级通知）/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">WWDC Session 2016</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/09/WWDC2016-Session708（高级通知）/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-WWDC2016-Session707（UNNotifications）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/08/WWDC2016-Session707（UNNotifications）/">WWDC2016-Session707（UNNotifications）</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/08/WWDC2016-Session707（UNNotifications）/" class="archive-article-date">
-  	<time datetime="2017-06-08T06:15:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><code>UNNotifications</code>是<code>WWDC2016</code>基于之前的推送服务，推出的全新的的通知框架。</p>
-<p><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-707/WWDC-2016-707-01.png" alt=""></p>
-        
-          <a class="article-more-a" href="/2017/06/08/WWDC2016-Session707（UNNotifications）/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">WWDC Session 2016</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/08/WWDC2016-Session707（UNNotifications）/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-  
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-    </nav>
-  
 
 
           </div>
@@ -726,10 +231,10 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
+		isHome: false,
 		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		root: "/",
