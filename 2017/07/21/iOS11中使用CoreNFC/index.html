@@ -16,7 +16,18 @@
 <meta property="og:site_name" content="Liberalism">
 <meta property="og:description" content="在2017的WWDC,苹果终于发布了众多开发者期待已久的系统级框架 CoreNFC。可能你对于NFC是什么并不是很了解，简而言之，NFC（近场通信）就是当两台硬件设备相距4cm以内时可以实现互相通信。NFC在商业上的应用是把NFC芯片集成到各类卡片中，极大的加强安全性。目前 CoreNFC 只支持一种格式：NFC Data Exchange Format，简称NDEF(常被用于平板电脑和智能手机">
 <meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/iOS11%E4%B8%AD%E4%BD%BF%E7%94%A8CoreNFC/1.png">
-<meta property="og:updated_time" content="2017-07-21T08:37:56.000Z">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/working-scanner-01.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/working-scanner-02.jpg">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/working-scanner-03.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/working-scanner-04.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/working-scanner-05.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/working-scanner-06.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/working-scanner-07.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/working-scanner-08.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/working-scanner-09.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/working-scanner-10.png">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/working-scanner-11.gif">
+<meta property="og:updated_time" content="2017-10-30T05:28:00.190Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS11中使用CoreNFC">
 <meta name="twitter:description" content="在2017的WWDC,苹果终于发布了众多开发者期待已久的系统级框架 CoreNFC。可能你对于NFC是什么并不是很了解，简而言之，NFC（近场通信）就是当两台硬件设备相距4cm以内时可以实现互相通信。NFC在商业上的应用是把NFC芯片集成到各类卡片中，极大的加强安全性。目前 CoreNFC 只支持一种格式：NFC Data Exchange Format，简称NDEF(常被用于平板电脑和智能手机">
@@ -184,9 +195,74 @@
 <p>在2017的<code>WWDC</code>,苹果终于发布了众多开发者期待已久的系统级框架 <code>CoreNFC</code>。可能你对于<code>NFC</code>是什么并不是很了解，简而言之，<code>NFC</code>（近场通信）就是当两台硬件设备相距<code>4cm</code>以内时可以实现互相通信。<code>NFC</code>在商业上的应用是把<code>NFC</code>芯片集成到各类卡片中，极大的加强安全性。目前 <code>CoreNFC</code> 只支持一种格式：<code>NFC Data Exchange Format</code>，简称<code>NDEF</code>(常被用于平板电脑和智能手机中)。</p>
 <a id="more"></a>
 <blockquote>
-<p>提示：接下来的教程你需要<code>Xcode9 beta</code>,同时你也需要一部<code>iPhone7</code>或者<code>iPhone 7 Plus</code>运行<code>iOS 11</code>系统来验证本教程中的一些新特性。<code>Xcode9 beta</code>可以同时支持<code>Swift 3.2</code>和<code>Swift 4.0</code>,本教程的代码都将使用<code>Swift 4.0</code>来编写。知识在项目中导入<code>CoreNFC</code>是无法构建或者编译一个<code>App</code>的,必须在物理设备上CIA可以运行。同时你还需要一个已经付费的开发者账号才可以。</p>
+<p>提示：接下来的教程你需要<code>Xcode9 beta</code>,同时你也需要一部<code>iPhone7</code>或者<code>iPhone 7 Plus</code>运行<code>iOS 11</code>系统来验证本教程中的一些新特性。<code>Xcode9 beta</code>可以同时支持<code>Swift 3.2</code>和<code>Swift 4.0</code>,本教程的代码都将使用<code>Swift 4.0</code>来编写。只是在项目中导入<code>CoreNFC</code>是无法构建或者编译一个<code>App</code>的,必须在物理设备上才可以运行。同时你还需要一个已经付费的开发者账号才可以。</p>
 </blockquote>
-<h2 id="什么是CoreNFC"><a href="#什么是CoreNFC" class="headerlink" title="什么是CoreNFC"></a>什么是CoreNFC</h2><p>通过<code>NFC</code>，你可以阅读到包括<code>NFC数据交换格式</code>（NDEF）数据中的1到5类的近场通讯标签。读取标签，你的App创建了一个<code>NFC数据交换格式</code>的阅读会话并且提供了一个代理。</p>
+<h2 id="什么是CoreNFC"><a href="#什么是CoreNFC" class="headerlink" title="什么是CoreNFC"></a>什么是CoreNFC</h2><blockquote>
+<p>通过<code>NFC</code>，你可以阅读到包括<code>NFC数据交换格式</code>（NDEF）数据中的1到5类的近场通讯标签。读取标签，你的App创建了一个<code>NFC数据交换格式</code>的<code>reader session</code>并且提供了一个 <code>delegate</code> 。正在运行的<code>reader session</code> 轮询 <code>NFC</code> 标签，并在 <code>delegate</code> 方法中找到包含 <code>NDEF</code> 消息的标签时传递消息，并将该消息传递给 <code>delegate</code> 。<code>delegate</code>可以读取消息并处理异常。</p>
+</blockquote>
+<p><code>NFC</code>谈不上“新”技术。苹果终于向开发者开放了这个 <code>API</code>，以便我们可以利用 <code>NFC</code> 识别信息。</p>
+<p><strong>举一个实际的例子</strong><br>你经营一家商店，希望客户进入后，使用有<code>NFC</code>功能的手机扫描一件商品，就直接完成了所有的流程。没有任何麻烦，没有等待时间。作为一名<code>App</code>开发人员，在不使用<code>NFC</code>的情况下，还可以选择<code>条形码</code>或<code>二维码</code>，但依然比<code>NFC</code>麻烦很多。</p>
+<p>说来说去<code>NFC</code>到底是什么？苹果虽然放开了<code>NFC</code>的使用权限，但苹果公司严格限制了我们的访问。这意味着<code>CoreNFC</code>只支持前面提到的<code>NDEF</code>格式。如果您打算使用<code>CoreNFC</code>替换您的`RFID卡,恐怕还有待时间。</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>我们将用一个 <code>demo</code> 来展示如何使用 <code>CoreNFC</code> 。我们的应用程序将读取存储在 <code>NDEF格式</code> 卡上的信息。</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/working-scanner-01.png" alt=""></p>
+<p>为此，我使用 <code>Arduino Uno</code> 与 <code>Adafruit PN532 Shield</code> 配对，将消息编程到 <code>N​​DEF</code> 格式的样品卡上。如果您没有这些工具，或者根本不想将时间和金钱投入到这样的硬件中，请尝试找到一张带有消息的预格式化卡。在本教程中，我将不会将 <code>NFC</code> 格式化或将消息嵌入到 <code>NDEF</code> 卡中。</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/working-scanner-02.jpg" alt=""></p>
+<h2 id="我们开始吧"><a href="#我们开始吧" class="headerlink" title="我们开始吧"></a>我们开始吧</h2><p>要创建我们的项目，请打开 <code>Xcode 9</code> 并创建一个新的 <code>single-view application</code> 。然后命名您的项目，并确保选择 <code>Swift</code> 作为您的语言。</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/working-scanner-03.png" alt=""></p>
+<h2 id="设计消息视图"><a href="#设计消息视图" class="headerlink" title="设计消息视图"></a>设计消息视图</h2><p>为达到目的，我们需要制作用户界面（UI），供用户进行交互。我们先创建一个<code>导航控制器</code>。点击 <code>Main.storyboard</code> 并选择<code>View-Controller</code>。然后，转到<code>status-Bar</code>，然后单击<code>Editor</code>&gt;<code>embed in</code>&gt;<code>Navigation Controller</code>。这会在<code>View-Controller</code>的顶部创建一个导航栏。您可以选择一个合适的标题。我起的标题为 <code>Message in a Bottle</code>。</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/working-scanner-04.png" alt=""></p>
+<p>接下来，拖动<code>UIButton</code>并将其放在 <code>View-Controller</code> 的底部。将按钮的文本更改为<code>扫描</code>，并根据需要进行初始化。添加扫描按钮后，利用<code>UILabel</code>添加背景标题。</p>
+<p><strong>现在我们的应用应该是这样的：</strong></p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/working-scanner-05.png" alt=""></p>
+<h2 id="设置扫描和消息"><a href="#设置扫描和消息" class="headerlink" title="设置扫描和消息"></a>设置扫描和消息</h2><p>现在我们已经做好了基础设置，接下来我们将为<code>按钮</code>和<code>标签</code>通过拖线设置属性，并为<code>按钮</code>设置点击行为。</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/working-scanner-06.png" alt=""></p>
+<p><strong>代码如下：</strong></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> UIKit</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">UIViewController</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@IBOutlet</span> <span class="keyword">weak</span> <span class="keyword">var</span> messageLabel: <span class="type">UILabel</span>!</div><div class="line"></div><div class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</div><div class="line">        <span class="keyword">super</span>.viewDidLoad()</div><div class="line">        <span class="comment">// Do any additional setup after loading the view, typically from a nib.</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">didReceiveMemoryWarning</span><span class="params">()</span></span> &#123;</div><div class="line">        <span class="keyword">super</span>.didReceiveMemoryWarning()</div><div class="line">        <span class="comment">// Dispose of any resources that can be recreated.</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@IBAction</span> <span class="function"><span class="keyword">func</span> <span class="title">scanPressed</span><span class="params">(<span class="number">_</span> sender: Any)</span></span> &#123;</div><div class="line">        <span class="comment">// this is our newly created IBAction</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="设置应用程序权限和隐私"><a href="#设置应用程序权限和隐私" class="headerlink" title="设置应用程序权限和隐私"></a>设置应用程序权限和隐私</h2><p>接下来，在我们真正开始研究我们的 <code>NFC</code> 实现之前，我们需要设置我们的应用权限。</p>
+<blockquote>
+<p>注意：您必须非常仔细地关注此部分，否则您的应用配置将无法正常工作。此外，您将需要付费的开发者帐户。</p>
+</blockquote>
+<hr>
+<h4 id="App-ID"><a href="#App-ID" class="headerlink" title="App ID"></a>App ID</h4><p>首先，请转到 <code>developer.apple.com</code> 登录您的帐户，一旦您进入 <code>account</code> 面板，请转到 <code>Certificates , Identifiers &amp; Profiles</code> 标签页。在<code>Identifiers</code>下，单击<code>App IDs</code>。然后点击 <code>（+）</code>注册一个新的<code>App ID</code>。<code>App ID</code>说明应简单（例如<code>NFC</code>）。<br>填入 <code>Explicit App ID</code> 和  <code>Bundle ID</code> 。 必须与您在 <code>Xcode</code> 项目中使用的<code>Bundle ID</code> 完全一致，就是<code>com.YOURDOMAIN.Message-in-a-Bottle</code>。一旦你把你的<code>Bundle ID</code>放入，向下滚动并检测服务列表。点击下一步，确保您的确认页面与我的相似：</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/working-scanner-07.png" alt=""></p>
+<h4 id="Provisioning-Profiles"><a href="#Provisioning-Profiles" class="headerlink" title="Provisioning Profiles"></a>Provisioning Profiles</h4><p>完成设置后，我们需要为此应用程序创建一个新的<code>配置文件</code>。转到 <code>Provisioning Profiles</code> 选项卡，然后单击 <code>all</code>。然后，单击<code>（+）</code>创建一个新的<code>配置文件</code>。选择<code>iOS Development</code>，继续选择 <code>App ID</code>的名称（我的是<code>NFC</code>），继续选择您使用的<code>证书</code>，添加想要测试此应用程序的任何手机。命名新建的<code>配置文件</code>，我们就生成了一个新的有效的<code>配置文件</code>。</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/working-scanner-08.png" alt=""></p>
+<blockquote>
+<p>此处解释一下什么是 <code>配置文件</code> ？ <code>配置文件</code> 要验证在所选设备上运行的特定的应用。这样，您可以确认在设备上运行的应用程序可追溯出处并确保安全。<br>所以我们也需要为我们的 <code>App</code> 选择特定的 <code>配置文件</code> 。为此，请返回 <code>Xcode</code> &gt; <code>build setting</code> &gt; 禁用 <code>Automatically manage signing</code> 。对于 <code>Debug</code>和 <code>Release</code>，选择下拉菜单并选择 <code>Download profile</code>。找到对应的相关配置文件，前期准备工作就完成了！</p>
+</blockquote>
+<h4 id="App-Entitlements"><a href="#App-Entitlements" class="headerlink" title="App Entitlements"></a>App Entitlements</h4><p> 然而，<code>Xcode</code> 团队尚未启用 <code>CoreNFC</code> 的自动授权。现在，下载此预构建的<a href="https://raw.githubusercontent.com/appcoda/CoreNFCDemo/master/NFC.entitlements" target="_blank" rel="external">授权文件</a>，并将文件位置放在 <code>Project</code>&gt; <code>build setting</code> &gt; <code>Code Signing Entitlement</code> 的文本框中。</p>
+<p>我们预计苹果将在不久的将来更新此功能，但现在这个步骤不可避免。所以如果发布了一个新的测试版本，可以回到这个教程重新测试。</p>
+<h4 id="App-Privacy"><a href="#App-Privacy" class="headerlink" title="App Privacy"></a>App Privacy</h4><p>打开 <code>Info.plist</code> 并右键单击以添加一行。在 <code>Key</code> 列中，打开下拉菜单并选择 <code>Privacy - NFC Scan Usage Description</code>。在 <code>value</code> 中设置自定义的提示信息。我们对 <code>plist</code> 文件的更新允许我们的 <code>App</code> 获取访问 <code>NFC</code> 的必要权限。</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/working-scanner-09.png" alt=""></p>
+<h2 id="实现CoreNFC"><a href="#实现CoreNFC" class="headerlink" title="实现CoreNFC"></a>实现CoreNFC</h2><p>接下来让我们来看看有趣的部分！我们将继续向 <code>ViewController.swift</code> 添加几行代码。但在我们写代码之前，需要提一下一个让我调试了几个小时的问题。</p>
+<p>目前 <code>CoreNFC</code> 框架尚未编译进 <code>iOS</code> 模拟器。这意味着如果你尝试<code>import CoreNFC</code> 你会得到一个错误，说没有 <code>CoreNFC</code> 模块。简单的修复方法就是主动选择您的 iPhone 或 通用设备。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">import</span> UIKit</div><div class="line"><span class="keyword">import</span> CoreNFC </div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">UIViewController</span>, <span class="title">NFCNDEFReaderSessionDelegate</span> </span>&#123; </div><div class="line"></div><div class="line">    <span class="meta">@IBOutlet</span> <span class="keyword">weak</span> <span class="keyword">var</span> messageLabel: <span class="type">UILabel</span>!</div><div class="line">    <span class="keyword">var</span> nfcSession: <span class="type">NFCNDEFReaderSession</span>?</div><div class="line"></div><div class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</div><div class="line">        <span class="keyword">super</span>.viewDidLoad()</div><div class="line">        <span class="comment">// Do any additional setup after loading the view, typically from a nib.</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">didReceiveMemoryWarning</span><span class="params">()</span></span> &#123;</div><div class="line">        <span class="keyword">super</span>.didReceiveMemoryWarning()</div><div class="line">        <span class="comment">// Dispose of any resources that can be recreated.</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@IBAction</span> <span class="function"><span class="keyword">func</span> <span class="title">scanPressed</span><span class="params">(<span class="number">_</span> sender: Any)</span></span> &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">readerSession</span><span class="params">(<span class="number">_</span> session: NFCNDEFReaderSession, didInvalidateWithError error: Error)</span></span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"The session was invalidated: \(error.localizedDescription)"</span>)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">readerSession</span><span class="params">(<span class="number">_</span> session: NFCNDEFReaderSession, didDetectNDEFs messages: [NFCNDEFMessage])</span></span> &#123;</div><div class="line">        <span class="comment">// Parse the card's information</span></div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>我们只需要再添加两行代码就可以启动 <code>NFC reader</code> 。更新我们之前创建的 <code>scanPressed</code> 方法来调用NFCNDEFReaderSession初始化器。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@IBAction</span> <span class="function"><span class="keyword">func</span> <span class="title">scanPressed</span><span class="params">(<span class="number">_</span> sender: Any)</span></span> &#123;</div><div class="line"></div><div class="line">    nfcSession = <span class="type">NFCNDEFReaderSession</span>.<span class="keyword">init</span>(delegate: <span class="keyword">self</span>, queue: <span class="literal">nil</span>, invalidateAfterFirstRead: <span class="literal">true</span>)</div><div class="line">    nfcSession?.begin()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/working-scanner-10.png" alt=""></p>
+<p>如果您的程序在运行时出现 <code>Session is invalidated unexpectedly</code> 错误，请返回并再次检查 <code>设置权限和隐私</code> 部分。</p>
+<h2 id="解析消息记录"><a href="#解析消息记录" class="headerlink" title="解析消息记录"></a>解析消息记录</h2><p>首先，我们来看看 <code>func readerSession(_ session: NFCNDEFReaderSession, didDetectNDEFs messages: [NFCNDEFMessage])</code></p>
+<p>我们可以通过打印<code>messages</code> 的第一个元素来认识它。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">( </div><div class="line">    // Payload one (There's only one payload in this card)</div><div class="line">    "TNF=1, /* Type Name Format */</div><div class="line">    Payload Type=&lt;55&gt;,</div><div class="line">    Payload ID=&lt;&gt;,</div><div class="line">    Payload=&lt;0048656c 6c6f21&gt;" /* What we're really interested in */</div><div class="line">)</div></pre></td></tr></table></figure>
+<pre><code>`messages` 是一个 存储`NFCNDEFMessages` 数据格式数组，在 `NFC` 会话无效之前，我们执行的每次扫描都有一个数组，而在我们扫描后，会话会自动失效。我们只需要关注数组中的一个对象。
+</code></pre><p><code>messages[0]</code> 是一个 <code>NFCNDEFMessage</code>，它包含一个 <code>NFCNDEFPayload</code>。<br><code>messages[0].records</code> 是一个 <code>NFCNDEFPayload</code> 数组，因为 <code>NDEF卡</code> 可以包含多个 <code>payLoad</code>。</p>
+<p><strong>单一 <code>NFCNDEFPayload</code> 包含4项信息：</strong></p>
+<ol>
+<li>identifier</li>
+<li>type</li>
+<li>typeNameFormat</li>
+<li>payload是一个 <code>Data</code> 类型的对象</li>
+</ol>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">readerSession</span><span class="params">(<span class="number">_</span> session: NFCNDEFReaderSession, didDetectNDEFs messages: [NFCNDEFMessage])</span></span> &#123;</div><div class="line">    <span class="keyword">var</span> result = <span class="string">""</span></div><div class="line">    <span class="keyword">for</span> payload <span class="keyword">in</span> messages[<span class="number">0</span>].records &#123;</div><div class="line">        result += <span class="type">String</span>.<span class="keyword">init</span>(data: payload.payload.advanced(by: <span class="number">3</span>), encoding: .utf8)! <span class="comment">// 1</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="type">DispatchQueue</span>.main.async &#123;</div><div class="line">        <span class="keyword">self</span>.messageLabel.text = result</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p><strong>此处有几个问题。为什么要前进3？DispatchQueue的内容是什么？</strong></p>
+<p>为什么 <code>NFC</code> 标签总是以 <code>enHello</code> 或 <code>enMessage</code> 开头。在对 <code>NDEF</code> 规范和法规进行了一些研究后发现：</p>
+<blockquote>
+<p>所有语言代码必须根据 <code>RFC 3066</code> 完成。语言代码不能省略。语言代码长度被编码在状态字节的六个最低有效位中。因此，通过使用值 <code>0x3F</code> 屏蔽状态字节很容易找到。</p>
+</blockquote>
+<p>第3行将 <code>payload</code> 从 <code>data</code> 类型转换为可读的 <code>string</code> 字符串。”</p>
+<p>关于这个问题 <code>DispatchQueue</code>，在<code>readerSession</code> 中 <code>messageLabel</code> 是不可访问的。所以我们要返回主线程，给 <code>messageLabel</code> 赋值，这也是线程间通信的一个最简单的方法。</p>
+<p>这是最终的样式：</p>
+<p><img src="http://okhqmtd8q.bkt.clouddn.com/working-scanner-11.gif" alt=""></p>
 
       
 
@@ -424,7 +500,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小知识</a>
+                <a href="javascript:void(0)" class="js-tag color4">面试题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -432,7 +508,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">面试题</a>
+                <a href="javascript:void(0)" class="js-tag color4">小知识</a>
               </li>
              
               <li class="article-tag-list-item">
