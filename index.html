@@ -158,6 +158,71 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-iOS常用宏定义" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/23/iOS常用宏定义/">iOS常用宏定义</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/23/iOS常用宏定义/" class="archive-article-date">
+  	<time datetime="2018-01-23T07:28:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>为了简化开发流程，提升工作效率，收集了一些平时常用的宏定义，今后会不定期更新</strong></p>
+<h3 id="1-UI元素"><a href="#1-UI元素" class="headerlink" title="1.UI元素"></a>1.UI元素</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//NavBar高度</span></div><div class="line"><span class="meta">#define NAVIGATIONBAR_HEIGHT 44</span></div><div class="line"></div><div class="line"><span class="comment">//StatusBar高度</span></div><div class="line"><span class="meta">#define STATUSBAR_HEIGHT 20</span></div><div class="line"></div><div class="line"><span class="comment">//获取屏幕 宽度、高度</span></div><div class="line"><span class="meta">#define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)</span></div><div class="line"><span class="meta">#define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)</span></div><div class="line"></div><div class="line"><span class="comment">//内容视图高度</span></div><div class="line"><span class="meta">#define CONTENT_HEIGHT (SCREEN_HEIGHT - NAVIGATIONBAR_HEIGHT - STATUSBAR_HEIGHT)</span></div><div class="line"></div><div class="line"><span class="comment">//KWindow</span></div><div class="line"><span class="meta">#define KWINDOW [UIApplication sharedApplication].keyWindow</span></div><div class="line"></div><div class="line"><span class="comment">//屏幕分辨率</span></div><div class="line"><span class="meta">#define SCREEN_RESOLUTION (SCREEN_WIDTH * SCREEN_HEIGHT * ([UIScreen mainScreen].scale))</span></div><div class="line"></div><div class="line"><span class="comment">//状态栏 ＋ 导航栏 高度</span></div><div class="line"><span class="meta">#define STATUS_AND_NAVIGATION_HEIGHT ((STATUSBAR_HEIGHT) + (NAVIGATIONBAR_HEIGHT))</span></div></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2018/01/23/iOS常用宏定义/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">知识总结</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/23/iOS常用宏定义/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-NSMutableDictionary实现完全深拷贝" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -641,73 +706,6 @@
 
 
   
-    <article id="post-WWDC2016-Session724（APNS新特性）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/12/WWDC2016-Session724（APNS新特性）/">WWDC2016-Session724（APNS新特性）</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/12/WWDC2016-Session724（APNS新特性）/" class="archive-article-date">
-  	<time datetime="2017-06-12T05:11:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="简要回顾"><a href="#简要回顾" class="headerlink" title="简要回顾"></a>简要回顾</h2><blockquote>
-<p><code>APNS</code>是苹果的推送服务器，此篇主要讲一下2016年<code>APNS</code>的新特性</p>
-</blockquote>
-<p><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/1.png" alt=""></p>
-        
-          <a class="article-more-a" href="/2017/06/12/WWDC2016-Session724（APNS新特性）/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">WWDC Session 2016</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/12/WWDC2016-Session724（APNS新特性）/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -722,7 +720,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2017 Liberalism
+    		&copy; 2018 Liberalism
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -801,15 +799,11 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">知识点</a>
+                <a href="javascript:void(0)" class="js-tag color4">面试题</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">翻译</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">面试题</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -821,7 +815,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">源码解析</a>
+                <a href="javascript:void(0)" class="js-tag color4">知识点</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Runtime</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -829,7 +827,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Runtime</a>
+                <a href="javascript:void(0)" class="js-tag color5">源码解析</a>
               </li>
              
               <li class="article-tag-list-item">
