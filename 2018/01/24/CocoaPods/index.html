@@ -6,17 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | Liberalism</title>
+  <title>CocoaPods | Liberalism</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="码农。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Liberalism">
-<meta property="og:url" content="http://yoursite.com/archives/page/3/index.html">
+  <meta name="description" content="CocoaPods 是我们最常用的包依赖管理工具，那么我们在项目中通过 CocoaPods 使用，可以极大的提高我们的开发效率，它可以自动帮我们设置好一些参数和环境，帮我们减少在开发过程中所耗费的时间和精力，那么今天的我们将通过简短的文章来简单的讲一下 CocoaPods 原理、使用、以及在使用过程中常见的问题，避免大家在使用过程中受到困扰，同时也利于我以后查找。">
+<meta name="keywords" content="知识总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CocoaPods">
+<meta property="og:url" content="http://yoursite.com/2018/01/24/CocoaPods/index.html">
 <meta property="og:site_name" content="Liberalism">
-<meta property="og:description" content="码农。">
+<meta property="og:description" content="CocoaPods 是我们最常用的包依赖管理工具，那么我们在项目中通过 CocoaPods 使用，可以极大的提高我们的开发效率，它可以自动帮我们设置好一些参数和环境，帮我们减少在开发过程中所耗费的时间和精力，那么今天的我们将通过简短的文章来简单的讲一下 CocoaPods 原理、使用、以及在使用过程中常见的问题，避免大家在使用过程中受到困扰，同时也利于我以后查找。">
+<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/cocoapodsCocoaPods.png">
+<meta property="og:updated_time" content="2018-01-24T06:29:29.433Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Liberalism">
-<meta name="twitter:description" content="码农。">
+<meta name="twitter:title" content="CocoaPods">
+<meta name="twitter:description" content="CocoaPods 是我们最常用的包依赖管理工具，那么我们在项目中通过 CocoaPods 使用，可以极大的提高我们的开发效率，它可以自动帮我们设置好一些参数和环境，帮我们减少在开发过程中所耗费的时间和精力，那么今天的我们将通过简短的文章来简单的讲一下 CocoaPods 原理、使用、以及在使用过程中常见的问题，避免大家在使用过程中受到困扰，同时也利于我以后查找。">
+<meta name="twitter:image" content="http://okhqmtd8q.bkt.clouddn.com/cocoapodsCocoaPods.png">
   
     <link rel="alternative" href="/atom.xml" title="Liberalism" type="application/atom+xml">
   
@@ -156,101 +160,88 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-CocoaPods" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CocoaPods
+    </h1>
+  
+
+        
+        <a href="/2018/01/24/CocoaPods/" class="archive-article-date">
+  	<time datetime="2018-01-24T06:24:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-24</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://okhqmtd8q.bkt.clouddn.com/cocoapodsCocoaPods.png" alt=""></p>
+<p><code>CocoaPods</code> 是我们最常用的包依赖管理工具，那么我们在项目中通过 <code>CocoaPods</code> 使用，可以极大的提高我们的开发效率，它可以自动帮我们设置好一些参数和环境，帮我们减少在开发过程中所耗费的时间和精力，那么今天的我们将通过简短的文章来简单的讲一下 <code>CocoaPods</code> 原理、使用、以及在使用过程中常见的问题，避免大家在使用过程中受到困扰，同时也利于我以后查找。</p>
+<a id="more"></a>
+<p>虽然讲 <code>CocoaPods</code> 文章已经非常多了，但大多数局限于如何安装以及简单的使用，但是在实际开发的过程中，通过我对于它的使用，我觉得问题还是很多的，所以有必要也争取能够将这篇文章做到相对全面，力求解决大家所遇到的大多数问题。</p>
+<p>我们安装的 <code>CocoaPods</code> 推荐安装最新的，功能最全面。对应的我们应该把我们电脑内置的 Ruby 环境更新到最新，所以会包括 <code>Ruby Version Manager</code> 的部分。其次包括如何安装 <code>CocoaPods</code> ，常用指令，常见错误，最终会介绍如何让自己的开原仓库支持 <code>CocoaPods</code> 等。</p>
+<p>–</p>
+<h3 id="1-更新-Ruby"><a href="#1-更新-Ruby" class="headerlink" title="1.更新 Ruby"></a>1.更新 Ruby</h3><p><code>CocoaPods</code> 是使用 <code>Ruby</code> 写的，为了保证 <code>CocoaPods</code> 的稳定以及能获取到最新的版本，最好将我们 <code>Mac</code> 自带的 <code>ruby</code> 客户端更新到最新版本。所以我们首先会说一下如何更新 <code>Mac</code> 端的 <code>Ruby</code> 环境。</p>
+<p>想要升级 <code>Mac</code> 上自带的 <code>Ruby</code> 环境,需要使用到 <code>RVM</code></p>
+<p><code>RVM</code>:Ruby Version Manager</p>
+<ul>
+<li>首先安装RVM</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ curl -L get.rvm.io <span class="params">| bash -s stable</span></div></pre></td></tr></table></figure>
+<ul>
+<li>测试是否安装正常</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ source ~/.bashrc </div><div class="line">$ source ~/.bash_profile</div><div class="line">$ rvm -v</div></pre></td></tr></table></figure>
+<ul>
+<li>然后就可以升级Ruby啦</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#查看当前ruby版本 </span></div><div class="line">$ ruby -v </div><div class="line"> <span class="comment">#列出已知的ruby版本 </span></div><div class="line">$ rvm list known</div><div class="line"> <span class="comment">#安装ruby 2.3.0 </span></div><div class="line">$ rvm install <span class="number">2.4</span>.<span class="number">0</span></div></pre></td></tr></table></figure>
+<p>至此大功告成</p>
+<h3 id="2-CocoapPods-工作原理"><a href="#2-CocoapPods-工作原理" class="headerlink" title="2.CocoapPods 工作原理"></a>2.CocoapPods 工作原理</h3><p>在使用一个工具前，我们最好还是要简要的了解一下，它的工作原理是什么。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://7xvffo.com1.z0.glb.clouddn.com/Alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://7xvffo.com1.z0.glb.clouddn.com/WeChat.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/17/iOS知识点小集/" class="archive-article-date">
-  	<time datetime="2017-05-17T05:45:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/17/iOS知识点小集/">iOS知识点小集</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/16/SDWebImage源码解析/" class="archive-article-date">
-  	<time datetime="2017-05-16T05:59:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/16/SDWebImage源码解析/">SDWebImage源码解析</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">源码解析</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/12/iOS知识总结-多线程/" class="archive-article-date">
-  	<time datetime="2017-05-12T05:36:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/12/iOS知识总结-多线程/">iOS知识总结-多线程</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -262,223 +253,92 @@
 		</ul>
 	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/10/iOS常用设计模式/" class="archive-article-date">
-  	<time datetime="2017-05-10T07:28:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/10/iOS常用设计模式/">iOS常用设计模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">知识总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/04/25/iOS知识总结-基础篇-2/" class="archive-article-date">
-  	<time datetime="2017-04-25T05:43:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/04/25/iOS知识总结-基础篇-2/">iOS知识总结-基础篇-2</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">知识总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/04/15/iOS知识总结-基础篇-1/" class="archive-article-date">
-  	<time datetime="2017-04-15T15:43:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/04/15/iOS知识总结-基础篇-1/">iOS知识总结-基础篇-1</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">知识总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/04/03/weak-弱引用实现原理/" class="archive-article-date">
-  	<time datetime="2017-04-03T06:33:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/04/03/weak-弱引用实现原理/">weak-弱引用实现原理</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">读后感</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
       
-        </div></section>
+
       
+
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/05/03/Healthkit睡眠分析/" class="archive-article-date">
-  	<time datetime="2016-05-03T06:55:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-05-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/03/Healthkit睡眠分析/">Healthkit睡眠分析</a>
-    </h1>
-  
+      </div>
+    </span>
+  </div>
+</div>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">翻译</a>
-        		</li>
-      		
-		</ul>
-	</div>
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/01/24/CocoaPods/" alt="微信分享二维码">
+    </div>
+</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2018/01/23/iOS常用宏定义/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          iOS常用宏定义
+        
+      </div>
+    </a>
   
   
-    </div></section>
+</nav>
+
+
+
+
+
+
+  
+    <div class="duoshuo"></div>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/page/2/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span>
-    </nav>
-  
+
 
 
           </div>
@@ -501,8 +361,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
