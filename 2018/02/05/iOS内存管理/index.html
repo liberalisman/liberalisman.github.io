@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>NSURLProtocol | Liberalism</title>
+  <title>iOS内存管理 | Liberalism</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="码农。">
-<meta name="keywords">
+  <meta name="description" content="1.什么是 ARC？ARC 是 iOS 5 引入的内存管理新功能 – 自动引用计数 。它的工作原理大致是这样：当我们编译源码时，编译器会分析源码中每个对象的生命周期，然后基于这些对象的生命周期，来添加相应的引用计数操作代码。所以，ARC 是工作在编译期的一种技术方案。 这样的好处是：编译之后，ARC 与非 ARC 代码是没有什么差别的，所以二者可以在源码中共存。实际上，你可以通过编译参数 -fno">
+<meta name="keywords" content="内存管理">
 <meta property="og:type" content="article">
-<meta property="og:title" content="NSURLProtocol">
-<meta property="og:url" content="http://yoursite.com/2017/05/26/NSURLProtocol/index.html">
+<meta property="og:title" content="iOS内存管理">
+<meta property="og:url" content="http://yoursite.com/2018/02/05/iOS内存管理/index.html">
 <meta property="og:site_name" content="Liberalism">
-<meta property="og:description" content="码农。">
-<meta property="og:updated_time" content="2017-05-26T08:03:27.000Z">
+<meta property="og:description" content="1.什么是 ARC？ARC 是 iOS 5 引入的内存管理新功能 – 自动引用计数 。它的工作原理大致是这样：当我们编译源码时，编译器会分析源码中每个对象的生命周期，然后基于这些对象的生命周期，来添加相应的引用计数操作代码。所以，ARC 是工作在编译期的一种技术方案。 这样的好处是：编译之后，ARC 与非 ARC 代码是没有什么差别的，所以二者可以在源码中共存。实际上，你可以通过编译参数 -fno">
+<meta property="og:updated_time" content="2018-02-05T08:09:57.929Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="NSURLProtocol">
-<meta name="twitter:description" content="码农。">
+<meta name="twitter:title" content="iOS内存管理">
+<meta name="twitter:description" content="1.什么是 ARC？ARC 是 iOS 5 引入的内存管理新功能 – 自动引用计数 。它的工作原理大致是这样：当我们编译源码时，编译器会分析源码中每个对象的生命周期，然后基于这些对象的生命周期，来添加相应的引用计数操作代码。所以，ARC 是工作在编译期的一种技术方案。 这样的好处是：编译之后，ARC 与非 ARC 代码是没有什么差别的，所以二者可以在源码中共存。实际上，你可以通过编译参数 -fno">
   
     <link rel="alternative" href="/atom.xml" title="Liberalism" type="application/atom+xml">
   
@@ -158,27 +158,53 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-NSURLProtocol" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-iOS内存管理" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      NSURLProtocol
+      iOS内存管理
     </h1>
   
 
         
-        <a href="/2017/05/26/NSURLProtocol/" class="archive-article-date">
-  	<time datetime="2017-05-26T08:03:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-26</time>
+        <a href="/2018/02/05/iOS内存管理/" class="archive-article-date">
+  	<time datetime="2018-02-05T08:08:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-05</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h5 id="1-什么是-ARC？"><a href="#1-什么是-ARC？" class="headerlink" title="1.什么是 ARC？"></a>1.什么是 ARC？</h5><p><code>ARC</code> 是 <code>iOS 5</code> 引入的内存管理新功能 – <code>自动引用计数</code> 。它的工作原理大致是这样：当我们编译源码时，编译器会分析源码中每个对象的生命周期，然后基于这些对象的生命周期，来添加相应的引用计数操作代码。所以，<code>ARC</code> 是工作在编译期的一种技术方案。</p>
+<p>这样的好处是：编译之后，<code>ARC</code> 与非 <code>ARC</code> 代码是没有什么差别的，所以二者可以在源码中共存。实际上，你可以通过编译参数 <code>-fno-objc-arc</code> 来关闭部分源代码的 <code>ARC</code> 特性。由于 <code>ARC</code> 能够深度分析每一个对象的生命周期，它能够做到比 <code>MRC</code> 更加高效。</p>
+<p>例如在一个函数中，对一个对象刚开始有一个引用计数 <code>+1</code> 的操作，之后又紧接着有一个 <code>-1</code> 的操作，那么编译器就可以把这两个操作都优化掉。</p>
+<h5 id="2-ARC-遵循的原则？"><a href="#2-ARC-遵循的原则？" class="headerlink" title="2 ARC 遵循的原则？"></a>2 ARC 遵循的原则？</h5><ul>
+<li>自己生成的对象，自己持有</li>
+<li>非自己生成的对象，自己可以持有</li>
+<li>自己持有的对象不再需要时，需要对其进行释放</li>
+<li>非自己持有的对象无法释放</li>
+</ul>
+<h5 id="3-ARC-在编译时做了哪些工作？"><a href="#3-ARC-在编译时做了哪些工作？" class="headerlink" title="3 ARC 在编译时做了哪些工作？"></a>3 ARC 在编译时做了哪些工作？</h5><ul>
+<li>自动调用 <code>保留(retain)</code> 与 <code>释放(release)</code> 的方法</li>
+<li>相对于垃圾回收这类内存管理方案，ARC 不会带来运行时的额外开销，所以对于应用的运行效率不会有影响。 <code>ARC</code> 会把能够互相抵消 <code>retain</code>、<code>release</code>、<code>autorelease</code>，操作简化，如果发现在同一个对象上执行了多次保留与释放操作，那么 <code>ARC</code> 有时可以成对的移除这两个操作。</li>
+</ul>
+<h5 id="4-ARC-在运行时做了哪些工作？"><a href="#4-ARC-在运行时做了哪些工作？" class="headerlink" title="4 ARC 在运行时做了哪些工作？"></a>4 ARC 在运行时做了哪些工作？</h5><ul>
+<li><p>主要是指 <code>weak</code> 关键字。<code>weak</code> 修饰的变量能够在引用计数为<code>0</code> 时被自动设置成 <code>nil</code>，显然是有运行时逻辑在工作的。关于原因会单独开一个问题</p>
+</li>
+<li><p>为了保证向后兼容性，<code>ARC</code> 在运行时检测到类函数中的 <code>autorelease</code> 后紧跟其后 <code>retain</code>，此时不直接调用对象的 <code>autorelease</code> 方法，而是改为调用 <code>objc_autoreleaseReturnValue</code>。<br><code>objc_autoreleaseReturnValue</code> 会检视当前方法返回之后即将要执行的那段代码，若那段代码要在返回对象上执行 <code>retain</code> 操作，则设置全局数据结构中的一个标志位，而不执行 <code>autorelease</code> 操作，与之相似，如果方法返回了一个自动释放的对象，而调用方法的代码要保留此对象，那么此时不直接执行 <code>retain</code> ，而是改为执行 <code>objc_retainAoutoreleasedReturnValue</code>函数。此函数要检测刚才提到的标志位，若已经置位，则不执行 <code>retain</code> 操作，设置并检测标志位，要比调用 <code>autorelease</code> 和<code>retain</code>更快。</p>
+</li>
+</ul>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">_myPerson = [ECOPerson personWithName:@“Bob”]; </div><div class="line">ECOPerson * tmp = [ECOPerson personWithName:@“Bob”]; </div><div class="line">_myPerson = [tmp <span class="keyword">retain</span>];</div></pre></td></tr></table></figure>
+<h5 id="5-函数返回一个对象时，会对对象autorelease么？为什么？autorelease是什么时候释放的？"><a href="#5-函数返回一个对象时，会对对象autorelease么？为什么？autorelease是什么时候释放的？" class="headerlink" title="5 函数返回一个对象时，会对对象autorelease么？为什么？autorelease是什么时候释放的？"></a>5 函数返回一个对象时，会对对象autorelease么？为什么？autorelease是什么时候释放的？</h5><p>会对对象 <code>autorelease</code>，因为需要在稍后释放对象，从而给调用者留下足够长的时间，使其可以在需要时先保留返回值。此方法可以保证对象在跨越方法调用边界时一定存活。</p>
+<p>除非你有自己的自动释放池，否则这个时机就是当前线程,当前事件循环结束时，就是 <code>RunLoop</code> 结束时。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 情况一：</span></div><div class="line"><span class="keyword">@autoreleasepool</span> &#123;</div><div class="line">    <span class="built_in">NSObject</span> * obj = [<span class="built_in">NSObject</span> new];</div><div class="line">    [obj autorelease];</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%d"</span>,[obj retaincount]); <span class="comment">//1</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 情况二：</span></div><div class="line"><span class="built_in">NSObject</span> * obj</div><div class="line"><span class="keyword">@autoreleasepool</span> &#123;</div><div class="line">        obj = [<span class="built_in">NSObject</span> new];</div><div class="line">        [obj autorelease];</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%d"</span>,[obj retaincount]); <span class="comment">//1</span></div><div class="line">&#125;</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"%d"</span>,[obj retaincount]); <span class="comment">//0</span></div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 情况三：</span></div><div class="line"><span class="built_in">NSObject</span> * obj</div><div class="line"><span class="keyword">@autoreleasepool</span> &#123;</div><div class="line">        obj = [<span class="built_in">NSObject</span> new];</div><div class="line">        [obj autorelease];</div><div class="line">        [obj autorelease];</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%d"</span>,[obj retaincount]);  <span class="comment">// 1</span></div><div class="line">  &#125; <span class="comment">// crash</span></div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"%d"</span>,[obj retaincount]);</div></pre></td></tr></table></figure>
+<h5 id="6-为什么已经有了-ARC-，还需要-autoreleasePool？"><a href="#6-为什么已经有了-ARC-，还需要-autoreleasePool？" class="headerlink" title="6 为什么已经有了 ARC ，还需要 @autoreleasePool？"></a>6 为什么已经有了 ARC ，还需要 @autoreleasePool？</h5><p>提到 <code>OC</code> 的 <code>RC</code>，首先要横向对比一下 <code>Android</code> 的 <code>GC(垃圾回收机制)</code>，<code>GC</code> 的内存回收是集中式回收（定期回收），而 <code>RC</code> 的回收是伴随整个运行时的，所以 <code>android</code> 机器有种 时“卡”时“流畅” 的感觉，而 <code>iOS</code> 总体比较均匀，缺乏像 <code>GC</code> 的集中式回收内存的类似机制，所以猜测 <code>Pool</code>的产生也是弥补 <code>RC</code> 的这一不足，在 <code>RC</code> 基础上进行内存优化的一种手段。</p>
+
       
 
       
@@ -217,6 +243,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">内存管理</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -267,7 +304,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/05/26/NSURLProtocol/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/02/05/iOS内存管理/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -281,20 +318,15 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/05/18/Block详解/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/01/24/CocoaPods/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Block详解
+          CocoaPods
         
       </div>
     </a>
   
-  
-    <a href="/2017/06/07/WWDC2016-Session413（介绍Xcode的使用技巧）/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">WWDC2016-Session413（介绍Xcode的使用技巧）</div>
-      <i class="icon-circle-right"></i>
-    </a>
   
 </nav>
 
