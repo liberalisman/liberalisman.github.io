@@ -15,7 +15,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/02/05/iOS内存管理/index.html">
 <meta property="og:site_name" content="Liberalism">
 <meta property="og:description" content="1.什么是 ARC？ARC 是 iOS 5 引入的内存管理新功能 – 自动引用计数 。它的工作原理大致是这样：当我们编译源码时，编译器会分析源码中每个对象的生命周期，然后基于这些对象的生命周期，来添加相应的引用计数操作代码。所以，ARC 是工作在编译期的一种技术方案。 这样的好处是：编译之后，ARC 与非 ARC 代码是没有什么差别的，所以二者可以在源码中共存。实际上，你可以通过编译参数 -fno">
-<meta property="og:updated_time" content="2018-02-07T06:47:19.848Z">
+<meta property="og:updated_time" content="2018-02-07T07:09:16.781Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS内存管理">
 <meta name="twitter:description" content="1.什么是 ARC？ARC 是 iOS 5 引入的内存管理新功能 – 自动引用计数 。它的工作原理大致是这样：当我们编译源码时，编译器会分析源码中每个对象的生命周期，然后基于这些对象的生命周期，来添加相应的引用计数操作代码。所以，ARC 是工作在编译期的一种技术方案。 这样的好处是：编译之后，ARC 与非 ARC 代码是没有什么差别的，所以二者可以在源码中共存。实际上，你可以通过编译参数 -fno">
@@ -212,7 +212,7 @@
 <p><code>weak</code> 修饰符指向但是并不持有该对象，引用计数也不会加1。在 <code>Runtime</code> 中对该属性进行了相关操作，无需处理，可以自动销毁。<code>weak</code>用来修饰对象，多用于避免循环引用的地方。<code>weak</code> 不可以修饰基本数据类型。</p>
 </blockquote>
 <h6 id="assign"><a href="#assign" class="headerlink" title="assign"></a>assign</h6><blockquote>
-<p><code>assign</code>主要用于修饰基本数据类型，存储在栈中，内存不用程序员管理。<code>assign</code>是可以修饰对象的，但是会出现问题。</p>
+<p><code>assign</code>主要用于修饰基本数据类型，<br>例如<code>NSInteger</code>，<code>CGFloat</code>，存储在栈中，内存不用程序员管理。<code>assign</code>是可以修饰对象的，但是会出现问题。</p>
 </blockquote>
 <h6 id="copy"><a href="#copy" class="headerlink" title="copy"></a>copy</h6><blockquote>
 <p><code>copy</code>关键字和 <code>strong</code>类似，<code>copy</code> 多用于修饰有可变类型的不可变对象上 <code>NSString</code>,<code>NSArray</code>,<code>NSDictionary</code>上。</p>
@@ -223,7 +223,15 @@
 <h6 id="autoreleasing"><a href="#autoreleasing" class="headerlink" title="__autoreleasing"></a>__autoreleasing</h6><blockquote>
 <p>将对象赋值给附有 <code>__autoreleasing</code>修饰的变量等同于 <code>ARC</code> 无效时调用对象的 <code>autorelease</code> 方法,实质就是扔进了自动释放池。</p>
 </blockquote>
-<h5 id="8-说一下什么是-悬垂指针"><a href="#8-说一下什么是-悬垂指针" class="headerlink" title="8 说一下什么是 悬垂指针"></a>8 说一下什么是 悬垂指针</h5>
+<h5 id="8-说一下什么是悬垂指针？什么是野指针？"><a href="#8-说一下什么是悬垂指针？什么是野指针？" class="headerlink" title="8 说一下什么是悬垂指针？什么是野指针？"></a>8 说一下什么是悬垂指针？什么是野指针？</h5><h6 id="悬垂指针"><a href="#悬垂指针" class="headerlink" title="悬垂指针"></a>悬垂指针</h6><blockquote>
+<p>指针指向的内存已经被释放了，但是指针还存在，这就是一个 <code>悬垂指针</code> 或者说 <code>迷途指针</code></p>
+</blockquote>
+<h6 id="野指针"><a href="#野指针" class="headerlink" title="野指针"></a>野指针</h6><blockquote>
+<p>没有进行初始化的指针，其实都是 <code>野指针</code></p>
+</blockquote>
+<h5 id="9-内存管理默认的关键字"><a href="#9-内存管理默认的关键字" class="headerlink" title="9 内存管理默认的关键字"></a>9 内存管理默认的关键字</h5><h6 id="MRC"><a href="#MRC" class="headerlink" title="MRC"></a>MRC</h6><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">@property</span> (atomic,readWrite,<span class="keyword">retain</span>) <span class="built_in">NSString</span> *name;</div></pre></td></tr></table></figure>
+<h6 id="ARC"><a href="#ARC" class="headerlink" title="ARC"></a>ARC</h6><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">@property</span> (atomic,readWrite,<span class="keyword">strong</span>) <span class="built_in">NSString</span> *name;</div></pre></td></tr></table></figure>
+
       
 
       
