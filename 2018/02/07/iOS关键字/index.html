@@ -6,17 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2018 | Liberalism</title>
+  <title>iOS关键字 | Liberalism</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="码农。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Liberalism">
-<meta property="og:url" content="http://yoursite.com/archives/2018/index.html">
+  <meta name="description" content="Super之前有一道面试题，例如有一个 Person 类，那么 [self Class] 和 [super Class] 的输出结果分别是什么？ 答案为都是 Person 其实 super 是 Xcode 的编译器特性,当 Xcode 的编译器检测到 super 这个关键字时，会自动去当前类的父类的方法列表中去寻找并执行执行该方法。当然如果父类本身就没有这个方法，编译器会报错 Const 常量字符">
+<meta name="keywords" content="知识总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS关键字">
+<meta property="og:url" content="http://yoursite.com/2018/02/07/iOS关键字/index.html">
 <meta property="og:site_name" content="Liberalism">
-<meta property="og:description" content="码农。">
+<meta property="og:description" content="Super之前有一道面试题，例如有一个 Person 类，那么 [self Class] 和 [super Class] 的输出结果分别是什么？ 答案为都是 Person 其实 super 是 Xcode 的编译器特性,当 Xcode 的编译器检测到 super 这个关键字时，会自动去当前类的父类的方法列表中去寻找并执行执行该方法。当然如果父类本身就没有这个方法，编译器会报错 Const 常量字符">
+<meta property="og:updated_time" content="2018-02-07T05:31:09.980Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Liberalism">
-<meta name="twitter:description" content="码农。">
+<meta name="twitter:title" content="iOS关键字">
+<meta name="twitter:description" content="Super之前有一道面试题，例如有一个 Person 类，那么 [self Class] 和 [super Class] 的输出结果分别是什么？ 答案为都是 Person 其实 super 是 Xcode 的编译器特性,当 Xcode 的编译器检测到 super 这个关键字时，会自动去当前类的父类的方法列表中去寻找并执行执行该方法。当然如果父类本身就没有这个方法，编译器会报错 Const 常量字符">
   
     <link rel="alternative" href="/atom.xml" title="Liberalism" type="application/atom+xml">
   
@@ -156,36 +158,97 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-iOS关键字" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      iOS关键字
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/02/07/iOS关键字/" class="archive-article-date">
+
+        
+        <a href="/2018/02/07/iOS关键字/" class="archive-article-date">
   	<time datetime="2018-02-07T05:30:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-07</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/02/07/iOS关键字/">iOS关键字</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Super"><a href="#Super" class="headerlink" title="Super"></a>Super</h3><p>之前有一道面试题，例如有一个 <code>Person</code> 类，那么 <code>[self Class]</code> 和 <code>[super Class]</code> 的输出结果分别是什么？</p>
+<p>答案为都是 <code>Person</code></p>
+<p>其实 <code>super</code> 是 <code>Xcode</code> 的编译器特性,当 <code>Xcode</code> 的编译器检测到 <code>super</code> 这个关键字时，会自动去当前类的父类的方法列表中去寻找并执行执行该方法。当然如果父类本身就没有这个方法，编译器会报错</p>
+<h3 id="Const"><a href="#Const" class="headerlink" title="Const"></a>Const</h3><ul>
+<li>常量字符串，目前苹果强烈推荐使用 <code>Const</code>。在 <code>Swift</code> 中已经废弃了之前与之对应的 <code>#define</code>。</li>
+<li><code>Const</code>用来修饰右边的变量。</li>
+<li><code>Const</code>修饰的变量只可读。</li>
+</ul>
+<h5 id="Const-与-宏定义的区别？"><a href="#Const-与-宏定义的区别？" class="headerlink" title="Const 与 宏定义的区别？"></a>Const 与 宏定义的区别？</h5><ul>
+<li>编译时刻：<code>#define</code>预编译，<code>Const</code>编译时刻</li>
+<li>编译检查：<code>#define</code>直接在编译时进行替换，不做检查。<code>Const</code>会做检查，也会报编译错误。</li>
+<li><code>#define</code>宏定义可以 定义一些简单的函数，而 <code>Const</code>不可以</li>
+<li><code>#define</code>宏会拖慢编译的速度。</li>
+</ul>
+<a id="more"></a>
+<h3 id="static"><a href="#static" class="headerlink" title="static"></a>static</h3><h5 id="修饰局部变量"><a href="#修饰局部变量" class="headerlink" title="修饰局部变量"></a>修饰局部变量</h5><ul>
+<li>延长局部变量的生命周期</li>
+<li>局部变量只会生成一份内存</li>
+<li>改变局部变量的作用域</li>
+</ul>
+<h5 id="修饰全局变量"><a href="#修饰全局变量" class="headerlink" title="修饰全局变量"></a>修饰全局变量</h5><ul>
+<li>只能在本文件中使用</li>
+<li>避免重复定义全局变量</li>
+</ul>
+<h5 id="static-const-混用"><a href="#static-const-混用" class="headerlink" title="static const 混用"></a>static const 混用</h5><p>在文件中经常将 <code>Static</code> 和 <code>extern</code> 结合使用，定义一个不可改变的全局常量</p>
+<p>例如：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> account = <span class="string">@"accountID"</span>;</div></pre></td></tr></table></figure>
+<p>这个值是唯一的、固定的、不可改变的。</p>
+<h3 id="Extern"><a href="#Extern" class="headerlink" title="Extern"></a>Extern</h3><p>只可以用来获取全局变量，不可以用来定义，<code>extern</code>首先会在自己当前的文件中查找，如果没有找到，才会到其他文件中查找。</p>
+<p>在开发中常用的方式是将项目中常用的一些常量，写在某个文件中</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// .h文件中</span></div><div class="line"><span class="keyword">extern</span> <span class="built_in">NSString</span> * <span class="keyword">const</span> externAccountID;</div><div class="line"></div><div class="line"><span class="comment">// .m文件中</span></div><div class="line"><span class="built_in">NSString</span> * <span class="keyword">const</span> externAccountID = <span class="string">@"001"</span>;</div></pre></td></tr></table></figure>
+<p>导入后，外部的其他文件就可以调用这个文件了</p>
 
-        <div class="article-info info-on-right">
-          
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://7xvffo.com1.z0.glb.clouddn.com/Alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://7xvffo.com1.z0.glb.clouddn.com/WeChat.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -197,133 +260,92 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/02/07/iOS关键字/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/02/05/iOS内存管理/" class="archive-article-date">
-  	<time datetime="2018-02-05T08:08:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-05</time>
-</a>
-        </div>
-    	 
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/02/05/iOS内存管理/">iOS内存管理</a>
-    </h1>
+    <a href="/2018/02/05/iOS内存管理/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          iOS内存管理
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+
+
+
+
+
+  
+    <div class="duoshuo"></div>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">内存管理</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/01/24/CocoaPods/" class="archive-article-date">
-  	<time datetime="2018-01-24T06:24:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-24</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/24/CocoaPods/">CocoaPods</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">知识总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/01/23/iOS常用宏定义/" class="archive-article-date">
-  	<time datetime="2018-01-23T07:28:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/23/iOS常用宏定义/">iOS常用宏定义</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">知识总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -346,8 +368,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

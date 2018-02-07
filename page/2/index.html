@@ -158,6 +158,77 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-KVC知识小结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/17/KVC知识小结/">KVC知识小结</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/17/KVC知识小结/" class="archive-article-date">
+  	<time datetime="2017-06-17T02:15:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>关于<code>KVC</code>和<code>KVO</code>,我之前的总结文章有写过，但是实际上我在平日工作里，<code>KVC</code>和<code>KVO</code>使用的相对较少，不是<code>KVC</code>和<code>KVO</code>的功能不够强大，这实际上和项目的架构有比较大的关系，以前的我对于<code>KVC</code>和<code>KVO</code>的使用也是趋于表面，没有探究其内部真正的实现原理和进阶用法，这次总结正好给了我很好的学习机会，在此深入的总结一下<code>KVC</code>和<code>KVO</code>吧。</p>
+<blockquote>
+<p><strong>KVC</strong>，即是指 <strong>NSKeyValueCoding</strong>，一个非正式的 <strong>Protocol</strong>，提供一种机制来间接访问对象的属性。<strong>KVO</strong> 就是基于 <strong>KVC</strong> 实现的关键技术之一。</p>
+</blockquote>
+<h3 id="KVC在iOS中的定义"><a href="#KVC在iOS中的定义" class="headerlink" title="KVC在iOS中的定义"></a>KVC在iOS中的定义</h3><p><code>Objective-C</code>中<code>KVC</code>的定义是对<code>NSObject</code>的扩展来实现的。所以对于所有继承了<code>NSObject</code>在类型，都可以使用<code>KVC</code>，下面是<code>KVC</code>最为重要的四个方法</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">nullable</span> <span class="keyword">id</span>)valueForKey:(<span class="built_in">NSString</span> *)key;                          <span class="comment">//直接通过Key来取值</span></div><div class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">nullable</span> <span class="keyword">id</span>)value forKey:(<span class="built_in">NSString</span> *)key;          <span class="comment">//通过Key来设值</span></div><div class="line">- (<span class="keyword">nullable</span> <span class="keyword">id</span>)valueForKeyPath:(<span class="built_in">NSString</span> *)keyPath;                  <span class="comment">//通过KeyPath来取值</span></div><div class="line">- (<span class="keyword">void</span>)setValue:(<span class="keyword">nullable</span> <span class="keyword">id</span>)value forKeyPath:(<span class="built_in">NSString</span> *)keyPath;  <span class="comment">//通过KeyPath来设值</span></div></pre></td></tr></table></figure>
+<p>一般来讲，<strong>Obj-C</strong> 对象中都会有一些属性。如代码所示</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#import <span class="meta-string">&lt;Foundation/Foundation.h&gt;</span></span></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Person</span> : <span class="title">NSObject</span></span></div><div class="line"></div><div class="line"><span class="comment">/** name */</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">copy</span>  ) <span class="built_in">NSString</span> *name;</div><div class="line"></div><div class="line"><span class="comment">/** Address */</span></div><div class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">copy</span>  ) <span class="built_in">NSString</span> *address;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+        
+          <a class="article-more-a" href="/2017/06/17/KVC知识小结/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">知识总结</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/17/KVC知识小结/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-UIStackView教程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -607,56 +678,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2017/06/07/WWDC2016-Session413（介绍Xcode的使用技巧）/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
-    <article id="post-NSURLProtocol" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/26/NSURLProtocol/">NSURLProtocol</a>
-    </h1>
-  
-
-        
-        <a href="/2017/05/26/NSURLProtocol/" class="archive-article-date">
-  	<time datetime="2017-05-26T08:03:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-26</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/26/NSURLProtocol/">展开全文 >></a>
         </p>
       
 
