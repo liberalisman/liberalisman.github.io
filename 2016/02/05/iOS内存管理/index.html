@@ -15,7 +15,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/02/05/iOS内存管理/index.html">
 <meta property="og:site_name" content="Liberalism">
 <meta property="og:description" content="1.什么是 ARC？ARC 是 iOS 5 引入的内存管理新功能 – 自动引用计数 。它的工作原理大致是这样：当我们编译源码时，编译器会分析源码中每个对象的生命周期，然后基于这些对象的生命周期，来添加相应的引用计数操作代码。所以，ARC 是工作在编译期的一种技术方案。 这样的好处是：编译之后，ARC 与非 ARC 代码是没有什么差别的，所以二者可以在源码中共存。实际上，你可以通过编译参数 -fno">
-<meta property="og:updated_time" content="2018-02-08T02:15:10.173Z">
+<meta property="og:updated_time" content="2018-02-08T03:06:05.243Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS内存管理">
 <meta name="twitter:description" content="1.什么是 ARC？ARC 是 iOS 5 引入的内存管理新功能 – 自动引用计数 。它的工作原理大致是这样：当我们编译源码时，编译器会分析源码中每个对象的生命周期，然后基于这些对象的生命周期，来添加相应的引用计数操作代码。所以，ARC 是工作在编译期的一种技术方案。 这样的好处是：编译之后，ARC 与非 ARC 代码是没有什么差别的，所以二者可以在源码中共存。实际上，你可以通过编译参数 -fno">
@@ -239,8 +239,18 @@
 <h6 id="野指针"><a href="#野指针" class="headerlink" title="野指针"></a>野指针</h6><blockquote>
 <p>没有进行初始化的指针，其实都是 <code>野指针</code></p>
 </blockquote>
-<h5 id="9-内存管理默认的关键字"><a href="#9-内存管理默认的关键字" class="headerlink" title="9 内存管理默认的关键字"></a>9 内存管理默认的关键字</h5><h6 id="MRC"><a href="#MRC" class="headerlink" title="MRC"></a>MRC</h6><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">@property</span> (atomic,readWrite,<span class="keyword">retain</span>) <span class="built_in">NSString</span> *name;</div></pre></td></tr></table></figure>
+<h5 id="10-内存管理默认的关键字？"><a href="#10-内存管理默认的关键字？" class="headerlink" title="10 内存管理默认的关键字？"></a>10 内存管理默认的关键字？</h5><h6 id="MRC"><a href="#MRC" class="headerlink" title="MRC"></a>MRC</h6><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">@property</span> (atomic,readWrite,<span class="keyword">retain</span>) <span class="built_in">NSString</span> *name;</div></pre></td></tr></table></figure>
 <h6 id="ARC"><a href="#ARC" class="headerlink" title="ARC"></a>ARC</h6><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">@property</span> (atomic,readWrite,<span class="keyword">strong</span>) <span class="built_in">NSString</span> *name;</div></pre></td></tr></table></figure>
+<h5 id="10-weak-和-unsafe-unretain-的区别？"><a href="#10-weak-和-unsafe-unretain-的区别？" class="headerlink" title="10 weak 和 unsafe_unretain 的区别？"></a>10 <strong>weak 和 </strong>unsafe_unretain 的区别？</h5><blockquote>
+<p> <code>__weak</code> 是 <code>__unsafe_unretain</code>升级版，<code>__unsafe_unretain</code> 在指向的内存地址销毁后，指针本身并不会自动销毁，这也就造成了野指针，之后容易造成 Crash。<code>__weak</code> 在指向的内存销毁后，可以将指针变量置为 <code>nil</code>，这样更加安全。</p>
+</blockquote>
+<h5 id="11-weak-修饰的变量在地址被释放后，为何被置为-nil？"><a href="#11-weak-修饰的变量在地址被释放后，为何被置为-nil？" class="headerlink" title="11 __weak 修饰的变量在地址被释放后，为何被置为 nil？"></a>11 __weak 修饰的变量在地址被释放后，为何被置为 nil？</h5><p>在 <code>Runtime</code> 中专门维护了一个用于存储 <code>weak</code>指针变量的 <code>weak</code> 表，这实际上是一个 <code>Hash</code> 表。这个表 <code>key</code> 是 <code>weak指针</code> 所指向的内存地址，<code>value</code> 是指向这个内存地址的所有 <code>weak指针</code>，实际上是一个数组。</p>
+<p><strong>过程可以总结为3步</strong></p>
+<ul>
+<li>1、初始化时：<code>runtime</code> 会调用 <code>objc_initWeak</code> 函数，初始化一个新的 <code>weak指针</code> 指向对象的地址。</li>
+<li>2、添加引用时：<code>objc_initWeak</code>函数会调用 <code>objc_storeWeak()</code> 函数， <code>objc_storeWeak()</code>的作用是更新指针指向，创建对应的弱引用表。</li>
+<li>3、释放时，调用 <code>clearDeallocating</code> 函数。<code>clearDeallocating</code> 函数首先根据对象地址获取所有 <code>weak指针</code> 地址的数组，然后遍历这个数组把其中的数据设为 <code>nil</code>，最后把这个 <code>entry</code> 从<code>weak表</code> 中删除，最后清理对象的记录。</li>
+</ul>
 
       
 
