@@ -257,13 +257,23 @@
         <h5 id="1-什么是-ARC？"><a href="#1-什么是-ARC？" class="headerlink" title="1.什么是 ARC？"></a>1.什么是 ARC？</h5><p><code>ARC</code> 是 <code>iOS 5</code> 引入的内存管理新功能 – <code>自动引用计数</code> 。它的工作原理大致是这样：当我们编译源码时，编译器会分析源码中每个对象的生命周期，然后基于这些对象的生命周期，来添加相应的引用计数操作代码。所以，<code>ARC</code> 是工作在编译期的一种技术方案。</p>
 <p>这样的好处是：编译之后，<code>ARC</code> 与非 <code>ARC</code> 代码是没有什么差别的，所以二者可以在源码中共存。实际上，你可以通过编译参数 <code>-fno-objc-arc</code> 来关闭部分源代码的 <code>ARC</code> 特性。由于 <code>ARC</code> 能够深度分析每一个对象的生命周期，它能够做到比 <code>MRC</code> 更加高效。</p>
 <p>例如在一个函数中，对一个对象刚开始有一个引用计数 <code>+1</code> 的操作，之后又紧接着有一个 <code>-1</code> 的操作，那么编译器就可以把这两个操作都优化掉。</p>
-<h5 id="2-ARC-遵循的原则？"><a href="#2-ARC-遵循的原则？" class="headerlink" title="2 ARC 遵循的原则？"></a>2 ARC 遵循的原则？</h5><ul>
+<h5 id="2-ARC-的核心思想？"><a href="#2-ARC-的核心思想？" class="headerlink" title="2 ARC 的核心思想？"></a>2 ARC 的核心思想？</h5><ul>
 <li>自己生成的对象，自己持有</li>
 <li>非自己生成的对象，自己可以持有</li>
 <li>自己持有的对象不再需要时，需要对其进行释放</li>
 <li>非自己持有的对象无法释放</li>
 </ul>
-<h5 id="3-ARC-在编译时做了哪些工作？"><a href="#3-ARC-在编译时做了哪些工作？" class="headerlink" title="3 ARC 在编译时做了哪些工作？"></a>3 ARC 在编译时做了哪些工作？</h5><ul>
+<h5 id="3-ARC-在使用时应该遵循的原则？"><a href="#3-ARC-在使用时应该遵循的原则？" class="headerlink" title="3 ARC 在使用时应该遵循的原则？"></a>3 ARC 在使用时应该遵循的原则？</h5><ul>
+<li>不能使用 <code>retain</code>、<code>release</code>、<code>retainCount</code>、<code>autorelease</code>。</li>
+<li>不可以使用 <code>NSAllocateObject</code>、<code>NSDeallocateObject</code>。</li>
+<li>必须遵守内存管理方法的命名规则。</li>
+<li>不需要显示的调用 <code>Dealloc</code>。</li>
+<li>使用 <code>@autoreleasePool</code> 来代替 <code>NSAutoreleasePool</code>。</li>
+<li>不可以使用区域 <code>NSZone</code>。</li>
+<li>对象性变量不可以作为 <code>C</code> 语言的结构体成员。</li>
+<li>显示转换 <code>id</code> 和 <code>void*</code>。</li>
+</ul>
+<h5 id="4-ARC-在编译时做了哪些工作？"><a href="#4-ARC-在编译时做了哪些工作？" class="headerlink" title="4 ARC 在编译时做了哪些工作？"></a>4 ARC 在编译时做了哪些工作？</h5><ul>
 <li>自动调用 <code>保留(retain)</code> 与 <code>释放(release)</code> 的方法</li>
 <li>相对于垃圾回收这类内存管理方案，ARC 不会带来运行时的额外开销，所以对于应用的运行效率不会有影响。 <code>ARC</code> 会把能够互相抵消 <code>retain</code>、<code>release</code>、<code>autorelease</code>，操作简化，如果发现在同一个对象上执行了多次保留与释放操作，那么 <code>ARC</code> 有时可以成对的移除这两个操作。</li>
 </ul>

@@ -15,7 +15,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/02/05/iOS内存管理/index.html">
 <meta property="og:site_name" content="Liberalism">
 <meta property="og:description" content="1.什么是 ARC？ARC 是 iOS 5 引入的内存管理新功能 – 自动引用计数 。它的工作原理大致是这样：当我们编译源码时，编译器会分析源码中每个对象的生命周期，然后基于这些对象的生命周期，来添加相应的引用计数操作代码。所以，ARC 是工作在编译期的一种技术方案。 这样的好处是：编译之后，ARC 与非 ARC 代码是没有什么差别的，所以二者可以在源码中共存。实际上，你可以通过编译参数 -fno">
-<meta property="og:updated_time" content="2018-02-07T07:09:16.781Z">
+<meta property="og:updated_time" content="2018-02-08T02:15:10.173Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS内存管理">
 <meta name="twitter:description" content="1.什么是 ARC？ARC 是 iOS 5 引入的内存管理新功能 – 自动引用计数 。它的工作原理大致是这样：当我们编译源码时，编译器会分析源码中每个对象的生命周期，然后基于这些对象的生命周期，来添加相应的引用计数操作代码。所以，ARC 是工作在编译期的一种技术方案。 这样的好处是：编译之后，ARC 与非 ARC 代码是没有什么差别的，所以二者可以在源码中共存。实际上，你可以通过编译参数 -fno">
@@ -181,31 +181,41 @@
         <h5 id="1-什么是-ARC？"><a href="#1-什么是-ARC？" class="headerlink" title="1.什么是 ARC？"></a>1.什么是 ARC？</h5><p><code>ARC</code> 是 <code>iOS 5</code> 引入的内存管理新功能 – <code>自动引用计数</code> 。它的工作原理大致是这样：当我们编译源码时，编译器会分析源码中每个对象的生命周期，然后基于这些对象的生命周期，来添加相应的引用计数操作代码。所以，<code>ARC</code> 是工作在编译期的一种技术方案。</p>
 <p>这样的好处是：编译之后，<code>ARC</code> 与非 <code>ARC</code> 代码是没有什么差别的，所以二者可以在源码中共存。实际上，你可以通过编译参数 <code>-fno-objc-arc</code> 来关闭部分源代码的 <code>ARC</code> 特性。由于 <code>ARC</code> 能够深度分析每一个对象的生命周期，它能够做到比 <code>MRC</code> 更加高效。</p>
 <p>例如在一个函数中，对一个对象刚开始有一个引用计数 <code>+1</code> 的操作，之后又紧接着有一个 <code>-1</code> 的操作，那么编译器就可以把这两个操作都优化掉。</p>
-<h5 id="2-ARC-遵循的原则？"><a href="#2-ARC-遵循的原则？" class="headerlink" title="2 ARC 遵循的原则？"></a>2 ARC 遵循的原则？</h5><ul>
+<h5 id="2-ARC-的核心思想？"><a href="#2-ARC-的核心思想？" class="headerlink" title="2 ARC 的核心思想？"></a>2 ARC 的核心思想？</h5><ul>
 <li>自己生成的对象，自己持有</li>
 <li>非自己生成的对象，自己可以持有</li>
 <li>自己持有的对象不再需要时，需要对其进行释放</li>
 <li>非自己持有的对象无法释放</li>
 </ul>
-<h5 id="3-ARC-在编译时做了哪些工作？"><a href="#3-ARC-在编译时做了哪些工作？" class="headerlink" title="3 ARC 在编译时做了哪些工作？"></a>3 ARC 在编译时做了哪些工作？</h5><ul>
+<h5 id="3-ARC-在使用时应该遵循的原则？"><a href="#3-ARC-在使用时应该遵循的原则？" class="headerlink" title="3 ARC 在使用时应该遵循的原则？"></a>3 ARC 在使用时应该遵循的原则？</h5><ul>
+<li>不能使用 <code>retain</code>、<code>release</code>、<code>retainCount</code>、<code>autorelease</code>。</li>
+<li>不可以使用 <code>NSAllocateObject</code>、<code>NSDeallocateObject</code>。</li>
+<li>必须遵守内存管理方法的命名规则。</li>
+<li>不需要显示的调用 <code>Dealloc</code>。</li>
+<li>使用 <code>@autoreleasePool</code> 来代替 <code>NSAutoreleasePool</code>。</li>
+<li>不可以使用区域 <code>NSZone</code>。</li>
+<li>对象性变量不可以作为 <code>C</code> 语言的结构体成员。</li>
+<li>显示转换 <code>id</code> 和 <code>void*</code>。</li>
+</ul>
+<h5 id="4-ARC-在编译时做了哪些工作？"><a href="#4-ARC-在编译时做了哪些工作？" class="headerlink" title="4 ARC 在编译时做了哪些工作？"></a>4 ARC 在编译时做了哪些工作？</h5><ul>
 <li>自动调用 <code>保留(retain)</code> 与 <code>释放(release)</code> 的方法</li>
 <li>相对于垃圾回收这类内存管理方案，ARC 不会带来运行时的额外开销，所以对于应用的运行效率不会有影响。 <code>ARC</code> 会把能够互相抵消 <code>retain</code>、<code>release</code>、<code>autorelease</code>，操作简化，如果发现在同一个对象上执行了多次保留与释放操作，那么 <code>ARC</code> 有时可以成对的移除这两个操作。</li>
 </ul>
 <a id="more"></a>
-<h5 id="4-ARC-在运行时做了哪些工作？"><a href="#4-ARC-在运行时做了哪些工作？" class="headerlink" title="4 ARC 在运行时做了哪些工作？"></a>4 ARC 在运行时做了哪些工作？</h5><ul>
+<h5 id="5-ARC-在运行时做了哪些工作？"><a href="#5-ARC-在运行时做了哪些工作？" class="headerlink" title="5 ARC 在运行时做了哪些工作？"></a>5 ARC 在运行时做了哪些工作？</h5><ul>
 <li><p>主要是指 <code>weak</code> 关键字。<code>weak</code> 修饰的变量能够在引用计数为<code>0</code> 时被自动设置成 <code>nil</code>，显然是有运行时逻辑在工作的。关于原因会单独开一个问题</p>
 </li>
 <li><p>为了保证向后兼容性，<code>ARC</code> 在运行时检测到类函数中的 <code>autorelease</code> 后紧跟其后 <code>retain</code>，此时不直接调用对象的 <code>autorelease</code> 方法，而是改为调用 <code>objc_autoreleaseReturnValue</code>。<br><code>objc_autoreleaseReturnValue</code> 会检视当前方法返回之后即将要执行的那段代码，若那段代码要在返回对象上执行 <code>retain</code> 操作，则设置全局数据结构中的一个标志位，而不执行 <code>autorelease</code> 操作，与之相似，如果方法返回了一个自动释放的对象，而调用方法的代码要保留此对象，那么此时不直接执行 <code>retain</code> ，而是改为执行 <code>objc_retainAoutoreleasedReturnValue</code>函数。此函数要检测刚才提到的标志位，若已经置位，则不执行 <code>retain</code> 操作，设置并检测标志位，要比调用 <code>autorelease</code> 和<code>retain</code>更快。</p>
 </li>
 </ul>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">_myPerson = [ECOPerson personWithName:@“Bob”]; </div><div class="line">ECOPerson * tmp = [ECOPerson personWithName:@“Bob”]; </div><div class="line">_myPerson = [tmp <span class="keyword">retain</span>];</div></pre></td></tr></table></figure>
-<h5 id="5-函数返回一个对象时，会对对象autorelease么？为什么？autorelease是什么时候释放的？"><a href="#5-函数返回一个对象时，会对对象autorelease么？为什么？autorelease是什么时候释放的？" class="headerlink" title="5 函数返回一个对象时，会对对象autorelease么？为什么？autorelease是什么时候释放的？"></a>5 函数返回一个对象时，会对对象autorelease么？为什么？autorelease是什么时候释放的？</h5><p>会对对象 <code>autorelease</code>，因为需要在稍后释放对象，从而给调用者留下足够长的时间，使其可以在需要时先保留返回值。此方法可以保证对象在跨越方法调用边界时一定存活。</p>
+<h5 id="6-函数返回一个对象时，会对对象autorelease么？为什么？autorelease是什么时候释放的？"><a href="#6-函数返回一个对象时，会对对象autorelease么？为什么？autorelease是什么时候释放的？" class="headerlink" title="6 函数返回一个对象时，会对对象autorelease么？为什么？autorelease是什么时候释放的？"></a>6 函数返回一个对象时，会对对象autorelease么？为什么？autorelease是什么时候释放的？</h5><p>会对对象 <code>autorelease</code>，因为需要在稍后释放对象，从而给调用者留下足够长的时间，使其可以在需要时先保留返回值。此方法可以保证对象在跨越方法调用边界时一定存活。</p>
 <p>除非你有自己的自动释放池，否则这个时机就是当前线程,当前事件循环结束时，就是 <code>RunLoop</code> 结束时。</p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 情况一：</span></div><div class="line"><span class="keyword">@autoreleasepool</span> &#123;</div><div class="line">    <span class="built_in">NSObject</span> * obj = [<span class="built_in">NSObject</span> new];</div><div class="line">    [obj autorelease];</div><div class="line">    <span class="built_in">NSLog</span>(<span class="string">@"%d"</span>,[obj retaincount]); <span class="comment">//1</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 情况二：</span></div><div class="line"><span class="built_in">NSObject</span> * obj</div><div class="line"><span class="keyword">@autoreleasepool</span> &#123;</div><div class="line">        obj = [<span class="built_in">NSObject</span> new];</div><div class="line">        [obj autorelease];</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%d"</span>,[obj retaincount]); <span class="comment">//1</span></div><div class="line">&#125;</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"%d"</span>,[obj retaincount]); <span class="comment">//0</span></div></pre></td></tr></table></figure>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 情况三：</span></div><div class="line"><span class="built_in">NSObject</span> * obj</div><div class="line"><span class="keyword">@autoreleasepool</span> &#123;</div><div class="line">        obj = [<span class="built_in">NSObject</span> new];</div><div class="line">        [obj autorelease];</div><div class="line">        [obj autorelease];</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"%d"</span>,[obj retaincount]);  <span class="comment">// 1</span></div><div class="line">  &#125; <span class="comment">// crash</span></div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"%d"</span>,[obj retaincount]);</div></pre></td></tr></table></figure>
-<h5 id="6-为什么已经有了-ARC-，还需要-autoreleasePool？"><a href="#6-为什么已经有了-ARC-，还需要-autoreleasePool？" class="headerlink" title="6 为什么已经有了 ARC ，还需要 @autoreleasePool？"></a>6 为什么已经有了 ARC ，还需要 @autoreleasePool？</h5><p>提到 <code>OC</code> 的 <code>RC</code>，首先要横向对比一下 <code>Android</code> 的 <code>GC(垃圾回收机制)</code>，<code>GC</code> 的内存回收是集中式回收（定期回收），而 <code>RC</code> 的回收是伴随整个运行时的，所以 <code>android</code> 机器有种 时“卡”时“流畅” 的感觉，而 <code>iOS</code> 总体比较均匀，缺乏像 <code>GC</code> 的集中式回收内存的类似机制，所以猜测 <code>Pool</code>的产生也是弥补 <code>RC</code> 的这一不足，在 <code>RC</code> 基础上进行内存优化的一种手段。</p>
-<h5 id="7-简要阐述内存相关的关键字？"><a href="#7-简要阐述内存相关的关键字？" class="headerlink" title="7 简要阐述内存相关的关键字？"></a>7 简要阐述内存相关的关键字？</h5><h6 id="Strong"><a href="#Strong" class="headerlink" title="Strong"></a>Strong</h6><blockquote>
+<h5 id="7-为什么已经有了-ARC-，还需要-autoreleasePool？"><a href="#7-为什么已经有了-ARC-，还需要-autoreleasePool？" class="headerlink" title="7 为什么已经有了 ARC ，还需要 @autoreleasePool？"></a>7 为什么已经有了 ARC ，还需要 @autoreleasePool？</h5><p>提到 <code>OC</code> 的 <code>RC</code>，首先要横向对比一下 <code>Android</code> 的 <code>GC(垃圾回收机制)</code>，<code>GC</code> 的内存回收是集中式回收（定期回收），而 <code>RC</code> 的回收是伴随整个运行时的，所以 <code>android</code> 机器有种 时“卡”时“流畅” 的感觉，而 <code>iOS</code> 总体比较均匀，缺乏像 <code>GC</code> 的集中式回收内存的类似机制，所以猜测 <code>Pool</code>的产生也是弥补 <code>RC</code> 的这一不足，在 <code>RC</code> 基础上进行内存优化的一种手段。</p>
+<h5 id="8-简要阐述内存相关的关键字？"><a href="#8-简要阐述内存相关的关键字？" class="headerlink" title="8 简要阐述内存相关的关键字？"></a>8 简要阐述内存相关的关键字？</h5><h6 id="Strong"><a href="#Strong" class="headerlink" title="Strong"></a>Strong</h6><blockquote>
 <p><code>Strong</code> 修饰符表示指向并持有该对象，其修饰对象的引用计数会加1。该对象只要引用计数不为0就不会被销毁。当然可以通过将变量强制赋值 <code>nil</code> 来进行销毁。</p>
 </blockquote>
 <h6 id="Weak"><a href="#Weak" class="headerlink" title="Weak"></a>Weak</h6><blockquote>
@@ -223,7 +233,7 @@
 <h6 id="autoreleasing"><a href="#autoreleasing" class="headerlink" title="__autoreleasing"></a>__autoreleasing</h6><blockquote>
 <p>将对象赋值给附有 <code>__autoreleasing</code>修饰的变量等同于 <code>ARC</code> 无效时调用对象的 <code>autorelease</code> 方法,实质就是扔进了自动释放池。</p>
 </blockquote>
-<h5 id="8-说一下什么是悬垂指针？什么是野指针？"><a href="#8-说一下什么是悬垂指针？什么是野指针？" class="headerlink" title="8 说一下什么是悬垂指针？什么是野指针？"></a>8 说一下什么是悬垂指针？什么是野指针？</h5><h6 id="悬垂指针"><a href="#悬垂指针" class="headerlink" title="悬垂指针"></a>悬垂指针</h6><blockquote>
+<h5 id="9-说一下什么是悬垂指针？什么是野指针？"><a href="#9-说一下什么是悬垂指针？什么是野指针？" class="headerlink" title="9 说一下什么是悬垂指针？什么是野指针？"></a>9 说一下什么是悬垂指针？什么是野指针？</h5><h6 id="悬垂指针"><a href="#悬垂指针" class="headerlink" title="悬垂指针"></a>悬垂指针</h6><blockquote>
 <p>指针指向的内存已经被释放了，但是指针还存在，这就是一个 <code>悬垂指针</code> 或者说 <code>迷途指针</code></p>
 </blockquote>
 <h6 id="野指针"><a href="#野指针" class="headerlink" title="野指针"></a>野指针</h6><blockquote>
