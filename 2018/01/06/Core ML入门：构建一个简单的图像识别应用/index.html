@@ -6,15 +6,32 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017/4 | Liberalism</title>
+  <title>Core ML入门：构建一个简单的图像识别应用 | Liberalism</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Liberalism">
-<meta property="og:url" content="http://yoursite.com/archives/2017/04/index.html">
+  <meta name="description" content="原文链接 原翻译者：智多芯 本人负责翻译、校对。 Apple 公司在 WWDC 2017 发布了几个令开发者感到兴奋的框架和 API，而在这些新框架中最受欢迎的绝对非 Core ML 莫属了。开发者可以通过 Core ML 框架将机器学习模型集成到应用程序中，该框架最大的优点是使用它并不需要开发者具备额外的神经网络或机器学习知识。Core ML 框架的另一个特点是，只要开发者将已经训练好的数据模型">
+<meta name="keywords" content="翻译">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Core ML入门：构建一个简单的图像识别应用">
+<meta property="og:url" content="http://yoursite.com/2018/01/06/Core ML入门：构建一个简单的图像识别应用/index.html">
 <meta property="og:site_name" content="Liberalism">
+<meta property="og:description" content="原文链接 原翻译者：智多芯 本人负责翻译、校对。 Apple 公司在 WWDC 2017 发布了几个令开发者感到兴奋的框架和 API，而在这些新框架中最受欢迎的绝对非 Core ML 莫属了。开发者可以通过 Core ML 框架将机器学习模型集成到应用程序中，该框架最大的优点是使用它并不需要开发者具备额外的神经网络或机器学习知识。Core ML 框架的另一个特点是，只要开发者将已经训练好的数据模型">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="http://www.appcoda.com/wp-content/uploads/2017/06/trained-model.png">
+<meta property="og:image" content="http://www.appcoda.com/wp-content/uploads/2017/06/coreml-app-demo.png">
+<meta property="og:image" content="http://www.appcoda.com/wp-content/uploads/2017/06/xcode9-new-proj.png">
+<meta property="og:image" content="http://www.appcoda.com/wp-content/uploads/2017/06/pic3.png">
+<meta property="og:image" content="http://www.appcoda.com/wp-content/uploads/2017/06/coreml-storyboard.png">
+<meta property="og:image" content="http://www.appcoda.com/wp-content/uploads/2017/06/coreml-plist-privacy.png">
+<meta property="og:image" content="http://www.appcoda.com/wp-content/uploads/2017/06/coreml-pretrained-model.png">
+<meta property="og:image" content="http://www.appcoda.com/wp-content/uploads/2017/06/coreml-model-desc.png">
+<meta property="og:image" content="http://www.appcoda.com/wp-content/uploads/2017/06/inceptionv3-class.png">
+<meta property="og:image" content="http://www.appcoda.com/wp-content/uploads/2017/06/coreml-successful-case.jpg">
+<meta property="og:image" content="http://www.appcoda.com/wp-content/uploads/2017/06/coreml-failed-case.jpg">
+<meta property="og:updated_time" content="2018-05-06T01:38:28.595Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Liberalism">
+<meta name="twitter:title" content="Core ML入门：构建一个简单的图像识别应用">
+<meta name="twitter:description" content="原文链接 原翻译者：智多芯 本人负责翻译、校对。 Apple 公司在 WWDC 2017 发布了几个令开发者感到兴奋的框架和 API，而在这些新框架中最受欢迎的绝对非 Core ML 莫属了。开发者可以通过 Core ML 框架将机器学习模型集成到应用程序中，该框架最大的优点是使用它并不需要开发者具备额外的神经网络或机器学习知识。Core ML 框架的另一个特点是，只要开发者将已经训练好的数据模型">
+<meta name="twitter:image" content="http://www.appcoda.com/wp-content/uploads/2017/06/trained-model.png">
   
     <link rel="alternative" href="/atom.xml" title="Liberalism" type="application/atom+xml">
   
@@ -144,163 +161,206 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Core ML入门：构建一个简单的图像识别应用" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Core ML入门：构建一个简单的图像识别应用
+    </h1>
+  
+
+        
+        <a href="/2018/01/06/Core ML入门：构建一个简单的图像识别应用/" class="archive-article-date">
+  	<time datetime="2018-01-06T01:21:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-06</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://www.appcoda.com/coreml-introduction/" target="_blank" rel="noopener">原文链接</a></p>
+<p><strong>原翻译者：智多芯</strong></p>
+<p><strong>本人负责翻译、校对。</strong></p>
+<p>Apple 公司在 WWDC 2017 发布了几个令开发者感到兴奋的框架和 API，而在这些新框架中最受欢迎的绝对非 <a href="https://developer.apple.com/documentation/coreml" target="_blank" rel="noopener">Core ML</a> 莫属了。开发者可以通过 Core ML 框架将机器学习模型集成到应用程序中，该框架最大的优点是使用它并不需要开发者具备额外的神经网络或机器学习知识。Core ML 框架的另一个特点是，只要开发者将已经训练好的数据模型转换成了 Core ML 模型即可使用。为了演示，本文将直接使用 Apple 开发者网站上提供的一个 Core ML 模型。闲话少说，下面开始学习 Core ML。</p>
+<blockquote>
+<p>注：本文要求使用 Xcode 9 beta 编写代码，还需要一个安装了 iOS 11 beta 的设备（译者注：也可使用 iOS 模拟器）用于测试文中实现的功能。虽然 Xcode 9 beta 同时支持 Swift 3.2 和 4.0，但文中所有的代码都使用了 Swift 4.0 编写。</p>
+</blockquote>
+<h1 id="什么是-Core-ML"><a href="#什么是-Core-ML" class="headerlink" title="什么是 Core ML"></a>什么是 Core ML</h1><blockquote>
+<p>Core ML 使得开发者能够将各种各样的机器学习模型集成到应用程序中。它不仅仅支持超过 30 层的深度学习网络（extensive deep learning with over 30 layer types），它还支持如树集成、支持向量机和广义线性模型等标准模型。Core ML 基于像 Metal 和 Accelerate 这样的底层技术，因此它能够无缝地充分利用 CPU 和 GPU 以最大化性能和效率。机器学习模型可直接运行在设备上，这样一来，被分析的数据就不必离开设备了。</p>
+</blockquote>
+<p>  <a href="https://developer.apple.com/machine-learning/" target="_blank" rel="noopener">关于 Core ML 的 Apple 官方文档</a></p>
+<p>Core ML 是今年在 WWDC 上随着 iOS 11 发布的一个全新的机器学习框架。通过 Core ML，开发者可以直接将机器学习模型集成到应用程序中。那么什么是机器学习呢？简单地说，机器学习是赋予计算机学习能力的应用，而不用明确地对它编程。一个训练好的模型就是结合机器学习算法对一些数据集进行训练的结果。</p>
+<p><img src="http://www.appcoda.com/wp-content/uploads/2017/06/trained-model.png" alt=""></p>
+<a id="more"></a>
+<p>作为一个应用程序开发者，我们主要关心的是如何将机器学习模型应用到应用程序中以实现更有意思的功能。幸运的是，Apple 提供的 Core ML 框架大大简化了将不同的机器学习模型集成到应用程序中的过程。这为开发者开发如图像识别、自然语言处理、文本预测等功能提供了非常多的可能性。</p>
+<p>现在你可能想知道将这种类型的人工智能加入到应用程序中会不会很困难，这就是最有意思的部分了，实际上 Core ML 非常易用。在本文中，你将会看到只要 10 行代码就可以将 Core ML 集成到应用程序中。</p>
+<p>很酷吧？下面开始吧！</p>
+<h1 id="演示程序概览"><a href="#演示程序概览" class="headerlink" title="演示程序概览"></a>演示程序概览</h1><p>本文将要实现的程序十分简单。该程序让用户拍摄或者从相册中选择一张照片，然后机器学习算法将会尝试预测照片中的物体。虽然预测结果可能并不完美，但你将借此了解到如何将 Core ML 应用到应用程序上。</p>
+<p><img src="http://www.appcoda.com/wp-content/uploads/2017/06/coreml-app-demo.png" alt=""></p>
+<h1 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h1><p>首先，打开 Xcode 9 beta 并创建一个新项目。为该项目选择单视图应用程序（Single View App）模板，并确保使用的语言设置为 Swift。</p>
+<p><img src="http://www.appcoda.com/wp-content/uploads/2017/06/xcode9-new-proj.png" alt=""></p>
+<h1 id="创建用户界面"><a href="#创建用户界面" class="headerlink" title="创建用户界面"></a>创建用户界面</h1><blockquote>
+<p><strong>编者按：</strong>如果你不想从头开始搭建 UI 界面，可以从<a href="https://github.com/appcoda/CoreMLDemo/raw/master/CoreMLDemoStarter.zip" target="_blank" rel="noopener">这里下载起始项目</a>并直接跳到 Core ML 部分。</p>
+</blockquote>
+<p>下面就开始吧！首先打开 <code>Main.storyboard</code>，并添加一些 UI 元素到视图中。选择 storyboard 中的视图控制器，然后依次点击 Xcode 菜单栏：<code>Editor-&gt; Embed In-&gt; Navigation Controller</code>。随后即可看到一个导航栏出现在视图上方。将该导航栏命名为 Core ML（或者任何你觉得合适的名字）。</p>
+<p><img src="http://www.appcoda.com/wp-content/uploads/2017/06/pic3.png" alt=""></p>
+<p>接着，在导航栏标题两边各添加一个按钮。对于左边的按钮，在 <code>Attributes Inspector</code> 中将 <code>System Item</code> 改为 “Camera”。对于右边的按钮，将其命名为 “Library”。这两个按钮分别为用户提供拍摄或者从相册中选取照片的功能。</p>
+<p>最后还需要一个 <code>UILabel</code> 和 <code>UIImageView</code>。把 <code>UIImageView</code> 放到视图内并居中，将宽高改为 <code>299x299</code>使其为正方形。把 <code>UILabel</code>放到视图底端并对其缩放，使其两端刚好与视图两端重合。这样就搭建好了该应用的界面。</p>
+<p>虽然本文没涉及到自动布局，但还是强烈建议使用。如果你没法自己完成自动布局，那就直接在 storyboard 中选择你将要运行的设备类型。</p>
+<p><img src="http://www.appcoda.com/wp-content/uploads/2017/06/coreml-storyboard.png" alt=""></p>
+<h1 id="实现拍照和相册功能"><a href="#实现拍照和相册功能" class="headerlink" title="实现拍照和相册功能"></a>实现拍照和相册功能</h1><p>既然已经搭好了界面，接着就开始实现功能吧。本节将实现相册和拍照按钮的功能。在 <code>ViewController.swift</code> 中，先遵从 <code>UIImagePickerController</code> 所要求的 <code>UINavigationControllerDelegate</code> 协议。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">UIViewController</span>, <span class="title">UINavigationControllerDelegate</span></span></span><br></pre></td></tr></table></figure>
+<p>然后为之前的 <code>UILabel</code> 和 <code>UIImageView</code> 新增两个 IBOutlet。为了简单起见，本文分别将 <code>UIImageView</code> 和 <code>UILabel</code> 命名为 <code>imageView</code> 和 <code>classifier</code>。代码应该如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> UIKit</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">UIViewController</span>, <span class="title">UINavigationControllerDelegate</span> </span>&#123;</span><br><span class="line">    <span class="meta">@IBOutlet</span> <span class="keyword">weak</span> <span class="keyword">var</span> imageView: <span class="type">UIImageView</span>!</span><br><span class="line">    <span class="meta">@IBOutlet</span> <span class="keyword">weak</span> <span class="keyword">var</span> classifier: <span class="type">UILabel</span>!</span><br><span class="line">    </span><br><span class="line">     <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.viewDidLoad()</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">didReceiveMemoryWarning</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.didReceiveMemoryWarning()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接着还需要实现对按钮的响应，在 <code>ViewController</code> 中添加如下动作方法：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@IBAction</span> <span class="function"><span class="keyword">func</span> <span class="title">camera</span><span class="params">(<span class="number">_</span> sender: Any)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> !<span class="type">UIImagePickerController</span>.isSourceTypeAvailable(.camera) &#123;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> cameraPicker = <span class="type">UIImagePickerController</span>()</span><br><span class="line">    cameraPicker.delegate = <span class="keyword">self</span></span><br><span class="line">    cameraPicker.sourceType = .camera</span><br><span class="line">    cameraPicker.allowsEditing = <span class="literal">false</span></span><br><span class="line">    </span><br><span class="line">    present(cameraPicker, animated: <span class="literal">true</span>)</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="meta">@IBAction</span> <span class="function"><span class="keyword">func</span> <span class="title">openLibrary</span><span class="params">(<span class="number">_</span> sender: Any)</span></span> &#123;</span><br><span class="line">    <span class="keyword">let</span> picker = <span class="type">UIImagePickerController</span>()</span><br><span class="line">    picker.allowsEditing = <span class="literal">false</span></span><br><span class="line">    picker.delegate = <span class="keyword">self</span></span><br><span class="line">    picker.sourceType = .photoLibrary</span><br><span class="line">    present(picker, animated: <span class="literal">true</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上代码创建了一个 <code>UIImagePickerController</code> 类型的常量并确保用户无法修改所拍摄的照片（无论该照片是刚拍摄的或者从相册中选择的）。然后将委托设置为 <code>self</code>，最后将 <code>UIImagePickerController</code> 展示给用户。</p>
+<p>至此还未添加 <code>UIImagePickerControllerDelegate</code> 对应的方法到 <code>ViewController.swift</code> 中，因此 Xcode 将会有错误提示。这里通过 extension 的形式来实现该协议：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">ViewController</span>: <span class="title">UIImagePickerControllerDelegate</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">imagePickerControllerDidCancel</span><span class="params">(<span class="number">_</span> picker: UIImagePickerController)</span></span> &#123;</span><br><span class="line">        dismiss(animated: <span class="literal">true</span>, completion: <span class="literal">nil</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的代码对用户取消选择照片的动作做了相应处理。到目前为止代码大致如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> UIKit</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">UIViewController</span>, <span class="title">UINavigationControllerDelegate</span> </span>&#123;</span><br><span class="line">    <span class="meta">@IBOutlet</span> <span class="keyword">weak</span> <span class="keyword">var</span> imageView: <span class="type">UIImageView</span>!</span><br><span class="line">    <span class="meta">@IBOutlet</span> <span class="keyword">weak</span> <span class="keyword">var</span> classifier: <span class="type">UILabel</span>!</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.viewDidLoad()</span><br><span class="line">        <span class="comment">// Do any additional setup after loading the view, typically from a nib.</span></span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">didReceiveMemoryWarning</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.didReceiveMemoryWarning()</span><br><span class="line">        <span class="comment">// Dispose of any resources that can be recreated.</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@IBAction</span> <span class="function"><span class="keyword">func</span> <span class="title">camera</span><span class="params">(<span class="number">_</span> sender: Any)</span></span> &#123;</span><br><span class="line">        <span class="keyword">if</span> !<span class="type">UIImagePickerController</span>.isSourceTypeAvailable(.camera) &#123;</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">let</span> cameraPicker = <span class="type">UIImagePickerController</span>()</span><br><span class="line">        cameraPicker.delegate = <span class="keyword">self</span></span><br><span class="line">        cameraPicker.sourceType = .camera</span><br><span class="line">        cameraPicker.allowsEditing = <span class="literal">false</span></span><br><span class="line">        </span><br><span class="line">        present(cameraPicker, animated: <span class="literal">true</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@IBAction</span> <span class="function"><span class="keyword">func</span> <span class="title">openLibrary</span><span class="params">(<span class="number">_</span> sender: Any)</span></span> &#123;</span><br><span class="line">        <span class="keyword">let</span> picker = <span class="type">UIImagePickerController</span>()</span><br><span class="line">        picker.allowsEditing = <span class="literal">false</span></span><br><span class="line">        picker.delegate = <span class="keyword">self</span></span><br><span class="line">        picker.sourceType = .photoLibrary</span><br><span class="line">        present(picker, animated: <span class="literal">true</span>)</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">ViewController</span>: <span class="title">UIImagePickerControllerDelegate</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">imagePickerControllerDidCancel</span><span class="params">(<span class="number">_</span> picker: UIImagePickerController)</span></span> &#123;</span><br><span class="line">        dismiss(animated: <span class="literal">true</span>, completion: <span class="literal">nil</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>确保你打开了 storyboard 并为所有的 IBOutlet 和 IBAction 都建立好连接了。</p>
+<p>为了访问摄像头和相册，还有做一件事。打开 <code>Info.plist</code> 并添加两项：<em>Privacy - Camera Usage Description</em> 和 <em>Privacy – Photo Library Usage Description</em>。这是因为从 iOS 10 开始，访问摄像头和相册需要指明访问原因。</p>
+<p><img src="http://www.appcoda.com/wp-content/uploads/2017/06/coreml-plist-privacy.png" alt=""></p>
+<p>接下来将开始本文的核心部分了。再声明一次，如果你不想从头搭建界面，你可以<a href="https://github.com/appcoda/CoreMLDemo/raw/master/CoreMLDemoStarter.zip" target="_blank" rel="noopener">从这里下载起始项目</a>。</p>
+<h1 id="集成-Core-ML-数据模型"><a href="#集成-Core-ML-数据模型" class="headerlink" title="集成 Core ML 数据模型"></a>集成 Core ML 数据模型</h1><p>现在开始将 Core ML 数据模型集成到应用程序中。正如前文所提到的，要使 Core ML 能正常工作还需要提供一个训练好的模型。你可以使用自己训练的模型，但本文将使用 Apple 开发者网站上提供的已经训练好的模型。</p>
+<p>在 Apple 开发者网站的 <a href="https://developer.apple.com/machine-learning/" target="_blank" rel="noopener">Machine Learning</a> 页面向下滚动到底部就可以看到 4 个已经训练好的 Core ML 模型。</p>
+<p><img src="http://www.appcoda.com/wp-content/uploads/2017/06/coreml-pretrained-model.png" alt=""></p>
+<p>本教程将使用 <em>Inception v3</em> 模型，但你也可以尝试下其他三个。在下载了 <em>Inception v3</em> 模型后，将其添加到 Xcode 项目中，然后看看 Xcode 都显示了哪些信息。</p>
+<p><img src="http://www.appcoda.com/wp-content/uploads/2017/06/coreml-model-desc.png" alt=""></p>
+<blockquote>
+<p>备注：请确保该项目的 <code>Target Membersip</code> 被选中了，否则应用将无法访问到该文件。</p>
+</blockquote>
+<p>在上面的截图中，可以看出该数据模型的类型为神经网络分类器。其他需要注意的信息还有模型评估参数，它表示该模型的输入和输出参数。本文使用的模型输入为一张 <code>299x299</code> 的图像，并输出最为可能的类型及其对应的概率。</p>
+<p>该截图中的另一个重要信息是模型类（model class），它是机器学习模型（<code>Inceptionv3</code>）自动生成的可以直接在代码中使用的类。点击 <code>Inceptionv3</code> 右边的箭头就可以看到该类的源码。</p>
+<p><img src="http://www.appcoda.com/wp-content/uploads/2017/06/inceptionv3-class.png" alt=""></p>
+<p>现在将该模型添加到代码中。首先打开 <code>ViewController.swift</code> 文件，在开头导入 Core ML 框架：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> CoreML</span><br></pre></td></tr></table></figure>
+<p>接着，为 <code>Inceptionv3</code> 模型声明一个 <code>model</code> 变量，并在 <code>viewWillAppear()</code> 方法中初始化：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> model: <span class="type">Inceptionv3</span>!</span><br><span class="line"> </span><br><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewWillAppear</span><span class="params">(<span class="number">_</span> animated: Bool)</span></span> &#123;</span><br><span class="line">    model = <span class="type">Inceptionv3</span>()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我知道你现在在想什么。</p>
+<p>“为什么不早点对这个模型进行初始化？”</p>
+<p>“在 <code>viewWillAppear</code> 方法中定义它的意义何在？”</p>
+<p>亲爱的朋友，它的意义在于，当应用程序尝试识别图像中的物体时，速度会快得多。（译者注：直接在声明 <code>model</code> 变量时直接初始化似乎也没什么影响，读者可自行测试。）</p>
+<p>现在回到 <code>Inceptionv3.mlmodel</code> ，该模型接受的唯一输入参数是一张尺寸为 <code>299x299</code>的图像，所以接下来要处理的就是如何将一张图像转换成这种尺寸。</p>
+<h1 id="转换图片"><a href="#转换图片" class="headerlink" title="转换图片"></a>转换图片</h1><p>在 <code>ViewController.swift</code> 的 extension 中，将代码更新成如下代码。它实现了 <code>imagePickerController(_:didFinishPickingMediaWithInfo)</code> 方法用于处理选中的图像：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">ViewController</span>: <span class="title">UIImagePickerControllerDelegate</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">imagePickerControllerDidCancel</span><span class="params">(<span class="number">_</span> picker: UIImagePickerController)</span></span> &#123;</span><br><span class="line">        dismiss(animated: <span class="literal">true</span>, completion: <span class="literal">nil</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">imagePickerController</span><span class="params">(<span class="number">_</span> picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])</span></span> &#123;</span><br><span class="line">        picker.dismiss(animated: <span class="literal">true</span>)</span><br><span class="line">        classifier.text = <span class="string">"Analyzing Image..."</span></span><br><span class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> image = info[<span class="string">"UIImagePickerControllerOriginalImage"</span>] <span class="keyword">as</span>? <span class="type">UIImage</span> <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125; </span><br><span class="line">        </span><br><span class="line">        <span class="type">UIGraphicsBeginImageContextWithOptions</span>(<span class="type">CGSize</span>(width: <span class="number">299</span>, height: <span class="number">299</span>), <span class="literal">true</span>, <span class="number">2.0</span>)</span><br><span class="line">        image.draw(<span class="keyword">in</span>: <span class="type">CGRect</span>(x: <span class="number">0</span>, y: <span class="number">0</span>, width: <span class="number">299</span>, height: <span class="number">299</span>))</span><br><span class="line">        <span class="keyword">let</span> newImage = <span class="type">UIGraphicsGetImageFromCurrentImageContext</span>()!</span><br><span class="line">        <span class="type">UIGraphicsEndImageContext</span>()</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">let</span> attrs = [kCVPixelBufferCGImageCompatibilityKey: kCFBooleanTrue, kCVPixelBufferCGBitmapContextCompatibilityKey: kCFBooleanTrue] <span class="keyword">as</span> <span class="type">CFDictionary</span></span><br><span class="line">        <span class="keyword">var</span> pixelBuffer : <span class="type">CVPixelBuffer</span>?</span><br><span class="line">        <span class="keyword">let</span> status = <span class="type">CVPixelBufferCreate</span>(kCFAllocatorDefault, <span class="type">Int</span>(newImage.size.width), <span class="type">Int</span>(newImage.size.height), kCVPixelFormatType_32ARGB, attrs, &amp;pixelBuffer)</span><br><span class="line">        <span class="keyword">guard</span> (status == kCVReturnSuccess) <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125; </span><br><span class="line">        </span><br><span class="line">        <span class="type">CVPixelBufferLockBaseAddress</span>(pixelBuffer!, <span class="type">CVPixelBufferLockFlags</span>(rawValue: <span class="number">0</span>))</span><br><span class="line">        <span class="keyword">let</span> pixelData = <span class="type">CVPixelBufferGetBaseAddress</span>(pixelBuffer!)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">let</span> rgbColorSpace = <span class="type">CGColorSpaceCreateDeviceRGB</span>()</span><br><span class="line">        <span class="keyword">let</span> context = <span class="type">CGContext</span>(data: pixelData, width: <span class="type">Int</span>(newImage.size.width), height: <span class="type">Int</span>(newImage.size.height), bitsPerComponent: <span class="number">8</span>, bytesPerRow: <span class="type">CVPixelBufferGetBytesPerRow</span>(pixelBuffer!), space: rgbColorSpace, bitmapInfo: <span class="type">CGImageAlphaInfo</span>.noneSkipFirst.rawValue) <span class="comment">//3</span></span><br><span class="line">        </span><br><span class="line">        context?.translateBy(x: <span class="number">0</span>, y: newImage.size.height)</span><br><span class="line">        context?.scaleBy(x: <span class="number">1.0</span>, y: -<span class="number">1.0</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="type">UIGraphicsPushContext</span>(context!)</span><br><span class="line">        newImage.draw(<span class="keyword">in</span>: <span class="type">CGRect</span>(x: <span class="number">0</span>, y: <span class="number">0</span>, width: newImage.size.width, height: newImage.size.height))</span><br><span class="line">        <span class="type">UIGraphicsPopContext</span>()</span><br><span class="line">        <span class="type">CVPixelBufferUnlockBaseAddress</span>(pixelBuffer!, <span class="type">CVPixelBufferLockFlags</span>(rawValue: <span class="number">0</span>))</span><br><span class="line">        imageView.image = newImage</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>imagePickerController(_:didFinishPickingMediaWithInfo)</code> 函数中的代码解释如下：</p>
+<ol>
+<li><code>7-11</code> 行：该方法的前几行将选中的图像从 <code>info</code> 字典中（使用 <code>UIImagePickerControllerOriginalImage</code>键）取出。另外，一旦有图像被选中就退出 <code>UIImagePickerController</code>。</li>
+<li><code>13-16</code> 行：本文使用的模型只接受尺寸为 <code>299x299</code> 的图像，因此对选中的图像进行转换，然后将该正方形图像赋值给另一个常量 <code>newImage</code>。</li>
+<li><code>18-23</code> 行：将 <code>newImage</code> 转换为 <code>CVPixelBuffer</code>。对于不熟悉 <code>CVPixelBuffer</code> 的读者来说，它就是一个用来在内存中存放像素的图像缓冲区，详情可查阅<a href="https://developer.apple.com/documentation/corevideo/cvpixelbuffer-q2e" target="_blank" rel="noopener">这里</a>。</li>
+<li><code>31-32</code> 行：将该图像的所有像素转换成独立于设备的 RGB 颜色空间。接着创建一个 <code>CGContext</code>，当需要渲染（或者改变）该上下文的一些基本属性时就可以直接调用它。这也是下面两行代码所做的事，对图像进行平移和缩放。</li>
+<li><code>34-38</code> 行：最后，将该图形上下文设置为当前的上下文，渲染图像，从栈顶删除该上下文，再将 <code>imageView.image</code> 设置成 <code>newImage</code>。</li>
+</ol>
+<p>如果你现在无法理解以上的大部分代码也没关系，这只是一些超出本文范围的 <code>Core Image</code> 的高级代码片段而已。你只需要知道上面的代码将选中的图像转换成了数据模型能够接受的形式。我建议你能改动下代码中的数字并留意对应的结果，以更好地理解上面的代码。</p>
+<h1 id="使用-Core-ML"><a href="#使用-Core-ML" class="headerlink" title="使用 Core ML"></a>使用 Core ML</h1><p>现在重新回到 Core ML 上来。本文使用了 Inceptionv3 模型来实现对象识别。借助 Core ML，我们所需要做的只是添加几行代码。将以下代码段粘贴到 <code>imageView.image = newImage</code>  之后。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">guard</span> <span class="keyword">let</span> prediction = <span class="keyword">try</span>? model.prediction(image: pixelBuffer!) <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">classifier.text = <span class="string">"I think this is a <span class="subst">\(prediction.classLabel)</span>."</span></span><br></pre></td></tr></table></figure>
+<p>这就完了！<code>Inceptionv3</code> 类自动生成了一个名为 <code>prediction(image:)</code> 的方法，可以用来预测给定图像中出现的物体。这里我们将缩放后的图像以 <code>pixelBuffer</code> 的形式作为参数传给了该方法。一旦 <code>String</code> 类型的预测结果返回了，就将 <code>classifier</code> 标签更新为识别出的物体名称。</p>
+<p>是时候测试一下这个应用了。编译并在模拟器或者你的 iPhone（安装了 iOS 11 beta）上运行该应用，从相册选择或使用摄像头拍摄一张照片，该应用将识别出图像中有什么物体。</p>
+<p><img src="http://www.appcoda.com/wp-content/uploads/2017/06/coreml-successful-case.jpg" alt=""></p>
+<p>在测试该应用的过程中，你可能会注意到它并不总能准确地做出预测。其实这并不是代码的问题，问题出在训练模型上。</p>
+<p><img src="http://www.appcoda.com/wp-content/uploads/2017/06/coreml-failed-case.jpg" alt=""></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>希望你已经懂得了如何将 Core ML 集成到应用中，本文仅仅是一篇入门教程而已。如果你对将训练好的 Caffe、Keras或者 SciKit 模型转换成 Core ML 模型，请<a href="http://facebook.com/appcodamobile" target="_blank" rel="noopener">继续关注</a>我们的下一篇 Core ML 系列教程。我将教你如何将一个模型转换为 Core ML 模型。</p>
+<p>如果想参考本文的演示应用程序，请<a href="https://github.com/appcoda/CoreMLDemo" target="_blank" rel="noopener">查看 GitHub 上的完整项目</a>。</p>
+<p>关于 Core ML 框架的更详细信息，请参考 <a href="https://developer.apple.com/documentation/coreml" target="_blank" rel="noopener">官方 Core ML 文档</a>。也可以参考 Apple 的 WWDC 2017 视频：</p>
+<ul>
+<li><a href="https://developer.apple.com/videos/play/wwdc2017/703/" target="_blank" rel="noopener">Introducing Core ML</a></li>
+<li><a href="https://developer.apple.com/videos/play/wwdc2017/710/" target="_blank" rel="noopener">Core ML in Depth</a></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/04/30/iOS关键字/" class="archive-article-date">
-  	<time datetime="2017-04-30T12:57:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/04/30/iOS关键字/">iOS关键字</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/04/25/iOS知识总结-基础篇-2/" class="archive-article-date">
-  	<time datetime="2017-04-25T05:43:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/04/25/iOS知识总结-基础篇-2/">iOS知识总结-基础篇-2</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">知识总结</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">翻译</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/04/15/iOS知识总结-基础篇-1/" class="archive-article-date">
-  	<time datetime="2017-04-15T15:43:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-15</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2018/01/23/iOS常用宏定义/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          iOS常用宏定义
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/10/26/NSMutableDictionary实现完全深拷贝/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">NSMutableDictionary实现完全深拷贝</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/04/15/iOS知识总结-基础篇-1/">iOS知识总结-基础篇-1</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">知识总结</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#什么是-Core-ML"><span class="toc-number">1.</span> <span class="toc-text">什么是 Core ML</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#演示程序概览"><span class="toc-number">2.</span> <span class="toc-text">演示程序概览</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#开始"><span class="toc-number">3.</span> <span class="toc-text">开始</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建用户界面"><span class="toc-number">4.</span> <span class="toc-text">创建用户界面</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实现拍照和相册功能"><span class="toc-number">5.</span> <span class="toc-text">实现拍照和相册功能</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#集成-Core-ML-数据模型"><span class="toc-number">6.</span> <span class="toc-text">集成 Core ML 数据模型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#转换图片"><span class="toc-number">7.</span> <span class="toc-text">转换图片</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#使用-Core-ML"><span class="toc-number">8.</span> <span class="toc-text">使用 Core ML</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-number">9.</span> <span class="toc-text">总结</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/04/03/weak-弱引用实现原理/" class="archive-article-date">
-  	<time datetime="2017-04-03T06:33:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-03</time>
-</a>
-        </div>
-    	 
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/04/03/weak-弱引用实现原理/">weak-弱引用实现原理</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">读后感</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
+
+  
 
 
           </div>
@@ -323,8 +383,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
