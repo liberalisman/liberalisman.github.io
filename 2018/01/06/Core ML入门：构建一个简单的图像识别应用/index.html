@@ -258,7 +258,7 @@
 </ol>
 <p>如果你现在无法理解以上的大部分代码也没关系，这只是一些超出本文范围的 <code>Core Image</code> 的高级代码片段而已。你只需要知道上面的代码将选中的图像转换成了数据模型能够接受的形式。我建议你能改动下代码中的数字并留意对应的结果，以更好地理解上面的代码。</p>
 <h1 id="使用-Core-ML"><a href="#使用-Core-ML" class="headerlink" title="使用 Core ML"></a>使用 Core ML</h1><p>现在重新回到 Core ML 上来。本文使用了 Inceptionv3 模型来实现对象识别。借助 Core ML，我们所需要做的只是添加几行代码。将以下代码段粘贴到 <code>imageView.image = newImage</code>  之后。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">guard</span> <span class="keyword">let</span> prediction = <span class="keyword">try</span>? model.prediction(image: pixelBuffer!) <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">classifier.text = <span class="string">"I think this is a <span class="subst">\(prediction.classLabel)</span>."</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">guard</span> <span class="keyword">let</span> prediction = <span class="keyword">try</span>? model.prediction(image: pixelBuffer!) <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">classifier.text = <span class="string">"I think this is a \(prediction.classLabel)."</span></span><br></pre></td></tr></table></figure>
 <p>这就完了！<code>Inceptionv3</code> 类自动生成了一个名为 <code>prediction(image:)</code> 的方法，可以用来预测给定图像中出现的物体。这里我们将缩放后的图像以 <code>pixelBuffer</code> 的形式作为参数传给了该方法。一旦 <code>String</code> 类型的预测结果返回了，就将 <code>classifier</code> 标签更新为识别出的物体名称。</p>
 <p>是时候测试一下这个应用了。编译并在模拟器或者你的 iPhone（安装了 iOS 11 beta）上运行该应用，从相册选择或使用摄像头拍摄一张照片，该应用将识别出图像中有什么物体。</p>
 <p><img src="http://www.appcoda.com/wp-content/uploads/2017/06/coreml-successful-case.jpg" alt=""></p>
@@ -294,6 +294,57 @@
 
       
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/01/06/Core ML入门：构建一个简单的图像识别应用/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
@@ -391,7 +442,7 @@
 		toc_hide_index: true,
 		root: "/",
 		innerArchive: true,
-		showTags: false
+		showTags: true
 	}
 </script>
 
@@ -449,15 +500,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">知识总结</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">翻译</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小知识</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -465,11 +508,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Runtime</a>
+                <a href="javascript:void(0)" class="js-tag color5">知识总结</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">小知识</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">源码解析</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Runtime</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -482,6 +533,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">读后感</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
             
             <div class="clearfix"></div>
@@ -532,7 +587,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">iOS工程师&lt;br&gt;业余学习前端&lt;br&gt; 最近喜欢上了骑摩托&lt;br&gt;欢迎来撩&lt;br&gt;带你兜风</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">iOS工程师&lt;br&gt;&lt;br&gt;业余学习前端&lt;br&gt; &lt;br&gt;最近喜欢上了骑摩托&lt;br&gt;&lt;br&gt;欢迎来撩&lt;br&gt;带你兜风</div>
   	  	
     	</section>
     

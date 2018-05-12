@@ -17,7 +17,7 @@
 <meta property="og:description" content="Obj-C之所以被称之为动态语言，完全是因为Runtime库，Runtime库是由C语言和汇编语言所写的，它在C语言的基础上，为Obj-C增加了面向对象的特征。同时借鉴SmallTalk增加了消息转发。说透彻了就是我们所写的所有Obj-C代码，都会通过Runtime库转换为C语言的代码。针对这么一个大家无时不刻都在使用的类库，是有必要深入了解一下的。  1.数据结构及常用名词解释之所以开篇将一些">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/Runtime/Runtime1.png">
-<meta property="og:updated_time" content="2018-01-23T22:37:52.000Z">
+<meta property="og:updated_time" content="2018-05-06T01:47:05.282Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Obj-C灵魂-Runtime">
 <meta name="twitter:description" content="Obj-C之所以被称之为动态语言，完全是因为Runtime库，Runtime库是由C语言和汇编语言所写的，它在C语言的基础上，为Obj-C增加了面向对象的特征。同时借鉴SmallTalk增加了消息转发。说透彻了就是我们所写的所有Obj-C代码，都会通过Runtime库转换为C语言的代码。针对这么一个大家无时不刻都在使用的类库，是有必要深入了解一下的。  1.数据结构及常用名词解释之所以开篇将一些">
@@ -195,7 +195,7 @@
 </ul>
 <p>但是你可能会感到很疑惑，每次调用方法都必须到自己的当前类，父类以及更上的层级去遍历岂不是很耗费时间，所以我们可以引出<code>objc_Cache</code>,<code>objc_Cache</code>会把最常用的方法存储起来，以<code>method_name</code>作为<code>Key</code>值，以<code>method_imp</code>作为<code>value</code>值进行存储，这样下一次就会优先查找<code>objc_cache</code>了，大大提高了效率。</p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> objc_cache &#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> mask;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> occupied;</span><br><span class="line">    Method buckets[<span class="number">1</span>];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="3-Runtime应用场景"><a href="#3-Runtime应用场景" class="headerlink" title="3.Runtime应用场景"></a>3.Runtime应用场景</h3><h4 id="1-利用Runtime自动归、解档"><a href="#1-利用Runtime自动归、解档" class="headerlink" title="1.利用Runtime自动归、解档"></a>1.利用Runtime自动归、解档</h4><p>在需要归、解档的对象的<code>.m</code>实现文件中采用下面的方法。</p>
+<h3 id="3-Runtime应用场景"><a href="#3-Runtime应用场景" class="headerlink" title="3.Runtime应用场景"></a>3.Runtime应用场景</h3><h4 id="1-利用-Runtime-自动归、解档"><a href="#1-利用-Runtime-自动归、解档" class="headerlink" title="1.利用 Runtime 自动归、解档"></a>1.利用 <code>Runtime</code> 自动归、解档</h4><p>在需要归、解档的对象的<code>.m</code>实现文件中采用下面的方法。</p>
 <blockquote>
 <p>本质是利用 <code>Runtime</code> 获取 <code>实例变量列表  Ivar_list</code> 中的实例变量 ，在进行接下来的操作即可</p>
 </blockquote>
@@ -203,7 +203,7 @@
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">instancetype</span>)initWithCoder:(<span class="built_in">NSCoder</span> *)aDecoder &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span> = [<span class="keyword">super</span> init])</span><br><span class="line">    &#123;</span><br><span class="line">        Class <span class="keyword">class</span> = <span class="keyword">self</span>.class;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">class</span> &amp;&amp; <span class="keyword">class</span> != [<span class="built_in">NSObject</span> <span class="keyword">class</span>])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">unsigned</span> <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">            </span><br><span class="line">            Ivar *ivars = class_copyIvarList(<span class="keyword">class</span>, &amp;count);</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">NSString</span> *key = [<span class="built_in">NSString</span> stringWithUTF8String:ivar_getName(ivars[i])];</span><br><span class="line">                </span><br><span class="line">                <span class="keyword">id</span> value = [aDecoder decodeObjectForKey:key];</span><br><span class="line">                </span><br><span class="line">                [<span class="keyword">self</span> setValue:value forKey:key];</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">class</span> = [<span class="keyword">class</span> superclass];</span><br><span class="line">            </span><br><span class="line">            free(ivars);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>自动解档</strong></p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)encodeWithCoder:(<span class="built_in">NSCoder</span> *)aCoder &#123;</span><br><span class="line">    </span><br><span class="line">    Class <span class="keyword">class</span> = <span class="keyword">self</span>.class;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> (<span class="keyword">class</span> &amp;&amp; <span class="keyword">class</span> != [<span class="built_in">NSObject</span> <span class="keyword">class</span>])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">unsigned</span> <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        Ivar *ivars = class_copyIvarList(<span class="keyword">class</span>, &amp;count);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">NSString</span> *key = [<span class="built_in">NSString</span> stringWithUTF8String:ivar_getName(ivars[i])];</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">id</span> value = [aCoder decodeObjectForKey:key];</span><br><span class="line">            </span><br><span class="line">            [aCoder encodeObject:value forKey:key];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">class</span> = [<span class="keyword">class</span> superclass];</span><br><span class="line">        </span><br><span class="line">        free(ivars);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<h4 id="2-利用-Runtime-遍历方法、属性、协议列表"><a href="#2-利用-Runtime-遍历方法、属性、协议列表" class="headerlink" title="2.利用 Runtime 遍历方法、属性、协议列表"></a>2.利用 <code>Runtime</code> 遍历方法、属性、协议列表</h4><h4 id="3-Method-Swizzling"><a href="#3-Method-Swizzling" class="headerlink" title="3. Method Swizzling"></a>3. Method Swizzling</h4><h4 id="4-动态增加方法、属性"><a href="#4-动态增加方法、属性" class="headerlink" title="4.动态增加方法、属性"></a>4.动态增加方法、属性</h4>
       
 
       
@@ -226,6 +226,57 @@
 
       
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2017/07/12/Obj-C灵魂-Runtime/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
@@ -273,7 +324,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-数据结构及常用名词解释"><span class="toc-number">1.</span> <span class="toc-text">1.数据结构及常用名词解释</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-Class"><span class="toc-number">1.0.1.</span> <span class="toc-text">1.Class</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-Object"><span class="toc-number">1.0.2.</span> <span class="toc-text">2.Object</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-Method"><span class="toc-number">1.0.3.</span> <span class="toc-text">3.Method</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-Property"><span class="toc-number">1.0.4.</span> <span class="toc-text">4.Property</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-方法调用流程"><span class="toc-number">2.</span> <span class="toc-text">2.方法调用流程</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-objc在向一个对象发送消息时，发生了什么？"><span class="toc-number">2.0.1.</span> <span class="toc-text">1.objc在向一个对象发送消息时，发生了什么？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Runtime应用场景"><span class="toc-number">3.</span> <span class="toc-text">3.Runtime应用场景</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-利用Runtime自动归、解档"><span class="toc-number">3.1.</span> <span class="toc-text">1.利用Runtime自动归、解档</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-数据结构及常用名词解释"><span class="toc-number">1.</span> <span class="toc-text">1.数据结构及常用名词解释</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-Class"><span class="toc-number">1.0.1.</span> <span class="toc-text">1.Class</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-Object"><span class="toc-number">1.0.2.</span> <span class="toc-text">2.Object</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-Method"><span class="toc-number">1.0.3.</span> <span class="toc-text">3.Method</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-Property"><span class="toc-number">1.0.4.</span> <span class="toc-text">4.Property</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-方法调用流程"><span class="toc-number">2.</span> <span class="toc-text">2.方法调用流程</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-objc在向一个对象发送消息时，发生了什么？"><span class="toc-number">2.0.1.</span> <span class="toc-text">1.objc在向一个对象发送消息时，发生了什么？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Runtime应用场景"><span class="toc-number">3.</span> <span class="toc-text">3.Runtime应用场景</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-利用-Runtime-自动归、解档"><span class="toc-number">3.1.</span> <span class="toc-text">1.利用 Runtime 自动归、解档</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-利用-Runtime-遍历方法、属性、协议列表"><span class="toc-number">3.2.</span> <span class="toc-text">2.利用 Runtime 遍历方法、属性、协议列表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Method-Swizzling"><span class="toc-number">3.3.</span> <span class="toc-text">3. Method Swizzling</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-动态增加方法、属性"><span class="toc-number">3.4.</span> <span class="toc-text">4.动态增加方法、属性</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -323,7 +374,7 @@
 		toc_hide_index: true,
 		root: "/",
 		innerArchive: true,
-		showTags: false
+		showTags: true
 	}
 </script>
 
@@ -381,15 +432,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">知识总结</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">翻译</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">小知识</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -397,11 +440,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Runtime</a>
+                <a href="javascript:void(0)" class="js-tag color5">知识总结</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">小知识</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">源码解析</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Runtime</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -414,6 +465,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">读后感</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
             
             <div class="clearfix"></div>
@@ -464,7 +519,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">iOS工程师&lt;br&gt;业余学习前端&lt;br&gt; 最近喜欢上了骑摩托&lt;br&gt;欢迎来撩&lt;br&gt;带你兜风</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">iOS工程师&lt;br&gt;&lt;br&gt;业余学习前端&lt;br&gt; &lt;br&gt;最近喜欢上了骑摩托&lt;br&gt;&lt;br&gt;欢迎来撩&lt;br&gt;带你兜风</div>
   	  	
     	</section>
     
