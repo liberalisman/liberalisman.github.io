@@ -8,14 +8,15 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>UICollectionView 之旅 | Liberalism</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文是 WWDC 2018 Session 225 读后感，其视频及配套 PDF文稿 地址如下 A Tour Of UICollectionView。 这篇文章难度不大，由易到难，逐层深入，是一篇很好的 Session。全文总计约2500字，通读全文花费时间大约15分钟。  看完这篇 Session，给我的直观感受是这篇名为 A Tour Of UICollectionView 的文章，是围绕着">
+  <meta name="description" content="本文是 WWDC 2018 Session 225 读后感，其视频及配套 PDF文稿 地址如下 A Tour Of UICollectionView。 这篇文章难度不大，由易到难，逐层深入，是一篇很好的 Session。全文总计约2500字，通读全文花费时间大约15分钟。">
 <meta name="keywords" content="WWDC 2018">
 <meta property="og:type" content="article">
 <meta property="og:title" content="UICollectionView 之旅">
 <meta property="og:url" content="http://yoursite.com/2018/06/18/UICollectionView之旅/index.html">
 <meta property="og:site_name" content="Liberalism">
-<meta property="og:description" content="本文是 WWDC 2018 Session 225 读后感，其视频及配套 PDF文稿 地址如下 A Tour Of UICollectionView。 这篇文章难度不大，由易到难，逐层深入，是一篇很好的 Session。全文总计约2500字，通读全文花费时间大约15分钟。  看完这篇 Session，给我的直观感受是这篇名为 A Tour Of UICollectionView 的文章，是围绕着">
+<meta property="og:description" content="本文是 WWDC 2018 Session 225 读后感，其视频及配套 PDF文稿 地址如下 A Tour Of UICollectionView。 这篇文章难度不大，由易到难，逐层深入，是一篇很好的 Session。全文总计约2500字，通读全文花费时间大约15分钟。">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/6/11/163ebff885e9f396?imageView2/2/w/480/h/480/q/85/interlace/1">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/6/9/163e39e71f643670?w=1738&h=1486&f=png&s=1697197">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/6/9/163e3abecf238d5e?w=1962&h=822&f=png&s=71403">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/6/9/163e3ac87a165beb?w=1958&h=880&f=png&s=73350">
@@ -24,11 +25,11 @@
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/6/10/163ea153c381e36b?w=1912&h=1416&f=png&s=376209">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/6/10/163ea17680b1a31b?w=3026&h=550&f=png&s=172706">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/6/11/163ebf095ac57bf3?w=2264&h=1300&f=png&s=157555">
-<meta property="og:updated_time" content="2018-06-18T07:48:49.631Z">
+<meta property="og:updated_time" content="2018-06-18T07:52:11.961Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="UICollectionView 之旅">
-<meta name="twitter:description" content="本文是 WWDC 2018 Session 225 读后感，其视频及配套 PDF文稿 地址如下 A Tour Of UICollectionView。 这篇文章难度不大，由易到难，逐层深入，是一篇很好的 Session。全文总计约2500字，通读全文花费时间大约15分钟。  看完这篇 Session，给我的直观感受是这篇名为 A Tour Of UICollectionView 的文章，是围绕着">
-<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2018/6/9/163e39e71f643670?w=1738&h=1486&f=png&s=1697197">
+<meta name="twitter:description" content="本文是 WWDC 2018 Session 225 读后感，其视频及配套 PDF文稿 地址如下 A Tour Of UICollectionView。 这篇文章难度不大，由易到难，逐层深入，是一篇很好的 Session。全文总计约2500字，通读全文花费时间大约15分钟。">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2018/6/11/163ebff885e9f396?imageView2/2/w/480/h/480/q/85/interlace/1">
   
     <link rel="alternative" href="/atom.xml" title="Liberalism" type="application/atom+xml">
   
@@ -182,6 +183,8 @@
 <p>本文是 WWDC 2018 Session 225 读后感，其视频及配套 PDF文稿 地址如下 <a href="https://developer.apple.com/videos/play/wwdc2018/225/" target="_blank" rel="noopener">A Tour Of UICollectionView</a>。</p>
 <p>这篇文章难度不大，由易到难，逐层深入，是一篇很好的 Session。全文总计约2500字，通读全文花费时间大约15分钟。</p>
 </blockquote>
+<p><img src="https://user-gold-cdn.xitu.io/2018/6/11/163ebff885e9f396?imageView2/2/w/480/h/480/q/85/interlace/1" alt=""></p>
+<a id="more"></a>
 <p>看完这篇 Session，给我的直观感受是这篇名为 A Tour Of UICollectionView 的文章，是围绕着一个 CollectionView 的案例，对自定义布局以及其性能优化、数据操作、动画做的一次探讨。虽然没有新增的 API 和特性，但是实际意义蛮大。</p>
 <p>我们也按照 Session 的思路，将本文主要分为三个模块：</p>
 <ul>
