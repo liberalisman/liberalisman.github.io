@@ -6,35 +6,29 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>WWDC2016-Session724（APNS新特性） | Liberalism</title>
+  <title>UICollectionView 之旅 | Liberalism</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="简要回顾 APNS是苹果的推送服务器，此篇主要讲一下2016年APNS的新特性">
-<meta name="keywords" content="WWDC Session 2016">
+  <meta name="description" content="本文是 WWDC 2018 Session 225 读后感，其视频及配套 PDF文稿 地址如下 A Tour Of UICollectionView。 这篇文章难度不大，由易到难，逐层深入，是一篇很好的 Session。全文总计约2500字，通读全文花费时间大约15分钟。  看完这篇 Session，给我的直观感受是这篇名为 A Tour Of UICollectionView 的文章，是围绕着">
+<meta name="keywords" content="WWDC 2018">
 <meta property="og:type" content="article">
-<meta property="og:title" content="WWDC2016-Session724（APNS新特性）">
-<meta property="og:url" content="http://yoursite.com/2017/06/12/WWDC2016-Session724（APNS新特性）/index.html">
+<meta property="og:title" content="UICollectionView 之旅">
+<meta property="og:url" content="http://yoursite.com/2018/06/18/UICollectionView之旅/index.html">
 <meta property="og:site_name" content="Liberalism">
-<meta property="og:description" content="简要回顾 APNS是苹果的推送服务器，此篇主要讲一下2016年APNS的新特性">
+<meta property="og:description" content="本文是 WWDC 2018 Session 225 读后感，其视频及配套 PDF文稿 地址如下 A Tour Of UICollectionView。 这篇文章难度不大，由易到难，逐层深入，是一篇很好的 Session。全文总计约2500字，通读全文花费时间大约15分钟。  看完这篇 Session，给我的直观感受是这篇名为 A Tour Of UICollectionView 的文章，是围绕着">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/1.png">
-<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/2.png">
-<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/3.png">
-<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/4.png">
-<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/6.png">
-<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/7.png">
-<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/8.png">
-<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/9.png">
-<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/10.png">
-<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/11.png">
-<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/13.png">
-<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/14.png">
-<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/15.png">
-<meta property="og:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/16.png">
-<meta property="og:updated_time" content="2018-01-23T22:37:52.000Z">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/6/9/163e39e71f643670?w=1738&h=1486&f=png&s=1697197">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/6/9/163e3abecf238d5e?w=1962&h=822&f=png&s=71403">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/6/9/163e3ac87a165beb?w=1958&h=880&f=png&s=73350">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/6/9/163e3bc7506d495d?w=742&h=1446&f=png&s=1359307">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/6/10/163e9407bb1d657f?w=2030&h=1508&f=png&s=1449522">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/6/10/163ea153c381e36b?w=1912&h=1416&f=png&s=376209">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/6/10/163ea17680b1a31b?w=3026&h=550&f=png&s=172706">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/6/11/163ebf095ac57bf3?w=2264&h=1300&f=png&s=157555">
+<meta property="og:updated_time" content="2018-06-18T07:48:49.631Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="WWDC2016-Session724（APNS新特性）">
-<meta name="twitter:description" content="简要回顾 APNS是苹果的推送服务器，此篇主要讲一下2016年APNS的新特性">
-<meta name="twitter:image" content="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/1.png">
+<meta name="twitter:title" content="UICollectionView 之旅">
+<meta name="twitter:description" content="本文是 WWDC 2018 Session 225 读后感，其视频及配套 PDF文稿 地址如下 A Tour Of UICollectionView。 这篇文章难度不大，由易到难，逐层深入，是一篇很好的 Session。全文总计约2500字，通读全文花费时间大约15分钟。  看完这篇 Session，给我的直观感受是这篇名为 A Tour Of UICollectionView 的文章，是围绕着">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2018/6/9/163e39e71f643670?w=1738&h=1486&f=png&s=1697197">
   
     <link rel="alternative" href="/atom.xml" title="Liberalism" type="application/atom+xml">
   
@@ -164,94 +158,128 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-WWDC2016-Session724（APNS新特性）" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-UICollectionView之旅" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      WWDC2016-Session724（APNS新特性）
+      UICollectionView 之旅
     </h1>
   
 
         
-        <a href="/2017/06/12/WWDC2016-Session724（APNS新特性）/" class="archive-article-date">
-  	<time datetime="2017-06-12T05:11:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-12</time>
+        <a href="/2018/06/18/UICollectionView之旅/" class="archive-article-date">
+  	<time datetime="2018-06-18T07:48:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-18</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="简要回顾"><a href="#简要回顾" class="headerlink" title="简要回顾"></a>简要回顾</h2><blockquote>
-<p><code>APNS</code>是苹果的推送服务器，此篇主要讲一下2016年<code>APNS</code>的新特性</p>
+        <blockquote>
+<p>本文是 WWDC 2018 Session 225 读后感，其视频及配套 PDF文稿 地址如下 <a href="https://developer.apple.com/videos/play/wwdc2018/225/" target="_blank" rel="noopener">A Tour Of UICollectionView</a>。</p>
+<p>这篇文章难度不大，由易到难，逐层深入，是一篇很好的 Session。全文总计约2500字，通读全文花费时间大约15分钟。</p>
 </blockquote>
-<p><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/1.png" alt=""></p>
-<a id="more"></a>
-<p>苹果的工程师上来就回顾了一下去年在<code>APNS</code>上所推出的改进，例如：</p>
+<p>看完这篇 Session，给我的直观感受是这篇名为 A Tour Of UICollectionView 的文章，是围绕着一个 CollectionView 的案例，对自定义布局以及其性能优化、数据操作、动画做的一次探讨。虽然没有新增的 API 和特性，但是实际意义蛮大。</p>
+<p>我们也按照 Session 的思路，将本文主要分为三个模块：</p>
 <ul>
-<li>支持<code>HTTP/2</code>的API（采用二进制编码）</li>
-<li>服务器通信可以做到及时响应</li>
-<li>可以推送的文件内容扩展到了4KB</li>
-<li>以及简化的证书管理</li>
+<li>CollectionView 概述</li>
+<li>布局（自定义 Layout）</li>
+<li>数据的刷新、动画</li>
 </ul>
-<p><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/2.png" alt=""></p>
-<p>通过下图可以简要的看一下基于<code>HTTP/2</code>提供的<code>API</code></p>
-<ol>
-<li>客户端通过<code>设备</code>与<code>APNS</code>通信，</li>
-<li><code>APNS</code>返回给客户端<code>DeviceToken</code>，</li>
-<li>客户端将<code>DeviceToken</code>上传给我们自己的<code>服务器</code>。</li>
-<li>接下来我们的<code>服务器</code>与<code>APNS</code>进行通信</li>
-<li>每一次<code>服务器</code>将推送信息传递给<code>APNS</code>,都会附带一个<code>DeviceToken</code>的<code>Request</code>,同时<code>APNS</code>也会返回一个<code>Response</code>。</li>
-</ol>
-<p><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/3.png" alt=""></p>
-<p>同时还简化了推送证书的管理，不论是<code>开发环境</code>还是<code>发布环境</code>，<code>应用推送</code>，<code>VOIP推送</code>以及<code>并发推送</code>，都用<code>一个证书</code>进行管理，大大的简化了流程</p>
-<p><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/4.png" alt=""></p>
-<h2 id="Token-Authentication"><a href="#Token-Authentication" class="headerlink" title="Token Authentication"></a>Token Authentication</h2><p>上文讲到，推送通知的时候会附带一个<code>Token</code>,接下来会讲这个<code>Token</code>认证的问题</p>
-<p><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/6.png" alt=""></p>
-<p>新出的<code>Token Authentication</code></p>
-<ol>
-<li>简化了我们的推送服务器与<code>APNS</code>通信的过程</li>
-<li>提高了安全性</li>
-<li>创建<code>Token</code>很简单</li>
-<li>不再有过多的<code>过期证书</code></li>
-<li><code>APNS</code>不会在服务失效时关闭连接</li>
-<li>每一次发送通知，都会附件一个客户端证书中的应用标识。</li>
-</ol>
-<p><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/7.png" alt=""><br><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/8.png" alt=""></p>
-<h3 id="证书验证-和-Token验证"><a href="#证书验证-和-Token验证" class="headerlink" title="证书验证 和 Token验证"></a>证书验证 和 Token验证</h3><p>结合上面的两张图，我们仔细的梳理一下<code>证书验证</code>和<code>Token验证</code>通信过程</p>
-<p> <strong>TLS</strong>（是“Transport Layer Security”的缩写），中文叫做“<strong>传输层安全协议</strong>”。</p>
-<p> 我们先来看看<strong>证书验证</strong></p>
-<ol>
-<li>通过<code>开发者账号</code>，生成一个<code>证书</code></li>
-<li>当<code>Provider</code>与<code>APNS</code>通信时，<code>APNS</code>会返回一个<code>证书</code>给<code>Provider</code>服务器。</li>
-<li><code>Provider</code>需要对这个<code>证书</code>签名并且信任，然后再将<code>客户端证书</code>返回给APNS。</li>
-<li>此时APNS和Privider就构建了一个可信赖的通信通道。</li>
-</ol>
-<p>再来看看<strong>Token验证</strong></p>
-<ol>
-<li>由我们的开发者账号生成一个<code>Service Key</code>，要包含你的<code>Team ID</code>,并且要为他签名</li>
-<li><code>Service Key</code>通过加密算法，生成一个加密后的<code>Token</code></li>
-</ol>
-<p>随后每一次<code>Provider</code>向<code>APNS</code>推送信息的时候，所发送的<code>Request</code>都必须有这个<code>Token</code>和<code>推送的内容</code>.</p>
-<p><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/9.png" alt=""><br><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/10.png" alt=""></p>
-<p>在<code>Provider</code>与<code>APNS</code>通信的过程中：</p>
+<p>CollectionView 想必各位已经不陌生了，在我们的日常开发中，它的身影随处可见。如果还有小伙伴对它不熟悉，可以看看之前的 Session ：</p>
 <ul>
-<li>如果Token验证正确，那么接下来处理需要推送的部分，随后再返回状态码等相关信息。</li>
-<li>如果Token验证失败，直接返回错误码信息。</li>
+<li>WWDC 2016 - <a href="https://developer.apple.com/videos/play/wwdc2016/219/" target="_blank" rel="noopener">What`s New In CollectionView In iOS 10</a> 。</li>
+<li>WWDC 2017 - <a href="https://developer.apple.com/videos/play/wwdc2017/223/" target="_blank" rel="noopener">Drag and Drop with Collection and Table View</a>。</li>
 </ul>
-<h2 id="构建-Token"><a href="#构建-Token" class="headerlink" title="构建 Token"></a>构建 Token</h2><p><strong>首先</strong>，到开着发中心创建一个 <code>Service Key</code>。<br><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/11.png" alt=""></p>
-<p><strong>其次</strong>，利用<code>Json Web Token</code>构建<code>Token</code>。<br><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/13.png" alt=""></p>
-<p>上面一共是三个部分，每一个部分都是通过 <code>base-64</code> 编码过的 <code>URL</code>形式</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  “alg”是加密方式，采用的是 ES256 加密</span></span><br><span class="line"><span class="comment">//  "kid"是 Key 的标识符，是用来给 Token 签名的</span></span><br><span class="line"><span class="comment">//  "iss"是Team ID 等团队信息</span></span><br><span class="line"><span class="comment">//  "iat"是初始化的时间戳</span></span><br><span class="line"><span class="comment">//  "signature"是针对上面的内容进行加密以后，再利用 Base64 加密</span></span><br></pre></td></tr></table></figure>
-<p>下图是使用<code>HTTP/2</code>构建的一个使用<code>Token</code>认证的请求<br><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/14.png" alt=""><br>下图是一个错误的<code>Response</code><br><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/15.png" alt=""><br><img src="http://okhqmtd8q.bkt.clouddn.com/WWDC-2016-724/16.png" alt=""></p>
-<h3 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h3><ol>
-<li>签名的Token需要不定期的生成，原则上是一小时，但考虑到性能因素，如果T欧肯有效就可以继续使用</li>
-<li><code>Sign Key</code>是不会失效的</li>
-<li>如果<code>Sign Key</code>有错误，可以通过<code>开发者中心</code>进行撤销并重新创建</li>
-<li>目前<code>证书认证</code>和<code>Token认证</code>两种方式同时有效</li>
-</ol>
+<p>如果我们想搭建一个如下图的 App ，需要涉及到三点：布局、刷新、动画，我们今天的话题也是围绕着这三点展开。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/6/9/163e39e71f643670?w=1738&amp;h=1486&amp;f=png&amp;s=1697197" alt=""></p>
+<h2 id="CollectionView-概述"><a href="#CollectionView-概述" class="headerlink" title="CollectionView 概述"></a>CollectionView 概述</h2><blockquote>
+<p><strong>CollectionView</strong> 的核心概念有三点：布局（Layout）、数据源（Data Source）、代理（Delegate）。</p>
+</blockquote>
+<h3 id="UICollectionViewLayout"><a href="#UICollectionViewLayout" class="headerlink" title="UICollectionViewLayout"></a>UICollectionViewLayout</h3><p> UICollectionViewLayout 负责管理 UICollectionViewLayoutAttributes，一个 UICollectionViewLayoutAttributes 对象管理着一个 CollectionView 中一个 Item 的布局相关属性。包括 Bounds、center、frame 等。同时要注意在当 Bounds 在改变时是否需要刷新 Layout, 以及布局时的动画。</p>
+<h4 id="UICollectionViewFlowLayout"><a href="#UICollectionViewFlowLayout" class="headerlink" title="UICollectionViewFlowLayout"></a>UICollectionViewFlowLayout</h4><p>UICollectionViewFlowLayout 是 UICollectionViewLayout 的子类,是系统提供给我们一个封装好的流式布局的类。</p>
+<h6 id="横向流式布局（白色线代表布局方向）"><a href="#横向流式布局（白色线代表布局方向）" class="headerlink" title="横向流式布局（白色线代表布局方向）"></a>横向流式布局（白色线代表布局方向）</h6><p><img src="https://user-gold-cdn.xitu.io/2018/6/9/163e3abecf238d5e?w=1962&amp;h=822&amp;f=png&amp;s=71403" alt=""></p>
+<h6 id="纵向流式布局（白色线代表布局方向）"><a href="#纵向流式布局（白色线代表布局方向）" class="headerlink" title="纵向流式布局（白色线代表布局方向）"></a>纵向流式布局（白色线代表布局方向）</h6><p><img src="https://user-gold-cdn.xitu.io/2018/6/9/163e3ac87a165beb?w=1958&amp;h=880&amp;f=png&amp;s=73350" alt=""></p>
+<p>这种流式布局需要区分方向，方向不同，具体的 Line Spacing 和 Item Spacing 所代表的含义不同，具体差异，可以通过上面的两张图进行区分。</p>
+<p>因为流式布局其强大的适用性，所以在设计中这种布局方式被广泛使用。</p>
+<h3 id="UICollectionViewDataSource"><a href="#UICollectionViewDataSource" class="headerlink" title="UICollectionViewDataSource"></a>UICollectionViewDataSource</h3><p>数据源：顾名思义，提供数据的分组信息、每组中 Item 数量以及每个 <code>Item</code> 的实际内容。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">optional</span> <span class="function"><span class="keyword">func</span> <span class="title">numberOfSections</span><span class="params">(<span class="keyword">in</span> collectionView: UICollectionView)</span></span> -&gt; <span class="type">Int</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">collectionView</span><span class="params">(<span class="number">_</span> collectionView: UICollectionView, numberOfItemsInSection section: Int)</span></span> -&gt; <span class="type">Int</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">collectionView</span><span class="params">(<span class="number">_</span> collectionView: UICollectionView, cellForItemAt indexPath: IndexPath)</span></span> -&gt; <span class="type">UICollectionViewCell</span></span><br></pre></td></tr></table></figure>
+<h3 id="UICollectionViewDelegate"><a href="#UICollectionViewDelegate" class="headerlink" title="UICollectionViewDelegate"></a>UICollectionViewDelegate</h3><p>delegate 提供了一些细颗粒度的方法：</p>
+<ul>
+<li>Highlighting</li>
+<li>Selection</li>
+</ul>
+<p>还有一些视图的显示事件：</p>
+<ul>
+<li>willDisplayItem</li>
+<li>didEndDisplayingItem</li>
+</ul>
+<h2 id="布局-自定义-Layout"><a href="#布局-自定义-Layout" class="headerlink" title="布局 - 自定义 Layout"></a>布局 - 自定义 Layout</h2><p>系统提供的<br><code>UICollectionViewFlowLayout</code> 虽然使用起来方便快捷，能够满足基本的布局需要。但是遇到如下图的布局样式，显然就无法达到我们所需的效果，这时就需要自定义 <code>FlowLayout</code> 了。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/6/9/163e3bc7506d495d?w=742&amp;h=1446&amp;f=png&amp;s=1359307" alt=""></p>
+<p>自定义 <code>FlowLayout</code> 并不复杂 ，有以下四步：</p>
+<h5 id="1-提供滚动范围"><a href="#1-提供滚动范围" class="headerlink" title="1.提供滚动范围"></a>1.提供滚动范围</h5><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="keyword">var</span> collectionViewContentSize: <span class="type">CGSize</span></span><br></pre></td></tr></table></figure>
+<h5 id="2-提供布局属性对象"><a href="#2-提供布局属性对象" class="headerlink" title="2.提供布局属性对象"></a>2.提供布局属性对象</h5><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">layoutAttributesForElements</span><span class="params">(<span class="keyword">in</span> rect: CGRect)</span></span> -&gt; [<span class="type">UICollectionViewLayoutAttributes</span>]? </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">layoutAttributesForItem</span><span class="params">(at indexPath: IndexPath)</span></span> -&gt; <span class="type">UICollectionViewLayoutAttributes</span>?</span><br></pre></td></tr></table></figure>
+<h5 id="3-布局的相关准备工作"><a href="#3-布局的相关准备工作" class="headerlink" title="3.布局的相关准备工作"></a>3.布局的相关准备工作</h5><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 为每个 invalidateLayout 调用</span></span><br><span class="line"><span class="comment">// 缓存 UICollectionViewLayoutAttributes</span></span><br><span class="line"><span class="comment">// 计算 collectionViewContentSize</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">prepare</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<h5 id="4-处理自定义布局中的边界更改"><a href="#4-处理自定义布局中的边界更改" class="headerlink" title="4.处理自定义布局中的边界更改"></a>4.处理自定义布局中的边界更改</h5><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在 CollectionView 滚动时是否允许刷新布局</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">shouldInvalidateLayout</span><span class="params">(forBoundsChange newBounds: CGRect)</span></span> -&gt; <span class="type">Bool</span></span><br></pre></td></tr></table></figure>
+<h4 id="性能优化部分"><a href="#性能优化部分" class="headerlink" title="性能优化部分"></a>性能优化部分</h4><p>通过以上的方法，我们可以轻松实现自定义 <code>layout</code> 的布局。但是在实际开发中，有一个对性能提升很实用的小技巧很值得我们借鉴。</p>
+<p>通常，我们获取当前屏幕上所有显示的 <code>UICollectionViewLayoutAttributes</code> 会这么写</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">layoutAttributesForElements</span><span class="params">(<span class="keyword">in</span> rect: CGRect)</span></span> -&gt; [<span class="type">UICollectionViewLayoutAttributes</span>]? &#123;</span><br><span class="line">    <span class="keyword">return</span> cachedAttributes.<span class="built_in">filter</span> &#123; (attributes:<span class="type">UICollectionViewLayoutAttributes</span>) -&gt; <span class="type">Bool</span> <span class="keyword">in</span></span><br><span class="line">        <span class="keyword">return</span> rect.intersects(attributes.frame)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>采用以上的写法，我们会遍历缓存了所有 UICollectionViewLayoutAttributes 的 cachedAttributes 数组。而随着用户的拖动屏幕，这个方法会被频繁的调用，也就是会做大量的计算。当 cachedAttributes 数组的量级达到一定的规模，对性能的负面影响就会非常明显，用户在使用过程中会出现卡顿的负面体验。</p>
+<p>苹果工程师采用的办法可以很好地解决这一问题。所有的 UICollectionViewLayoutAttributes 都按照顺序被存储在 cachedAttributes 数组中，既然是一个有序的数组，那么只要我们通过二分查找，拿到任何一个在当前页面显示的 Attribures 对象，就可以以这个 Attribures 对象为中心，向前向后遍历查找符合条件的 Attribures 对象即可，这样查找的范围就被大大缩小了。相应地，计算量变小，对性能的提升非常明显。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/6/10/163e9407bb1d657f?w=2030&amp;h=1508&amp;f=png&amp;s=1449522" alt=""></p>
+<p>为了让大家易于理解，画了一张图，虽然有点丑，但表达思想足够了。<br>当前显示的 CollectionView 的范围就是 rect。在 rect 内部通过二分查找，找到第一个合适的 UICollectionViewLayoutAttributes 作为 firstMatchIndex，也就是那个 Attributes 对象。</p>
+<p>在 rect 内， firstMatchIndex 以上的 Attributes 都符合 <code>attributes.frame.maxY &gt;= rect.minY</code>，而在 firstMatchIndex 以下的 Attributes 也都符合 <code>attributes.frame.maxY &lt;= rect.maxY</code> 的条件。</p>
+<h5 id="优化后的代码如下"><a href="#优化后的代码如下" class="headerlink" title="优化后的代码如下"></a>优化后的代码如下</h5><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">layoutAttributesForElements</span><span class="params">(<span class="keyword">in</span> rect: CGRect)</span></span> -&gt; [<span class="type">UICollectionViewLayoutAttributes</span>]? &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> attributesArray = [<span class="type">UICollectionViewLayoutAttributes</span>]()</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 找到在当前区域内的任何一个 Attributes 的 Index</span></span><br><span class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> firstMatchIndex = binarySearchAttributes(range: <span class="number">0</span>...cachedAttributes.endIndex, rect:rect) <span class="keyword">else</span> &#123; <span class="keyword">return</span> attributesArray &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 从后向前反向遍历，缩小查找范围</span></span><br><span class="line">    <span class="keyword">for</span> attributes <span class="keyword">in</span> cachedAttributes[..&lt;firstMatchIndex].reversed &#123;</span><br><span class="line">        <span class="keyword">guard</span> attributes.frame.maxY &gt;= rect.minY  <span class="keyword">else</span> &#123;<span class="keyword">break</span>&#125;</span><br><span class="line">        attributesArray.append(attributes)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 从前向后正向遍历，缩小查找范围</span></span><br><span class="line">    <span class="keyword">for</span> attributes <span class="keyword">in</span> cachedAttributes[firstMatchIndex...] &#123;</span><br><span class="line">        <span class="keyword">guard</span> attributes.frame.minY &lt;= rect.maxY  <span class="keyword">else</span> &#123;<span class="keyword">break</span>&#125;</span><br><span class="line">        attributesArray.append(attributes)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> attributesArray</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过二分查找的方式，在处理当前页面显示的 <code>UICollectionViewLayoutAttributes</code> 的过程中可以减少遍历的数据量，在实际体验中页面滑动更加顺滑，体验更好，这种处理 <code>Attribures</code> 对象的方式，值得我们在开发过程中借鉴。</p>
+<h2 id="数据刷新和动画"><a href="#数据刷新和动画" class="headerlink" title="数据刷新和动画"></a>数据刷新和动画</h2><p>我们会遇到对 <code>CollectionView</code> 进行编辑的场景，编辑操作一般是新增、删除、刷新、插入等。在本 Session 中，主讲人为我们做了一个示例。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/6/10/163ea153c381e36b?w=1912&amp;h=1416&amp;f=png&amp;s=376209" alt=""></p>
+<ul>
+<li>对最后一条数据进行刷新操作</li>
+<li>将原本在最后位置的数据移动到第一条的位置</li>
+<li>删除原本的第三条数据</li>
+</ul>
+<p>为了便于理解，还是贴一下代码吧：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 原函数</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">performUpdates</span><span class="params">()</span></span> &#123;</span><br><span class="line">    people[<span class="number">3</span>].isUpdated = <span class="literal">true</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> movedPerson = people[<span class="number">3</span>]</span><br><span class="line">    people.remove(at:<span class="number">3</span>)</span><br><span class="line">    people.remove(at:<span class="number">2</span>)</span><br><span class="line">    </span><br><span class="line">    people.insert(movedPerson, at:<span class="number">0</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Update Collection View</span></span><br><span class="line">    collectionView.reloadItems(at: [<span class="type">IndexPath</span>(item:<span class="number">3</span>, section:<span class="number">0</span>)])</span><br><span class="line">    collectionView.reloadItems(at: [<span class="type">IndexPath</span>(item:<span class="number">2</span>, section:<span class="number">0</span>)])</span><br><span class="line">    collectionView.moveItem(at: <span class="type">IndexPath</span>(item:<span class="number">3</span>, section:<span class="number">0</span>), to:<span class="type">IndexPath</span>(item:<span class="number">0</span>, section:<span class="number">0</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个例子在操作过程中报错，原因如下：我们删除和移动的是同一个索引位置的元素。我们显示地调用了 <code>reloadData()</code> , <code>reloadData()</code> 是一个异步执行的函数，会直接访问数据源方法，进行重新布局，多次调用容易出错，同时这样写也没有动画效果。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/6/10/163ea17680b1a31b?w=3026&amp;h=550&amp;f=png&amp;s=172706" alt=""></p>
+<h4 id="performBatchUpdates"><a href="#performBatchUpdates" class="headerlink" title="performBatchUpdates"></a>performBatchUpdates</h4><p>上面出错的场景其实挺常见，为了规范操作，避免在编辑的场景下出现问题，应当将对 <code>CollectionView</code> 的新增、删除、刷新、插入等操作都放入到 <code>performBatchUpdates()</code> 中的 <code>updates</code> 闭包内，<code>CollectionView</code> 中 Item  的更新顺序我们不需要关心，但是数据源更新的顺序是很重要的。</p>
+<p>首先认识一下这个方法<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">performBatchUpdates</span><span class="params">(<span class="number">_</span> updates: <span class="params">(<span class="params">()</span></span></span></span> -&gt; <span class="type">Void</span>)?, completion: ((<span class="type">Bool</span>) -&gt; <span class="type">Void</span>)? = <span class="literal">nil</span>)</span><br><span class="line"></span><br><span class="line"><span class="number">1</span>.其中 updates 闭包内部会执行新增、删除、刷新、插入等一系列操作。</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>.而 completion 闭包会在 updates 闭包执行完毕后开始执行，updates 闭包中的相关操作会触发一些动画，</span><br><span class="line">  当这些动画执行成功会返回 <span class="type">True</span>，当动画被打断或者执行失败会返回 <span class="literal">false</span>，这个参数也有可能会返回 <span class="literal">nil</span>。</span><br></pre></td></tr></table></figure></p>
+<p>这个方法可以用来对 <code>collectionView</code> 中的元素进行批量的新增、删除、刷新、插入等操作，同时将触发<code>collectionView</code> 的 <code>layout</code> 的对应动画:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>.<span class="keyword">func</span> initialLayoutAttributesForAppearingItem(at itemIndexPath: <span class="type">IndexPath</span>) -&gt; <span class="type">NSCollectionViewLayoutAttributes</span>?</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>.<span class="keyword">func</span> initialLayoutAttributesForAppearingDecorationElement(ofKind elementKind: <span class="type">NSCollectionView</span>.<span class="type">DecorationElementKind</span>, at decorationIndexPath: <span class="type">IndexPath</span>) -&gt; <span class="type">NSCollectionViewLayoutAttributes</span>?</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>.<span class="keyword">func</span> finalLayoutAttributesForDisappearingItem(at itemIndexPath: <span class="type">IndexPath</span>) -&gt; <span class="type">NSCollectionViewLayoutAttributes</span>?</span><br><span class="line"></span><br><span class="line"><span class="number">4</span>.<span class="keyword">func</span> finalLayoutAttributesForDisappearingDecorationElement(ofKind elementKind: <span class="type">String</span>, at decorationIndexPath: <span class="type">IndexPath</span>) -&gt; <span class="type">UICollectionViewLayoutAttributes</span>?</span><br></pre></td></tr></table></figure>
+<p>原因是因为在执行完 <code>performBatchUpdates</code> 操作之后，CollectionView  会自动 <code>reloadData</code> 调用数据源方法重新布局。所以我们在 Updates 闭包中对数据的编辑操作执行完毕后，一定要同步更新数据源，否则有极大的几率出现数据越界等错误情况。</p>
+<h4 id="易出错的合并更新一般有以下几种"><a href="#易出错的合并更新一般有以下几种" class="headerlink" title="易出错的合并更新一般有以下几种"></a>易出错的合并更新一般有以下几种</h4><ul>
+<li>1.移动与删除同一个索引</li>
+<li>2.移动与插入同一个索引</li>
+<li>3.将多个对象移动到同一个索引</li>
+<li>4.引用了一个无效的索引</li>
+</ul>
+<p>既然在执行操作时容易出现问题，我们就该想办法去规避，苹果的工程师给出了很好的建议。在上面我们讲过对 <code>CollectionView</code> 的新增、删除、刷新、插入等操作都放入到 <code>performBatchUpdates()</code> 中的 <code>updates</code> 闭包内，<code>CollectionView</code> 中 Item  的更新顺序我们不需要关心，但是数据源更新的顺序很重要。最后的 Item 更新顺序和数据源的更新顺序是怎么回事呢？</p>
+<p>你可以这样理解：</p>
+<ul>
+<li>在 Updates 闭包内，你可以选择先删除一个索引，然后插入一个新的索引，或是把两者的顺序颠倒过来进行操作，这都没有问题，你可以按照自己的喜好，随意指定顺序。</li>
+<li>但是涉及到数据源更新的方法，必须按照一定的顺序和规则来操作。</li>
+</ul>
+<h4 id="数据源执行操作的顺序及规则"><a href="#数据源执行操作的顺序及规则" class="headerlink" title="数据源执行操作的顺序及规则"></a>数据源执行操作的顺序及规则</h4><ul>
+<li>1.将移动操作拆分成删除和插入。</li>
+<li>2.将所有的删除操作合并到一起，同理将所有的插入操作也合并到一起。</li>
+<li>3.以降序优先处理删除操作。</li>
+<li>4.最后以升序处理插入操作。</li>
+</ul>
+<p><img src="https://user-gold-cdn.xitu.io/2018/6/11/163ebf095ac57bf3?w=2264&amp;h=1300&amp;f=png&amp;s=157555" alt=""></p>
+<p>然后我们将刚才出错的代码，改为如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 新的实现</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">performUpdates</span><span class="params">()</span></span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="type">UIView</span>.performWithoutAnimation &#123;</span><br><span class="line">        <span class="comment">// 先将数据刷新</span></span><br><span class="line">        <span class="type">CollectionView</span>.performBatchUpdates(&#123;</span><br><span class="line">            people[<span class="number">3</span>].isUpdate = <span class="literal">true</span></span><br><span class="line">            <span class="type">CollectionView</span>.reloadItems(at: [<span class="type">IndexPath</span>(item:<span class="number">3</span>, section:<span class="number">0</span>)])</span><br><span class="line">        &#125;)</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 再将移动拆分成删除之后再插入两个动作</span></span><br><span class="line">        <span class="type">CollectionView</span>.performBatchUpdates(&#123;</span><br><span class="line">            <span class="keyword">let</span> movedPerson = people[<span class="number">3</span>]</span><br><span class="line">            people.remove(at: <span class="number">3</span>)</span><br><span class="line">            people.remove(at: <span class="number">2</span>)</span><br><span class="line">            people.insert(movedPerson, at:<span class="number">0</span>)</span><br><span class="line">            <span class="type">CollectionView</span>.deleteItems(at: [<span class="type">IndexPath</span>(item:<span class="number">2</span>, section:<span class="number">0</span>)])</span><br><span class="line">            collectionView.moveItem(at: <span class="type">IndexPath</span>(item:<span class="number">3</span>, section:<span class="number">0</span>), to:<span class="type">IndexPath</span>(item:<span class="number">0</span>, section:<span class="number">0</span>))</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后总结一下，苹果的工程师建议我们通过自定义布局来实现精美的布局样式，同时采取二分查找的方式来高效的处理数据，提升界面的流畅性和用户体验。</p>
+<p>其次对 CollectionView 的操作建议我们通过 <code>performBatchUpdates</code> 来进行处理，我们不需要去考虑动画的执行，因为默认都帮助我们处理好了，我们只需要注意数据源处理的原则和顺序，确保数据处理的安全与稳定。</p>
+<p>如果对这篇 Session 很感兴趣的话，可以在 Twitter 上联系作者，只需要在 Twitter 搜索 A Tour Of CollectionView 即可，作者还是很热心的。</p>
+<!--本次大会还有另外一篇关于 CollectionView 的 Session ：[Using Collections Effectively](https://developer.apple.com/videos/play/wwdc2018/229/)。-->
+<!--有兴趣的同学可以自己提前看一下，后期时间充裕，我也会针对这个 Session，单独写一篇读后感。-->
+<p>最后声明，笔者的英语听力比较惨，有些地方听得不是特别明白，一旦发现我的信息有遗漏或者传达的信息有误，还望大家不吝指教。</p>
+<blockquote>
+<p>查看更多 WWDC 18 相关文章请前往 <a href="https://www.jianshu.com/p/6f95f7631d36" target="_blank" rel="noopener">老司机x知识小集xSwiftGG WWDC 18 专题目录</a></p>
+</blockquote>
 
       
 
@@ -265,7 +293,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">WWDC Session 2016</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">WWDC 2018</a>
         		</li>
       		
 		</ul>
@@ -321,7 +349,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2017/06/12/WWDC2016-Session724（APNS新特性）/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/06/18/UICollectionView之旅/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -335,18 +363,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/06/15/Interview-Question/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Interview-Question &amp; Answer （初级篇)
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/06/09/WWDC2016-Session708（高级通知）/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">WWDC2016-Session708（高级通知）</div>
+    <a href="/2018/05/16/这两天面试的一些整理/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">这两天面试的一些整理</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -373,7 +392,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简要回顾"><span class="toc-number">1.</span> <span class="toc-text">简要回顾</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Token-Authentication"><span class="toc-number">2.</span> <span class="toc-text">Token Authentication</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#证书验证-和-Token验证"><span class="toc-number">2.1.</span> <span class="toc-text">证书验证 和 Token验证</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构建-Token"><span class="toc-number">3.</span> <span class="toc-text">构建 Token</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#注意点"><span class="toc-number">3.1.</span> <span class="toc-text">注意点</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CollectionView-概述"><span class="toc-number">1.</span> <span class="toc-text">CollectionView 概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#UICollectionViewLayout"><span class="toc-number">1.1.</span> <span class="toc-text">UICollectionViewLayout</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#UICollectionViewFlowLayout"><span class="toc-number">1.1.1.</span> <span class="toc-text">UICollectionViewFlowLayout</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#横向流式布局（白色线代表布局方向）"><span class="toc-number">1.1.1.0.1.</span> <span class="toc-text">横向流式布局（白色线代表布局方向）</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#纵向流式布局（白色线代表布局方向）"><span class="toc-number">1.1.1.0.2.</span> <span class="toc-text">纵向流式布局（白色线代表布局方向）</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UICollectionViewDataSource"><span class="toc-number">1.2.</span> <span class="toc-text">UICollectionViewDataSource</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UICollectionViewDelegate"><span class="toc-number">1.3.</span> <span class="toc-text">UICollectionViewDelegate</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#布局-自定义-Layout"><span class="toc-number">2.</span> <span class="toc-text">布局 - 自定义 Layout</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-提供滚动范围"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">1.提供滚动范围</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-提供布局属性对象"><span class="toc-number">2.0.0.2.</span> <span class="toc-text">2.提供布局属性对象</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-布局的相关准备工作"><span class="toc-number">2.0.0.3.</span> <span class="toc-text">3.布局的相关准备工作</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-处理自定义布局中的边界更改"><span class="toc-number">2.0.0.4.</span> <span class="toc-text">4.处理自定义布局中的边界更改</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#性能优化部分"><span class="toc-number">2.0.1.</span> <span class="toc-text">性能优化部分</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#优化后的代码如下"><span class="toc-number">2.0.1.1.</span> <span class="toc-text">优化后的代码如下</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据刷新和动画"><span class="toc-number">3.</span> <span class="toc-text">数据刷新和动画</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#performBatchUpdates"><span class="toc-number">3.0.1.</span> <span class="toc-text">performBatchUpdates</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#易出错的合并更新一般有以下几种"><span class="toc-number">3.0.2.</span> <span class="toc-text">易出错的合并更新一般有以下几种</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#数据源执行操作的顺序及规则"><span class="toc-number">3.0.3.</span> <span class="toc-text">数据源执行操作的顺序及规则</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
